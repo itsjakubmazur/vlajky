@@ -45,6 +45,7 @@ export const cs = {
     almost: 'Skoro!',
     wrong: 'Tahle byla těžká',
     correctAnswerIs: 'Správně je',
+    youWrote: (country: string) => `Napsal jsi ${country}`,
     difference: 'V čem se liší',
     quit: 'Ukončit',
     streak: (n: number) => `${n}× správně v řadě`,

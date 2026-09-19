@@ -28,7 +28,7 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 ## Otevřené otázky
 
 - **Afghánistán** (`af`)
-  - OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Rozhodni, kterou učit.
+  - OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Úřední název je proto v datech taky ten starší, aby si vlajka a název neodporovaly. Rozhodni, kterou verzi učit.
 - **Belgie** (`be`)
   - Poměr stran: oficiálně 13:15, běžně se ale používá 2:3. Zdrojové SVG má 15:13.
 - **Burundi** (`bi`)
@@ -132,7 +132,7 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 
 | Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
 |---|---|---|---|---|---|---|---|
-| `af` | **Afghánistán** | Afghánský islámský emirát | – | Kábul | 4 | 1.50:1 | **— CHYBÍ —** |
+| `af` | **Afghánistán** | Afghánská islámská republika | – | Kábul | 4 | 1.50:1 | **— CHYBÍ —** |
 | `am` | **Arménie** | Arménská republika | – | Jerevan | 3 | 2.00:1 | Spodní pruh arménské vlajky se úředně popisuje jako meruňkový. |
 | `az` | **Ázerbájdžán** | Ázerbájdžánská republika | – | Baku | 4 | 2.00:1 | Na ázerbájdžánské vlajce je půlměsíc a hvězda s osmi cípy. |
 | `bh` | **Bahrajn** | Bahrajnské království | – | Manáma | 4 | 1.67:1 | Bílou a červenou odděluje na bahrajnské vlajce pět zubů – jeden za každý pilíř islámu. |

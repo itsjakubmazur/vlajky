@@ -1,8 +1,8 @@
 import type { CsCountry } from '../schema';
 
 export const asia: CsCountry[] = [
-  { code: 'af', nameCs: 'Afghánistán', nameCsOfficial: 'Afghánský islámský emirát', capitalCs: 'Kábul', continent: 'asia', subregion: 'southAsia', sovereignty: 'un', lat: 33.9, lng: 67.7, difficulty: 4,
-    review: ['OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Rozhodni, kterou učit.'] },
+  { code: 'af', nameCs: 'Afghánistán', nameCsOfficial: 'Afghánská islámská republika', capitalCs: 'Kábul', continent: 'asia', subregion: 'southAsia', sovereignty: 'un', lat: 33.9, lng: 67.7, difficulty: 4,
+    review: ['OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Úřední název je proto v datech taky ten starší, aby si vlajka a název neodporovaly. Rozhodni, kterou verzi učit.'] },
   { code: 'am', nameCs: 'Arménie', nameCsOfficial: 'Arménská republika', capitalCs: 'Jerevan', continent: 'asia', subregion: 'caucasus', sovereignty: 'un', lat: 40.2, lng: 45.0, difficulty: 3,
     funFact: 'Spodní pruh arménské vlajky se úředně popisuje jako meruňkový.' },
   { code: 'az', nameCs: 'Ázerbájdžán', nameCsOfficial: 'Ázerbájdžánská republika', capitalCs: 'Baku', continent: 'asia', subregion: 'caucasus', sovereignty: 'un', lat: 40.3, lng: 47.7, difficulty: 4,

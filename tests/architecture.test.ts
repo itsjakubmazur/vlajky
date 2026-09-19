@@ -34,8 +34,8 @@ describe('architektura', () => {
   it('české texty jsou jen v i18n, ne roztroušené v komponentách', () => {
     const uiFiles = walk(join(process.cwd(), 'src', 'components')).filter((f) => f.endsWith('.tsx'));
     for (const file of uiFiles) {
-      const content = readFileSync(file, 'utf8');
-      // hledáme české řetězce s diakritikou v JSX textu
+      // komentáře smíme psát česky, hlídáme jen texty v JSX
+      const content = code(file);
       const suspicious = content.match(/>[^<>{}]*[áčďéěíňóřšťúůýž][^<>{}]*</gi) ?? [];
       expect(suspicious, `${file}: ${suspicious.join(' | ')}`).toHaveLength(0);
     }

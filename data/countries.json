@@ -61,7 +61,7 @@
     {
       "code": "af",
       "nameCs": "Afghánistán",
-      "nameCsOfficial": "Afghánský islámský emirát",
+      "nameCsOfficial": "Afghánská islámská republika",
       "aliases": [],
       "capitalCs": "Kábul",
       "continent": "asia",
@@ -77,7 +77,7 @@
         600
       ],
       "needsReview": [
-        "OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Rozhodni, kterou učit.",
+        "OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Úřední název je proto v datech taky ten starší, aby si vlajka a název neodporovaly. Rozhodni, kterou verzi učit.",
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
       "iso3": "AFG",

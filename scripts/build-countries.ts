@@ -78,7 +78,7 @@ const countries: Country[] = source.map((c) => {
     needsReview,
     iso3,
     numeric,
-  } as Country & { iso3: string | null; numeric: string | null };
+  } satisfies Country;
 });
 
 // --- 3. Kontroly -----------------------------------------------------------
@@ -117,10 +117,7 @@ const atlas = JSON.parse(
 const mapIds = new Set(atlas.objects.countries.geometries.map((g) => g.id));
 const withoutMap = countries
   .filter((c) => c.sovereignty !== 'territory')
-  .filter((c) => {
-    const numeric = (c as Country & { numeric: string | null }).numeric;
-    return !numeric || !mapIds.has(numeric);
-  })
+  .filter((c) => !c.numeric || !mapIds.has(c.numeric))
   .map((c) => c.code);
 if (withoutMap.length) {
   warnings.push(`Bez polygonu na mapě (${withoutMap.length}): ${withoutMap.join(', ')}`);

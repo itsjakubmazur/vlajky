@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ESNext", "WebWorker"],
+    "types": ["@serwist/next/typings"],
+    "plugins": []
+  },
+  "include": ["src/sw.ts", "src/generated/flag-manifest.ts"],
+  "exclude": []
+}

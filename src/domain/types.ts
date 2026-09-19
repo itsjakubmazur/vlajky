@@ -81,4 +81,8 @@ export interface Country {
   ratio: [number, number];
   /** Co má rodič zkontrolovat v REVIEW.md. */
   needsReview: string[];
+  /** ISO 3166-1 alpha-3; `null` u kódů mimo standard. */
+  iso3: string | null;
+  /** ISO 3166-1 numeric – napojení na polygony mapy světa. */
+  numeric: string | null;
 }
