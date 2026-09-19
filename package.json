@@ -1,0 +1,47 @@
+{
+  "name": "vlajky",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run data && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "data": "tsx scripts/build-countries.ts && tsx scripts/copy-flags.ts && tsx scripts/build-review.ts",
+    "check": "npm run typecheck && npm run lint && npm run test"
+  },
+  "dependencies": {
+    "d3-geo": "3.1.1",
+    "next": "15.3.9",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "topojson-client": "3.1.0",
+    "ts-fsrs": "5.4.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.2.0",
+    "@serwist/next": "9.5.12",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/d3-geo": "3.1.0",
+    "@types/node": "22.10.2",
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2",
+    "@types/topojson-client": "3.1.5",
+    "eslint": "9.17.0",
+    "eslint-config-next": "15.3.9",
+    "i18n-iso-countries": "^7.14.0",
+    "serwist": "9.5.12",
+    "svg-country-flags": "1.2.10",
+    "svgo": "4.1.0",
+    "tailwindcss": "4.3.3",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2",
+    "vitest": "3.2.4",
+    "world-atlas": "^2.0.2",
+    "zod": "3.24.1"
+  }
+}

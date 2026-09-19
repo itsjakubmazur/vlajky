@@ -1,0 +1,387 @@
+# REVIEW – kontrola dat
+
+> Tenhle soubor je **generovaný** (`npm run data`). Opravy piš do `data/cs/*.ts`, ne sem.
+
+## Co je potřeba zkontrolovat
+
+1. **České názvy zemí** – jestli sedí s tím, jak se to říká/píše u nás.
+2. **Hlavní města** – hlavně tam, kde je víc možností (viz otevřené otázky níž).
+3. **Zajímavosti o vlajkách** – jestli jsou pravdivé a srozumitelné pro osmiletého.
+4. **Aliasy** – co všechno se má uznat jako správná odpověď.
+
+Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zdrojových datech.
+
+## Přehled
+
+- Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
+- Států v sadě „Svět“: **197** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
+- Území v bonusové sadě: **31**
+- Zajímavost o vlajce chybí u **24** záznamů
+- Otevřených otázek k rozhodnutí: **21**
+
+### Co NENÍ ověřené
+
+- **Souřadnice (`lat`, `lng`)** jsou přibližné středy zemí. Slouží k obarvení mapy a později k nápovědě „směr + vzdálenost“. Na metry přesné nejsou a být nemusí.
+- **Obtížnost 1–5** je odhad (jak je vlajka podobná jiným + jak je země známá), ne měřený údaj. Až bude dost odehraných odpovědí, dá se nahradit reálnými daty.
+- **Poměr stran** je odečtený z `viewBox` zdrojového SVG, takže odpovídá tomu, co zdroj kreslí – ne nutně tomu, co je v zákoně dané země.
+
+## Otevřené otázky
+
+- **Afghánistán** (`af`)
+  - OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Rozhodni, kterou učit.
+- **Belgie** (`be`)
+  - Poměr stran: oficiálně 13:15, běžně se ale používá 2:3. Zdrojové SVG má 15:13.
+- **Burundi** (`bi`)
+  - Hlavním městem je od roku 2019 Gitega, největším městem zůstává Bujumbura.
+- **Benin** (`bj`)
+  - Úřední hlavní město je Porto-Novo, sídlem vlády je Cotonou.
+- **Bolívie** (`bo`)
+  - Ústavním hlavním městem je Sucre, sídlem vlády La Paz.
+- **Konžská republika** (`cg`)
+  - Slovo Kongo je v češtině dvojznačné. Teď platí jako alias JEN pro Konžskou republiku (Brazzaville). Chceš to tak?
+- **Pobřeží slonoviny** (`ci`)
+  - Úřední hlavní město je Yamoussoukro, sídlem vlády je Abidžan.
+- **Kypr** (`cy`)
+  - Zeměpisně leží v Asii, politicky patří k Evropě (EU). Zařazeno do Evropy.
+- **Západní Sahara** (`eh`)
+  - Sporné území. Zařazeno jen do bonusové sady.
+- **Spojené království** (`gb`)
+  - Anglie ZÁMĚRNĚ není alias – je to samostatná vlajka v bonusové sadě.
+- **Izrael** (`il`)
+  - Hlavní město: Izrael uvádí Jeruzalém, většina států má velvyslanectví v Tel Avivu. Sporné.
+- **Srí Lanka** (`lk`)
+  - Úřední hlavní město je Srí Džajavardanapura Kotte, Kolombo je největší město a sídlo vlády.
+- **Mexiko** (`mx`)
+  - Hlavní město se česky píše různě: Mexico City / Ciudad de México / Mexiko. Vybráno Mexico City.
+- **Nizozemsko** (`nl`)
+  - Hlavní město je Amsterdam, sídlo vlády je ale Haag.
+- **Palestina** (`ps`)
+  - Hlavní město: Palestina uvádí Východní Jeruzalém, sídlem vlády je Ramalláh. Sporné.
+- **Rusko** (`ru`)
+  - Zeměpisný střed leží na Sibiři; zařazeno do Evropy podle zvyklosti.
+- **Sýrie** (`sy`)
+  - OVĚŘENO: zdrojové SVG ukazuje starší červeno-bílo-černou vlajku se dvěma zelenými hvězdami, ne dnešní zeleno-bílo-černou se třemi červenými hvězdami. Rozhodni, kterou učit.
+- **Eswatini** (`sz`)
+  - Mbabane je správní hlavní město, Lobamba je královské a parlamentní sídlo.
+- **Turecko** (`tr`)
+  - Leží v Asii i v Evropě; zařazeno do Asie.
+- **Tanzanie** (`tz`)
+  - Úřední hlavní město je Dodoma, největší město a přístav je Dar es Salaam.
+- **Jihoafrická republika** (`za`)
+  - JAR má tři hlavní města: Pretoria (vláda), Kapské Město (parlament), Bloemfontein (soudy).
+
+## Chybějící zajímavosti
+
+U těchhle vlajek jsem nenašel fakt, za který bych ručil. Radši prázdné než vymyšlené –
+když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká vlajka).
+
+`af` Afghánistán · `ai` Anguilla · `as` Americká Samoa · `aw` Aruba · `ax` Ålandy · `bm` Bermudy · `ck` Cookovy ostrovy · `cw` Curaçao · `eh` Západní Sahara · `fk` Falklandy · `gb-nir` Severní Irsko · `gg` Guernsey · `gu` Guam · `je` Jersey · `ky` Kajmanské ostrovy · `mo` Macao · `mp` Severní Mariany · `ms` Montserrat · `nc` Nová Kaledonie · `pf` Francouzská Polynésie · `sy` Sýrie · `tc` Turks a Caicos · `vg` Britské Panenské ostrovy · `vi` Americké Panenské ostrovy
+
+## Evropa (46)
+
+| Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
+|---|---|---|---|---|---|---|---|
+| `al` | **Albánie** | – | – | Tirana | 3 | 1.40:1 | Na albánské vlajce je černý dvouhlavý orel. |
+| `ad` | **Andorra** | – | – | Andorra la Vella | 4 | 1.43:1 | Ve znaku uprostřed andorrské vlajky jsou dvě červené krávy. |
+| `be` | **Belgie** | Belgické království | – | Brusel | 2 | 1.15:1 | Barvy belgické vlajky pochází z erbu Brabantska – zlatý lev na černém poli s červenými drápy. |
+| `by` | **Bělorusko** | Běloruská republika | – | Minsk | 3 | 2.00:1 | U žerdi má běloruská vlajka červený vzor převzatý z lidové výšivky. |
+| `ba` | **Bosna a Hercegovina** | – | Bosna | Sarajevo | 3 | 2.00:1 | Hvězdy na vlajce Bosny a Hercegoviny jsou na krajích useknuté, jako by jich byla nekonečná řada. |
+| `bg` | **Bulharsko** | Bulharská republika | – | Sofie | 2 | 1.67:1 | Bulharská vlajka vychází z ruské trikolóry, jen modrý pruh v ní nahradila zelená. |
+| `me` | **Černá Hora** | – | – | Podgorica | 4 | 2.00:1 | Černohorská vlajka má zlatý okraj a uprostřed zlatého dvouhlavého orla. |
+| `cz` | **Česko** | Česká republika | Česká republika, ČR | Praha | 1 | 1.50:1 | Modrý klín se k bílo-červené vlajce přidal až v roce 1920. |
+| `dk` | **Dánsko** | Dánské království | – | Kodaň | 2 | 1.32:1 | Dánská vlajka Dannebrog je nejstarší státní vlajka, která se dodnes používá. |
+| `ee` | **Estonsko** | Estonská republika | – | Tallinn | 3 | 1.57:1 | Modrou, černou a bílou si v roce 1881 zvolil spolek estonských studentů. |
+| `fi` | **Finsko** | Finská republika | – | Helsinky | 2 | 1.64:1 | Modrá na finské vlajce znamená tisíce finských jezer a bílá sníh. |
+| `fr` | **Francie** | Francouzská republika | – | Paříž | 1 | 1.50:1 | Modrá a červená jsou barvy Paříže, bílá byla barva francouzských králů. |
+| `hr` | **Chorvatsko** | Chorvatská republika | – | Záhřeb | 2 | 2.00:1 | Uprostřed chorvatské vlajky je červeno-bílá šachovnice, které se říká šahovnica. |
+| `ie` | **Irsko** | – | – | Dublin | 2 | 2.00:1 | Bílý pruh uprostřed irské vlajky znamená mír mezi zelenými katolíky a oranžovými protestanty. |
+| `is` | **Island** | Islandská republika | – | Reykjavík | 3 | 1.39:1 | Islandská vlajka má stejný tvar jako norská, jen s prohozenou modrou a červenou. |
+| `it` | **Itálie** | Italská republika | – | Řím | 1 | 1.50:1 | Italská i irská vlajka mají u žerdi zelenou – italská má ale jako třetí barvu červenou, irská oranžovou. |
+| `xk` | **Kosovo** | Republika Kosovo | – | Priština | 4 | 1.40:1 | Na kosovské vlajce je obrys země a nad ním šest hvězd. |
+| `cy` | **Kypr** | Kyperská republika | – | Nikósie | 4 | 1.50:1 | Kypr má na vlajce nakreslený obrys vlastního ostrova – to má na světě jen pár zemí. |
+| `li` | **Lichtenštejnsko** | Lichtenštejnské knížectví | – | Vaduz | 4 | 1.67:1 | Zlatá koruna se na vlajku přidala až poté, co se na olympiádě v roce 1936 ukázalo, že Lichtenštejnsko má stejnou vlajku jako Haiti. |
+| `lt` | **Litva** | Litevská republika | – | Vilnius | 3 | 1.67:1 | Žlutá na litevské vlajce znamená slunce, zelená lesy a červená odvahu. |
+| `lv` | **Lotyšsko** | Lotyšská republika | – | Riga | 3 | 2.00:1 | Lotyšská vlajka má tak tmavou červenou, že se jí říká lotyšská červeň. |
+| `lu` | **Lucembursko** | Lucemburské velkovévodství | – | Lucemburk | 4 | 1.67:1 | Lucemburská vlajka se od nizozemské liší světlejším modrým pruhem. |
+| `hu` | **Maďarsko** | – | – | Budapešť | 2 | 2.00:1 | Maďarská vlajka má stejné barvy jako italská, jen pruhy leží vodorovně. |
+| `mt` | **Malta** | Maltská republika | – | Valletta | 4 | 1.50:1 | V rohu maltské vlajky je Jiřího kříž, britské vyznamenání za statečnost z druhé světové války. |
+| `md` | **Moldavsko** | Moldavská republika | – | Kišiněv | 4 | 2.00:1 | Ve znaku uprostřed moldavské vlajky je hlava zubra. |
+| `mc` | **Monako** | Monacké knížectví | – | Monako | 4 | 1.25:1 | Monacká vlajka vypadá jako indonéská, je ale skoro čtvercová. |
+| `de` | **Německo** | Spolková republika Německo | SRN | Berlín | 1 | 1.67:1 | Černá, červená a zlatá se v Německu používají jako národní barvy už od 19. století. |
+| `nl` | **Nizozemsko** | Nizozemské království | Holandsko | Amsterdam | 2 | 1.50:1 | Nizozemská vlajka měla původně místo červeného pruhu oranžový. |
+| `no` | **Norsko** | Norské království | – | Oslo | 2 | 1.38:1 | Norská vlajka vznikla z dánské tím, že do bílého kříže přidali ještě modrý. |
+| `pl` | **Polsko** | Polská republika | – | Varšava | 1 | 1.60:1 | Polská vlajka má bílou nahoře – přesně obráceně než monacká a indonéská. |
+| `pt` | **Portugalsko** | Portugalská republika | – | Lisabon | 2 | 1.50:1 | Na portugalské vlajce je armilární sféra, přístroj starých mořeplavců. |
+| `at` | **Rakousko** | Rakouská republika | – | Vídeň | 2 | 1.50:1 | Červeno-bílo-červené pruhy patří k nejstarším vlajkovým vzorům v Evropě, používají se už od středověku. |
+| `ro` | **Rumunsko** | – | – | Bukurešť | 2 | 1.50:1 | Rumunská vlajka se od čadské liší jen odstínem modré – rumunská ji má světlejší. |
+| `ru` | **Rusko** | Ruská federace | – | Moskva | 1 | 1.50:1 | Ruskou trikolóru zavedl car Petr Veliký podle nizozemské vlajky. |
+| `gr` | **Řecko** | Řecká republika | – | Atény | 2 | 1.50:1 | Devět pruhů na řecké vlajce odpovídá devíti slabikám hesla Svoboda, nebo smrt. |
+| `sm` | **San Marino** | – | – | San Marino | 4 | 1.33:1 | Ve znaku San Marina jsou tři věže, které opravdu stojí na hoře Titano. |
+| `mk` | **Severní Makedonie** | – | – | Skopje | 4 | 2.00:1 | Slunce na vlajce Severní Makedonie má osm paprsků, které sahají až k okrajům. |
+| `sk` | **Slovensko** | Slovenská republika | SR | Bratislava | 2 | 1.50:1 | Slovenská vlajka má znak posunutý k žerdi, aby se nepletla s ruskou a slovinskou. |
+| `si` | **Slovinsko** | Slovinská republika | – | Lublaň | 3 | 2.00:1 | Ve slovinském znaku je hora Triglav a pod ní dvě vlnky – moře a řeky. |
+| `gb` | **Spojené království** | Spojené království Velké Británie a Severního Irska | Velká Británie, Británie, UK | Londýn | 1 | 2.00:1 | Union Jack vznikl složením tří křížů – anglického, skotského a irského. Wales v něm není. |
+| `rs` | **Srbsko** | Srbská republika | – | Bělehrad | 3 | 1.50:1 | Srbská vlajka má stejné barvy jako ruská, ale v opačném pořadí. |
+| `es` | **Španělsko** | Španělské království | – | Madrid | 1 | 1.50:1 | Ve španělském znaku jsou dva sloupy s nápisem Plus Ultra, tedy dál za obzor. |
+| `se` | **Švédsko** | Švédské království | – | Stockholm | 2 | 1.60:1 | Švédská vlajka má stejný tvar kříže jako dánská, jen v modré a žluté. |
+| `ch` | **Švýcarsko** | Švýcarská konfederace | – | Bern | 2 | 1.00:1 | Švýcarská vlajka je čtvercová – kromě vatikánské je jediná taková na světě. |
+| `ua` | **Ukrajina** | – | – | Kyjev | 2 | 1.50:1 | Modrá na ukrajinské vlajce je nebe a žlutá lán obilí pod ním. |
+| `va` | **Vatikán** | Městský stát Vatikán | – | Vatikán | 3 | 1.00:1 | Vatikánská vlajka je spolu se švýcarskou jediná čtvercová a jsou na ní zkřížené klíče. |
+
+## Asie (48)
+
+| Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
+|---|---|---|---|---|---|---|---|
+| `af` | **Afghánistán** | Afghánský islámský emirát | – | Kábul | 4 | 1.50:1 | **— CHYBÍ —** |
+| `am` | **Arménie** | Arménská republika | – | Jerevan | 3 | 2.00:1 | Spodní pruh arménské vlajky se úředně popisuje jako meruňkový. |
+| `az` | **Ázerbájdžán** | Ázerbájdžánská republika | – | Baku | 4 | 2.00:1 | Na ázerbájdžánské vlajce je půlměsíc a hvězda s osmi cípy. |
+| `bh` | **Bahrajn** | Bahrajnské království | – | Manáma | 4 | 1.67:1 | Bílou a červenou odděluje na bahrajnské vlajce pět zubů – jeden za každý pilíř islámu. |
+| `bd` | **Bangladéš** | Bangladéšská lidová republika | – | Dháka | 3 | 1.67:1 | Červený kruh je posunutý kousek k žerdi, aby při vlání vypadal přesně uprostřed. |
+| `bt` | **Bhútán** | Bhútánské království | – | Thimphú | 3 | 1.50:1 | Na bhútánské vlajce je bílý drak, který v tlapách svírá klenoty. |
+| `bn` | **Brunej** | Brunej Darussalam | – | Bandar Seri Begawan | 5 | 2.00:1 | Žlutá je v Bruneji barva sultána. |
+| `cn` | **Čína** | Čínská lidová republika | ČLR | Peking | 1 | 1.50:1 | Velká hvězda na čínské vlajce znamená komunistickou stranu a čtyři malé lid. |
+| `ph` | **Filipíny** | Filipínská republika | – | Manila | 3 | 2.00:1 | Za války se filipínská vlajka otáčí vzhůru nohama, aby byla nahoře červená. |
+| `ge` | **Gruzie** | – | – | Tbilisi | 4 | 1.50:1 | Na gruzínské vlajce je pět křížů – jeden velký a čtyři malé v rozích. |
+| `in` | **Indie** | Indická republika | – | Nové Dillí | 1 | 1.50:1 | Uprostřed indické vlajky je modré kolo s 24 paprsky, Ašókova čakra. |
+| `id` | **Indonésie** | Indonéská republika | – | Jakarta | 2 | 1.50:1 | Indonéská vlajka je stejná jako monacká, jen je delší. |
+| `iq` | **Irák** | Irácká republika | – | Bagdád | 3 | 1.50:1 | Uprostřed irácké vlajky je zeleným písmem nápis Alláh akbar. |
+| `ir` | **Írán** | Íránská islámská republika | – | Teherán | 3 | 1.75:1 | Podél pruhů íránské vlajky je 22krát drobně napsané Alláh akbar. |
+| `il` | **Izrael** | Stát Izrael | – | Jeruzalém | 2 | 1.38:1 | Modré pruhy na izraelské vlajce připomínají modlitební šál talit. |
+| `jp` | **Japonsko** | – | – | Tokio | 1 | 1.50:1 | Japonské vlajce se říká Hinomaru, což znamená sluneční kotouč. |
+| `ye` | **Jemen** | Jemenská republika | – | Saná | 4 | 1.50:1 | Jemenská vlajka jsou jen tři pruhy – červený, bílý a černý, bez jakéhokoli znaku. |
+| `kr` | **Jižní Korea** | Korejská republika | – | Soul | 2 | 1.50:1 | Uprostřed jihokorejské vlajky je červeno-modrý symbol jin a jang. |
+| `jo` | **Jordánsko** | Jordánské hášimovské království | – | Ammán | 4 | 2.00:1 | Na červeném trojúhelníku jordánské vlajky je bílá sedmicípá hvězda – palestinská vlajka ji nemá. |
+| `kh` | **Kambodža** | Kambodžské království | – | Phnompenh | 3 | 1.56:1 | Uprostřed kambodžské vlajky je chrám Angkor Vat. |
+| `qa` | **Katar** | Stát Katar | – | Dauhá | 3 | 2.55:1 | Katarská vlajka je ze všech nejdelší – je skoro třikrát delší, než vysoká. |
+| `kz` | **Kazachstán** | Republika Kazachstán | – | Astana | 3 | 2.00:1 | Na kazašské vlajce letí pod sluncem zlatý orel a u žerdi je národní vzor. |
+| `kw` | **Kuvajt** | Stát Kuvajt | – | Kuvajt | 4 | 2.00:1 | U žerdi kuvajtské vlajky je černý lichoběžník, ne trojúhelník. |
+| `kg` | **Kyrgyzstán** | Kyrgyzská republika | – | Biškek | 4 | 1.67:1 | Uvnitř slunce na kyrgyzské vlajce je pohled na střechu jurty. |
+| `la` | **Laos** | Laoská lidově demokratická republika | – | Vientiane | 4 | 1.50:1 | Bílý kruh na laoské vlajce představuje měsíc nad řekou Mekong. |
+| `lb` | **Libanon** | Libanonská republika | – | Bejrút | 3 | 1.50:1 | Uprostřed libanonské vlajky je cedr – žádná jiná země strom na vlajce nemá. |
+| `my` | **Malajsie** | – | – | Kuala Lumpur | 3 | 2.00:1 | Malajsijská vlajka má 14 pruhů a hvězdu se 14 cípy za 13 států a hlavní město. |
+| `mv` | **Maledivy** | Maledivská republika | – | Male | 4 | 1.50:1 | Maledivská vlajka má červený okraj, zelený obdélník a v něm bílý půlměsíc. |
+| `mn` | **Mongolsko** | – | – | Ulánbátar | 3 | 2.00:1 | U žerdi mongolské vlajky je zlatý znak sojombo. |
+| `mm` | **Myanmar** | Republika Myanmarský svaz | Barma | Neipyijto | 4 | 1.50:1 | Myanmar používá vlajku s velkou bílou hvězdou až od roku 2010. |
+| `np` | **Nepál** | – | – | Káthmándú | 2 | 0.82:1 | Nepálská vlajka je jediná na světě, která není obdélník – jsou to dva trojúhelníky nad sebou. |
+| `om` | **Omán** | Sultanát Omán | – | Maskat | 4 | 2.00:1 | Ve znaku ománské vlajky jsou dvě zkřížené šavle a zahnutá dýka chandžar. |
+| `pk` | **Pákistán** | Pákistánská islámská republika | – | Islámábád | 2 | 1.50:1 | Bílý pruh u žerdi pákistánské vlajky patří nemuslimským menšinám. |
+| `ps` | **Palestina** | Stát Palestina | – | Ramalláh | 4 | 2.00:1 | Palestinská vlajka vypadá jako jordánská, jen na červeném trojúhelníku nemá hvězdu. |
+| `sa` | **Saúdská Arábie** | Království Saúdská Arábie | – | Rijád | 3 | 1.50:1 | Kvůli posvátnému nápisu se saúdská vlajka nikdy nespouští na půl žerdi. |
+| `kp` | **Severní Korea** | Korejská lidově demokratická republika | KLDR | Pchjongjang | 3 | 2.00:1 | Na severokorejské vlajce je červená hvězda v bílém kruhu. |
+| `sg` | **Singapur** | Singapurská republika | – | Singapur | 3 | 1.50:1 | Na singapurské vlajce je půlměsíc a pět hvězd srovnaných do kroužku. |
+| `ae` | **Spojené arabské emiráty** | – | SAE, Emiráty | Abú Zabí | 3 | 2.00:1 | Červená, zelená, bílá a černá jsou panarabské barvy, které má na vlajce víc arabských zemí. |
+| `lk` | **Srí Lanka** | Srílanská demokratická socialistická republika | – | Kolombo | 4 | 2.00:1 | Na srílanské vlajce je lev s mečem a v rozích čtyři lístky fíkovníku. |
+| `sy` | **Sýrie** | Syrská arabská republika | – | Damašek | 3 | 1.50:1 | **— CHYBÍ —** |
+| `tj` | **Tádžikistán** | Republika Tádžikistán | – | Dušanbe | 5 | 2.00:1 | Uprostřed tádžické vlajky je koruna se sedmi hvězdami. |
+| `th` | **Thajsko** | Thajské království | – | Bangkok | 2 | 1.50:1 | Thajská vlajka má pět pruhů a prostřední modrý je dvakrát širší než ostatní. |
+| `tw` | **Tchaj-wan** | Čínská republika | – | Tchaj-pej | 3 | 1.50:1 | V rohu tchajwanské vlajky je bílé slunce s dvanácti paprsky. |
+| `tr` | **Turecko** | Turecká republika | Türkiye | Ankara | 1 | 1.50:1 | Půlměsíc s hvězdou z turecké vlajky převzala později řada dalších zemí. |
+| `tm` | **Turkmenistán** | – | – | Ašchabad | 5 | 1.50:1 | U žerdi turkmenské vlajky je pruh s pěti kobercovými vzory – bývá označovaná za nejsložitější vlajku světa. |
+| `uz` | **Uzbekistán** | Republika Uzbekistán | – | Taškent | 4 | 2.00:1 | Na uzbecké vlajce je půlměsíc a dvanáct hvězd. |
+| `vn` | **Vietnam** | Vietnamská socialistická republika | – | Hanoj | 2 | 1.50:1 | Žlutá hvězda na vietnamské vlajce má pět cípů za pět skupin obyvatel. |
+| `tl` | **Východní Timor** | Demokratická republika Východní Timor | Timor-Leste | Dili | 5 | 2.00:1 | Na vlajce Východního Timoru leží přes sebe dva trojúhelníky – žlutý a černý s bílou hvězdou. |
+
+## Afrika (54)
+
+| Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
+|---|---|---|---|---|---|---|---|
+| `dz` | **Alžírsko** | Alžírská demokratická a lidová republika | – | Alžír | 3 | 1.50:1 | Na hranici zeleného a bílého pole alžírské vlajky je červený půlměsíc s hvězdou. |
+| `ao` | **Angola** | Angolská republika | – | Luanda | 4 | 1.50:1 | Uprostřed angolské vlajky je mačeta a půlka ozubeného kola. |
+| `bj` | **Benin** | Beninská republika | – | Porto-Novo | 4 | 1.50:1 | Benin má panafrické barvy poskládané jinak než sousedé – zelený pruh stojí nastojato u žerdi. |
+| `bw` | **Botswana** | Botswanská republika | – | Gaborone | 4 | 1.50:1 | Modrá na botswanské vlajce znamená vodu a déšť – v zemi s pouští Kalahari je vzácný. |
+| `bf` | **Burkina Faso** | – | – | Ouagadougou | 4 | 1.50:1 | Mezi červeným a zeleným pruhem vlajky Burkiny Faso svítí žlutá hvězda. |
+| `bi` | **Burundi** | Burundská republika | – | Gitega | 5 | 1.67:1 | Uprostřed burundské vlajky jsou v bílém kruhu tři červené hvězdy. |
+| `td` | **Čad** | Čadská republika | – | Ndžamena | 3 | 1.50:1 | Čadská vlajka se od rumunské liší jen tím, že má tmavší modrou. |
+| `cd` | **Demokratická republika Kongo** | – | DR Kongo, DRK, Kongo-Kinshasa | Kinshasa | 4 | 1.33:1 | Modrou vlajku DR Kongo přetíná šikmý červený pruh se žlutým lemem a v rohu je žlutá hvězda. |
+| `dj` | **Džibutsko** | Džibutská republika | – | Džibuti | 5 | 1.50:1 | Na džibutské vlajce je bílý trojúhelník s červenou hvězdou. |
+| `eg` | **Egypt** | Egyptská arabská republika | – | Káhira | 2 | 1.50:1 | Uprostřed egyptské vlajky je zlatý Saladinův orel. |
+| `er` | **Eritrea** | Stát Eritrea | – | Asmara | 5 | 2.00:1 | V červeném trojúhelníku eritrejské vlajky je zlatá olivová ratolest ve věnci. |
+| `sz` | **Eswatini** | Království Eswatini | Svazijsko | Mbabane | 5 | 1.50:1 | Na vlajce Eswatini leží naležato válečný štít a dvě kopí. |
+| `et` | **Etiopie** | Etiopská federativní demokratická republika | – | Addis Abeba | 3 | 2.00:1 | Etiopská zelená, žlutá a červená posloužila jako vzor vlajkám mnoha dalších afrických zemí. |
+| `ga` | **Gabon** | Gabonská republika | – | Libreville | 4 | 1.33:1 | Žlutý pruh uprostřed gabonské vlajky připomíná rovník, který zemí prochází. |
+| `gm` | **Gambie** | Gambijská republika | – | Banjul | 4 | 1.50:1 | Modrý pruh uprostřed gambijské vlajky je řeka Gambie, kolem které se celá země táhne. |
+| `gh` | **Ghana** | Ghanská republika | – | Akkra | 3 | 1.50:1 | Ghana si jako první africká země po osamostatnění zvolila panafrické barvy a k nim černou hvězdu. |
+| `gn` | **Guinea** | Guinejská republika | – | Konakry | 4 | 1.50:1 | Guinejská vlajka je jako malijská, jen má barvy v opačném pořadí. |
+| `gw` | **Guinea-Bissau** | – | – | Bissau | 5 | 2.00:1 | Guinea-Bissau má u žerdi červený svislý pruh s černou hvězdou. |
+| `za` | **Jihoafrická republika** | – | JAR, Jižní Afrika | Pretoria | 2 | 1.50:1 | Jihoafrická vlajka má šest barev – víc než kterákoli jiná státní vlajka. |
+| `ss` | **Jižní Súdán** | Jihosúdánská republika | – | Džuba | 4 | 2.00:1 | Vlajka Jižního Súdánu má šest barev a v modrém trojúhelníku žlutou hvězdu. |
+| `cm` | **Kamerun** | Kamerunská republika | – | Yaoundé | 3 | 1.50:1 | Kamerunská vlajka má hvězdu uprostřed žlutého svislého pruhu. |
+| `cv` | **Kapverdy** | Kapverdská republika | Kapverdské ostrovy, Cabo Verde | Praia | 5 | 1.70:1 | Na kapverdské vlajce je kruh z deseti hvězd – jedna za každý ostrov. |
+| `ke` | **Keňa** | Keňská republika | – | Nairobi | 3 | 1.50:1 | Uprostřed keňské vlajky je masajský štít a dvě zkřížená kopí. |
+| `km` | **Komory** | Komorský svaz | – | Moroni | 5 | 1.67:1 | Čtyři hvězdy na komorské vlajce jsou čtyři ostrovy souostroví. |
+| `cg` | **Konžská republika** | – | Kongo, Kongo-Brazzaville | Brazzaville | 4 | 1.50:1 | Vlajku Konžské republiky dělí šikmý žlutý pruh mezi zelenou a červenou. |
+| `ls` | **Lesotho** | Lesothské království | – | Maseru | 5 | 1.50:1 | Uprostřed vlajky Lesotha je černý slaměný klobouk mokorotlo. |
+| `lr` | **Libérie** | Liberijská republika | – | Monrovia | 4 | 1.90:1 | Libérijská vlajka vypadá jako americká, má ale jen jedenáct pruhů a jedinou hvězdu. |
+| `ly` | **Libye** | Stát Libye | – | Tripolis | 4 | 2.00:1 | Libye měla v letech 1977 až 2011 celou vlajku jednolitě zelenou, bez jediného znaku. |
+| `mg` | **Madagaskar** | Madagaskarská republika | – | Antananarivo | 4 | 1.50:1 | Madagaskarská vlajka má bílý pruh nastojato u žerdi a vedle něj červený a zelený. |
+| `mw` | **Malawi** | Malawiská republika | – | Lilongwe | 5 | 1.50:1 | V černém pruhu malawijské vlajky vychází rudé slunce. |
+| `ml` | **Mali** | Republika Mali | – | Bamako | 4 | 1.50:1 | Malijská vlajka má u žerdi zelenou, guinejská červenou – jinak jsou stejné. |
+| `ma` | **Maroko** | Marocké království | – | Rabat | 2 | 1.50:1 | Zelená hvězda na marocké vlajce je nakreslená jedním propleteným tahem. |
+| `mu` | **Mauricius** | Mauricijská republika | – | Port Louis | 5 | 1.50:1 | Mauricijská vlajka má čtyři stejně široké pruhy: červený, modrý, žlutý a zelený. |
+| `mr` | **Mauritánie** | Mauritánská islámská republika | – | Nuakšott | 5 | 1.50:1 | K zlatému půlměsíci s hvězdou přibyly mauritánské vlajce v roce 2017 dva červené pruhy. |
+| `mz` | **Mosambik** | Mosambická republika | – | Maputo | 4 | 1.50:1 | Na mosambické vlajce je kniha, motyka a puška. |
+| `na` | **Namibie** | Namibijská republika | – | Windhoek | 4 | 1.50:1 | V modrém rohu namibijské vlajky svítí zlaté slunce s dvanácti paprsky. |
+| `ne` | **Niger** | Nigerská republika | – | Niamey | 4 | 1.17:1 | Oranžový kruh uprostřed nigerské vlajky je slunce nad Saharou. |
+| `ng` | **Nigérie** | Nigerijská federativní republika | – | Abuja | 3 | 2.00:1 | Nigerijská vlajka má tři svislé pruhy – zelený, bílý a zelený. |
+| `ci` | **Pobřeží slonoviny** | – | Cote d Ivoire, Côte d Ivoire | Yamoussoukro | 3 | 1.50:1 | Pobřeží slonoviny má stejné barvy jako Irsko, ale obráceně – u žerdi oranžovou. |
+| `gq` | **Rovníková Guinea** | – | – | Malabo | 5 | 1.50:1 | Ve znaku Rovníkové Guineje je strom kapok. |
+| `rw` | **Rwanda** | Rwandská republika | – | Kigali | 4 | 1.50:1 | V rohu rwandské vlajky svítí zlaté slunce s 24 paprsky. |
+| `sn` | **Senegal** | Senegalská republika | – | Dakar | 4 | 1.50:1 | Senegalská vlajka je jako malijská, jen má uprostřed zelenou hvězdu. |
+| `sc` | **Seychely** | Seychelská republika | – | Victoria | 5 | 2.00:1 | Ze seychelské vlajky vybíhá pět barevných paprsků z jednoho rohu. |
+| `sl` | **Sierra Leone** | Republika Sierra Leone | – | Freetown | 5 | 1.50:1 | Modrý pruh dole na vlajce Sierry Leone znamená přístav ve Freetownu. |
+| `so` | **Somálsko** | Somálská federativní republika | – | Mogadišo | 4 | 1.50:1 | Bílá hvězda na somálské vlajce má pět cípů za pět území, kde žijí Somálci. |
+| `cf` | **Středoafrická republika** | – | – | Bangui | 5 | 1.50:1 | Vlajka Středoafrické republiky spojuje panafrické barvy s francouzskou trikolórou – svislý červený pruh je protíná. |
+| `sd` | **Súdán** | Súdánská republika | – | Chartúm | 4 | 2.00:1 | Súdánská vlajka má u žerdi zelený trojúhelník, palestinská červený. |
+| `st` | **Svatý Tomáš a Princův ostrov** | – | – | São Tomé | 5 | 2.00:1 | Dvě černé hvězdy na vlajce znamenají dva hlavní ostrovy země. |
+| `tz` | **Tanzanie** | Sjednocená republika Tanzanie | – | Dodoma | 4 | 1.50:1 | Tanzanskou vlajku dělí šikmý černý pruh se žlutými okraji. |
+| `tg` | **Togo** | Tožská republika | – | Lomé | 5 | 1.62:1 | Togo má pět pruhů a v červeném rohu bílou hvězdu. |
+| `tn` | **Tunisko** | Tuniská republika | – | Tunis | 3 | 1.50:1 | Uprostřed tuniské vlajky je v bílém kruhu červený půlměsíc s hvězdou. |
+| `ug` | **Uganda** | Ugandská republika | – | Kampala | 4 | 1.50:1 | Uprostřed ugandské vlajky stojí v bílém kruhu jeřáb královský. |
+| `zm` | **Zambie** | Zambijská republika | – | Lusaka | 5 | 1.50:1 | Zambijská vlajka má barevné pruhy jen v rohu a nad nimi oranžového orla. |
+| `zw` | **Zimbabwe** | Zimbabwská republika | – | Harare | 4 | 2.00:1 | Na zimbabwské vlajce je Zimbabwský pták vytesaný z kamene. |
+
+## Severní Amerika (23)
+
+| Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
+|---|---|---|---|---|---|---|---|
+| `ag` | **Antigua a Barbuda** | – | – | Saint Johns | 5 | 1.50:1 | Na vlajce Antiguy a Barbudy vychází zlaté slunce nad černým pruhem. |
+| `bs` | **Bahamy** | Bahamské společenství | – | Nassau | 4 | 2.00:1 | Bahamská vlajka má tři vodorovné pruhy a u žerdi černý trojúhelník. |
+| `bb` | **Barbados** | – | – | Bridgetown | 4 | 1.50:1 | Uprostřed barbadoské vlajky je černý trojzubec, kterému chybí násada. |
+| `bz` | **Belize** | – | – | Belmopan | 5 | 1.67:1 | Belize je jediná země, která má na vlajce nakreslené lidi. |
+| `dm` | **Dominika** | Dominické společenství | – | Roseau | 5 | 2.00:1 | Uprostřed vlajky Dominiky sedí papoušek amazoňan císařský. |
+| `do` | **Dominikánská republika** | – | – | Santo Domingo | 4 | 1.50:1 | Dominikánská republika je jediná země, která má na vlajce otevřenou bibli. |
+| `gd` | **Grenada** | – | – | Saint Georges | 5 | 1.67:1 | Na grenadské vlajce je muškátový oříšek, kterým je ostrov proslulý. |
+| `gt` | **Guatemala** | Guatemalská republika | – | Guatemala | 4 | 1.60:1 | Guatemalská vlajka má pruhy nastojato a ve znaku ptáka kvesala. |
+| `ht` | **Haiti** | Republika Haiti | – | Port-au-Prince | 4 | 1.67:1 | Haiti mívalo stejnou vlajku jako Lichtenštejnsko, dokud si Lichtenštejnsko nepřidalo korunu. |
+| `hn` | **Honduras** | Honduraská republika | – | Tegucigalpa | 5 | 2.00:1 | Pět hvězd uprostřed honduraské vlajky je pět zemí bývalé středoamerické federace. |
+| `jm` | **Jamajka** | – | – | Kingston | 3 | 2.00:1 | Jamajská vlajka je jediná na světě, na které není ani červená, ani bílá, ani modrá. |
+| `ca` | **Kanada** | – | – | Ottawa | 1 | 2.00:1 | Javorový list na kanadské vlajce má jedenáct cípů. |
+| `cr` | **Kostarika** | Kostarická republika | – | San José | 4 | 1.67:1 | Kostarika si k modro-bílé vlajce přidala červený pruh podle francouzské trikolóry. |
+| `cu` | **Kuba** | Kubánská republika | – | Havana | 2 | 2.00:1 | Kubánská vlajka má pět pruhů a v červeném trojúhelníku jednu bílou hvězdu. |
+| `mx` | **Mexiko** | Spojené státy mexické | – | Mexico City | 2 | 1.75:1 | Uprostřed mexické vlajky sedí orel na kaktusu a v zobáku drží hada. |
+| `ni` | **Nikaragua** | Nikaragujská republika | – | Managua | 5 | 1.67:1 | Ve znaku Nikaraguy se klene duha nad pěti sopkami. |
+| `pa` | **Panama** | Panamská republika | – | Panama | 4 | 1.50:1 | Panamská vlajka je rozdělená na čtyři pole a jsou v ní dvě hvězdy. |
+| `sv` | **Salvador** | Salvadorská republika | – | San Salvador | 5 | 1.77:1 | Salvador, Nikaragua i Honduras mají modro-bílo-modrou vlajku po společné středoamerické federaci. |
+| `us` | **Spojené státy americké** | – | USA, Amerika, Spojené státy | Washington | 1 | 1.90:1 | Americká vlajka má 13 pruhů za původní kolonie a 50 hvězd za dnešní státy. |
+| `lc` | **Svatá Lucie** | – | – | Castries | 5 | 2.00:1 | Trojúhelníky na vlajce Svaté Lucie představují sopečné štíty Pitons. |
+| `kn` | **Svatý Kryštof a Nevis** | – | – | Basseterre | 5 | 1.50:1 | Vlajku Svatého Kryštofa a Nevisu přetíná šikmý černý pruh se dvěma bílými hvězdami. |
+| `vc` | **Svatý Vincenc a Grenadiny** | – | – | Kingstown | 5 | 1.50:1 | Uprostřed vlajky jsou tři zelené kosočtverce poskládané do písmene V. |
+| `tt` | **Trinidad a Tobago** | – | – | Port of Spain | 4 | 1.67:1 | Červenou vlajku Trinidadu a Tobaga přetíná šikmý černý pruh s bílým lemem. |
+
+## Jižní Amerika (12)
+
+| Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
+|---|---|---|---|---|---|---|---|
+| `ar` | **Argentina** | Argentinská republika | – | Buenos Aires | 2 | 1.60:1 | Uprostřed argentinské vlajky svítí zlaté Májové slunce s obličejem. |
+| `bo` | **Bolívie** | Mnohonárodnostní stát Bolívie | – | Sucre | 4 | 1.47:1 | Ve znaku bolivijské vlajky je lama a stříbrná hora Cerro Rico. |
+| `br` | **Brazílie** | Brazilská federativní republika | – | Brasília | 1 | 1.43:1 | Hvězdy na brazilské vlajce ukazují skutečnou noční oblohu nad Rio de Janeirem v den vyhlášení republiky. |
+| `ec` | **Ekvádor** | Ekvádorská republika | – | Quito | 4 | 1.50:1 | Ekvádorská vlajka má stejné pruhy jako kolumbijská, ale uprostřed znak s kondorem. |
+| `gy` | **Guyana** | Guyanská kooperativní republika | – | Georgetown | 5 | 1.67:1 | Guyanské vlajce se říká Zlatý šíp. |
+| `cl` | **Chile** | Chilská republika | – | Santiago de Chile | 3 | 1.50:1 | Chilská vlajka má v modrém čtverci jedinou bílou hvězdu. |
+| `co` | **Kolumbie** | Kolumbijská republika | – | Bogotá | 3 | 1.50:1 | Žlutý pruh na kolumbijské vlajce je dvakrát širší než modrý a červený. |
+| `py` | **Paraguay** | Paraguayská republika | – | Asunción | 4 | 1.82:1 | Paraguayská vlajka má na každé straně jiný znak – jako jediná na světě. |
+| `pe` | **Peru** | Peruánská republika | – | Lima | 3 | 1.50:1 | Peruánská vlajka má tři svislé pruhy: červený, bílý a červený. |
+| `sr` | **Surinam** | Republika Surinam | – | Paramaribo | 5 | 1.50:1 | Uprostřed surinamské vlajky je velká žlutá hvězda. |
+| `uy` | **Uruguay** | Uruguayská východní republika | – | Montevideo | 4 | 1.50:1 | Uruguayská vlajka má devět pruhů a v rohu Májové slunce jako Argentina. |
+| `ve` | **Venezuela** | Venezuelská bolívarovská republika | – | Caracas | 3 | 1.50:1 | Uprostřed venezuelské vlajky je oblouk z osmi bílých hvězd. |
+
+## Oceánie (14)
+
+| Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
+|---|---|---|---|---|---|---|---|
+| `au` | **Austrálie** | Australské společenství | – | Canberra | 1 | 2.00:1 | Pod Union Jackem má australská vlajka velkou hvězdu Commonwealthu a vedle ní Jižní kříž. |
+| `fj` | **Fidži** | Republika Fidži | – | Suva | 4 | 2.00:1 | Fidžijská vlajka je světle modrá a v rohu má britský Union Jack. |
+| `ki` | **Kiribati** | Republika Kiribati | – | Jižní Tarawa | 5 | 2.00:1 | Na vlajce Kiribati letí fregatka nad vycházejícím sluncem. |
+| `mh` | **Marshallovy ostrovy** | – | – | Majuro | 5 | 1.90:1 | Vlajku Marshallových ostrovů přetínají dva šikmé pruhy a v rohu je hvězda s 24 paprsky. |
+| `fm` | **Mikronésie** | Federativní státy Mikronésie | – | Palikir | 5 | 1.90:1 | Čtyři bílé hvězdy na vlajce Mikronésie jsou čtyři státy federace. |
+| `nr` | **Nauru** | Republika Nauru | – | Yaren | 5 | 2.00:1 | Žlutý pruh na naurské vlajce je rovník a hvězda pod ním ukazuje, kde ostrov leží. |
+| `nz` | **Nový Zéland** | – | – | Wellington | 2 | 2.00:1 | Novozélandská vlajka má čtyři červené hvězdy, australská pět bílých. |
+| `pw` | **Palau** | Republika Palau | – | Ngerulmud | 5 | 1.60:1 | Žlutý kruh na palauské vlajce je měsíc a schválně není přesně uprostřed. |
+| `pg` | **Papua-Nová Guinea** | Nezávislý stát Papua-Nová Guinea | – | Port Moresby | 4 | 1.33:1 | Vlajka Papuy-Nové Guineje je rozdělená úhlopříčně – nahoře rajka, dole Jižní kříž. |
+| `ws` | **Samoa** | Nezávislý stát Samoa | – | Apia | 5 | 2.00:1 | V modrém rohu samojské vlajky svítí Jižní kříž z pěti hvězd. |
+| `sb` | **Šalomounovy ostrovy** | – | – | Honiara | 5 | 2.00:1 | Pět hvězd na vlajce Šalomounových ostrovů je pět původních provincií. |
+| `to` | **Tonga** | Království Tonga | – | Nukualofa | 5 | 2.00:1 | V rohu tonžské vlajky je červený kříž na bílém poli. |
+| `tv` | **Tuvalu** | – | – | Funafuti | 5 | 2.00:1 | Devět hvězd na tuvalské vlajce je rozmístěných jako devět ostrovů v moři. |
+| `vu` | **Vanuatu** | Republika Vanuatu | – | Port Vila | 5 | 1.67:1 | Na vlajce Vanuatu je zahnutý prasečí kel a dva listy kapradiny. |
+
+## Bonusová sada: Území (31)
+
+| Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
+|---|---|---|---|---|---|---|---|
+| `ax` | **Ålandy** | – | – | Mariehamn | 5 | 1.53:1 | **— CHYBÍ —** |
+| `as` | **Americká Samoa** | – | – | Pago Pago | 5 | 2.00:1 | **— CHYBÍ —** |
+| `vi` | **Americké Panenské ostrovy** | – | – | Charlotte Amalie | 5 | 1.50:1 | **— CHYBÍ —** |
+| `gb-eng` | **Anglie** | – | – | Londýn | 2 | 1.67:1 | Anglická vlajka je červený kříž svatého Jiří – ve Union Jacku tvoří tu rovnou část. |
+| `ai` | **Anguilla** | – | – | The Valley | 5 | 2.00:1 | **— CHYBÍ —** |
+| `aw` | **Aruba** | – | – | Oranjestad | 5 | 1.50:1 | **— CHYBÍ —** |
+| `bm` | **Bermudy** | – | – | Hamilton | 4 | 2.00:1 | **— CHYBÍ —** |
+| `vg` | **Britské Panenské ostrovy** | – | – | Road Town | 5 | 2.00:1 | **— CHYBÍ —** |
+| `ck` | **Cookovy ostrovy** | – | – | Avarua | 5 | 2.00:1 | **— CHYBÍ —** |
+| `cw` | **Curaçao** | – | – | Willemstad | 5 | 1.50:1 | **— CHYBÍ —** |
+| `fo` | **Faerské ostrovy** | – | – | Tórshavn | 4 | 1.38:1 | Faerská vlajka má severský kříž v červené a modré na bílém poli. |
+| `fk` | **Falklandy** | – | – | Stanley | 5 | 2.00:1 | **— CHYBÍ —** |
+| `pf` | **Francouzská Polynésie** | – | – | Papeete | 5 | 1.50:1 | **— CHYBÍ —** |
+| `gi` | **Gibraltar** | – | – | Gibraltar | 4 | 2.00:1 | Na gibraltarské vlajce je hrad se zlatým klíčem, který visí z brány. |
+| `gl` | **Grónsko** | – | – | Nuuk | 3 | 1.50:1 | Grónská vlajka má kruh napůl červený a napůl bílý – jako slunce nad ledem. |
+| `gu` | **Guam** | – | – | Hagåtña | 5 | 1.86:1 | **— CHYBÍ —** |
+| `gg` | **Guernsey** | – | – | Saint Peter Port | 5 | 1.50:1 | **— CHYBÍ —** |
+| `hk` | **Hongkong** | – | – | Hongkong | 3 | 1.50:1 | Na hongkongské vlajce je bílý květ blahovičníku s pěti okvětními lístky. |
+| `je` | **Jersey** | – | – | Saint Helier | 5 | 1.67:1 | **— CHYBÍ —** |
+| `ky` | **Kajmanské ostrovy** | – | – | George Town | 5 | 2.00:1 | **— CHYBÍ —** |
+| `mo` | **Macao** | – | – | Macao | 5 | 1.50:1 | **— CHYBÍ —** |
+| `ms` | **Montserrat** | – | – | Plymouth | 5 | 2.00:1 | **— CHYBÍ —** |
+| `nc` | **Nová Kaledonie** | – | – | Nouméa | 5 | 2.00:1 | **— CHYBÍ —** |
+| `im` | **Ostrov Man** | – | – | Douglas | 4 | 2.00:1 | Na vlajce Ostrova Man jsou tři nohy v brnění spojené do kolečka. |
+| `pr` | **Portoriko** | – | – | San Juan | 3 | 1.50:1 | Portorická vlajka vypadá jako kubánská s prohozenou modrou a červenou. |
+| `gb-nir` | **Severní Irsko** | – | – | Belfast | 4 | 2.00:1 | **— CHYBÍ —** |
+| `mp` | **Severní Mariany** | – | – | Saipan | 5 | 2.00:1 | **— CHYBÍ —** |
+| `gb-sct` | **Skotsko** | – | – | Edinburgh | 3 | 1.67:1 | Skotská vlajka je bílý šikmý kříž svatého Ondřeje na modré. |
+| `tc` | **Turks a Caicos** | – | – | Cockburn Town | 5 | 2.00:1 | **— CHYBÍ —** |
+| `gb-wls` | **Wales** | – | – | Cardiff | 3 | 1.67:1 | Na velšské vlajce je červený drak – a ve Union Jacku není vůbec zastoupený. |
+| `eh` | **Západní Sahara** | – | – | Al-Ajún | 5 | 2.00:1 | **— CHYBÍ —** |
+
+## Skupiny zaměnitelných vlajek
+
+Podle nich se vybírají distraktory a staví režim Dvojčata. Čím víc přesných skupin, tím lepší trénink.
+
+- Čad · Rumunsko
+- Monako · Indonésie · Polsko
+- Senegal · Mali · Guinea
+- Irsko · Pobřeží slonoviny · Itálie
+- Nizozemsko · Lucembursko
+- Austrálie · Nový Zéland
+- Slovinsko · Slovensko · Rusko
+- Kolumbie · Ekvádor · Venezuela
+- Norsko · Island
+- Jordánsko · Palestina · Súdán
+- Katar · Bahrajn
+- Rumunsko · Čad · Moldavsko · Andorra
+- Senegal · Mali · Guinea · Kamerun
+- Slovinsko · Slovensko · Rusko · Srbsko
+- Island · Norsko · Dánsko · Finsko · Švédsko
+- Dánsko · Faerské ostrovy · Ålandy
+- Jordánsko · Palestina · Súdán · Kuvajt · Západní Sahara
+- Jemen · Egypt · Irák · Sýrie
+- Rakousko · Lotyšsko
+- Peru · Kanada
+- Libérie · Spojené státy americké · Malajsie
+- Itálie · Irsko · Pobřeží slonoviny · Mexiko
+- Guatemala · Nikaragua · Salvador · Honduras
+- Argentina · Uruguay
+- Česko · Filipíny
+- Čína · Vietnam
+- Turecko · Tunisko · Alžírsko
+- Niger · Indie
+- Japonsko · Bangladéš · Palau
+- Bolívie · Ghana · Etiopie · Litva · Myanmar
+- Austrálie · Nový Zéland · Fidži
+- Nizozemsko · Lucembursko · Paraguay
+- Belgie · Německo
+- Jižní Súdán · Keňa · Súdán
+- Kostarika · Thajsko
+- Haiti · Lichtenštejnsko
+- Řecko · Uruguay
+- Chile · Kuba
+- Maďarsko · Bulharsko
+- Spojené arabské emiráty · Kuvajt
+- Spojené království · Anglie · Skotsko

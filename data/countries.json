@@ -1,0 +1,5475 @@
+{
+  "meta": {
+    "generated": "scripts/build-countries.ts – NEEDITOVAT RUČNĚ",
+    "flagSource": "svg-country-flags (public domain, zdroj Wikipedia)",
+    "count": 228
+  },
+  "countries": [
+    {
+      "code": "ad",
+      "nameCs": "Andorra",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Andorra la Vella",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "un",
+      "lat": 42.5,
+      "lng": 1.5,
+      "similar": [
+        "md",
+        "ro",
+        "td"
+      ],
+      "difficulty": 4,
+      "funFact": "Ve znaku uprostřed andorrské vlajky jsou dvě červené krávy.",
+      "ratio": [
+        1000,
+        700
+      ],
+      "needsReview": [],
+      "iso3": "AND",
+      "numeric": "020"
+    },
+    {
+      "code": "ae",
+      "nameCs": "Spojené arabské emiráty",
+      "nameCsOfficial": null,
+      "aliases": [
+        "SAE",
+        "Emiráty"
+      ],
+      "capitalCs": "Abú Zabí",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 24,
+      "lng": 54,
+      "similar": [
+        "kw"
+      ],
+      "difficulty": 3,
+      "funFact": "Červená, zelená, bílá a černá jsou panarabské barvy, které má na vlajce víc arabských zemí.",
+      "ratio": [
+        12,
+        6
+      ],
+      "needsReview": [],
+      "iso3": "ARE",
+      "numeric": "784"
+    },
+    {
+      "code": "af",
+      "nameCs": "Afghánistán",
+      "nameCsOfficial": "Afghánský islámský emirát",
+      "aliases": [],
+      "capitalCs": "Kábul",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 33.9,
+      "lng": 67.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": null,
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [
+        "OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Rozhodni, kterou učit.",
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "AFG",
+      "numeric": "004"
+    },
+    {
+      "code": "ag",
+      "nameCs": "Antigua a Barbuda",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Saint Johns",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 17.1,
+      "lng": -61.8,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Na vlajce Antiguy a Barbudy vychází zlaté slunce nad černým pruhem.",
+      "ratio": [
+        138,
+        92
+      ],
+      "needsReview": [],
+      "iso3": "ATG",
+      "numeric": "028"
+    },
+    {
+      "code": "ai",
+      "nameCs": "Anguilla",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "The Valley",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 18.2,
+      "lng": -63.1,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "AIA",
+      "numeric": "660"
+    },
+    {
+      "code": "al",
+      "nameCs": "Albánie",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Tirana",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 41,
+      "lng": 20,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Na albánské vlajce je černý dvouhlavý orel.",
+      "ratio": [
+        980,
+        700
+      ],
+      "needsReview": [],
+      "iso3": "ALB",
+      "numeric": "008"
+    },
+    {
+      "code": "am",
+      "nameCs": "Arménie",
+      "nameCsOfficial": "Arménská republika",
+      "aliases": [],
+      "capitalCs": "Jerevan",
+      "continent": "asia",
+      "subregion": "caucasus",
+      "sovereignty": "un",
+      "lat": 40.2,
+      "lng": 45,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Spodní pruh arménské vlajky se úředně popisuje jako meruňkový.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "ARM",
+      "numeric": "051"
+    },
+    {
+      "code": "ao",
+      "nameCs": "Angola",
+      "nameCsOfficial": "Angolská republika",
+      "aliases": [],
+      "capitalCs": "Luanda",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": -12,
+      "lng": 17.5,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Uprostřed angolské vlajky je mačeta a půlka ozubeného kola.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "AGO",
+      "numeric": "024"
+    },
+    {
+      "code": "ar",
+      "nameCs": "Argentina",
+      "nameCsOfficial": "Argentinská republika",
+      "aliases": [],
+      "capitalCs": "Buenos Aires",
+      "continent": "southAmerica",
+      "subregion": "southernCone",
+      "sovereignty": "un",
+      "lat": -34,
+      "lng": -64,
+      "similar": [
+        "uy"
+      ],
+      "difficulty": 2,
+      "funFact": "Uprostřed argentinské vlajky svítí zlaté Májové slunce s obličejem.",
+      "ratio": [
+        800,
+        500
+      ],
+      "needsReview": [],
+      "iso3": "ARG",
+      "numeric": "032"
+    },
+    {
+      "code": "as",
+      "nameCs": "Americká Samoa",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Pago Pago",
+      "continent": "oceania",
+      "subregion": "polynesia",
+      "sovereignty": "territory",
+      "lat": -14.3,
+      "lng": -170.7,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        1000,
+        500
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "ASM",
+      "numeric": "016"
+    },
+    {
+      "code": "at",
+      "nameCs": "Rakousko",
+      "nameCsOfficial": "Rakouská republika",
+      "aliases": [],
+      "capitalCs": "Vídeň",
+      "continent": "europe",
+      "subregion": "centralEurope",
+      "sovereignty": "un",
+      "lat": 47.6,
+      "lng": 14.1,
+      "similar": [
+        "lv"
+      ],
+      "difficulty": 2,
+      "funFact": "Červeno-bílo-červené pruhy patří k nejstarším vlajkovým vzorům v Evropě, používají se už od středověku.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "AUT",
+      "numeric": "040"
+    },
+    {
+      "code": "au",
+      "nameCs": "Austrálie",
+      "nameCsOfficial": "Australské společenství",
+      "aliases": [],
+      "capitalCs": "Canberra",
+      "continent": "oceania",
+      "subregion": "australasia",
+      "sovereignty": "un",
+      "lat": -25,
+      "lng": 134,
+      "similar": [
+        "fj",
+        "nz"
+      ],
+      "difficulty": 1,
+      "funFact": "Pod Union Jackem má australská vlajka velkou hvězdu Commonwealthu a vedle ní Jižní kříž.",
+      "ratio": [
+        10080,
+        5040
+      ],
+      "needsReview": [],
+      "iso3": "AUS",
+      "numeric": "036"
+    },
+    {
+      "code": "aw",
+      "nameCs": "Aruba",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Oranjestad",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 12.5,
+      "lng": -69.97,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        27,
+        18
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "ABW",
+      "numeric": "533"
+    },
+    {
+      "code": "ax",
+      "nameCs": "Ålandy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Mariehamn",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "territory",
+      "lat": 60.2,
+      "lng": 20,
+      "similar": [
+        "dk",
+        "fo"
+      ],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        260,
+        170
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "ALA",
+      "numeric": "248"
+    },
+    {
+      "code": "az",
+      "nameCs": "Ázerbájdžán",
+      "nameCsOfficial": "Ázerbájdžánská republika",
+      "aliases": [],
+      "capitalCs": "Baku",
+      "continent": "asia",
+      "subregion": "caucasus",
+      "sovereignty": "un",
+      "lat": 40.3,
+      "lng": 47.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na ázerbájdžánské vlajce je půlměsíc a hvězda s osmi cípy.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "AZE",
+      "numeric": "031"
+    },
+    {
+      "code": "ba",
+      "nameCs": "Bosna a Hercegovina",
+      "nameCsOfficial": null,
+      "aliases": [
+        "Bosna"
+      ],
+      "capitalCs": "Sarajevo",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 44,
+      "lng": 18,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Hvězdy na vlajce Bosny a Hercegoviny jsou na krajích useknuté, jako by jich byla nekonečná řada.",
+      "ratio": [
+        16,
+        8
+      ],
+      "needsReview": [],
+      "iso3": "BIH",
+      "numeric": "070"
+    },
+    {
+      "code": "bb",
+      "nameCs": "Barbados",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Bridgetown",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 13.2,
+      "lng": -59.5,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Uprostřed barbadoské vlajky je černý trojzubec, kterému chybí násada.",
+      "ratio": [
+        24000,
+        16000
+      ],
+      "needsReview": [],
+      "iso3": "BRB",
+      "numeric": "052"
+    },
+    {
+      "code": "bd",
+      "nameCs": "Bangladéš",
+      "nameCsOfficial": "Bangladéšská lidová republika",
+      "aliases": [],
+      "capitalCs": "Dháka",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 23.7,
+      "lng": 90.4,
+      "similar": [
+        "jp",
+        "pw"
+      ],
+      "difficulty": 3,
+      "funFact": "Červený kruh je posunutý kousek k žerdi, aby při vlání vypadal přesně uprostřed.",
+      "ratio": [
+        20,
+        12
+      ],
+      "needsReview": [],
+      "iso3": "BGD",
+      "numeric": "050"
+    },
+    {
+      "code": "be",
+      "nameCs": "Belgie",
+      "nameCsOfficial": "Belgické království",
+      "aliases": [],
+      "capitalCs": "Brusel",
+      "continent": "europe",
+      "subregion": "westernEurope",
+      "sovereignty": "un",
+      "lat": 50.6,
+      "lng": 4.6,
+      "similar": [
+        "de"
+      ],
+      "difficulty": 2,
+      "funFact": "Barvy belgické vlajky pochází z erbu Brabantska – zlatý lev na černém poli s červenými drápy.",
+      "ratio": [
+        450,
+        390
+      ],
+      "needsReview": [
+        "Poměr stran: oficiálně 13:15, běžně se ale používá 2:3. Zdrojové SVG má 15:13."
+      ],
+      "iso3": "BEL",
+      "numeric": "056"
+    },
+    {
+      "code": "bf",
+      "nameCs": "Burkina Faso",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Ouagadougou",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 12.3,
+      "lng": -1.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Mezi červeným a zeleným pruhem vlajky Burkiny Faso svítí žlutá hvězda.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "BFA",
+      "numeric": "854"
+    },
+    {
+      "code": "bg",
+      "nameCs": "Bulharsko",
+      "nameCsOfficial": "Bulharská republika",
+      "aliases": [],
+      "capitalCs": "Sofie",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 42.7,
+      "lng": 25.3,
+      "similar": [
+        "hu"
+      ],
+      "difficulty": 2,
+      "funFact": "Bulharská vlajka vychází z ruské trikolóry, jen modrý pruh v ní nahradila zelená.",
+      "ratio": [
+        5,
+        3
+      ],
+      "needsReview": [],
+      "iso3": "BGR",
+      "numeric": "100"
+    },
+    {
+      "code": "bh",
+      "nameCs": "Bahrajn",
+      "nameCsOfficial": "Bahrajnské království",
+      "aliases": [],
+      "capitalCs": "Manáma",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 26,
+      "lng": 50.55,
+      "similar": [
+        "qa"
+      ],
+      "difficulty": 4,
+      "funFact": "Bílou a červenou odděluje na bahrajnské vlajce pět zubů – jeden za každý pilíř islámu.",
+      "ratio": [
+        1500,
+        900
+      ],
+      "needsReview": [],
+      "iso3": "BHR",
+      "numeric": "048"
+    },
+    {
+      "code": "bi",
+      "nameCs": "Burundi",
+      "nameCsOfficial": "Burundská republika",
+      "aliases": [],
+      "capitalCs": "Gitega",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -3.4,
+      "lng": 29.9,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Uprostřed burundské vlajky jsou v bílém kruhu tři červené hvězdy.",
+      "ratio": [
+        500,
+        300
+      ],
+      "needsReview": [
+        "Hlavním městem je od roku 2019 Gitega, největším městem zůstává Bujumbura."
+      ],
+      "iso3": "BDI",
+      "numeric": "108"
+    },
+    {
+      "code": "bj",
+      "nameCs": "Benin",
+      "nameCsOfficial": "Beninská republika",
+      "aliases": [],
+      "capitalCs": "Porto-Novo",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 9.5,
+      "lng": 2.3,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Benin má panafrické barvy poskládané jinak než sousedé – zelený pruh stojí nastojato u žerdi.",
+      "ratio": [
+        15,
+        10
+      ],
+      "needsReview": [
+        "Úřední hlavní město je Porto-Novo, sídlem vlády je Cotonou."
+      ],
+      "iso3": "BEN",
+      "numeric": "204"
+    },
+    {
+      "code": "bm",
+      "nameCs": "Bermudy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Hamilton",
+      "continent": "northAmerica",
+      "subregion": "northAmerica",
+      "sovereignty": "territory",
+      "lat": 32.3,
+      "lng": -64.75,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": null,
+      "ratio": [
+        1000,
+        500
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "BMU",
+      "numeric": "060"
+    },
+    {
+      "code": "bn",
+      "nameCs": "Brunej",
+      "nameCsOfficial": "Brunej Darussalam",
+      "aliases": [],
+      "capitalCs": "Bandar Seri Begawan",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 4.5,
+      "lng": 114.7,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Žlutá je v Bruneji barva sultána.",
+      "ratio": [
+        1440,
+        720
+      ],
+      "needsReview": [],
+      "iso3": "BRN",
+      "numeric": "096"
+    },
+    {
+      "code": "bo",
+      "nameCs": "Bolívie",
+      "nameCsOfficial": "Mnohonárodnostní stát Bolívie",
+      "aliases": [],
+      "capitalCs": "Sucre",
+      "continent": "southAmerica",
+      "subregion": "andes",
+      "sovereignty": "un",
+      "lat": -17,
+      "lng": -64,
+      "similar": [
+        "et",
+        "gh",
+        "lt",
+        "mm"
+      ],
+      "difficulty": 4,
+      "funFact": "Ve znaku bolivijské vlajky je lama a stříbrná hora Cerro Rico.",
+      "ratio": [
+        291.042,
+        198.438
+      ],
+      "needsReview": [
+        "Ústavním hlavním městem je Sucre, sídlem vlády La Paz."
+      ],
+      "iso3": "BOL",
+      "numeric": "068"
+    },
+    {
+      "code": "br",
+      "nameCs": "Brazílie",
+      "nameCsOfficial": "Brazilská federativní republika",
+      "aliases": [],
+      "capitalCs": "Brasília",
+      "continent": "southAmerica",
+      "subregion": "southernCone",
+      "sovereignty": "un",
+      "lat": -10,
+      "lng": -53,
+      "similar": [],
+      "difficulty": 1,
+      "funFact": "Hvězdy na brazilské vlajce ukazují skutečnou noční oblohu nad Rio de Janeirem v den vyhlášení republiky.",
+      "ratio": [
+        4200,
+        2940
+      ],
+      "needsReview": [],
+      "iso3": "BRA",
+      "numeric": "076"
+    },
+    {
+      "code": "bs",
+      "nameCs": "Bahamy",
+      "nameCsOfficial": "Bahamské společenství",
+      "aliases": [],
+      "capitalCs": "Nassau",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 25,
+      "lng": -77.4,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Bahamská vlajka má tři vodorovné pruhy a u žerdi černý trojúhelník.",
+      "ratio": [
+        600,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "BHS",
+      "numeric": "044"
+    },
+    {
+      "code": "bt",
+      "nameCs": "Bhútán",
+      "nameCsOfficial": "Bhútánské království",
+      "aliases": [],
+      "capitalCs": "Thimphú",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 27.4,
+      "lng": 90.4,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Na bhútánské vlajce je bílý drak, který v tlapách svírá klenoty.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "BTN",
+      "numeric": "064"
+    },
+    {
+      "code": "bw",
+      "nameCs": "Botswana",
+      "nameCsOfficial": "Botswanská republika",
+      "aliases": [],
+      "capitalCs": "Gaborone",
+      "continent": "africa",
+      "subregion": "southernAfrica",
+      "sovereignty": "un",
+      "lat": -22,
+      "lng": 24,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Modrá na botswanské vlajce znamená vodu a déšť – v zemi s pouští Kalahari je vzácný.",
+      "ratio": [
+        36,
+        24
+      ],
+      "needsReview": [],
+      "iso3": "BWA",
+      "numeric": "072"
+    },
+    {
+      "code": "by",
+      "nameCs": "Bělorusko",
+      "nameCsOfficial": "Běloruská republika",
+      "aliases": [],
+      "capitalCs": "Minsk",
+      "continent": "europe",
+      "subregion": "easternEurope",
+      "sovereignty": "un",
+      "lat": 53.7,
+      "lng": 28,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "U žerdi má běloruská vlajka červený vzor převzatý z lidové výšivky.",
+      "ratio": [
+        1098,
+        549
+      ],
+      "needsReview": [],
+      "iso3": "BLR",
+      "numeric": "112"
+    },
+    {
+      "code": "bz",
+      "nameCs": "Belize",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Belmopan",
+      "continent": "northAmerica",
+      "subregion": "centralAmerica",
+      "sovereignty": "un",
+      "lat": 17.2,
+      "lng": -88.7,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Belize je jediná země, která má na vlajce nakreslené lidi.",
+      "ratio": [
+        1000,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "BLZ",
+      "numeric": "084"
+    },
+    {
+      "code": "ca",
+      "nameCs": "Kanada",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Ottawa",
+      "continent": "northAmerica",
+      "subregion": "northAmerica",
+      "sovereignty": "un",
+      "lat": 56,
+      "lng": -106,
+      "similar": [
+        "pe"
+      ],
+      "difficulty": 1,
+      "funFact": "Javorový list na kanadské vlajce má jedenáct cípů.",
+      "ratio": [
+        9600,
+        4800
+      ],
+      "needsReview": [],
+      "iso3": "CAN",
+      "numeric": "124"
+    },
+    {
+      "code": "cd",
+      "nameCs": "Demokratická republika Kongo",
+      "nameCsOfficial": null,
+      "aliases": [
+        "DR Kongo",
+        "DRK",
+        "Kongo-Kinshasa"
+      ],
+      "capitalCs": "Kinshasa",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": -2.9,
+      "lng": 23.6,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Modrou vlajku DR Kongo přetíná šikmý červený pruh se žlutým lemem a v rohu je žlutá hvězda.",
+      "ratio": [
+        800,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "COD",
+      "numeric": "180"
+    },
+    {
+      "code": "cf",
+      "nameCs": "Středoafrická republika",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Bangui",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": 6.6,
+      "lng": 20.9,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Vlajka Středoafrické republiky spojuje panafrické barvy s francouzskou trikolórou – svislý červený pruh je protíná.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "CAF",
+      "numeric": "140"
+    },
+    {
+      "code": "cg",
+      "nameCs": "Konžská republika",
+      "nameCsOfficial": null,
+      "aliases": [
+        "Kongo",
+        "Kongo-Brazzaville"
+      ],
+      "capitalCs": "Brazzaville",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": -1,
+      "lng": 15.5,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Vlajku Konžské republiky dělí šikmý žlutý pruh mezi zelenou a červenou.",
+      "ratio": [
+        3,
+        2
+      ],
+      "needsReview": [
+        "Slovo Kongo je v češtině dvojznačné. Teď platí jako alias JEN pro Konžskou republiku (Brazzaville). Chceš to tak?"
+      ],
+      "iso3": "COG",
+      "numeric": "178"
+    },
+    {
+      "code": "ch",
+      "nameCs": "Švýcarsko",
+      "nameCsOfficial": "Švýcarská konfederace",
+      "aliases": [],
+      "capitalCs": "Bern",
+      "continent": "europe",
+      "subregion": "centralEurope",
+      "sovereignty": "un",
+      "lat": 46.8,
+      "lng": 8.2,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Švýcarská vlajka je čtvercová – kromě vatikánské je jediná taková na světě.",
+      "ratio": [
+        320,
+        320
+      ],
+      "needsReview": [],
+      "iso3": "CHE",
+      "numeric": "756"
+    },
+    {
+      "code": "ci",
+      "nameCs": "Pobřeží slonoviny",
+      "nameCsOfficial": null,
+      "aliases": [
+        "Cote d Ivoire",
+        "Côte d Ivoire"
+      ],
+      "capitalCs": "Yamoussoukro",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 7.5,
+      "lng": -5.5,
+      "similar": [
+        "ie",
+        "it",
+        "mx"
+      ],
+      "difficulty": 3,
+      "funFact": "Pobřeží slonoviny má stejné barvy jako Irsko, ale obráceně – u žerdi oranžovou.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [
+        "Úřední hlavní město je Yamoussoukro, sídlem vlády je Abidžan."
+      ],
+      "iso3": "CIV",
+      "numeric": "384"
+    },
+    {
+      "code": "ck",
+      "nameCs": "Cookovy ostrovy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Avarua",
+      "continent": "oceania",
+      "subregion": "polynesia",
+      "sovereignty": "territory",
+      "lat": -21.2,
+      "lng": -159.8,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        9600,
+        4800
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "COK",
+      "numeric": "184"
+    },
+    {
+      "code": "cl",
+      "nameCs": "Chile",
+      "nameCsOfficial": "Chilská republika",
+      "aliases": [],
+      "capitalCs": "Santiago de Chile",
+      "continent": "southAmerica",
+      "subregion": "southernCone",
+      "sovereignty": "un",
+      "lat": -35.7,
+      "lng": -71.5,
+      "similar": [
+        "cu"
+      ],
+      "difficulty": 3,
+      "funFact": "Chilská vlajka má v modrém čtverci jedinou bílou hvězdu.",
+      "ratio": [
+        24,
+        16
+      ],
+      "needsReview": [],
+      "iso3": "CHL",
+      "numeric": "152"
+    },
+    {
+      "code": "cm",
+      "nameCs": "Kamerun",
+      "nameCsOfficial": "Kamerunská republika",
+      "aliases": [],
+      "capitalCs": "Yaoundé",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": 6,
+      "lng": 12.5,
+      "similar": [
+        "gn",
+        "ml",
+        "sn"
+      ],
+      "difficulty": 3,
+      "funFact": "Kamerunská vlajka má hvězdu uprostřed žlutého svislého pruhu.",
+      "ratio": [
+        90,
+        60
+      ],
+      "needsReview": [],
+      "iso3": "CMR",
+      "numeric": "120"
+    },
+    {
+      "code": "cn",
+      "nameCs": "Čína",
+      "nameCsOfficial": "Čínská lidová republika",
+      "aliases": [
+        "ČLR"
+      ],
+      "capitalCs": "Peking",
+      "continent": "asia",
+      "subregion": "eastAsia",
+      "sovereignty": "un",
+      "lat": 35,
+      "lng": 105,
+      "similar": [
+        "vn"
+      ],
+      "difficulty": 1,
+      "funFact": "Velká hvězda na čínské vlajce znamená komunistickou stranu a čtyři malé lid.",
+      "ratio": [
+        30,
+        20
+      ],
+      "needsReview": [],
+      "iso3": "CHN",
+      "numeric": "156"
+    },
+    {
+      "code": "co",
+      "nameCs": "Kolumbie",
+      "nameCsOfficial": "Kolumbijská republika",
+      "aliases": [],
+      "capitalCs": "Bogotá",
+      "continent": "southAmerica",
+      "subregion": "andes",
+      "sovereignty": "un",
+      "lat": 4,
+      "lng": -73,
+      "similar": [
+        "ec",
+        "ve"
+      ],
+      "difficulty": 3,
+      "funFact": "Žlutý pruh na kolumbijské vlajce je dvakrát širší než modrý a červený.",
+      "ratio": [
+        6,
+        4
+      ],
+      "needsReview": [],
+      "iso3": "COL",
+      "numeric": "170"
+    },
+    {
+      "code": "cr",
+      "nameCs": "Kostarika",
+      "nameCsOfficial": "Kostarická republika",
+      "aliases": [],
+      "capitalCs": "San José",
+      "continent": "northAmerica",
+      "subregion": "centralAmerica",
+      "sovereignty": "un",
+      "lat": 9.9,
+      "lng": -84,
+      "similar": [
+        "th"
+      ],
+      "difficulty": 4,
+      "funFact": "Kostarika si k modro-bílé vlajce přidala červený pruh podle francouzské trikolóry.",
+      "ratio": [
+        1000,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "CRI",
+      "numeric": "188"
+    },
+    {
+      "code": "cu",
+      "nameCs": "Kuba",
+      "nameCsOfficial": "Kubánská republika",
+      "aliases": [],
+      "capitalCs": "Havana",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 21.5,
+      "lng": -79.5,
+      "similar": [
+        "cl"
+      ],
+      "difficulty": 2,
+      "funFact": "Kubánská vlajka má pět pruhů a v červeném trojúhelníku jednu bílou hvězdu.",
+      "ratio": [
+        800,
+        400
+      ],
+      "needsReview": [],
+      "iso3": "CUB",
+      "numeric": "192"
+    },
+    {
+      "code": "cv",
+      "nameCs": "Kapverdy",
+      "nameCsOfficial": "Kapverdská republika",
+      "aliases": [
+        "Kapverdské ostrovy",
+        "Cabo Verde"
+      ],
+      "capitalCs": "Praia",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 16,
+      "lng": -24,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Na kapverdské vlajce je kruh z deseti hvězd – jedna za každý ostrov.",
+      "ratio": [
+        510,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "CPV",
+      "numeric": "132"
+    },
+    {
+      "code": "cw",
+      "nameCs": "Curaçao",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Willemstad",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 12.2,
+      "lng": -69,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        54,
+        36
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "CUW",
+      "numeric": "531"
+    },
+    {
+      "code": "cy",
+      "nameCs": "Kypr",
+      "nameCsOfficial": "Kyperská republika",
+      "aliases": [],
+      "capitalCs": "Nikósie",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "un",
+      "lat": 35.1,
+      "lng": 33.4,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Kypr má na vlajce nakreslený obrys vlastního ostrova – to má na světě jen pár zemí.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [
+        "Zeměpisně leží v Asii, politicky patří k Evropě (EU). Zařazeno do Evropy."
+      ],
+      "iso3": "CYP",
+      "numeric": "196"
+    },
+    {
+      "code": "cz",
+      "nameCs": "Česko",
+      "nameCsOfficial": "Česká republika",
+      "aliases": [
+        "Česká republika",
+        "ČR"
+      ],
+      "capitalCs": "Praha",
+      "continent": "europe",
+      "subregion": "centralEurope",
+      "sovereignty": "un",
+      "lat": 49.8,
+      "lng": 15.5,
+      "similar": [
+        "ph"
+      ],
+      "difficulty": 1,
+      "funFact": "Modrý klín se k bílo-červené vlajce přidal až v roce 1920.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "CZE",
+      "numeric": "203"
+    },
+    {
+      "code": "de",
+      "nameCs": "Německo",
+      "nameCsOfficial": "Spolková republika Německo",
+      "aliases": [
+        "SRN"
+      ],
+      "capitalCs": "Berlín",
+      "continent": "europe",
+      "subregion": "centralEurope",
+      "sovereignty": "un",
+      "lat": 51.2,
+      "lng": 10.4,
+      "similar": [
+        "be"
+      ],
+      "difficulty": 1,
+      "funFact": "Černá, červená a zlatá se v Německu používají jako národní barvy už od 19. století.",
+      "ratio": [
+        5,
+        3
+      ],
+      "needsReview": [],
+      "iso3": "DEU",
+      "numeric": "276"
+    },
+    {
+      "code": "dj",
+      "nameCs": "Džibutsko",
+      "nameCsOfficial": "Džibutská republika",
+      "aliases": [],
+      "capitalCs": "Džibuti",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": 11.8,
+      "lng": 42.6,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Na džibutské vlajce je bílý trojúhelník s červenou hvězdou.",
+      "ratio": [
+        15,
+        10
+      ],
+      "needsReview": [],
+      "iso3": "DJI",
+      "numeric": "262"
+    },
+    {
+      "code": "dk",
+      "nameCs": "Dánsko",
+      "nameCsOfficial": "Dánské království",
+      "aliases": [],
+      "capitalCs": "Kodaň",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "un",
+      "lat": 56,
+      "lng": 10,
+      "similar": [
+        "ax",
+        "fi",
+        "fo",
+        "is",
+        "no",
+        "se"
+      ],
+      "difficulty": 2,
+      "funFact": "Dánská vlajka Dannebrog je nejstarší státní vlajka, která se dodnes používá.",
+      "ratio": [
+        370,
+        280
+      ],
+      "needsReview": [],
+      "iso3": "DNK",
+      "numeric": "208"
+    },
+    {
+      "code": "dm",
+      "nameCs": "Dominika",
+      "nameCsOfficial": "Dominické společenství",
+      "aliases": [],
+      "capitalCs": "Roseau",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 15.4,
+      "lng": -61.4,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Uprostřed vlajky Dominiky sedí papoušek amazoňan císařský.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "DMA",
+      "numeric": "212"
+    },
+    {
+      "code": "do",
+      "nameCs": "Dominikánská republika",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Santo Domingo",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 19,
+      "lng": -70.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Dominikánská republika je jediná země, která má na vlajce otevřenou bibli.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "DOM",
+      "numeric": "214"
+    },
+    {
+      "code": "dz",
+      "nameCs": "Alžírsko",
+      "nameCsOfficial": "Alžírská demokratická a lidová republika",
+      "aliases": [],
+      "capitalCs": "Alžír",
+      "continent": "africa",
+      "subregion": "northernAfrica",
+      "sovereignty": "un",
+      "lat": 28,
+      "lng": 3,
+      "similar": [
+        "tn",
+        "tr"
+      ],
+      "difficulty": 3,
+      "funFact": "Na hranici zeleného a bílého pole alžírské vlajky je červený půlměsíc s hvězdou.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "DZA",
+      "numeric": "012"
+    },
+    {
+      "code": "ec",
+      "nameCs": "Ekvádor",
+      "nameCsOfficial": "Ekvádorská republika",
+      "aliases": [],
+      "capitalCs": "Quito",
+      "continent": "southAmerica",
+      "subregion": "andes",
+      "sovereignty": "un",
+      "lat": -1.5,
+      "lng": -78.5,
+      "similar": [
+        "co",
+        "ve"
+      ],
+      "difficulty": 4,
+      "funFact": "Ekvádorská vlajka má stejné pruhy jako kolumbijská, ale uprostřed znak s kondorem.",
+      "ratio": [
+        1440,
+        960
+      ],
+      "needsReview": [],
+      "iso3": "ECU",
+      "numeric": "218"
+    },
+    {
+      "code": "ee",
+      "nameCs": "Estonsko",
+      "nameCsOfficial": "Estonská republika",
+      "aliases": [],
+      "capitalCs": "Tallinn",
+      "continent": "europe",
+      "subregion": "baltics",
+      "sovereignty": "un",
+      "lat": 58.7,
+      "lng": 25.5,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Modrou, černou a bílou si v roce 1881 zvolil spolek estonských studentů.",
+      "ratio": [
+        33,
+        21
+      ],
+      "needsReview": [],
+      "iso3": "EST",
+      "numeric": "233"
+    },
+    {
+      "code": "eg",
+      "nameCs": "Egypt",
+      "nameCsOfficial": "Egyptská arabská republika",
+      "aliases": [],
+      "capitalCs": "Káhira",
+      "continent": "africa",
+      "subregion": "northernAfrica",
+      "sovereignty": "un",
+      "lat": 26.8,
+      "lng": 30.8,
+      "similar": [
+        "iq",
+        "sy",
+        "ye"
+      ],
+      "difficulty": 2,
+      "funFact": "Uprostřed egyptské vlajky je zlatý Saladinův orel.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "EGY",
+      "numeric": "818"
+    },
+    {
+      "code": "eh",
+      "nameCs": "Západní Sahara",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Al-Ajún",
+      "continent": "africa",
+      "subregion": "northernAfrica",
+      "sovereignty": "territory",
+      "lat": 24.5,
+      "lng": -13,
+      "similar": [
+        "jo",
+        "kw",
+        "ps",
+        "sd"
+      ],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        600,
+        300
+      ],
+      "needsReview": [
+        "Sporné území. Zařazeno jen do bonusové sady.",
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "ESH",
+      "numeric": "732"
+    },
+    {
+      "code": "er",
+      "nameCs": "Eritrea",
+      "nameCsOfficial": "Stát Eritrea",
+      "aliases": [],
+      "capitalCs": "Asmara",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": 15.2,
+      "lng": 39,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "V červeném trojúhelníku eritrejské vlajky je zlatá olivová ratolest ve věnci.",
+      "ratio": [
+        1000,
+        500
+      ],
+      "needsReview": [],
+      "iso3": "ERI",
+      "numeric": "232"
+    },
+    {
+      "code": "es",
+      "nameCs": "Španělsko",
+      "nameCsOfficial": "Španělské království",
+      "aliases": [],
+      "capitalCs": "Madrid",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "un",
+      "lat": 40.2,
+      "lng": -3.6,
+      "similar": [],
+      "difficulty": 1,
+      "funFact": "Ve španělském znaku jsou dva sloupy s nápisem Plus Ultra, tedy dál za obzor.",
+      "ratio": [
+        750,
+        500
+      ],
+      "needsReview": [],
+      "iso3": "ESP",
+      "numeric": "724"
+    },
+    {
+      "code": "et",
+      "nameCs": "Etiopie",
+      "nameCsOfficial": "Etiopská federativní demokratická republika",
+      "aliases": [],
+      "capitalCs": "Addis Abeba",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": 9,
+      "lng": 39.5,
+      "similar": [
+        "bo",
+        "gh",
+        "lt",
+        "mm"
+      ],
+      "difficulty": 3,
+      "funFact": "Etiopská zelená, žlutá a červená posloužila jako vzor vlajkám mnoha dalších afrických zemí.",
+      "ratio": [
+        720,
+        360
+      ],
+      "needsReview": [],
+      "iso3": "ETH",
+      "numeric": "231"
+    },
+    {
+      "code": "fi",
+      "nameCs": "Finsko",
+      "nameCsOfficial": "Finská republika",
+      "aliases": [],
+      "capitalCs": "Helsinky",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "un",
+      "lat": 64,
+      "lng": 26,
+      "similar": [
+        "dk",
+        "is",
+        "no",
+        "se"
+      ],
+      "difficulty": 2,
+      "funFact": "Modrá na finské vlajce znamená tisíce finských jezer a bílá sníh.",
+      "ratio": [
+        1800,
+        1100
+      ],
+      "needsReview": [],
+      "iso3": "FIN",
+      "numeric": "246"
+    },
+    {
+      "code": "fj",
+      "nameCs": "Fidži",
+      "nameCsOfficial": "Republika Fidži",
+      "aliases": [],
+      "capitalCs": "Suva",
+      "continent": "oceania",
+      "subregion": "melanesia",
+      "sovereignty": "un",
+      "lat": -17.8,
+      "lng": 178,
+      "similar": [
+        "au",
+        "nz"
+      ],
+      "difficulty": 4,
+      "funFact": "Fidžijská vlajka je světle modrá a v rohu má britský Union Jack.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "FJI",
+      "numeric": "242"
+    },
+    {
+      "code": "fk",
+      "nameCs": "Falklandy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Stanley",
+      "continent": "southAmerica",
+      "subregion": "southernCone",
+      "sovereignty": "territory",
+      "lat": -51.8,
+      "lng": -59.5,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "FLK",
+      "numeric": "238"
+    },
+    {
+      "code": "fm",
+      "nameCs": "Mikronésie",
+      "nameCsOfficial": "Federativní státy Mikronésie",
+      "aliases": [],
+      "capitalCs": "Palikir",
+      "continent": "oceania",
+      "subregion": "micronesia",
+      "sovereignty": "un",
+      "lat": 6.9,
+      "lng": 158.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Čtyři bílé hvězdy na vlajce Mikronésie jsou čtyři státy federace.",
+      "ratio": [
+        38,
+        20
+      ],
+      "needsReview": [],
+      "iso3": "FSM",
+      "numeric": "583"
+    },
+    {
+      "code": "fo",
+      "nameCs": "Faerské ostrovy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Tórshavn",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "territory",
+      "lat": 62,
+      "lng": -6.8,
+      "similar": [
+        "ax",
+        "dk"
+      ],
+      "difficulty": 4,
+      "funFact": "Faerská vlajka má severský kříž v červené a modré na bílém poli.",
+      "ratio": [
+        22,
+        16
+      ],
+      "needsReview": [],
+      "iso3": "FRO",
+      "numeric": "234"
+    },
+    {
+      "code": "fr",
+      "nameCs": "Francie",
+      "nameCsOfficial": "Francouzská republika",
+      "aliases": [],
+      "capitalCs": "Paříž",
+      "continent": "europe",
+      "subregion": "westernEurope",
+      "sovereignty": "un",
+      "lat": 46.6,
+      "lng": 2.4,
+      "similar": [],
+      "difficulty": 1,
+      "funFact": "Modrá a červená jsou barvy Paříže, bílá byla barva francouzských králů.",
+      "ratio": [
+        3,
+        2
+      ],
+      "needsReview": [],
+      "iso3": "FRA",
+      "numeric": "250"
+    },
+    {
+      "code": "ga",
+      "nameCs": "Gabon",
+      "nameCsOfficial": "Gabonská republika",
+      "aliases": [],
+      "capitalCs": "Libreville",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": -0.8,
+      "lng": 11.6,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Žlutý pruh uprostřed gabonské vlajky připomíná rovník, který zemí prochází.",
+      "ratio": [
+        400,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "GAB",
+      "numeric": "266"
+    },
+    {
+      "code": "gb",
+      "nameCs": "Spojené království",
+      "nameCsOfficial": "Spojené království Velké Británie a Severního Irska",
+      "aliases": [
+        "Velká Británie",
+        "Británie",
+        "UK"
+      ],
+      "capitalCs": "Londýn",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "un",
+      "lat": 54,
+      "lng": -2.5,
+      "similar": [
+        "gb-eng",
+        "gb-sct"
+      ],
+      "difficulty": 1,
+      "funFact": "Union Jack vznikl složením tří křížů – anglického, skotského a irského. Wales v něm není.",
+      "ratio": [
+        60,
+        30
+      ],
+      "needsReview": [
+        "Anglie ZÁMĚRNĚ není alias – je to samostatná vlajka v bonusové sadě."
+      ],
+      "iso3": "GBR",
+      "numeric": "826"
+    },
+    {
+      "code": "gb-eng",
+      "nameCs": "Anglie",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Londýn",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "territory",
+      "lat": 52.5,
+      "lng": -1.5,
+      "similar": [
+        "gb",
+        "gb-sct"
+      ],
+      "difficulty": 2,
+      "funFact": "Anglická vlajka je červený kříž svatého Jiří – ve Union Jacku tvoří tu rovnou část.",
+      "ratio": [
+        25,
+        15
+      ],
+      "needsReview": [],
+      "iso3": null,
+      "numeric": null
+    },
+    {
+      "code": "gb-nir",
+      "nameCs": "Severní Irsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Belfast",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "territory",
+      "lat": 54.6,
+      "lng": -6.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": null,
+      "ratio": [
+        60,
+        30
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": null,
+      "numeric": null
+    },
+    {
+      "code": "gb-sct",
+      "nameCs": "Skotsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Edinburgh",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "territory",
+      "lat": 56.8,
+      "lng": -4.2,
+      "similar": [
+        "gb",
+        "gb-eng"
+      ],
+      "difficulty": 3,
+      "funFact": "Skotská vlajka je bílý šikmý kříž svatého Ondřeje na modré.",
+      "ratio": [
+        1000,
+        600
+      ],
+      "needsReview": [],
+      "iso3": null,
+      "numeric": null
+    },
+    {
+      "code": "gb-wls",
+      "nameCs": "Wales",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Cardiff",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "territory",
+      "lat": 52.3,
+      "lng": -3.7,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Na velšské vlajce je červený drak – a ve Union Jacku není vůbec zastoupený.",
+      "ratio": [
+        830,
+        498
+      ],
+      "needsReview": [],
+      "iso3": null,
+      "numeric": null
+    },
+    {
+      "code": "gd",
+      "nameCs": "Grenada",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Saint Georges",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 12.1,
+      "lng": -61.7,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Na grenadské vlajce je muškátový oříšek, kterým je ostrov proslulý.",
+      "ratio": [
+        500,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "GRD",
+      "numeric": "308"
+    },
+    {
+      "code": "ge",
+      "nameCs": "Gruzie",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Tbilisi",
+      "continent": "asia",
+      "subregion": "caucasus",
+      "sovereignty": "un",
+      "lat": 42,
+      "lng": 43.5,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na gruzínské vlajce je pět křížů – jeden velký a čtyři malé v rozích.",
+      "ratio": [
+        300,
+        200
+      ],
+      "needsReview": [],
+      "iso3": "GEO",
+      "numeric": "268"
+    },
+    {
+      "code": "gg",
+      "nameCs": "Guernsey",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Saint Peter Port",
+      "continent": "europe",
+      "subregion": "westernEurope",
+      "sovereignty": "territory",
+      "lat": 49.45,
+      "lng": -2.6,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        36,
+        24
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "GGY",
+      "numeric": "831"
+    },
+    {
+      "code": "gh",
+      "nameCs": "Ghana",
+      "nameCsOfficial": "Ghanská republika",
+      "aliases": [],
+      "capitalCs": "Akkra",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 7.9,
+      "lng": -1,
+      "similar": [
+        "bo",
+        "et",
+        "lt",
+        "mm"
+      ],
+      "difficulty": 3,
+      "funFact": "Ghana si jako první africká země po osamostatnění zvolila panafrické barvy a k nim černou hvězdu.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "GHA",
+      "numeric": "288"
+    },
+    {
+      "code": "gi",
+      "nameCs": "Gibraltar",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Gibraltar",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "territory",
+      "lat": 36.1,
+      "lng": -5.35,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na gibraltarské vlajce je hrad se zlatým klíčem, který visí z brány.",
+      "ratio": [
+        512,
+        256
+      ],
+      "needsReview": [],
+      "iso3": "GIB",
+      "numeric": "292"
+    },
+    {
+      "code": "gl",
+      "nameCs": "Grónsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Nuuk",
+      "continent": "northAmerica",
+      "subregion": "northAmerica",
+      "sovereignty": "territory",
+      "lat": 72,
+      "lng": -40,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Grónská vlajka má kruh napůl červený a napůl bílý – jako slunce nad ledem.",
+      "ratio": [
+        18,
+        12
+      ],
+      "needsReview": [],
+      "iso3": "GRL",
+      "numeric": "304"
+    },
+    {
+      "code": "gm",
+      "nameCs": "Gambie",
+      "nameCsOfficial": "Gambijská republika",
+      "aliases": [],
+      "capitalCs": "Banjul",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 13.45,
+      "lng": -15.4,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Modrý pruh uprostřed gambijské vlajky je řeka Gambie, kolem které se celá země táhne.",
+      "ratio": [
+        27,
+        18
+      ],
+      "needsReview": [],
+      "iso3": "GMB",
+      "numeric": "270"
+    },
+    {
+      "code": "gn",
+      "nameCs": "Guinea",
+      "nameCsOfficial": "Guinejská republika",
+      "aliases": [],
+      "capitalCs": "Konakry",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 10,
+      "lng": -10.5,
+      "similar": [
+        "cm",
+        "ml",
+        "sn"
+      ],
+      "difficulty": 4,
+      "funFact": "Guinejská vlajka je jako malijská, jen má barvy v opačném pořadí.",
+      "ratio": [
+        3,
+        2
+      ],
+      "needsReview": [],
+      "iso3": "GIN",
+      "numeric": "324"
+    },
+    {
+      "code": "gq",
+      "nameCs": "Rovníková Guinea",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Malabo",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": 1.6,
+      "lng": 10.5,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Ve znaku Rovníkové Guineje je strom kapok.",
+      "ratio": [
+        3600,
+        2400
+      ],
+      "needsReview": [],
+      "iso3": "GNQ",
+      "numeric": "226"
+    },
+    {
+      "code": "gr",
+      "nameCs": "Řecko",
+      "nameCsOfficial": "Řecká republika",
+      "aliases": [],
+      "capitalCs": "Atény",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "un",
+      "lat": 39,
+      "lng": 22,
+      "similar": [
+        "uy"
+      ],
+      "difficulty": 2,
+      "funFact": "Devět pruhů na řecké vlajce odpovídá devíti slabikám hesla Svoboda, nebo smrt.",
+      "ratio": [
+        27,
+        18
+      ],
+      "needsReview": [],
+      "iso3": "GRC",
+      "numeric": "300"
+    },
+    {
+      "code": "gt",
+      "nameCs": "Guatemala",
+      "nameCsOfficial": "Guatemalská republika",
+      "aliases": [],
+      "capitalCs": "Guatemala",
+      "continent": "northAmerica",
+      "subregion": "centralAmerica",
+      "sovereignty": "un",
+      "lat": 15.5,
+      "lng": -90.3,
+      "similar": [
+        "hn",
+        "ni",
+        "sv"
+      ],
+      "difficulty": 4,
+      "funFact": "Guatemalská vlajka má pruhy nastojato a ve znaku ptáka kvesala.",
+      "ratio": [
+        960,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "GTM",
+      "numeric": "320"
+    },
+    {
+      "code": "gu",
+      "nameCs": "Guam",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Hagåtña",
+      "continent": "oceania",
+      "subregion": "micronesia",
+      "sovereignty": "territory",
+      "lat": 13.4,
+      "lng": 144.8,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        216958.34,
+        116416.66
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "GUM",
+      "numeric": "316"
+    },
+    {
+      "code": "gw",
+      "nameCs": "Guinea-Bissau",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Bissau",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 12,
+      "lng": -15,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Guinea-Bissau má u žerdi červený svislý pruh s černou hvězdou.",
+      "ratio": [
+        12,
+        6
+      ],
+      "needsReview": [],
+      "iso3": "GNB",
+      "numeric": "624"
+    },
+    {
+      "code": "gy",
+      "nameCs": "Guyana",
+      "nameCsOfficial": "Guyanská kooperativní republika",
+      "aliases": [],
+      "capitalCs": "Georgetown",
+      "continent": "southAmerica",
+      "subregion": "northernSouthAmerica",
+      "sovereignty": "un",
+      "lat": 5,
+      "lng": -58.9,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Guyanské vlajce se říká Zlatý šíp.",
+      "ratio": [
+        500,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "GUY",
+      "numeric": "328"
+    },
+    {
+      "code": "hk",
+      "nameCs": "Hongkong",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Hongkong",
+      "continent": "asia",
+      "subregion": "eastAsia",
+      "sovereignty": "territory",
+      "lat": 22.3,
+      "lng": 114.2,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Na hongkongské vlajce je bílý květ blahovičníku s pěti okvětními lístky.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "HKG",
+      "numeric": "344"
+    },
+    {
+      "code": "hn",
+      "nameCs": "Honduras",
+      "nameCsOfficial": "Honduraská republika",
+      "aliases": [],
+      "capitalCs": "Tegucigalpa",
+      "continent": "northAmerica",
+      "subregion": "centralAmerica",
+      "sovereignty": "un",
+      "lat": 14.8,
+      "lng": -86.5,
+      "similar": [
+        "gt",
+        "ni",
+        "sv"
+      ],
+      "difficulty": 5,
+      "funFact": "Pět hvězd uprostřed honduraské vlajky je pět zemí bývalé středoamerické federace.",
+      "ratio": [
+        72,
+        36
+      ],
+      "needsReview": [],
+      "iso3": "HND",
+      "numeric": "340"
+    },
+    {
+      "code": "hr",
+      "nameCs": "Chorvatsko",
+      "nameCsOfficial": "Chorvatská republika",
+      "aliases": [],
+      "capitalCs": "Záhřeb",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 45.1,
+      "lng": 15.5,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Uprostřed chorvatské vlajky je červeno-bílá šachovnice, které se říká šahovnica.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "HRV",
+      "numeric": "191"
+    },
+    {
+      "code": "ht",
+      "nameCs": "Haiti",
+      "nameCsOfficial": "Republika Haiti",
+      "aliases": [],
+      "capitalCs": "Port-au-Prince",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 19,
+      "lng": -72.3,
+      "similar": [
+        "li"
+      ],
+      "difficulty": 4,
+      "funFact": "Haiti mívalo stejnou vlajku jako Lichtenštejnsko, dokud si Lichtenštejnsko nepřidalo korunu.",
+      "ratio": [
+        500,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "HTI",
+      "numeric": "332"
+    },
+    {
+      "code": "hu",
+      "nameCs": "Maďarsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Budapešť",
+      "continent": "europe",
+      "subregion": "centralEurope",
+      "sovereignty": "un",
+      "lat": 47.2,
+      "lng": 19.4,
+      "similar": [
+        "bg"
+      ],
+      "difficulty": 2,
+      "funFact": "Maďarská vlajka má stejné barvy jako italská, jen pruhy leží vodorovně.",
+      "ratio": [
+        6,
+        3
+      ],
+      "needsReview": [],
+      "iso3": "HUN",
+      "numeric": "348"
+    },
+    {
+      "code": "id",
+      "nameCs": "Indonésie",
+      "nameCsOfficial": "Indonéská republika",
+      "aliases": [],
+      "capitalCs": "Jakarta",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": -2.5,
+      "lng": 118,
+      "similar": [
+        "mc",
+        "pl"
+      ],
+      "difficulty": 2,
+      "funFact": "Indonéská vlajka je stejná jako monacká, jen je delší.",
+      "ratio": [
+        3,
+        2
+      ],
+      "needsReview": [],
+      "iso3": "IDN",
+      "numeric": "360"
+    },
+    {
+      "code": "ie",
+      "nameCs": "Irsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Dublin",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "un",
+      "lat": 53.2,
+      "lng": -8,
+      "similar": [
+        "ci",
+        "it",
+        "mx"
+      ],
+      "difficulty": 2,
+      "funFact": "Bílý pruh uprostřed irské vlajky znamená mír mezi zelenými katolíky a oranžovými protestanty.",
+      "ratio": [
+        600,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "IRL",
+      "numeric": "372"
+    },
+    {
+      "code": "il",
+      "nameCs": "Izrael",
+      "nameCsOfficial": "Stát Izrael",
+      "aliases": [],
+      "capitalCs": "Jeruzalém",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 31.4,
+      "lng": 35,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Modré pruhy na izraelské vlajce připomínají modlitební šál talit.",
+      "ratio": [
+        1100,
+        800
+      ],
+      "needsReview": [
+        "Hlavní město: Izrael uvádí Jeruzalém, většina států má velvyslanectví v Tel Avivu. Sporné."
+      ],
+      "iso3": "ISR",
+      "numeric": "376"
+    },
+    {
+      "code": "im",
+      "nameCs": "Ostrov Man",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Douglas",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "territory",
+      "lat": 54.2,
+      "lng": -4.5,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na vlajce Ostrova Man jsou tři nohy v brnění spojené do kolečka.",
+      "ratio": [
+        600,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "IMN",
+      "numeric": "833"
+    },
+    {
+      "code": "in",
+      "nameCs": "Indie",
+      "nameCsOfficial": "Indická republika",
+      "aliases": [],
+      "capitalCs": "Nové Dillí",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 22,
+      "lng": 79,
+      "similar": [
+        "ne"
+      ],
+      "difficulty": 1,
+      "funFact": "Uprostřed indické vlajky je modré kolo s 24 paprsky, Ašókova čakra.",
+      "ratio": [
+        225,
+        150
+      ],
+      "needsReview": [],
+      "iso3": "IND",
+      "numeric": "356"
+    },
+    {
+      "code": "iq",
+      "nameCs": "Irák",
+      "nameCsOfficial": "Irácká republika",
+      "aliases": [],
+      "capitalCs": "Bagdád",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 33,
+      "lng": 44,
+      "similar": [
+        "eg",
+        "sy",
+        "ye"
+      ],
+      "difficulty": 3,
+      "funFact": "Uprostřed irácké vlajky je zeleným písmem nápis Alláh akbar.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "IRQ",
+      "numeric": "368"
+    },
+    {
+      "code": "ir",
+      "nameCs": "Írán",
+      "nameCsOfficial": "Íránská islámská republika",
+      "aliases": [],
+      "capitalCs": "Teherán",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 32,
+      "lng": 53,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Podél pruhů íránské vlajky je 22krát drobně napsané Alláh akbar.",
+      "ratio": [
+        630,
+        360
+      ],
+      "needsReview": [],
+      "iso3": "IRN",
+      "numeric": "364"
+    },
+    {
+      "code": "is",
+      "nameCs": "Island",
+      "nameCsOfficial": "Islandská republika",
+      "aliases": [],
+      "capitalCs": "Reykjavík",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "un",
+      "lat": 65,
+      "lng": -18.6,
+      "similar": [
+        "dk",
+        "fi",
+        "no",
+        "se"
+      ],
+      "difficulty": 3,
+      "funFact": "Islandská vlajka má stejný tvar jako norská, jen s prohozenou modrou a červenou.",
+      "ratio": [
+        2500,
+        1800
+      ],
+      "needsReview": [],
+      "iso3": "ISL",
+      "numeric": "352"
+    },
+    {
+      "code": "it",
+      "nameCs": "Itálie",
+      "nameCsOfficial": "Italská republika",
+      "aliases": [],
+      "capitalCs": "Řím",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "un",
+      "lat": 42.8,
+      "lng": 12.6,
+      "similar": [
+        "ci",
+        "ie",
+        "mx"
+      ],
+      "difficulty": 1,
+      "funFact": "Italská i irská vlajka mají u žerdi zelenou – italská má ale jako třetí barvu červenou, irská oranžovou.",
+      "ratio": [
+        3,
+        2
+      ],
+      "needsReview": [],
+      "iso3": "ITA",
+      "numeric": "380"
+    },
+    {
+      "code": "je",
+      "nameCs": "Jersey",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Saint Helier",
+      "continent": "europe",
+      "subregion": "westernEurope",
+      "sovereignty": "territory",
+      "lat": 49.2,
+      "lng": -2.1,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        30,
+        18
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "JEY",
+      "numeric": "832"
+    },
+    {
+      "code": "jm",
+      "nameCs": "Jamajka",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Kingston",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 18.1,
+      "lng": -77.3,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Jamajská vlajka je jediná na světě, na které není ani červená, ani bílá, ani modrá.",
+      "ratio": [
+        12,
+        6
+      ],
+      "needsReview": [],
+      "iso3": "JAM",
+      "numeric": "388"
+    },
+    {
+      "code": "jo",
+      "nameCs": "Jordánsko",
+      "nameCsOfficial": "Jordánské hášimovské království",
+      "aliases": [],
+      "capitalCs": "Ammán",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 31,
+      "lng": 36.5,
+      "similar": [
+        "eh",
+        "kw",
+        "ps",
+        "sd"
+      ],
+      "difficulty": 4,
+      "funFact": "Na červeném trojúhelníku jordánské vlajky je bílá sedmicípá hvězda – palestinská vlajka ji nemá.",
+      "ratio": [
+        840,
+        420
+      ],
+      "needsReview": [],
+      "iso3": "JOR",
+      "numeric": "400"
+    },
+    {
+      "code": "jp",
+      "nameCs": "Japonsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Tokio",
+      "continent": "asia",
+      "subregion": "eastAsia",
+      "sovereignty": "un",
+      "lat": 36.2,
+      "lng": 138.3,
+      "similar": [
+        "bd",
+        "pw"
+      ],
+      "difficulty": 1,
+      "funFact": "Japonské vlajce se říká Hinomaru, což znamená sluneční kotouč.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "JPN",
+      "numeric": "392"
+    },
+    {
+      "code": "ke",
+      "nameCs": "Keňa",
+      "nameCsOfficial": "Keňská republika",
+      "aliases": [],
+      "capitalCs": "Nairobi",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": 0,
+      "lng": 37.9,
+      "similar": [
+        "sd",
+        "ss"
+      ],
+      "difficulty": 3,
+      "funFact": "Uprostřed keňské vlajky je masajský štít a dvě zkřížená kopí.",
+      "ratio": [
+        240,
+        160
+      ],
+      "needsReview": [],
+      "iso3": "KEN",
+      "numeric": "404"
+    },
+    {
+      "code": "kg",
+      "nameCs": "Kyrgyzstán",
+      "nameCsOfficial": "Kyrgyzská republika",
+      "aliases": [],
+      "capitalCs": "Biškek",
+      "continent": "asia",
+      "subregion": "centralAsia",
+      "sovereignty": "un",
+      "lat": 41.5,
+      "lng": 74.6,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Uvnitř slunce na kyrgyzské vlajce je pohled na střechu jurty.",
+      "ratio": [
+        1000,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "KGZ",
+      "numeric": "417"
+    },
+    {
+      "code": "kh",
+      "nameCs": "Kambodža",
+      "nameCsOfficial": "Kambodžské království",
+      "aliases": [],
+      "capitalCs": "Phnompenh",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 12.6,
+      "lng": 104.9,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Uprostřed kambodžské vlajky je chrám Angkor Vat.",
+      "ratio": [
+        625,
+        400
+      ],
+      "needsReview": [],
+      "iso3": "KHM",
+      "numeric": "116"
+    },
+    {
+      "code": "ki",
+      "nameCs": "Kiribati",
+      "nameCsOfficial": "Republika Kiribati",
+      "aliases": [],
+      "capitalCs": "Jižní Tarawa",
+      "continent": "oceania",
+      "subregion": "micronesia",
+      "sovereignty": "un",
+      "lat": 1.4,
+      "lng": 173,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Na vlajce Kiribati letí fregatka nad vycházejícím sluncem.",
+      "ratio": [
+        600,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "KIR",
+      "numeric": "296"
+    },
+    {
+      "code": "km",
+      "nameCs": "Komory",
+      "nameCsOfficial": "Komorský svaz",
+      "aliases": [],
+      "capitalCs": "Moroni",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -11.7,
+      "lng": 43.3,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Čtyři hvězdy na komorské vlajce jsou čtyři ostrovy souostroví.",
+      "ratio": [
+        500,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "COM",
+      "numeric": "174"
+    },
+    {
+      "code": "kn",
+      "nameCs": "Svatý Kryštof a Nevis",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Basseterre",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 17.3,
+      "lng": -62.7,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Vlajku Svatého Kryštofa a Nevisu přetíná šikmý černý pruh se dvěma bílými hvězdami.",
+      "ratio": [
+        750,
+        500
+      ],
+      "needsReview": [],
+      "iso3": "KNA",
+      "numeric": "659"
+    },
+    {
+      "code": "kp",
+      "nameCs": "Severní Korea",
+      "nameCsOfficial": "Korejská lidově demokratická republika",
+      "aliases": [
+        "KLDR"
+      ],
+      "capitalCs": "Pchjongjang",
+      "continent": "asia",
+      "subregion": "eastAsia",
+      "sovereignty": "un",
+      "lat": 40,
+      "lng": 127,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Na severokorejské vlajce je červená hvězda v bílém kruhu.",
+      "ratio": [
+        72,
+        36
+      ],
+      "needsReview": [],
+      "iso3": "PRK",
+      "numeric": "408"
+    },
+    {
+      "code": "kr",
+      "nameCs": "Jižní Korea",
+      "nameCsOfficial": "Korejská republika",
+      "aliases": [],
+      "capitalCs": "Soul",
+      "continent": "asia",
+      "subregion": "eastAsia",
+      "sovereignty": "un",
+      "lat": 36.5,
+      "lng": 127.9,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Uprostřed jihokorejské vlajky je červeno-modrý symbol jin a jang.",
+      "ratio": [
+        72,
+        48
+      ],
+      "needsReview": [],
+      "iso3": "KOR",
+      "numeric": "410"
+    },
+    {
+      "code": "kw",
+      "nameCs": "Kuvajt",
+      "nameCsOfficial": "Stát Kuvajt",
+      "aliases": [],
+      "capitalCs": "Kuvajt",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 29.3,
+      "lng": 47.6,
+      "similar": [
+        "ae",
+        "eh",
+        "jo",
+        "ps",
+        "sd"
+      ],
+      "difficulty": 4,
+      "funFact": "U žerdi kuvajtské vlajky je černý lichoběžník, ne trojúhelník.",
+      "ratio": [
+        12,
+        6
+      ],
+      "needsReview": [],
+      "iso3": "KWT",
+      "numeric": "414"
+    },
+    {
+      "code": "ky",
+      "nameCs": "Kajmanské ostrovy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "George Town",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 19.3,
+      "lng": -81.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "CYM",
+      "numeric": "136"
+    },
+    {
+      "code": "kz",
+      "nameCs": "Kazachstán",
+      "nameCsOfficial": "Republika Kazachstán",
+      "aliases": [],
+      "capitalCs": "Astana",
+      "continent": "asia",
+      "subregion": "centralAsia",
+      "sovereignty": "un",
+      "lat": 48,
+      "lng": 68,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Na kazašské vlajce letí pod sluncem zlatý orel a u žerdi je národní vzor.",
+      "ratio": [
+        2000,
+        1000
+      ],
+      "needsReview": [],
+      "iso3": "KAZ",
+      "numeric": "398"
+    },
+    {
+      "code": "la",
+      "nameCs": "Laos",
+      "nameCsOfficial": "Laoská lidově demokratická republika",
+      "aliases": [],
+      "capitalCs": "Vientiane",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 18,
+      "lng": 103.8,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Bílý kruh na laoské vlajce představuje měsíc nad řekou Mekong.",
+      "ratio": [
+        600,
+        400
+      ],
+      "needsReview": [],
+      "iso3": "LAO",
+      "numeric": "418"
+    },
+    {
+      "code": "lb",
+      "nameCs": "Libanon",
+      "nameCsOfficial": "Libanonská republika",
+      "aliases": [],
+      "capitalCs": "Bejrút",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 33.9,
+      "lng": 35.9,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Uprostřed libanonské vlajky je cedr – žádná jiná země strom na vlajce nemá.",
+      "ratio": [
+        750,
+        500
+      ],
+      "needsReview": [],
+      "iso3": "LBN",
+      "numeric": "422"
+    },
+    {
+      "code": "lc",
+      "nameCs": "Svatá Lucie",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Castries",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 13.9,
+      "lng": -61,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Trojúhelníky na vlajce Svaté Lucie představují sopečné štíty Pitons.",
+      "ratio": [
+        600,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "LCA",
+      "numeric": "662"
+    },
+    {
+      "code": "li",
+      "nameCs": "Lichtenštejnsko",
+      "nameCsOfficial": "Lichtenštejnské knížectví",
+      "aliases": [],
+      "capitalCs": "Vaduz",
+      "continent": "europe",
+      "subregion": "centralEurope",
+      "sovereignty": "un",
+      "lat": 47.1,
+      "lng": 9.5,
+      "similar": [
+        "ht"
+      ],
+      "difficulty": 4,
+      "funFact": "Zlatá koruna se na vlajku přidala až poté, co se na olympiádě v roce 1936 ukázalo, že Lichtenštejnsko má stejnou vlajku jako Haiti.",
+      "ratio": [
+        1000,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "LIE",
+      "numeric": "438"
+    },
+    {
+      "code": "lk",
+      "nameCs": "Srí Lanka",
+      "nameCsOfficial": "Srílanská demokratická socialistická republika",
+      "aliases": [],
+      "capitalCs": "Kolombo",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 7.6,
+      "lng": 80.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na srílanské vlajce je lev s mečem a v rozích čtyři lístky fíkovníku.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [
+        "Úřední hlavní město je Srí Džajavardanapura Kotte, Kolombo je největší město a sídlo vlády."
+      ],
+      "iso3": "LKA",
+      "numeric": "144"
+    },
+    {
+      "code": "lr",
+      "nameCs": "Libérie",
+      "nameCsOfficial": "Liberijská republika",
+      "aliases": [],
+      "capitalCs": "Monrovia",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 6.4,
+      "lng": -9.4,
+      "similar": [
+        "my",
+        "us"
+      ],
+      "difficulty": 4,
+      "funFact": "Libérijská vlajka vypadá jako americká, má ale jen jedenáct pruhů a jedinou hvězdu.",
+      "ratio": [
+        209,
+        110
+      ],
+      "needsReview": [],
+      "iso3": "LBR",
+      "numeric": "430"
+    },
+    {
+      "code": "ls",
+      "nameCs": "Lesotho",
+      "nameCsOfficial": "Lesothské království",
+      "aliases": [],
+      "capitalCs": "Maseru",
+      "continent": "africa",
+      "subregion": "southernAfrica",
+      "sovereignty": "un",
+      "lat": -29.6,
+      "lng": 28.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Uprostřed vlajky Lesotha je černý slaměný klobouk mokorotlo.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "LSO",
+      "numeric": "426"
+    },
+    {
+      "code": "lt",
+      "nameCs": "Litva",
+      "nameCsOfficial": "Litevská republika",
+      "aliases": [],
+      "capitalCs": "Vilnius",
+      "continent": "europe",
+      "subregion": "baltics",
+      "sovereignty": "un",
+      "lat": 55.2,
+      "lng": 23.9,
+      "similar": [
+        "bo",
+        "et",
+        "gh",
+        "mm"
+      ],
+      "difficulty": 3,
+      "funFact": "Žlutá na litevské vlajce znamená slunce, zelená lesy a červená odvahu.",
+      "ratio": [
+        5,
+        3
+      ],
+      "needsReview": [],
+      "iso3": "LTU",
+      "numeric": "440"
+    },
+    {
+      "code": "lu",
+      "nameCs": "Lucembursko",
+      "nameCsOfficial": "Lucemburské velkovévodství",
+      "aliases": [],
+      "capitalCs": "Lucemburk",
+      "continent": "europe",
+      "subregion": "westernEurope",
+      "sovereignty": "un",
+      "lat": 49.8,
+      "lng": 6.1,
+      "similar": [
+        "nl",
+        "py"
+      ],
+      "difficulty": 4,
+      "funFact": "Lucemburská vlajka se od nizozemské liší světlejším modrým pruhem.",
+      "ratio": [
+        1000,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "LUX",
+      "numeric": "442"
+    },
+    {
+      "code": "lv",
+      "nameCs": "Lotyšsko",
+      "nameCsOfficial": "Lotyšská republika",
+      "aliases": [],
+      "capitalCs": "Riga",
+      "continent": "europe",
+      "subregion": "baltics",
+      "sovereignty": "un",
+      "lat": 57,
+      "lng": 25,
+      "similar": [
+        "at"
+      ],
+      "difficulty": 3,
+      "funFact": "Lotyšská vlajka má tak tmavou červenou, že se jí říká lotyšská červeň.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "LVA",
+      "numeric": "428"
+    },
+    {
+      "code": "ly",
+      "nameCs": "Libye",
+      "nameCsOfficial": "Stát Libye",
+      "aliases": [],
+      "capitalCs": "Tripolis",
+      "continent": "africa",
+      "subregion": "northernAfrica",
+      "sovereignty": "un",
+      "lat": 27,
+      "lng": 17,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Libye měla v letech 1977 až 2011 celou vlajku jednolitě zelenou, bez jediného znaku.",
+      "ratio": [
+        960,
+        480
+      ],
+      "needsReview": [],
+      "iso3": "LBY",
+      "numeric": "434"
+    },
+    {
+      "code": "ma",
+      "nameCs": "Maroko",
+      "nameCsOfficial": "Marocké království",
+      "aliases": [],
+      "capitalCs": "Rabat",
+      "continent": "africa",
+      "subregion": "northernAfrica",
+      "sovereignty": "un",
+      "lat": 32,
+      "lng": -6,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Zelená hvězda na marocké vlajce je nakreslená jedním propleteným tahem.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "MAR",
+      "numeric": "504"
+    },
+    {
+      "code": "mc",
+      "nameCs": "Monako",
+      "nameCsOfficial": "Monacké knížectví",
+      "aliases": [],
+      "capitalCs": "Monako",
+      "continent": "europe",
+      "subregion": "westernEurope",
+      "sovereignty": "un",
+      "lat": 43.7,
+      "lng": 7.4,
+      "similar": [
+        "id",
+        "pl"
+      ],
+      "difficulty": 4,
+      "funFact": "Monacká vlajka vypadá jako indonéská, je ale skoro čtvercová.",
+      "ratio": [
+        750,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "MCO",
+      "numeric": "492"
+    },
+    {
+      "code": "md",
+      "nameCs": "Moldavsko",
+      "nameCsOfficial": "Moldavská republika",
+      "aliases": [],
+      "capitalCs": "Kišiněv",
+      "continent": "europe",
+      "subregion": "easternEurope",
+      "sovereignty": "un",
+      "lat": 47.2,
+      "lng": 28.5,
+      "similar": [
+        "ad",
+        "ro",
+        "td"
+      ],
+      "difficulty": 4,
+      "funFact": "Ve znaku uprostřed moldavské vlajky je hlava zubra.",
+      "ratio": [
+        1800,
+        900
+      ],
+      "needsReview": [],
+      "iso3": "MDA",
+      "numeric": "498"
+    },
+    {
+      "code": "me",
+      "nameCs": "Černá Hora",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Podgorica",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 42.8,
+      "lng": 19.3,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Černohorská vlajka má zlatý okraj a uprostřed zlatého dvouhlavého orla.",
+      "ratio": [
+        640,
+        320
+      ],
+      "needsReview": [],
+      "iso3": "MNE",
+      "numeric": "499"
+    },
+    {
+      "code": "mg",
+      "nameCs": "Madagaskar",
+      "nameCsOfficial": "Madagaskarská republika",
+      "aliases": [],
+      "capitalCs": "Antananarivo",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -19,
+      "lng": 46.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Madagaskarská vlajka má bílý pruh nastojato u žerdi a vedle něj červený a zelený.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "MDG",
+      "numeric": "450"
+    },
+    {
+      "code": "mh",
+      "nameCs": "Marshallovy ostrovy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Majuro",
+      "continent": "oceania",
+      "subregion": "micronesia",
+      "sovereignty": "un",
+      "lat": 7.1,
+      "lng": 171.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Vlajku Marshallových ostrovů přetínají dva šikmé pruhy a v rohu je hvězda s 24 paprsky.",
+      "ratio": [
+        570,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "MHL",
+      "numeric": "584"
+    },
+    {
+      "code": "mk",
+      "nameCs": "Severní Makedonie",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Skopje",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 41.6,
+      "lng": 21.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Slunce na vlajce Severní Makedonie má osm paprsků, které sahají až k okrajům.",
+      "ratio": [
+        56,
+        28
+      ],
+      "needsReview": [],
+      "iso3": "MKD",
+      "numeric": "807"
+    },
+    {
+      "code": "ml",
+      "nameCs": "Mali",
+      "nameCsOfficial": "Republika Mali",
+      "aliases": [],
+      "capitalCs": "Bamako",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 17,
+      "lng": -4,
+      "similar": [
+        "cm",
+        "gn",
+        "sn"
+      ],
+      "difficulty": 4,
+      "funFact": "Malijská vlajka má u žerdi zelenou, guinejská červenou – jinak jsou stejné.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "MLI",
+      "numeric": "466"
+    },
+    {
+      "code": "mm",
+      "nameCs": "Myanmar",
+      "nameCsOfficial": "Republika Myanmarský svaz",
+      "aliases": [
+        "Barma"
+      ],
+      "capitalCs": "Neipyijto",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 21,
+      "lng": 96,
+      "similar": [
+        "bo",
+        "et",
+        "gh",
+        "lt"
+      ],
+      "difficulty": 4,
+      "funFact": "Myanmar používá vlajku s velkou bílou hvězdou až od roku 2010.",
+      "ratio": [
+        18,
+        12
+      ],
+      "needsReview": [],
+      "iso3": "MMR",
+      "numeric": "104"
+    },
+    {
+      "code": "mn",
+      "nameCs": "Mongolsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Ulánbátar",
+      "continent": "asia",
+      "subregion": "eastAsia",
+      "sovereignty": "un",
+      "lat": 46.8,
+      "lng": 103,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "U žerdi mongolské vlajky je zlatý znak sojombo.",
+      "ratio": [
+        4800,
+        2400
+      ],
+      "needsReview": [],
+      "iso3": "MNG",
+      "numeric": "496"
+    },
+    {
+      "code": "mo",
+      "nameCs": "Macao",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Macao",
+      "continent": "asia",
+      "subregion": "eastAsia",
+      "sovereignty": "territory",
+      "lat": 22.2,
+      "lng": 113.5,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        660,
+        440
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "MAC",
+      "numeric": "446"
+    },
+    {
+      "code": "mp",
+      "nameCs": "Severní Mariany",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Saipan",
+      "continent": "oceania",
+      "subregion": "micronesia",
+      "sovereignty": "territory",
+      "lat": 15.2,
+      "lng": 145.75,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        1000,
+        500
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "MNP",
+      "numeric": "580"
+    },
+    {
+      "code": "mr",
+      "nameCs": "Mauritánie",
+      "nameCsOfficial": "Mauritánská islámská republika",
+      "aliases": [],
+      "capitalCs": "Nuakšott",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 20,
+      "lng": -10.5,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "K zlatému půlměsíci s hvězdou přibyly mauritánské vlajce v roce 2017 dva červené pruhy.",
+      "ratio": [
+        144,
+        96
+      ],
+      "needsReview": [],
+      "iso3": "MRT",
+      "numeric": "478"
+    },
+    {
+      "code": "ms",
+      "nameCs": "Montserrat",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Plymouth",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 16.75,
+      "lng": -62.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "MSR",
+      "numeric": "500"
+    },
+    {
+      "code": "mt",
+      "nameCs": "Malta",
+      "nameCsOfficial": "Maltská republika",
+      "aliases": [],
+      "capitalCs": "Valletta",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "un",
+      "lat": 35.9,
+      "lng": 14.4,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "V rohu maltské vlajky je Jiřího kříž, britské vyznamenání za statečnost z druhé světové války.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "MLT",
+      "numeric": "470"
+    },
+    {
+      "code": "mu",
+      "nameCs": "Mauricius",
+      "nameCsOfficial": "Mauricijská republika",
+      "aliases": [],
+      "capitalCs": "Port Louis",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -20.3,
+      "lng": 57.6,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Mauricijská vlajka má čtyři stejně široké pruhy: červený, modrý, žlutý a zelený.",
+      "ratio": [
+        6,
+        4
+      ],
+      "needsReview": [],
+      "iso3": "MUS",
+      "numeric": "480"
+    },
+    {
+      "code": "mv",
+      "nameCs": "Maledivy",
+      "nameCsOfficial": "Maledivská republika",
+      "aliases": [],
+      "capitalCs": "Male",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 3.2,
+      "lng": 73.2,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Maledivská vlajka má červený okraj, zelený obdélník a v něm bílý půlměsíc.",
+      "ratio": [
+        720,
+        480
+      ],
+      "needsReview": [],
+      "iso3": "MDV",
+      "numeric": "462"
+    },
+    {
+      "code": "mw",
+      "nameCs": "Malawi",
+      "nameCsOfficial": "Malawiská republika",
+      "aliases": [],
+      "capitalCs": "Lilongwe",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -13.2,
+      "lng": 34.3,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "V černém pruhu malawijské vlajky vychází rudé slunce.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "MWI",
+      "numeric": "454"
+    },
+    {
+      "code": "mx",
+      "nameCs": "Mexiko",
+      "nameCsOfficial": "Spojené státy mexické",
+      "aliases": [],
+      "capitalCs": "Mexico City",
+      "continent": "northAmerica",
+      "subregion": "northAmerica",
+      "sovereignty": "un",
+      "lat": 23.6,
+      "lng": -102.5,
+      "similar": [
+        "ci",
+        "ie",
+        "it"
+      ],
+      "difficulty": 2,
+      "funFact": "Uprostřed mexické vlajky sedí orel na kaktusu a v zobáku drží hada.",
+      "ratio": [
+        980,
+        560
+      ],
+      "needsReview": [
+        "Hlavní město se česky píše různě: Mexico City / Ciudad de México / Mexiko. Vybráno Mexico City."
+      ],
+      "iso3": "MEX",
+      "numeric": "484"
+    },
+    {
+      "code": "my",
+      "nameCs": "Malajsie",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Kuala Lumpur",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 4.2,
+      "lng": 102,
+      "similar": [
+        "lr",
+        "us"
+      ],
+      "difficulty": 3,
+      "funFact": "Malajsijská vlajka má 14 pruhů a hvězdu se 14 cípy za 13 států a hlavní město.",
+      "ratio": [
+        2800,
+        1400
+      ],
+      "needsReview": [],
+      "iso3": "MYS",
+      "numeric": "458"
+    },
+    {
+      "code": "mz",
+      "nameCs": "Mosambik",
+      "nameCsOfficial": "Mosambická republika",
+      "aliases": [],
+      "capitalCs": "Maputo",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -18,
+      "lng": 35,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na mosambické vlajce je kniha, motyka a puška.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "MOZ",
+      "numeric": "508"
+    },
+    {
+      "code": "na",
+      "nameCs": "Namibie",
+      "nameCsOfficial": "Namibijská republika",
+      "aliases": [],
+      "capitalCs": "Windhoek",
+      "continent": "africa",
+      "subregion": "southernAfrica",
+      "sovereignty": "un",
+      "lat": -22,
+      "lng": 17,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "V modrém rohu namibijské vlajky svítí zlaté slunce s dvanácti paprsky.",
+      "ratio": [
+        90,
+        60
+      ],
+      "needsReview": [],
+      "iso3": "NAM",
+      "numeric": "516"
+    },
+    {
+      "code": "nc",
+      "nameCs": "Nová Kaledonie",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Nouméa",
+      "continent": "oceania",
+      "subregion": "melanesia",
+      "sovereignty": "territory",
+      "lat": -21.3,
+      "lng": 165.5,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        900,
+        450
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "NCL",
+      "numeric": "540"
+    },
+    {
+      "code": "ne",
+      "nameCs": "Niger",
+      "nameCsOfficial": "Nigerská republika",
+      "aliases": [],
+      "capitalCs": "Niamey",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 17.6,
+      "lng": 8.1,
+      "similar": [
+        "in"
+      ],
+      "difficulty": 4,
+      "funFact": "Oranžový kruh uprostřed nigerské vlajky je slunce nad Saharou.",
+      "ratio": [
+        700,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "NER",
+      "numeric": "562"
+    },
+    {
+      "code": "ng",
+      "nameCs": "Nigérie",
+      "nameCsOfficial": "Nigerijská federativní republika",
+      "aliases": [],
+      "capitalCs": "Abuja",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 9.1,
+      "lng": 8.7,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Nigerijská vlajka má tři svislé pruhy – zelený, bílý a zelený.",
+      "ratio": [
+        6,
+        3
+      ],
+      "needsReview": [],
+      "iso3": "NGA",
+      "numeric": "566"
+    },
+    {
+      "code": "ni",
+      "nameCs": "Nikaragua",
+      "nameCsOfficial": "Nikaragujská republika",
+      "aliases": [],
+      "capitalCs": "Managua",
+      "continent": "northAmerica",
+      "subregion": "centralAmerica",
+      "sovereignty": "un",
+      "lat": 12.9,
+      "lng": -85.2,
+      "similar": [
+        "gt",
+        "hn",
+        "sv"
+      ],
+      "difficulty": 5,
+      "funFact": "Ve znaku Nikaraguy se klene duha nad pěti sopkami.",
+      "ratio": [
+        1000,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "NIC",
+      "numeric": "558"
+    },
+    {
+      "code": "nl",
+      "nameCs": "Nizozemsko",
+      "nameCsOfficial": "Nizozemské království",
+      "aliases": [
+        "Holandsko"
+      ],
+      "capitalCs": "Amsterdam",
+      "continent": "europe",
+      "subregion": "westernEurope",
+      "sovereignty": "un",
+      "lat": 52.2,
+      "lng": 5.3,
+      "similar": [
+        "lu",
+        "py"
+      ],
+      "difficulty": 2,
+      "funFact": "Nizozemská vlajka měla původně místo červeného pruhu oranžový.",
+      "ratio": [
+        9,
+        6
+      ],
+      "needsReview": [
+        "Hlavní město je Amsterdam, sídlo vlády je ale Haag."
+      ],
+      "iso3": "NLD",
+      "numeric": "528"
+    },
+    {
+      "code": "no",
+      "nameCs": "Norsko",
+      "nameCsOfficial": "Norské království",
+      "aliases": [],
+      "capitalCs": "Oslo",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "un",
+      "lat": 61,
+      "lng": 9,
+      "similar": [
+        "dk",
+        "fi",
+        "is",
+        "se"
+      ],
+      "difficulty": 2,
+      "funFact": "Norská vlajka vznikla z dánské tím, že do bílého kříže přidali ještě modrý.",
+      "ratio": [
+        1100,
+        800
+      ],
+      "needsReview": [],
+      "iso3": "NOR",
+      "numeric": "578"
+    },
+    {
+      "code": "np",
+      "nameCs": "Nepál",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Káthmándú",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 28.3,
+      "lng": 84.1,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Nepálská vlajka je jediná na světě, která není obdélník – jsou to dva trojúhelníky nad sebou.",
+      "ratio": [
+        71.571,
+        87.246
+      ],
+      "needsReview": [],
+      "iso3": "NPL",
+      "numeric": "524"
+    },
+    {
+      "code": "nr",
+      "nameCs": "Nauru",
+      "nameCsOfficial": "Republika Nauru",
+      "aliases": [],
+      "capitalCs": "Yaren",
+      "continent": "oceania",
+      "subregion": "micronesia",
+      "sovereignty": "un",
+      "lat": -0.5,
+      "lng": 166.9,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Žlutý pruh na naurské vlajce je rovník a hvězda pod ním ukazuje, kde ostrov leží.",
+      "ratio": [
+        600,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "NRU",
+      "numeric": "520"
+    },
+    {
+      "code": "nz",
+      "nameCs": "Nový Zéland",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Wellington",
+      "continent": "oceania",
+      "subregion": "australasia",
+      "sovereignty": "un",
+      "lat": -41,
+      "lng": 174,
+      "similar": [
+        "au",
+        "fj"
+      ],
+      "difficulty": 2,
+      "funFact": "Novozélandská vlajka má čtyři červené hvězdy, australská pět bílých.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "NZL",
+      "numeric": "554"
+    },
+    {
+      "code": "om",
+      "nameCs": "Omán",
+      "nameCsOfficial": "Sultanát Omán",
+      "aliases": [],
+      "capitalCs": "Maskat",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 21,
+      "lng": 57,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Ve znaku ománské vlajky jsou dvě zkřížené šavle a zahnutá dýka chandžar.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "OMN",
+      "numeric": "512"
+    },
+    {
+      "code": "pa",
+      "nameCs": "Panama",
+      "nameCsOfficial": "Panamská republika",
+      "aliases": [],
+      "capitalCs": "Panama",
+      "continent": "northAmerica",
+      "subregion": "centralAmerica",
+      "sovereignty": "un",
+      "lat": 8.5,
+      "lng": -80.1,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Panamská vlajka je rozdělená na čtyři pole a jsou v ní dvě hvězdy.",
+      "ratio": [
+        36,
+        24
+      ],
+      "needsReview": [],
+      "iso3": "PAN",
+      "numeric": "591"
+    },
+    {
+      "code": "pe",
+      "nameCs": "Peru",
+      "nameCsOfficial": "Peruánská republika",
+      "aliases": [],
+      "capitalCs": "Lima",
+      "continent": "southAmerica",
+      "subregion": "andes",
+      "sovereignty": "un",
+      "lat": -9.2,
+      "lng": -75,
+      "similar": [
+        "ca"
+      ],
+      "difficulty": 3,
+      "funFact": "Peruánská vlajka má tři svislé pruhy: červený, bílý a červený.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "PER",
+      "numeric": "604"
+    },
+    {
+      "code": "pf",
+      "nameCs": "Francouzská Polynésie",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Papeete",
+      "continent": "oceania",
+      "subregion": "polynesia",
+      "sovereignty": "territory",
+      "lat": -17.6,
+      "lng": -149.6,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        600,
+        400
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "PYF",
+      "numeric": "258"
+    },
+    {
+      "code": "pg",
+      "nameCs": "Papua-Nová Guinea",
+      "nameCsOfficial": "Nezávislý stát Papua-Nová Guinea",
+      "aliases": [],
+      "capitalCs": "Port Moresby",
+      "continent": "oceania",
+      "subregion": "melanesia",
+      "sovereignty": "un",
+      "lat": -6,
+      "lng": 147,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Vlajka Papuy-Nové Guineje je rozdělená úhlopříčně – nahoře rajka, dole Jižní kříž.",
+      "ratio": [
+        768,
+        576
+      ],
+      "needsReview": [],
+      "iso3": "PNG",
+      "numeric": "598"
+    },
+    {
+      "code": "ph",
+      "nameCs": "Filipíny",
+      "nameCsOfficial": "Filipínská republika",
+      "aliases": [],
+      "capitalCs": "Manila",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 12.9,
+      "lng": 121.8,
+      "similar": [
+        "cz"
+      ],
+      "difficulty": 3,
+      "funFact": "Za války se filipínská vlajka otáčí vzhůru nohama, aby byla nahoře červená.",
+      "ratio": [
+        180,
+        90
+      ],
+      "needsReview": [],
+      "iso3": "PHL",
+      "numeric": "608"
+    },
+    {
+      "code": "pk",
+      "nameCs": "Pákistán",
+      "nameCsOfficial": "Pákistánská islámská republika",
+      "aliases": [],
+      "capitalCs": "Islámábád",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 30,
+      "lng": 70,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Bílý pruh u žerdi pákistánské vlajky patří nemuslimským menšinám.",
+      "ratio": [
+        120,
+        80
+      ],
+      "needsReview": [],
+      "iso3": "PAK",
+      "numeric": "586"
+    },
+    {
+      "code": "pl",
+      "nameCs": "Polsko",
+      "nameCsOfficial": "Polská republika",
+      "aliases": [],
+      "capitalCs": "Varšava",
+      "continent": "europe",
+      "subregion": "centralEurope",
+      "sovereignty": "un",
+      "lat": 52.1,
+      "lng": 19.4,
+      "similar": [
+        "id",
+        "mc"
+      ],
+      "difficulty": 1,
+      "funFact": "Polská vlajka má bílou nahoře – přesně obráceně než monacká a indonéská.",
+      "ratio": [
+        16,
+        10
+      ],
+      "needsReview": [],
+      "iso3": "POL",
+      "numeric": "616"
+    },
+    {
+      "code": "pr",
+      "nameCs": "Portoriko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "San Juan",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 18.2,
+      "lng": -66.5,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Portorická vlajka vypadá jako kubánská s prohozenou modrou a červenou.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "PRI",
+      "numeric": "630"
+    },
+    {
+      "code": "ps",
+      "nameCs": "Palestina",
+      "nameCsOfficial": "Stát Palestina",
+      "aliases": [],
+      "capitalCs": "Ramalláh",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "observer",
+      "lat": 31.9,
+      "lng": 35.2,
+      "similar": [
+        "eh",
+        "jo",
+        "kw",
+        "sd"
+      ],
+      "difficulty": 4,
+      "funFact": "Palestinská vlajka vypadá jako jordánská, jen na červeném trojúhelníku nemá hvězdu.",
+      "ratio": [
+        6,
+        3
+      ],
+      "needsReview": [
+        "Hlavní město: Palestina uvádí Východní Jeruzalém, sídlem vlády je Ramalláh. Sporné."
+      ],
+      "iso3": "PSE",
+      "numeric": "275"
+    },
+    {
+      "code": "pt",
+      "nameCs": "Portugalsko",
+      "nameCsOfficial": "Portugalská republika",
+      "aliases": [],
+      "capitalCs": "Lisabon",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "un",
+      "lat": 39.6,
+      "lng": -8,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Na portugalské vlajce je armilární sféra, přístroj starých mořeplavců.",
+      "ratio": [
+        600,
+        400
+      ],
+      "needsReview": [],
+      "iso3": "PRT",
+      "numeric": "620"
+    },
+    {
+      "code": "pw",
+      "nameCs": "Palau",
+      "nameCsOfficial": "Republika Palau",
+      "aliases": [],
+      "capitalCs": "Ngerulmud",
+      "continent": "oceania",
+      "subregion": "micronesia",
+      "sovereignty": "un",
+      "lat": 7.5,
+      "lng": 134.6,
+      "similar": [
+        "bd",
+        "jp"
+      ],
+      "difficulty": 5,
+      "funFact": "Žlutý kruh na palauské vlajce je měsíc a schválně není přesně uprostřed.",
+      "ratio": [
+        800,
+        500
+      ],
+      "needsReview": [],
+      "iso3": "PLW",
+      "numeric": "585"
+    },
+    {
+      "code": "py",
+      "nameCs": "Paraguay",
+      "nameCsOfficial": "Paraguayská republika",
+      "aliases": [],
+      "capitalCs": "Asunción",
+      "continent": "southAmerica",
+      "subregion": "southernCone",
+      "sovereignty": "un",
+      "lat": -23.4,
+      "lng": -58.4,
+      "similar": [
+        "lu",
+        "nl"
+      ],
+      "difficulty": 4,
+      "funFact": "Paraguayská vlajka má na každé straně jiný znak – jako jediná na světě.",
+      "ratio": [
+        600,
+        330
+      ],
+      "needsReview": [],
+      "iso3": "PRY",
+      "numeric": "600"
+    },
+    {
+      "code": "qa",
+      "nameCs": "Katar",
+      "nameCsOfficial": "Stát Katar",
+      "aliases": [],
+      "capitalCs": "Dauhá",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 25.3,
+      "lng": 51.2,
+      "similar": [
+        "bh"
+      ],
+      "difficulty": 3,
+      "funFact": "Katarská vlajka je ze všech nejdelší – je skoro třikrát delší, než vysoká.",
+      "ratio": [
+        1400,
+        550
+      ],
+      "needsReview": [],
+      "iso3": "QAT",
+      "numeric": "634"
+    },
+    {
+      "code": "ro",
+      "nameCs": "Rumunsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Bukurešť",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 45.9,
+      "lng": 25,
+      "similar": [
+        "ad",
+        "md",
+        "td"
+      ],
+      "difficulty": 2,
+      "funFact": "Rumunská vlajka se od čadské liší jen odstínem modré – rumunská ji má světlejší.",
+      "ratio": [
+        3,
+        2
+      ],
+      "needsReview": [],
+      "iso3": "ROU",
+      "numeric": "642"
+    },
+    {
+      "code": "rs",
+      "nameCs": "Srbsko",
+      "nameCsOfficial": "Srbská republika",
+      "aliases": [],
+      "capitalCs": "Bělehrad",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 44,
+      "lng": 21,
+      "similar": [
+        "ru",
+        "si",
+        "sk"
+      ],
+      "difficulty": 3,
+      "funFact": "Srbská vlajka má stejné barvy jako ruská, ale v opačném pořadí.",
+      "ratio": [
+        1350,
+        900
+      ],
+      "needsReview": [],
+      "iso3": "SRB",
+      "numeric": "688"
+    },
+    {
+      "code": "ru",
+      "nameCs": "Rusko",
+      "nameCsOfficial": "Ruská federace",
+      "aliases": [],
+      "capitalCs": "Moskva",
+      "continent": "europe",
+      "subregion": "easternEurope",
+      "sovereignty": "un",
+      "lat": 61.5,
+      "lng": 100,
+      "similar": [
+        "rs",
+        "si",
+        "sk"
+      ],
+      "difficulty": 1,
+      "funFact": "Ruskou trikolóru zavedl car Petr Veliký podle nizozemské vlajky.",
+      "ratio": [
+        9,
+        6
+      ],
+      "needsReview": [
+        "Zeměpisný střed leží na Sibiři; zařazeno do Evropy podle zvyklosti."
+      ],
+      "iso3": "RUS",
+      "numeric": "643"
+    },
+    {
+      "code": "rw",
+      "nameCs": "Rwanda",
+      "nameCsOfficial": "Rwandská republika",
+      "aliases": [],
+      "capitalCs": "Kigali",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -1.9,
+      "lng": 29.9,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "V rohu rwandské vlajky svítí zlaté slunce s 24 paprsky.",
+      "ratio": [
+        1080,
+        720
+      ],
+      "needsReview": [],
+      "iso3": "RWA",
+      "numeric": "646"
+    },
+    {
+      "code": "sa",
+      "nameCs": "Saúdská Arábie",
+      "nameCsOfficial": "Království Saúdská Arábie",
+      "aliases": [],
+      "capitalCs": "Rijád",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 24,
+      "lng": 45,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Kvůli posvátnému nápisu se saúdská vlajka nikdy nespouští na půl žerdi.",
+      "ratio": [
+        750,
+        500
+      ],
+      "needsReview": [],
+      "iso3": "SAU",
+      "numeric": "682"
+    },
+    {
+      "code": "sb",
+      "nameCs": "Šalomounovy ostrovy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Honiara",
+      "continent": "oceania",
+      "subregion": "melanesia",
+      "sovereignty": "un",
+      "lat": -9.6,
+      "lng": 160.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Pět hvězd na vlajce Šalomounových ostrovů je pět původních provincií.",
+      "ratio": [
+        800,
+        400
+      ],
+      "needsReview": [],
+      "iso3": "SLB",
+      "numeric": "090"
+    },
+    {
+      "code": "sc",
+      "nameCs": "Seychely",
+      "nameCsOfficial": "Seychelská republika",
+      "aliases": [],
+      "capitalCs": "Victoria",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -4.6,
+      "lng": 55.5,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Ze seychelské vlajky vybíhá pět barevných paprsků z jednoho rohu.",
+      "ratio": [
+        900,
+        450
+      ],
+      "needsReview": [],
+      "iso3": "SYC",
+      "numeric": "690"
+    },
+    {
+      "code": "sd",
+      "nameCs": "Súdán",
+      "nameCsOfficial": "Súdánská republika",
+      "aliases": [],
+      "capitalCs": "Chartúm",
+      "continent": "africa",
+      "subregion": "northernAfrica",
+      "sovereignty": "un",
+      "lat": 15,
+      "lng": 30,
+      "similar": [
+        "eh",
+        "jo",
+        "ke",
+        "kw",
+        "ps",
+        "ss"
+      ],
+      "difficulty": 4,
+      "funFact": "Súdánská vlajka má u žerdi zelený trojúhelník, palestinská červený.",
+      "ratio": [
+        12,
+        6
+      ],
+      "needsReview": [],
+      "iso3": "SDN",
+      "numeric": "729"
+    },
+    {
+      "code": "se",
+      "nameCs": "Švédsko",
+      "nameCsOfficial": "Švédské království",
+      "aliases": [],
+      "capitalCs": "Stockholm",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "un",
+      "lat": 62,
+      "lng": 15,
+      "similar": [
+        "dk",
+        "fi",
+        "is",
+        "no"
+      ],
+      "difficulty": 2,
+      "funFact": "Švédská vlajka má stejný tvar kříže jako dánská, jen v modré a žluté.",
+      "ratio": [
+        16,
+        10
+      ],
+      "needsReview": [],
+      "iso3": "SWE",
+      "numeric": "752"
+    },
+    {
+      "code": "sg",
+      "nameCs": "Singapur",
+      "nameCsOfficial": "Singapurská republika",
+      "aliases": [],
+      "capitalCs": "Singapur",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 1.35,
+      "lng": 103.8,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Na singapurské vlajce je půlměsíc a pět hvězd srovnaných do kroužku.",
+      "ratio": [
+        4320,
+        2880
+      ],
+      "needsReview": [],
+      "iso3": "SGP",
+      "numeric": "702"
+    },
+    {
+      "code": "si",
+      "nameCs": "Slovinsko",
+      "nameCsOfficial": "Slovinská republika",
+      "aliases": [],
+      "capitalCs": "Lublaň",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "un",
+      "lat": 46.1,
+      "lng": 14.8,
+      "similar": [
+        "rs",
+        "ru",
+        "sk"
+      ],
+      "difficulty": 3,
+      "funFact": "Ve slovinském znaku je hora Triglav a pod ní dvě vlnky – moře a řeky.",
+      "ratio": [
+        12,
+        6
+      ],
+      "needsReview": [],
+      "iso3": "SVN",
+      "numeric": "705"
+    },
+    {
+      "code": "sk",
+      "nameCs": "Slovensko",
+      "nameCsOfficial": "Slovenská republika",
+      "aliases": [
+        "SR"
+      ],
+      "capitalCs": "Bratislava",
+      "continent": "europe",
+      "subregion": "centralEurope",
+      "sovereignty": "un",
+      "lat": 48.7,
+      "lng": 19.5,
+      "similar": [
+        "rs",
+        "ru",
+        "si"
+      ],
+      "difficulty": 2,
+      "funFact": "Slovenská vlajka má znak posunutý k žerdi, aby se nepletla s ruskou a slovinskou.",
+      "ratio": [
+        9,
+        6
+      ],
+      "needsReview": [],
+      "iso3": "SVK",
+      "numeric": "703"
+    },
+    {
+      "code": "sl",
+      "nameCs": "Sierra Leone",
+      "nameCsOfficial": "Republika Sierra Leone",
+      "aliases": [],
+      "capitalCs": "Freetown",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 8.5,
+      "lng": -11.8,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Modrý pruh dole na vlajce Sierry Leone znamená přístav ve Freetownu.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "SLE",
+      "numeric": "694"
+    },
+    {
+      "code": "sm",
+      "nameCs": "San Marino",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "San Marino",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "un",
+      "lat": 43.9,
+      "lng": 12.5,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Ve znaku San Marina jsou tři věže, které opravdu stojí na hoře Titano.",
+      "ratio": [
+        800,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "SMR",
+      "numeric": "674"
+    },
+    {
+      "code": "sn",
+      "nameCs": "Senegal",
+      "nameCsOfficial": "Senegalská republika",
+      "aliases": [],
+      "capitalCs": "Dakar",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 14.5,
+      "lng": -14.5,
+      "similar": [
+        "cm",
+        "gn",
+        "ml"
+      ],
+      "difficulty": 4,
+      "funFact": "Senegalská vlajka je jako malijská, jen má uprostřed zelenou hvězdu.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "SEN",
+      "numeric": "686"
+    },
+    {
+      "code": "so",
+      "nameCs": "Somálsko",
+      "nameCsOfficial": "Somálská federativní republika",
+      "aliases": [],
+      "capitalCs": "Mogadišo",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": 5,
+      "lng": 46,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Bílá hvězda na somálské vlajce má pět cípů za pět území, kde žijí Somálci.",
+      "ratio": [
+        81,
+        54
+      ],
+      "needsReview": [],
+      "iso3": "SOM",
+      "numeric": "706"
+    },
+    {
+      "code": "sr",
+      "nameCs": "Surinam",
+      "nameCsOfficial": "Republika Surinam",
+      "aliases": [],
+      "capitalCs": "Paramaribo",
+      "continent": "southAmerica",
+      "subregion": "northernSouthAmerica",
+      "sovereignty": "un",
+      "lat": 4,
+      "lng": -56,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Uprostřed surinamské vlajky je velká žlutá hvězda.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "SUR",
+      "numeric": "740"
+    },
+    {
+      "code": "ss",
+      "nameCs": "Jižní Súdán",
+      "nameCsOfficial": "Jihosúdánská republika",
+      "aliases": [],
+      "capitalCs": "Džuba",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": 7,
+      "lng": 30,
+      "similar": [
+        "ke",
+        "sd"
+      ],
+      "difficulty": 4,
+      "funFact": "Vlajka Jižního Súdánu má šest barev a v modrém trojúhelníku žlutou hvězdu.",
+      "ratio": [
+        20,
+        10
+      ],
+      "needsReview": [],
+      "iso3": "SSD",
+      "numeric": "728"
+    },
+    {
+      "code": "st",
+      "nameCs": "Svatý Tomáš a Princův ostrov",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "São Tomé",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": 0.3,
+      "lng": 6.6,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Dvě černé hvězdy na vlajce znamenají dva hlavní ostrovy země.",
+      "ratio": [
+        2800,
+        1400
+      ],
+      "needsReview": [],
+      "iso3": "STP",
+      "numeric": "678"
+    },
+    {
+      "code": "sv",
+      "nameCs": "Salvador",
+      "nameCsOfficial": "Salvadorská republika",
+      "aliases": [],
+      "capitalCs": "San Salvador",
+      "continent": "northAmerica",
+      "subregion": "centralAmerica",
+      "sovereignty": "un",
+      "lat": 13.8,
+      "lng": -88.9,
+      "similar": [
+        "gt",
+        "hn",
+        "ni"
+      ],
+      "difficulty": 5,
+      "funFact": "Salvador, Nikaragua i Honduras mají modro-bílo-modrou vlajku po společné středoamerické federaci.",
+      "ratio": [
+        1005,
+        567
+      ],
+      "needsReview": [],
+      "iso3": "SLV",
+      "numeric": "222"
+    },
+    {
+      "code": "sy",
+      "nameCs": "Sýrie",
+      "nameCsOfficial": "Syrská arabská republika",
+      "aliases": [],
+      "capitalCs": "Damašek",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 35,
+      "lng": 38,
+      "similar": [
+        "eg",
+        "iq",
+        "ye"
+      ],
+      "difficulty": 3,
+      "funFact": null,
+      "ratio": [
+        180,
+        120
+      ],
+      "needsReview": [
+        "OVĚŘENO: zdrojové SVG ukazuje starší červeno-bílo-černou vlajku se dvěma zelenými hvězdami, ne dnešní zeleno-bílo-černou se třemi červenými hvězdami. Rozhodni, kterou učit.",
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "SYR",
+      "numeric": "760"
+    },
+    {
+      "code": "sz",
+      "nameCs": "Eswatini",
+      "nameCsOfficial": "Království Eswatini",
+      "aliases": [
+        "Svazijsko"
+      ],
+      "capitalCs": "Mbabane",
+      "continent": "africa",
+      "subregion": "southernAfrica",
+      "sovereignty": "un",
+      "lat": -26.5,
+      "lng": 31.5,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Na vlajce Eswatini leží naležato válečný štít a dvě kopí.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [
+        "Mbabane je správní hlavní město, Lobamba je královské a parlamentní sídlo."
+      ],
+      "iso3": "SWZ",
+      "numeric": "748"
+    },
+    {
+      "code": "tc",
+      "nameCs": "Turks a Caicos",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Cockburn Town",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 21.7,
+      "lng": -71.6,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        9600,
+        4800
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "TCA",
+      "numeric": "796"
+    },
+    {
+      "code": "td",
+      "nameCs": "Čad",
+      "nameCsOfficial": "Čadská republika",
+      "aliases": [],
+      "capitalCs": "Ndžamena",
+      "continent": "africa",
+      "subregion": "centralAfrica",
+      "sovereignty": "un",
+      "lat": 15,
+      "lng": 19,
+      "similar": [
+        "ad",
+        "md",
+        "ro"
+      ],
+      "difficulty": 3,
+      "funFact": "Čadská vlajka se od rumunské liší jen tím, že má tmavší modrou.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "TCD",
+      "numeric": "148"
+    },
+    {
+      "code": "tg",
+      "nameCs": "Togo",
+      "nameCsOfficial": "Tožská republika",
+      "aliases": [],
+      "capitalCs": "Lomé",
+      "continent": "africa",
+      "subregion": "westernAfrica",
+      "sovereignty": "un",
+      "lat": 8.6,
+      "lng": 1,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Togo má pět pruhů a v červeném rohu bílou hvězdu.",
+      "ratio": [
+        809,
+        500
+      ],
+      "needsReview": [],
+      "iso3": "TGO",
+      "numeric": "768"
+    },
+    {
+      "code": "th",
+      "nameCs": "Thajsko",
+      "nameCsOfficial": "Thajské království",
+      "aliases": [],
+      "capitalCs": "Bangkok",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 15,
+      "lng": 101,
+      "similar": [
+        "cr"
+      ],
+      "difficulty": 2,
+      "funFact": "Thajská vlajka má pět pruhů a prostřední modrý je dvakrát širší než ostatní.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "THA",
+      "numeric": "764"
+    },
+    {
+      "code": "tj",
+      "nameCs": "Tádžikistán",
+      "nameCsOfficial": "Republika Tádžikistán",
+      "aliases": [],
+      "capitalCs": "Dušanbe",
+      "continent": "asia",
+      "subregion": "centralAsia",
+      "sovereignty": "un",
+      "lat": 38.9,
+      "lng": 71,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Uprostřed tádžické vlajky je koruna se sedmi hvězdami.",
+      "ratio": [
+        1400,
+        700
+      ],
+      "needsReview": [],
+      "iso3": "TJK",
+      "numeric": "762"
+    },
+    {
+      "code": "tl",
+      "nameCs": "Východní Timor",
+      "nameCsOfficial": "Demokratická republika Východní Timor",
+      "aliases": [
+        "Timor-Leste"
+      ],
+      "capitalCs": "Dili",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": -8.8,
+      "lng": 125.7,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Na vlajce Východního Timoru leží přes sebe dva trojúhelníky – žlutý a černý s bílou hvězdou.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "TLS",
+      "numeric": "626"
+    },
+    {
+      "code": "tm",
+      "nameCs": "Turkmenistán",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Ašchabad",
+      "continent": "asia",
+      "subregion": "centralAsia",
+      "sovereignty": "un",
+      "lat": 39,
+      "lng": 59,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "U žerdi turkmenské vlajky je pruh s pěti kobercovými vzory – bývá označovaná za nejsložitější vlajku světa.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "TKM",
+      "numeric": "795"
+    },
+    {
+      "code": "tn",
+      "nameCs": "Tunisko",
+      "nameCsOfficial": "Tuniská republika",
+      "aliases": [],
+      "capitalCs": "Tunis",
+      "continent": "africa",
+      "subregion": "northernAfrica",
+      "sovereignty": "un",
+      "lat": 34,
+      "lng": 9,
+      "similar": [
+        "dz",
+        "tr"
+      ],
+      "difficulty": 3,
+      "funFact": "Uprostřed tuniské vlajky je v bílém kruhu červený půlměsíc s hvězdou.",
+      "ratio": [
+        120,
+        80
+      ],
+      "needsReview": [],
+      "iso3": "TUN",
+      "numeric": "788"
+    },
+    {
+      "code": "to",
+      "nameCs": "Tonga",
+      "nameCsOfficial": "Království Tonga",
+      "aliases": [],
+      "capitalCs": "Nukualofa",
+      "continent": "oceania",
+      "subregion": "polynesia",
+      "sovereignty": "un",
+      "lat": -21.2,
+      "lng": -175.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "V rohu tonžské vlajky je červený kříž na bílém poli.",
+      "ratio": [
+        96,
+        48
+      ],
+      "needsReview": [],
+      "iso3": "TON",
+      "numeric": "776"
+    },
+    {
+      "code": "tr",
+      "nameCs": "Turecko",
+      "nameCsOfficial": "Turecká republika",
+      "aliases": [
+        "Türkiye"
+      ],
+      "capitalCs": "Ankara",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 39,
+      "lng": 35,
+      "similar": [
+        "dz",
+        "tn"
+      ],
+      "difficulty": 1,
+      "funFact": "Půlměsíc s hvězdou z turecké vlajky převzala později řada dalších zemí.",
+      "ratio": [
+        1200,
+        800
+      ],
+      "needsReview": [
+        "Leží v Asii i v Evropě; zařazeno do Asie."
+      ],
+      "iso3": "TUR",
+      "numeric": "792"
+    },
+    {
+      "code": "tt",
+      "nameCs": "Trinidad a Tobago",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Port of Spain",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 10.7,
+      "lng": -61.2,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Červenou vlajku Trinidadu a Tobaga přetíná šikmý černý pruh s bílým lemem.",
+      "ratio": [
+        30,
+        18
+      ],
+      "needsReview": [],
+      "iso3": "TTO",
+      "numeric": "780"
+    },
+    {
+      "code": "tv",
+      "nameCs": "Tuvalu",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Funafuti",
+      "continent": "oceania",
+      "subregion": "polynesia",
+      "sovereignty": "un",
+      "lat": -8.5,
+      "lng": 179.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Devět hvězd na tuvalské vlajce je rozmístěných jako devět ostrovů v moři.",
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "TUV",
+      "numeric": "798"
+    },
+    {
+      "code": "tw",
+      "nameCs": "Tchaj-wan",
+      "nameCsOfficial": "Čínská republika",
+      "aliases": [],
+      "capitalCs": "Tchaj-pej",
+      "continent": "asia",
+      "subregion": "eastAsia",
+      "sovereignty": "partial",
+      "lat": 23.7,
+      "lng": 121,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "V rohu tchajwanské vlajky je bílé slunce s dvanácti paprsky.",
+      "ratio": [
+        240,
+        160
+      ],
+      "needsReview": [],
+      "iso3": "TWN",
+      "numeric": "158"
+    },
+    {
+      "code": "tz",
+      "nameCs": "Tanzanie",
+      "nameCsOfficial": "Sjednocená republika Tanzanie",
+      "aliases": [],
+      "capitalCs": "Dodoma",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -6,
+      "lng": 35,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Tanzanskou vlajku dělí šikmý černý pruh se žlutými okraji.",
+      "ratio": [
+        72,
+        48
+      ],
+      "needsReview": [
+        "Úřední hlavní město je Dodoma, největší město a přístav je Dar es Salaam."
+      ],
+      "iso3": "TZA",
+      "numeric": "834"
+    },
+    {
+      "code": "ua",
+      "nameCs": "Ukrajina",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Kyjev",
+      "continent": "europe",
+      "subregion": "easternEurope",
+      "sovereignty": "un",
+      "lat": 49,
+      "lng": 32,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Modrá na ukrajinské vlajce je nebe a žlutá lán obilí pod ním.",
+      "ratio": [
+        1200,
+        800
+      ],
+      "needsReview": [],
+      "iso3": "UKR",
+      "numeric": "804"
+    },
+    {
+      "code": "ug",
+      "nameCs": "Uganda",
+      "nameCsOfficial": "Ugandská republika",
+      "aliases": [],
+      "capitalCs": "Kampala",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": 1.4,
+      "lng": 32.3,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Uprostřed ugandské vlajky stojí v bílém kruhu jeřáb královský.",
+      "ratio": [
+        900,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "UGA",
+      "numeric": "800"
+    },
+    {
+      "code": "us",
+      "nameCs": "Spojené státy americké",
+      "nameCsOfficial": null,
+      "aliases": [
+        "USA",
+        "Amerika",
+        "Spojené státy"
+      ],
+      "capitalCs": "Washington",
+      "continent": "northAmerica",
+      "subregion": "northAmerica",
+      "sovereignty": "un",
+      "lat": 39,
+      "lng": -98,
+      "similar": [
+        "lr",
+        "my"
+      ],
+      "difficulty": 1,
+      "funFact": "Americká vlajka má 13 pruhů za původní kolonie a 50 hvězd za dnešní státy.",
+      "ratio": [
+        7410,
+        3900
+      ],
+      "needsReview": [],
+      "iso3": "USA",
+      "numeric": "840"
+    },
+    {
+      "code": "uy",
+      "nameCs": "Uruguay",
+      "nameCsOfficial": "Uruguayská východní republika",
+      "aliases": [],
+      "capitalCs": "Montevideo",
+      "continent": "southAmerica",
+      "subregion": "southernCone",
+      "sovereignty": "un",
+      "lat": -33,
+      "lng": -56,
+      "similar": [
+        "ar",
+        "gr"
+      ],
+      "difficulty": 4,
+      "funFact": "Uruguayská vlajka má devět pruhů a v rohu Májové slunce jako Argentina.",
+      "ratio": [
+        27,
+        18
+      ],
+      "needsReview": [],
+      "iso3": "URY",
+      "numeric": "858"
+    },
+    {
+      "code": "uz",
+      "nameCs": "Uzbekistán",
+      "nameCsOfficial": "Republika Uzbekistán",
+      "aliases": [],
+      "capitalCs": "Taškent",
+      "continent": "asia",
+      "subregion": "centralAsia",
+      "sovereignty": "un",
+      "lat": 41.5,
+      "lng": 64,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na uzbecké vlajce je půlměsíc a dvanáct hvězd.",
+      "ratio": [
+        500,
+        250
+      ],
+      "needsReview": [],
+      "iso3": "UZB",
+      "numeric": "860"
+    },
+    {
+      "code": "va",
+      "nameCs": "Vatikán",
+      "nameCsOfficial": "Městský stát Vatikán",
+      "aliases": [],
+      "capitalCs": "Vatikán",
+      "continent": "europe",
+      "subregion": "southernEurope",
+      "sovereignty": "observer",
+      "lat": 41.9,
+      "lng": 12.45,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Vatikánská vlajka je spolu se švýcarskou jediná čtvercová a jsou na ní zkřížené klíče.",
+      "ratio": [
+        2500,
+        2500
+      ],
+      "needsReview": [],
+      "iso3": "VAT",
+      "numeric": "336"
+    },
+    {
+      "code": "vc",
+      "nameCs": "Svatý Vincenc a Grenadiny",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Kingstown",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "un",
+      "lat": 13.2,
+      "lng": -61.2,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Uprostřed vlajky jsou tři zelené kosočtverce poskládané do písmene V.",
+      "ratio": [
+        72,
+        48
+      ],
+      "needsReview": [],
+      "iso3": "VCT",
+      "numeric": "670"
+    },
+    {
+      "code": "ve",
+      "nameCs": "Venezuela",
+      "nameCsOfficial": "Venezuelská bolívarovská republika",
+      "aliases": [],
+      "capitalCs": "Caracas",
+      "continent": "southAmerica",
+      "subregion": "northernSouthAmerica",
+      "sovereignty": "un",
+      "lat": 7,
+      "lng": -66,
+      "similar": [
+        "co",
+        "ec"
+      ],
+      "difficulty": 3,
+      "funFact": "Uprostřed venezuelské vlajky je oblouk z osmi bílých hvězd.",
+      "ratio": [
+        180,
+        120
+      ],
+      "needsReview": [],
+      "iso3": "VEN",
+      "numeric": "862"
+    },
+    {
+      "code": "vg",
+      "nameCs": "Britské Panenské ostrovy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Road Town",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 18.4,
+      "lng": -64.6,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        1200,
+        600
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "VGB",
+      "numeric": "092"
+    },
+    {
+      "code": "vi",
+      "nameCs": "Americké Panenské ostrovy",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Charlotte Amalie",
+      "continent": "northAmerica",
+      "subregion": "caribbean",
+      "sovereignty": "territory",
+      "lat": 18,
+      "lng": -64.8,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": null,
+      "ratio": [
+        1275,
+        850
+      ],
+      "needsReview": [
+        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+      ],
+      "iso3": "VIR",
+      "numeric": "850"
+    },
+    {
+      "code": "vn",
+      "nameCs": "Vietnam",
+      "nameCsOfficial": "Vietnamská socialistická republika",
+      "aliases": [],
+      "capitalCs": "Hanoj",
+      "continent": "asia",
+      "subregion": "southeastAsia",
+      "sovereignty": "un",
+      "lat": 16,
+      "lng": 108,
+      "similar": [
+        "cn"
+      ],
+      "difficulty": 2,
+      "funFact": "Žlutá hvězda na vietnamské vlajce má pět cípů za pět skupin obyvatel.",
+      "ratio": [
+        30,
+        20
+      ],
+      "needsReview": [],
+      "iso3": "VNM",
+      "numeric": "704"
+    },
+    {
+      "code": "vu",
+      "nameCs": "Vanuatu",
+      "nameCsOfficial": "Republika Vanuatu",
+      "aliases": [],
+      "capitalCs": "Port Vila",
+      "continent": "oceania",
+      "subregion": "melanesia",
+      "sovereignty": "un",
+      "lat": -16,
+      "lng": 167,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Na vlajce Vanuatu je zahnutý prasečí kel a dva listy kapradiny.",
+      "ratio": [
+        950,
+        570
+      ],
+      "needsReview": [],
+      "iso3": "VUT",
+      "numeric": "548"
+    },
+    {
+      "code": "ws",
+      "nameCs": "Samoa",
+      "nameCsOfficial": "Nezávislý stát Samoa",
+      "aliases": [],
+      "capitalCs": "Apia",
+      "continent": "oceania",
+      "subregion": "polynesia",
+      "sovereignty": "un",
+      "lat": -13.8,
+      "lng": -172.1,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "V modrém rohu samojské vlajky svítí Jižní kříž z pěti hvězd.",
+      "ratio": [
+        2880,
+        1440
+      ],
+      "needsReview": [],
+      "iso3": "WSM",
+      "numeric": "882"
+    },
+    {
+      "code": "xk",
+      "nameCs": "Kosovo",
+      "nameCsOfficial": "Republika Kosovo",
+      "aliases": [],
+      "capitalCs": "Priština",
+      "continent": "europe",
+      "subregion": "balkans",
+      "sovereignty": "partial",
+      "lat": 42.6,
+      "lng": 20.9,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na kosovské vlajce je obrys země a nad ním šest hvězd.",
+      "ratio": [
+        840,
+        600
+      ],
+      "needsReview": [],
+      "iso3": "XKK",
+      "numeric": "983"
+    },
+    {
+      "code": "ye",
+      "nameCs": "Jemen",
+      "nameCsOfficial": "Jemenská republika",
+      "aliases": [],
+      "capitalCs": "Saná",
+      "continent": "asia",
+      "subregion": "westernAsia",
+      "sovereignty": "un",
+      "lat": 15.5,
+      "lng": 47.5,
+      "similar": [
+        "eg",
+        "iq",
+        "sy"
+      ],
+      "difficulty": 4,
+      "funFact": "Jemenská vlajka jsou jen tři pruhy – červený, bílý a černý, bez jakéhokoli znaku.",
+      "ratio": [
+        450,
+        300
+      ],
+      "needsReview": [],
+      "iso3": "YEM",
+      "numeric": "887"
+    },
+    {
+      "code": "za",
+      "nameCs": "Jihoafrická republika",
+      "nameCsOfficial": null,
+      "aliases": [
+        "JAR",
+        "Jižní Afrika"
+      ],
+      "capitalCs": "Pretoria",
+      "continent": "africa",
+      "subregion": "southernAfrica",
+      "sovereignty": "un",
+      "lat": -29,
+      "lng": 24,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Jihoafrická vlajka má šest barev – víc než kterákoli jiná státní vlajka.",
+      "ratio": [
+        9,
+        6
+      ],
+      "needsReview": [
+        "JAR má tři hlavní města: Pretoria (vláda), Kapské Město (parlament), Bloemfontein (soudy)."
+      ],
+      "iso3": "ZAF",
+      "numeric": "710"
+    },
+    {
+      "code": "zm",
+      "nameCs": "Zambie",
+      "nameCsOfficial": "Zambijská republika",
+      "aliases": [],
+      "capitalCs": "Lusaka",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -13.1,
+      "lng": 27.8,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Zambijská vlajka má barevné pruhy jen v rohu a nad nimi oranžového orla.",
+      "ratio": [
+        2100,
+        1400
+      ],
+      "needsReview": [],
+      "iso3": "ZMB",
+      "numeric": "894"
+    },
+    {
+      "code": "zw",
+      "nameCs": "Zimbabwe",
+      "nameCsOfficial": "Zimbabwská republika",
+      "aliases": [],
+      "capitalCs": "Harare",
+      "continent": "africa",
+      "subregion": "easternAfrica",
+      "sovereignty": "un",
+      "lat": -19,
+      "lng": 29.9,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na zimbabwské vlajce je Zimbabwský pták vytesaný z kamene.",
+      "ratio": [
+        252,
+        126
+      ],
+      "needsReview": [],
+      "iso3": "ZWE",
+      "numeric": "716"
+    }
+  ]
+}
