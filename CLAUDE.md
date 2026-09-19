@@ -8,6 +8,7 @@ testera, který už vlajky umí hodně dobře.
 | Fáze | Stav | Co obsahuje |
 |---|---|---|
 | **1 – MVP** | ✅ hotovo | 5 režimů, album, mapa, rozřazovací test, FSRS, PWA offline |
+| **1b – gamifikace** | ✅ hotovo | body a kombo, 4 nové režimy, denní výzva, mise, hodnosti, souboje, odemykání, zvuky |
 | 2 – Supabase | ⬜ nezačato | rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
@@ -57,6 +58,7 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `src/domain/answer/match.ts` | vyhodnocení napsané odpovědi |
 | `src/domain/quiz/` | distraktory, režimy, sestavení hry |
 | `src/domain/srs/` | FSRS, úrovně zvládnutí |
+| `src/domain/game/` | body, hodnosti, souboje, denní výzva, mise, odemykání |
 | `src/store/ProgressStore.ts` | rozhraní úložiště (fáze 2 = nová implementace) |
 | `src/i18n/cs.ts` | **všechny** texty rozhraní |
 | `src/config/app.ts` | název aplikace, složení sady, prahy |
@@ -115,6 +117,30 @@ iPhonu se přes ni po pár pixelech posunu schoval nadpis otázky.
 - dvě rozvržení otázky: je-li v ní vlajka, drží střed a odpovědi jsou dole
   u palce; když v ní vlajka není, tvoří zadání a nabídka jednu skupinu
   uprostřed
+- **nabídka je vždy 2×2**: medián českého názvu má 8 znaků a 90 % se vejde
+  do 16, takže sloupec pod sebou plýtval šířkou. Mřížka navíc zkracuje oční
+  dráhu, což se při bodování za rychlost počítá.
+
+## Gamifikace
+
+Osmiletý tester zná skoro všechny vlajky, takže kvíz se čtyřmi možnostmi
+pro něj neměl žádné napětí – doslova řekl, že je to „jak kvíz na Seznamu“.
+Řešením nebylo přilepit body na nudnou smyčku, ale **změnit, o co se hraje**.
+
+- **Body = správnost × rychlost × série.** Pod 1,5 s je trojnásobek, série
+  přidá až 3×. Znalost sama o sobě přestala stačit. Viz `game/score.ts`.
+- **Vlajka po termínu vynáší víc** (`DUE_BONUS`). Zábava a učení tak táhnou
+  stejným směrem místo aby si konkurovaly – to je záměrně jádro návrhu.
+- **Životy** v Maratonu (3) a v Souboji (1); `livesFor()` v `quiz/modes.ts`.
+- **Denní výzva** je seedovaná datem, takže všichni mají stejných 10 vlajek
+  a výsledek se dá poslat – **bez serveru**. Viz `game/daily.ts`.
+- **Souboje** vznikají ze skupin zaměnitelných vlajek, které už v datech
+  byly kvůli distraktorům. Jméno se skládá ze zemí, nic se nevymýšlí.
+- **Mise** jsou tři na den, seedované datem, počítají se z dnešního logu.
+- **Hodnosti** rostou z bodů, které se nikdy neodečítají.
+- **Odemykání** (rámečky, témata) mění jen vzhled, nikdy hru.
+- **Zvuky** se generují ve Web Audio, žádné soubory – drží to pravidlo
+  o nulových externích požadavcích a nezvětšuje offline cache.
 
 ## Konvence
 

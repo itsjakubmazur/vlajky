@@ -80,7 +80,25 @@ describe('migrace uložených dat', () => {
     const migrated = migrate({ cards: { td: {} } } as never);
     expect(migrated.meta.activeSet).toBe('world');
     expect(migrated.log).toEqual([]);
-    expect(migrated.schemaVersion).toBe(1);
+    expect(migrated.schemaVersion).toBe(2);
+  });
+
+  it('starý postup ze schématu 1 se nezahodí a herní pole se doplní', () => {
+    const old = {
+      schemaVersion: 1,
+      cards: { td: { code: 'td', mastery: 'gold', seen: 9, correct: 9 } },
+      meta: { placementDone: true, placementIndex: 197, activeSet: 'world', streakDays: 4 },
+      log: [],
+    };
+    const migrated = migrate(old as never);
+    expect(migrated.cards['td']?.mastery).toBe('gold');
+    expect(migrated.meta.streakDays).toBe(4);
+    expect(migrated.meta.placementDone).toBe(true);
+    // nová pole dostanou rozumný výchozí stav
+    expect(migrated.meta.totalPoints).toBe(0);
+    expect(migrated.meta.records).toEqual({});
+    expect(migrated.meta.bossesBeaten).toEqual([]);
+    expect(migrated.meta.soundOn).toBe(true);
   });
 
   it('nespadne na nesmyslném vstupu', () => {

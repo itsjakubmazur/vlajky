@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { cs } from '@/i18n/cs';
+import { GameHud } from './GameHud';
 
 /**
  * Ukazatel postupu je poskládaný z dílků – dítě na první pohled vidí,
@@ -46,10 +47,16 @@ function Steps({ index, total }: { index: number; total: number }) {
 export function QuizShell({
   index,
   total,
+  combo,
+  points,
+  lives,
   children,
 }: {
   index: number;
   total: number;
+  combo: number;
+  points: number;
+  lives: number | null;
   children: ReactNode;
 }) {
   return (
@@ -69,6 +76,7 @@ export function QuizShell({
             {cs.quiz.progress(Math.min(index + 1, total), total)}
           </span>
         </div>
+        <GameHud combo={combo} points={points} lives={lives} />
       </header>
       {/*
         `main` je sám sloupcový flex – teprve tak se obsah uvnitř roztáhne do

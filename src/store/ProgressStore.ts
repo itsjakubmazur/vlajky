@@ -1,8 +1,19 @@
 import type { SetId } from '~data/sets';
 import type { AnswerLog, CardState } from '@/domain/srs/types';
+import type { DailyResult } from '@/domain/game/daily';
 
 /** Verze schématu – při změně tvaru dat se postup zmigruje, ne zahodí. */
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
+
+/** Nejlepší výkon v daném režimu. */
+export interface GameRecord {
+  points: number;
+  correct: number;
+  total: number;
+  bestCombo: number;
+  elapsedMs: number;
+  at: string;
+}
 
 export interface Meta {
   /** Prošel hráč rozřazovacím testem? */
@@ -15,6 +26,23 @@ export interface Meta {
   /** Poslední den hraní jako YYYY-MM-DD. */
   lastPlayedDay: string | null;
   totalAnswers: number;
+
+  // --- hra ---------------------------------------------------------------
+  /** Body se nikdy neodečítají; drží hodnost. */
+  totalPoints: number;
+  /** Rekordy podle režimu. */
+  records: Record<string, GameRecord>;
+  /** Id poražených soubojů. */
+  bossesBeaten: string[];
+  /** Výsledky denní výzvy podle dne. */
+  dailyResults: Record<string, DailyResult>;
+  /** Vyzvednuté mise podle dne. */
+  missionsClaimed: Record<string, string[]>;
+  /** Vybraný rámeček a téma z odemčených. */
+  frame: string;
+  theme: string;
+  soundOn: boolean;
+  hapticsOn: boolean;
 }
 
 export interface Progress {
@@ -38,6 +66,15 @@ export function emptyProgress(): Progress {
       streakDays: 0,
       lastPlayedDay: null,
       totalAnswers: 0,
+      totalPoints: 0,
+      records: {},
+      bossesBeaten: [],
+      dailyResults: {},
+      missionsClaimed: {},
+      frame: 'frame-classic',
+      theme: 'theme-night',
+      soundOn: true,
+      hapticsOn: true,
     },
     log: [],
   };
@@ -60,13 +97,7 @@ export interface ProgressStore {
   subscribe(listener: () => void): () => void;
 }
 
-/** Den v podobě YYYY-MM-DD v místním čase. */
-export function dayKey(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
+export { dayKey } from '@/domain/game/day';
 
 /** Spočítá sérii dní v řadě po odehrání dalšího dne. */
 export function nextStreak(meta: Meta, today: string): number {

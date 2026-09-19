@@ -1,9 +1,9 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ALL_COUNTRIES, requireCountry } from '@/domain/countries';
 import { countriesInSet } from '~data/sets';
-import type { QuizModeId } from '@/domain/quiz/modes';
+import { FLASH_MS, type QuizModeId } from '@/domain/quiz/modes';
 import { cs } from '@/i18n/cs';
 import { useProgress } from '@/store/StoreProvider';
 import { useQuizSession } from '@/quiz/useQuizSession';
@@ -12,16 +12,26 @@ import { QuizShell } from './QuizShell';
 import { OptionGrid } from './OptionGrid';
 import { TwinsQuestion } from './TwinsQuestion';
 import { TypingInput } from './TypingInput';
+import { StakePicker } from './StakePicker';
 import { FeedbackPanel } from './FeedbackPanel';
 import { ResultScreen } from './ResultScreen';
 
-export function QuizScreen({ mode }: { mode: QuizModeId }) {
+export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string }) {
   const { progress } = useProgress();
-  const session = useQuizSession(mode);
+  const session = useQuizSession(mode, { bossId });
   const pool = useMemo(
     () => countriesInSet([...ALL_COUNTRIES], progress.meta.activeSet),
     [progress.meta.activeSet],
   );
+
+  // Režim Blesk: vlajka po dvou sekundách zmizí a odpovídá se po paměti.
+  const [flashHidden, setFlashHidden] = useState(false);
+  useEffect(() => {
+    if (mode !== 'flash') return;
+    setFlashHidden(false);
+    const timer = setTimeout(() => setFlashHidden(true), FLASH_MS);
+    return () => clearTimeout(timer);
+  }, [mode, session.index]);
 
   if (session.phase === 'loading') {
     return (
@@ -35,8 +45,9 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
     return (
       <div className="mx-auto flex min-h-[var(--safe-height)] w-full max-w-xl flex-col justify-center px-4 py-6">
         <ResultScreen
-          correct={session.correctCount}
-          total={session.total}
+          mode={mode}
+          tally={session.tally}
+          outcome={session.roundOutcome}
           goldEarned={session.goldEarned}
           onAgain={session.restart}
         />
@@ -62,17 +73,16 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
           : cs.quiz.whichCountry;
 
   const showsFlagInQuestion = question.kind === 'pickCountry' || question.kind === 'type';
+  const flagVisible = !(mode === 'flash' && flashHidden && !session.feedback);
 
   return (
-    <QuizShell index={session.index} total={session.total}>
-      {/*
-        Dvě rozvržení podle toho, co je v otázce.
-
-        Je-li v otázce vlajka (Klasika, Napiš), drží se středu a odpovědi
-        zůstávají dole na dosah palce. Když v otázce vlajka není (Opačně,
-        Dvojčata), tvoří zadání a nabídka jednu skupinu uprostřed – nabízené
-        vlajky jsou tam to hlavní a nemá smysl je trhat od otázky.
-      */}
+    <QuizShell
+      index={session.index}
+      total={session.total}
+      combo={session.combo}
+      points={session.points}
+      lives={session.lives}
+    >
       <div
         className={`flex flex-1 flex-col ${showsFlagInQuestion ? '' : 'justify-center gap-6 py-4'}`}
       >
@@ -80,14 +90,25 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
           <div className="flex flex-1 flex-col justify-center gap-6 py-4">
             <h1 className="display text-center text-xl text-muted">{prompt}</h1>
             <div key={question.code} className="animate-flag-reveal flex justify-center">
-              <FlagImage code={question.code} size="xl" priority />
+              {flagVisible ? (
+                <FlagImage code={question.code} size="xl" priority />
+              ) : (
+                // Prázdné místo si drží velikost, ať obraz neposkočí.
+                <span className="glass-thin flex h-[150px] w-[225px] items-center justify-center rounded-glass text-4xl font-black text-faint">
+                  ?
+                </span>
+              )}
             </div>
           </div>
         ) : (
           <h1 className="display text-center text-xl text-muted">{prompt}</h1>
         )}
 
-        <div key={`odpovedi-${session.index}`} className="flex flex-col gap-5">
+        <div key={`odpovedi-${session.index}`} className="flex flex-col gap-4">
+          {mode === 'risk' && !session.feedback ? (
+            <StakePicker value={session.stake} onChange={session.setStake} />
+          ) : null}
+
           {question.kind === 'pickCountry' || question.kind === 'pickFlag' ? (
             <OptionGrid
               options={question.options}

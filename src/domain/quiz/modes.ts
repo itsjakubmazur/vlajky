@@ -3,8 +3,42 @@ import type { Mastery } from '../srs/types';
 import { buildOptions, challengeFromMastery, pickDistractors } from './distractors';
 import { pick, shuffle, type Rng } from '../rng';
 
-export const QUIZ_MODES = ['classic', 'reverse', 'typing', 'twins', 'review'] as const;
-export type QuizModeId = (typeof QUIZ_MODES)[number] | 'placement';
+export const QUIZ_MODES = [
+  'classic',
+  'reverse',
+  'typing',
+  'twins',
+  'review',
+  // Režimy s napětím: rychlost, životy, sázka, denní výzva.
+  'marathon',
+  'flash',
+  'risk',
+  'daily',
+] as const;
+export type QuizModeId = (typeof QUIZ_MODES)[number] | 'placement' | 'boss';
+
+/** Režimy, ve kterých se hraje o rekord a počítají se body. */
+export const SCORED_MODES: readonly QuizModeId[] = [
+  'classic',
+  'reverse',
+  'typing',
+  'twins',
+  'marathon',
+  'flash',
+  'risk',
+  'daily',
+  'boss',
+];
+
+/** Kolik životů má hráč v daném režimu; `null` = neomezeně. */
+export function livesFor(mode: QuizModeId): number | null {
+  if (mode === 'marathon') return 3;
+  if (mode === 'boss') return 1;
+  return null;
+}
+
+/** Režim, kde se vlajka po chvíli schová. */
+export const FLASH_MS = 2000;
 
 /** Jak vypadá otázka na obrazovce. */
 export type QuestionKind =
@@ -31,7 +65,13 @@ export function kindForMode(mode: QuizModeId, rng: Rng): QuestionKind {
   switch (mode) {
     case 'classic':
     case 'placement':
+    case 'marathon':
+    case 'flash':
+    case 'risk':
+    case 'daily':
       return 'pickCountry';
+    case 'boss':
+      return 'twins';
     case 'reverse':
       return 'pickFlag';
     case 'typing':

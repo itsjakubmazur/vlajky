@@ -22,6 +22,8 @@ export interface CardState {
   /** kolikrát správně v režimu Napiš – bez toho není zlato */
   typedCorrect: number;
   updatedAt: string;
+  /** Kdy dítě vlajku vidělo úplně poprvé (kvůli denním misím). */
+  firstSeenAt?: string;
 }
 
 export interface AnswerLog {

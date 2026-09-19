@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useGameFeedback } from '@/components/useGameFeedback';
 import { requireCountry } from '@/domain/countries';
 import { cs } from '@/i18n/cs';
 import { FlagImage } from '@/components/FlagImage';
@@ -14,12 +15,19 @@ import type { Feedback } from '@/quiz/useQuizSession';
  */
 export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext: () => void }) {
   const panel = useRef<HTMLDivElement>(null);
+  const play = useGameFeedback();
   const country = requireCountry(feedback.outcome.card.code);
   const { correct, result } = feedback;
 
   // Na mobilu je panel pod nabídkou – ať ho dítě nemusí hledat.
   useEffect(() => {
     panel.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, []);
+
+  useEffect(() => {
+    play(feedback.correct ? (feedback.speed === 'flash' ? 'combo' : 'correct') : 'wrong');
+    // Zvuk patří k jedné odpovědi, ne ke každému překreslení.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const title = correct
@@ -42,7 +50,22 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
       }`}
     >
       <div className="flex items-center justify-between gap-3">
-        <p className={`display text-2xl ${correct ? 'text-mint' : 'text-coral'}`}>{title}</p>
+        <div>
+          <p className={`display text-2xl ${correct ? 'text-mint' : 'text-coral'}`}>{title}</p>
+          {feedback.gained !== 0 ? (
+            <p
+              className={`display animate-pop-in text-sm tabular-nums ${
+                feedback.gained > 0 ? 'text-gold' : 'text-coral/80'
+              }`}
+            >
+              {feedback.gained > 0 ? '+' : ''}
+              {feedback.gained} {cs.game.pointsShort}
+              {correct && cs.game.speed[feedback.speed] ? (
+                <span className="ml-2 text-mint">{cs.game.speed[feedback.speed]}</span>
+              ) : null}
+            </p>
+          ) : null}
+        </div>
         <MasteryBadge
           mastery={feedback.outcome.after}
           label={cs.album.mastery[feedback.outcome.after]}

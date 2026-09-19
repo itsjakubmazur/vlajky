@@ -85,7 +85,12 @@ export class LocalStorageStore implements ProgressStore {
   }
 }
 
-/** Migrace starších uložených dat na aktuální schéma. */
+/**
+ * Migrace starších uložených dat na aktuální schéma.
+ *
+ * Schéma 1 → 2 přidalo body, rekordy a souboje. Chybějící pole se doplní
+ * z prázdného stavu, takže postup ve vlajkách se nikdy nezahazuje.
+ */
 export function migrate(input: Progress): Progress {
   const base = emptyProgress();
   if (!input || typeof input !== 'object') return base;

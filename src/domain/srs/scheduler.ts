@@ -58,6 +58,7 @@ export function applyAnswer(card: CardState, input: AnswerInput, now: Date): Car
   const next: CardState = {
     ...card,
     fsrs: nextFsrs,
+    firstSeenAt: card.firstSeenAt ?? now.toISOString(),
     seen: card.seen + 1,
     correct: card.correct + (input.correct ? 1 : 0),
     streak: input.correct ? card.streak + 1 : 0,

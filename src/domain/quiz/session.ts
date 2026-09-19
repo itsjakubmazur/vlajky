@@ -3,6 +3,8 @@ import type { CardState } from '../srs/types';
 import { dailyBatch, isDue, isNew } from '../srs/scheduler';
 import { shuffle, type Rng } from '../rng';
 import { twinnableCountries, type QuizModeId } from './modes';
+import { dailyCodes } from '../game/daily';
+import { bossById, BOSS_QUESTIONS } from '../game/bosses';
 
 export const SESSION_LENGTH = 12;
 
@@ -13,6 +15,10 @@ export interface SessionOptions {
   now: Date;
   rng: Rng;
   length?: number;
+  /** Klíč dne pro denní výzvu. */
+  dayKey?: string;
+  /** Který souboj se hraje. */
+  bossId?: string;
 }
 
 /**
@@ -29,8 +35,31 @@ export function buildSession({
   now,
   rng,
   length = SESSION_LENGTH,
+  dayKey,
+  bossId,
 }: SessionOptions): string[] {
   const candidates = mode === 'twins' ? twinnableCountries(pool) : [...pool];
+
+  // Maraton jde přes celou sadu – od nejznámějších, ať se dá vůbec rozjet.
+  if (mode === 'marathon') {
+    return [...pool]
+      .sort((a, b) => a.difficulty - b.difficulty || a.code.localeCompare(b.code))
+      .map((c) => c.code);
+  }
+
+  if (mode === 'daily') {
+    return dayKey ? dailyCodes(dayKey, pool) : [];
+  }
+
+  if (mode === 'boss') {
+    const boss = bossId ? bossById(pool, bossId) : undefined;
+    if (!boss) return [];
+    // Pět otázek losovaných z členů skupiny; krátké skupiny se opakují.
+    return Array.from(
+      { length: BOSS_QUESTIONS },
+      (_, i) => boss.codes[Math.floor(rng() * boss.codes.length)] ?? boss.codes[i % boss.codes.length]!,
+    );
+  }
 
   if (mode === 'review') {
     return dailyBatch(

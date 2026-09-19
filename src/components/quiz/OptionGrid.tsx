@@ -20,9 +20,17 @@ function state(code: string, correctCode: string, chosen: string | null) {
   return 'glass opacity-35 text-muted';
 }
 
+/**
+ * Nabídka je vždy 2×2.
+ *
+ * Medián českého názvu má 8 znaků a 90 % se vejde do 16, takže sloupec pod
+ * sebou jen plýtval šířkou. Mřížka navíc zkracuje oční dráhu, což se
+ * s bodováním za rychlost počítá. Řádky mají stejnou výšku, takže
+ * „Demokratická republika Kongo“ nerozhodí sousedy.
+ */
 export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: OptionGridProps) {
   return (
-    <div className={`stagger grid gap-2.5 ${asFlags ? 'grid-cols-2' : 'grid-cols-1'}`}>
+    <div className="stagger grid grid-cols-2 gap-2.5">
       {options.map((code) => {
         const country = requireCountry(code);
         const revealed = chosen !== null && code === correctCode;
@@ -32,11 +40,11 @@ export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: 
             type="button"
             disabled={chosen !== null}
             onClick={() => onChoose(code)}
-            className={`touch-target relative overflow-hidden rounded-glass border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${state(
+            className={`touch-target relative flex min-h-20 items-center justify-center overflow-hidden rounded-glass border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${state(
               code,
               correctCode,
               chosen,
-            )} ${asFlags ? 'flex min-h-32 items-center justify-center' : 'flex items-center'}`}
+            )}`}
           >
             {/* Přejezd světla po správné odpovědi – jedna krátká odměna. */}
             {revealed ? (
@@ -48,7 +56,7 @@ export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: 
             {asFlags ? (
               <FlagImage code={code} fluid priority />
             ) : (
-              <span className="display w-full text-left text-[1.15rem] leading-tight">
+              <span className="display text-center text-[0.95rem] leading-tight text-balance">
                 {country.nameCs}
               </span>
             )}

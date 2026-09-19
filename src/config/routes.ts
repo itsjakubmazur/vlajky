@@ -7,6 +7,10 @@ export const MODE_SLUGS = {
   napis: 'typing',
   dvojcata: 'twins',
   opakovani: 'review',
+  maraton: 'marathon',
+  blesk: 'flash',
+  vabank: 'risk',
+  'denni-vyzva': 'daily',
 } as const satisfies Record<string, QuizModeId>;
 
 export type ModeSlug = keyof typeof MODE_SLUGS;
@@ -24,5 +28,6 @@ export const ROUTES = {
   album: '/album',
   placement: '/rozrazovaci-test',
   settings: '/nastaveni',
+  bosses: '/souboje',
   play: (slug: ModeSlug) => `/hrat/${slug}`,
 };

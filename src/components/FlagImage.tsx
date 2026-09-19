@@ -39,8 +39,9 @@ export function FlagImage({
   const accent = country?.accent ?? '#19e3b1';
   const showGlow = (glow ?? (size === 'lg' || size === 'xl')) && !muted;
 
+  // Styl rámečku řídí CSS podle odemčeného vzhledu; tady jen dáme háček.
   const frame = rectangular
-    ? 'rounded-[4px] ring-1 ring-white/25 shadow-[0_10px_26px_-12px_rgb(0_0_0/0.9)]'
+    ? 'flag-frame rounded-[4px] shadow-[0_10px_26px_-12px_rgb(0_0_0/0.9)]'
     : 'drop-shadow-[0_6px_14px_rgb(0_0_0/0.75)]';
 
   const style = fluid
