@@ -40,6 +40,7 @@ export function TypingInput({
         className="flex gap-2"
       >
         <input
+          id="odpoved"
           value={value}
           onChange={(event) => setValue(event.target.value)}
           disabled={disabled}
@@ -50,9 +51,9 @@ export function TypingInput({
           enterKeyHint="done"
           placeholder={cs.quiz.inputPlaceholder}
           aria-label={cs.quiz.typeCountry}
-          className="touch-target min-w-0 flex-1 rounded-2xl border-2 border-line bg-surface px-4 text-lg font-semibold outline-none focus:border-brand disabled:opacity-60"
+          className="glass touch-target display min-w-0 flex-1 rounded-pill px-5 text-lg text-ink outline-none placeholder:font-sans placeholder:font-semibold placeholder:text-faint focus:border-mint/60 disabled:opacity-50"
         />
-        <Button type="submit" disabled={disabled || value.trim().length === 0}>
+        <Button type="submit" disabled={disabled || value.trim().length === 0} className="px-5">
           {cs.quiz.check}
         </Button>
       </form>
@@ -64,7 +65,7 @@ export function TypingInput({
               <button
                 type="button"
                 onClick={() => send(suggestion.country.nameCs)}
-                className="touch-target w-full rounded-2xl border border-line bg-surface px-4 text-left text-base font-semibold hover:border-brand/50"
+                className="glass touch-target display w-full rounded-pill px-5 text-left text-base transition-colors hover:border-mint/40 hover:text-mint"
               >
                 {suggestion.country.nameCs}
               </button>

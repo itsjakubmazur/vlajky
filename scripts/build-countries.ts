@@ -17,7 +17,7 @@ import type { CsCountry } from '../data/schema';
 import type { Country } from '../src/domain/types';
 import { CONTINENTS, SOVEREIGNTIES, SUBREGIONS } from '../src/domain/types';
 import { normalize } from '../src/domain/text/normalize';
-import { hasFlag, readRatio, FLAG_SOURCE_NAME } from './flag-source';
+import { hasFlag, readAccent, readRatio, FLAG_SOURCE_NAME } from './flag-source';
 
 const source: CsCountry[] = [...europe, ...asia, ...africa, ...americas, ...oceania, ...territories];
 
@@ -75,6 +75,7 @@ const countries: Country[] = source.map((c) => {
     difficulty: c.difficulty,
     funFact: c.funFact ?? null,
     ratio: hasFlag(c.code) ? readRatio(c.code) : [3, 2],
+    accent: hasFlag(c.code) ? readAccent(c.code) : '#19E3B1',
     needsReview,
     iso3,
     numeric,

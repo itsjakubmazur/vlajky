@@ -24,6 +24,10 @@ export const cs = {
     reviewDue: (n: number) => (n === 1 ? '1 vlajka čeká na zopakování' : `${n} vlajek čeká na zopakování`),
     reviewNoneDue: 'Dnes nic nečeká. Zahraj si něco jiného!',
     settings: 'Nastavení',
+    streak: (n: number) => (n === 1 ? '1 den v řadě' : n < 5 ? `${n} dny v řadě` : `${n} dní v řadě`),
+    goldCount: 've zlatě',
+    collectedLabel: 'Nasbíráno',
+    todayLabel: 'Dnes',
   },
   modes: {
     classic: { name: 'Klasika', desc: 'Vlajka → vyber zemi ze čtyř' },

@@ -3,7 +3,7 @@
 import { requireCountry } from '@/domain/countries';
 import { cs } from '@/i18n/cs';
 import { ROUTES } from '@/config/routes';
-import { Button, ButtonLink, Card } from '@/components/ui';
+import { Button, ButtonLink, Eyebrow, Panel, ProgressRing } from '@/components/ui';
 import { FlagImage } from '@/components/FlagImage';
 import { Confetti } from '@/components/Confetti';
 
@@ -28,32 +28,37 @@ export function ResultScreen({
   onAgain: () => void;
 }) {
   return (
-    <div className="animate-pop-in flex flex-col gap-5 py-6">
+    <div className="stagger flex flex-col gap-4 py-8">
       {goldEarned.length > 0 ? <Confetti seed={goldEarned.length} /> : null}
 
-      <div className="text-center">
-        <h1 className="text-3xl font-extrabold">{cs.result.title}</h1>
-        <p className="mt-1 text-lg font-semibold text-brand">{cs.result.score(correct, total)}</p>
-        <p className="mt-2 text-muted">{encouragement(correct, total)}</p>
-      </div>
+      <Panel raised className="flex items-center gap-5">
+        <ProgressRing value={correct} total={total} size={104}>
+          <span className="display text-3xl leading-none tabular-nums">{correct}</span>
+          <span className="text-xs font-bold tabular-nums text-faint">z {total}</span>
+        </ProgressRing>
+        <div className="min-w-0">
+          <h1 className="display text-3xl">{cs.result.title}</h1>
+          <p className="mt-1 text-sm leading-snug text-muted">{encouragement(correct, total)}</p>
+        </div>
+      </Panel>
 
       {goldEarned.length > 0 ? (
-        <Card className="border-gold/40 bg-gold/10">
-          <p className="mb-3 text-center font-bold text-gold">
-            {cs.result.newGold(goldEarned.length)}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+        <Panel className="border-gold/35">
+          <Eyebrow>{cs.result.newGold(goldEarned.length)}</Eyebrow>
+          <div className="mt-3 flex flex-wrap items-end justify-center gap-4">
             {goldEarned.map((code) => (
-              <span key={code} className="flex flex-col items-center gap-1">
-                <FlagImage code={code} size="md" />
-                <span className="text-xs font-semibold">{requireCountry(code).nameCs}</span>
+              <span key={code} className="flex w-20 flex-col items-center gap-2">
+                <FlagImage code={code} size="md" glow pulse />
+                <span className="text-center text-[0.7rem] font-bold leading-tight text-gold">
+                  {requireCountry(code).nameCs}
+                </span>
               </span>
             ))}
           </div>
-        </Card>
+        </Panel>
       ) : null}
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5">
         <Button onClick={onAgain}>{cs.result.again}</Button>
         <ButtonLink href={ROUTES.album} variant="secondary">
           {cs.result.toAlbum}

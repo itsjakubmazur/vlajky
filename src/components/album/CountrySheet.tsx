@@ -5,7 +5,7 @@ import type { Mastery } from '@/domain/srs/types';
 import { cs } from '@/i18n/cs';
 import { FlagImage } from '@/components/FlagImage';
 import { MasteryBadge } from '@/components/MasteryBadge';
-import { Button } from '@/components/ui';
+import { Button, Eyebrow } from '@/components/ui';
 
 export function CountrySheet({
   code,
@@ -25,62 +25,66 @@ export function CountrySheet({
 
   return (
     <div
-      className="fixed inset-0 z-40 flex items-end justify-center bg-ink/40 p-0 sm:items-center sm:p-4"
+      className="fixed inset-0 z-40 flex items-end justify-center bg-abyss/70 backdrop-blur-sm sm:items-center sm:p-4"
       role="dialog"
       aria-modal="true"
       onClick={onClose}
     >
       <div
-        className="animate-rise max-h-[88dvh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-surface p-5 pb-8 sm:rounded-3xl"
+        className="glass-raised animate-rise-in max-h-[88dvh] w-full max-w-md overflow-y-auto rounded-t-glass p-6 pb-9 sm:rounded-glass"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center gap-4">
           <FlagImage code={code} size="xl" />
-          <h2 className="text-center text-2xl font-extrabold">{country.nameCs}</h2>
-          {country.nameCsOfficial ? (
-            <p className="-mt-2 text-center text-sm text-muted">{country.nameCsOfficial}</p>
-          ) : null}
+          <div className="text-center">
+            <h2 className="display text-2xl">{country.nameCs}</h2>
+            {country.nameCsOfficial ? (
+              <p className="mt-1 text-sm text-faint">{country.nameCsOfficial}</p>
+            ) : null}
+          </div>
           <MasteryBadge mastery={mastery} label={cs.album.mastery[mastery]} />
         </div>
 
-        <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
-          <div className="rounded-2xl bg-bg p-3">
-            <dt className="text-muted">{cs.album.capital}</dt>
-            <dd className="font-bold">{country.capitalCs}</dd>
+        <dl className="mt-6 grid grid-cols-2 gap-2.5">
+          <div className="glass-thin rounded-2xl p-3.5">
+            <dt className="eyebrow">{cs.album.capital}</dt>
+            <dd className="display mt-1 text-base">{country.capitalCs}</dd>
           </div>
-          <div className="rounded-2xl bg-bg p-3">
-            <dt className="text-muted">{cs.album.continent}</dt>
-            <dd className="font-bold">{cs.continents[country.continent]}</dd>
+          <div className="glass-thin rounded-2xl p-3.5">
+            <dt className="eyebrow">{cs.album.continent}</dt>
+            <dd className="display mt-1 text-base">{cs.continents[country.continent]}</dd>
           </div>
         </dl>
 
         {country.funFact ? (
-          <p className="mt-3 rounded-2xl bg-brand-soft p-3 text-base leading-snug">
-            <span className="font-bold">{cs.album.funFactTitle} </span>
-            {country.funFact}
-          </p>
+          <div className="glass-thin mt-2.5 rounded-2xl p-3.5">
+            <Eyebrow>{cs.album.funFactTitle}</Eyebrow>
+            <p className="mt-1.5 text-[0.95rem] leading-relaxed text-ink/90">{country.funFact}</p>
+          </div>
         ) : null}
 
         {similar.length > 0 ? (
-          <div className="mt-4">
-            <h3 className="mb-2 text-sm font-bold text-muted">{cs.album.similarFlags}</h3>
-            <div className="flex flex-wrap gap-3">
+          <div className="mt-5">
+            <Eyebrow>{cs.album.similarFlags}</Eyebrow>
+            <div className="mt-3 flex flex-wrap gap-2">
               {similar.map((other) => (
                 <button
                   key={other}
                   type="button"
                   onClick={() => onSelect(other)}
-                  className="flex flex-col items-center gap-1 rounded-xl p-1 hover:bg-bg"
+                  className="glass-thin flex w-[4.75rem] flex-col items-center gap-1.5 rounded-2xl p-2 transition-colors hover:border-white/20"
                 >
-                  <FlagImage code={other} size="sm" />
-                  <span className="text-xs font-semibold">{requireCountry(other).nameCs}</span>
+                  <FlagImage code={other} size="sm" glow={false} />
+                  <span className="text-center text-[0.65rem] font-bold leading-tight text-muted">
+                    {requireCountry(other).nameCs}
+                  </span>
                 </button>
               ))}
             </div>
           </div>
         ) : null}
 
-        <Button variant="secondary" className="mt-5 w-full" onClick={onClose}>
+        <Button variant="secondary" className="mt-6 w-full" onClick={onClose}>
           {cs.common.close}
         </Button>
       </div>

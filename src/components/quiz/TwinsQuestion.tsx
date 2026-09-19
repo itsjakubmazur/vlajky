@@ -14,29 +14,32 @@ export function TwinsQuestion({
   chosen: string | null;
   onChoose: (code: string) => void;
 }) {
+  const answered = chosen !== null;
+
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid h-full grid-cols-2 gap-3 pb-2">
       {options.map((code) => {
-        const answered = chosen !== null;
         const isCorrect = code === correctCode;
-        const border = !answered
-          ? 'border-line bg-surface'
+        const look = !answered
+          ? 'glass hover:border-white/25'
           : isCorrect
-            ? 'border-correct bg-correct-soft'
+            ? 'border-mint/70 bg-mint/15'
             : code === chosen
-              ? 'border-wrong bg-wrong-soft animate-shake'
-              : 'border-line bg-surface opacity-50';
+              ? 'border-coral/70 bg-coral/15 animate-shake'
+              : 'glass opacity-35';
         return (
           <button
             key={code}
             type="button"
             disabled={answered}
             onClick={() => onChoose(code)}
-            className={`touch-target flex min-h-40 flex-col items-center justify-center gap-3 rounded-2xl border-2 p-3 transition-colors duration-200 active:scale-[0.99] disabled:cursor-default ${border}`}
+            className={`touch-target flex h-full min-h-44 flex-col items-center justify-center gap-4 rounded-glass border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${look}`}
           >
-            <FlagImage code={code} size="lg" />
+            <FlagImage code={code} size="lg" pulse={answered && isCorrect} />
             {answered ? (
-              <span className={`text-sm font-semibold ${isCorrect ? 'text-correct' : 'text-muted'}`}>
+              <span
+                className={`display text-sm ${isCorrect ? 'text-mint' : 'text-muted'}`}
+              >
                 {requireCountry(code).nameCs}
               </span>
             ) : null}

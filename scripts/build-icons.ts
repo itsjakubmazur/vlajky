@@ -6,9 +6,9 @@ import { deflateSync } from 'node:zlib';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const BRAND: [number, number, number] = [0x4f, 0x46, 0xe5];
-const WHITE: [number, number, number] = [0xff, 0xff, 0xff];
-const POLE: [number, number, number] = [0xe8, 0xa8, 0x00];
+const GROUND: [number, number, number] = [0x0b, 0x12, 0x26];
+const FLAG: [number, number, number] = [0x19, 0xe3, 0xb1];
+const POLE: [number, number, number] = [0xff, 0xc2, 0x4b];
 
 /** Jednoduchá vlaječka na žerdi – čitelná i v 48 px na liště. */
 function draw(size: number): Buffer {
@@ -40,15 +40,15 @@ function draw(size: number): Buffer {
       const cy = Math.min(Math.max(y, r), size - r);
       const inside = (x - cx) ** 2 + (y - cy) ** 2 <= r * r;
       if (!inside) {
-        set(x, y, BRAND, 0);
+        set(x, y, GROUND, 0);
         continue;
       }
-      set(x, y, BRAND);
+      set(x, y, GROUND);
 
       if (x >= poleX && x < poleX + poleW && y >= poleTop && y < poleBottom) {
         set(x, y, POLE);
       } else if (x >= flagX && x < flagX + flagW && y >= flagTop && y < flagTop + flagH) {
-        set(x, y, WHITE);
+        set(x, y, FLAG);
       }
     }
   }
@@ -102,9 +102,9 @@ for (const size of [180, 192, 512]) {
 writeFileSync(
   join(outDir, 'icon.svg'),
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="22" fill="#4f46e5"/>
-  <rect x="30" y="20" width="5.5" height="60" rx="2" fill="#e8a800"/>
-  <rect x="35.5" y="24" width="36" height="26" fill="#ffffff"/>
+  <rect width="100" height="100" rx="22" fill="#0b1226"/>
+  <rect x="30" y="20" width="5.5" height="60" rx="2" fill="#ffc24b"/>
+  <rect x="35.5" y="24" width="36" height="26" fill="#19e3b1"/>
 </svg>
 `,
   'utf8',

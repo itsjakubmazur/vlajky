@@ -11,10 +11,12 @@
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.sw.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "data": "tsx scripts/build-countries.ts && tsx scripts/copy-flags.ts && tsx scripts/build-review.ts",
+    "data": "tsx scripts/build-countries.ts && tsx scripts/copy-flags.ts && tsx scripts/copy-fonts.ts && tsx scripts/build-icons.ts && tsx scripts/build-review.ts",
     "check": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
     "d3-geo": "3.1.1",
     "next": "15.3.9",
     "react": "19.0.0",

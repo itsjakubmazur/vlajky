@@ -27,6 +27,7 @@
         1000,
         700
       ],
+      "accent": "#d0103a",
       "needsReview": [],
       "iso3": "AND",
       "numeric": "020"
@@ -54,6 +55,7 @@
         12,
         6
       ],
+      "accent": "#00732f",
       "needsReview": [],
       "iso3": "ARE",
       "numeric": "784"
@@ -76,6 +78,7 @@
         900,
         600
       ],
+      "accent": "#d32011",
       "needsReview": [
         "OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Úřední název je proto v datech taky ten starší, aby si vlajka a název neodporovaly. Rozhodni, kterou verzi učit.",
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
@@ -101,6 +104,7 @@
         138,
         92
       ],
+      "accent": "#fcd116",
       "needsReview": [],
       "iso3": "ATG",
       "numeric": "028"
@@ -123,6 +127,7 @@
         1200,
         600
       ],
+      "accent": "#012169",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -147,6 +152,7 @@
         980,
         700
       ],
+      "accent": "#ff0000",
       "needsReview": [],
       "iso3": "ALB",
       "numeric": "008"
@@ -169,6 +175,7 @@
         1200,
         600
       ],
+      "accent": "#f2a800",
       "needsReview": [],
       "iso3": "ARM",
       "numeric": "051"
@@ -191,6 +198,7 @@
         900,
         600
       ],
+      "accent": "#cc092f",
       "needsReview": [],
       "iso3": "AGO",
       "numeric": "024"
@@ -215,6 +223,7 @@
         800,
         500
       ],
+      "accent": "#74acdf",
       "needsReview": [],
       "iso3": "ARG",
       "numeric": "032"
@@ -237,6 +246,7 @@
         1000,
         500
       ],
+      "accent": "#000066",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -263,6 +273,7 @@
         900,
         600
       ],
+      "accent": "#ed2939",
       "needsReview": [],
       "iso3": "AUT",
       "numeric": "040"
@@ -288,6 +299,7 @@
         10080,
         5040
       ],
+      "accent": "#012169",
       "needsReview": [],
       "iso3": "AUS",
       "numeric": "036"
@@ -310,6 +322,7 @@
         27,
         18
       ],
+      "accent": "#418fde",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -337,6 +350,7 @@
         260,
         170
       ],
+      "accent": "#0053a5",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -361,6 +375,7 @@
         1200,
         600
       ],
+      "accent": "#3f9c35",
       "needsReview": [],
       "iso3": "AZE",
       "numeric": "031"
@@ -385,6 +400,7 @@
         16,
         8
       ],
+      "accent": "#002395",
       "needsReview": [],
       "iso3": "BIH",
       "numeric": "070"
@@ -407,6 +423,7 @@
         24000,
         16000
       ],
+      "accent": "#00267f",
       "needsReview": [],
       "iso3": "BRB",
       "numeric": "052"
@@ -432,6 +449,7 @@
         20,
         12
       ],
+      "accent": "#006a4e",
       "needsReview": [],
       "iso3": "BGD",
       "numeric": "050"
@@ -456,6 +474,7 @@
         450,
         390
       ],
+      "accent": "#ed2939",
       "needsReview": [
         "Poměr stran: oficiálně 13:15, běžně se ale používá 2:3. Zdrojové SVG má 15:13."
       ],
@@ -480,6 +499,7 @@
         900,
         600
       ],
+      "accent": "#009e49",
       "needsReview": [],
       "iso3": "BFA",
       "numeric": "854"
@@ -504,6 +524,7 @@
         5,
         3
       ],
+      "accent": "#00966e",
       "needsReview": [],
       "iso3": "BGR",
       "numeric": "100"
@@ -528,6 +549,7 @@
         1500,
         900
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "BHR",
       "numeric": "048"
@@ -550,6 +572,7 @@
         500,
         300
       ],
+      "accent": "#1eb53a",
       "needsReview": [
         "Hlavním městem je od roku 2019 Gitega, největším městem zůstává Bujumbura."
       ],
@@ -574,6 +597,7 @@
         15,
         10
       ],
+      "accent": "#e8112d",
       "needsReview": [
         "Úřední hlavní město je Porto-Novo, sídlem vlády je Cotonou."
       ],
@@ -598,6 +622,7 @@
         1000,
         500
       ],
+      "accent": "#c8102e",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -622,6 +647,7 @@
         1440,
         720
       ],
+      "accent": "#f7e017",
       "needsReview": [],
       "iso3": "BRN",
       "numeric": "096"
@@ -649,6 +675,7 @@
         291.042,
         198.438
       ],
+      "accent": "#00702d",
       "needsReview": [
         "Ústavním hlavním městem je Sucre, sídlem vlády La Paz."
       ],
@@ -673,6 +700,7 @@
         4200,
         2940
       ],
+      "accent": "#009b3a",
       "needsReview": [],
       "iso3": "BRA",
       "numeric": "076"
@@ -695,6 +723,7 @@
         600,
         300
       ],
+      "accent": "#00abc9",
       "needsReview": [],
       "iso3": "BHS",
       "numeric": "044"
@@ -717,6 +746,7 @@
         900,
         600
       ],
+      "accent": "#ffd520",
       "needsReview": [],
       "iso3": "BTN",
       "numeric": "064"
@@ -739,6 +769,7 @@
         36,
         24
       ],
+      "accent": "#75aadb",
       "needsReview": [],
       "iso3": "BWA",
       "numeric": "072"
@@ -761,6 +792,7 @@
         1098,
         549
       ],
+      "accent": "#c8313e",
       "needsReview": [],
       "iso3": "BLR",
       "numeric": "112"
@@ -783,6 +815,7 @@
         1000,
         600
       ],
+      "accent": "#d90f19",
       "needsReview": [],
       "iso3": "BLZ",
       "numeric": "084"
@@ -807,6 +840,7 @@
         9600,
         4800
       ],
+      "accent": "#d52b1e",
       "needsReview": [],
       "iso3": "CAN",
       "numeric": "124"
@@ -833,6 +867,7 @@
         800,
         600
       ],
+      "accent": "#19E3B1",
       "needsReview": [],
       "iso3": "COD",
       "numeric": "180"
@@ -855,6 +890,7 @@
         450,
         300
       ],
+      "accent": "#ffce00",
       "needsReview": [],
       "iso3": "CAF",
       "numeric": "140"
@@ -880,6 +916,7 @@
         3,
         2
       ],
+      "accent": "#009543",
       "needsReview": [
         "Slovo Kongo je v češtině dvojznačné. Teď platí jako alias JEN pro Konžskou republiku (Brazzaville). Chceš to tak?"
       ],
@@ -904,6 +941,7 @@
         320,
         320
       ],
+      "accent": "#d52b1e",
       "needsReview": [],
       "iso3": "CHE",
       "numeric": "756"
@@ -933,6 +971,7 @@
         450,
         300
       ],
+      "accent": "#009e60",
       "needsReview": [
         "Úřední hlavní město je Yamoussoukro, sídlem vlády je Abidžan."
       ],
@@ -957,6 +996,7 @@
         9600,
         4800
       ],
+      "accent": "#012169",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -983,6 +1023,7 @@
         24,
         16
       ],
+      "accent": "#d52b1e",
       "needsReview": [],
       "iso3": "CHL",
       "numeric": "152"
@@ -1009,6 +1050,7 @@
         90,
         60
       ],
+      "accent": "#007a5e",
       "needsReview": [],
       "iso3": "CMR",
       "numeric": "120"
@@ -1035,6 +1077,7 @@
         30,
         20
       ],
+      "accent": "#ffde00",
       "needsReview": [],
       "iso3": "CHN",
       "numeric": "156"
@@ -1060,6 +1103,7 @@
         6,
         4
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "COL",
       "numeric": "170"
@@ -1084,6 +1128,7 @@
         1000,
         600
       ],
+      "accent": "#fbd55f",
       "needsReview": [],
       "iso3": "CRI",
       "numeric": "188"
@@ -1108,6 +1153,7 @@
         800,
         400
       ],
+      "accent": "#002a8f",
       "needsReview": [],
       "iso3": "CUB",
       "numeric": "192"
@@ -1133,6 +1179,7 @@
         510,
         300
       ],
+      "accent": "#003893",
       "needsReview": [],
       "iso3": "CPV",
       "numeric": "132"
@@ -1155,6 +1202,7 @@
         54,
         36
       ],
+      "accent": "#002b7f",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -1179,6 +1227,7 @@
         900,
         600
       ],
+      "accent": "#4e5b31",
       "needsReview": [
         "Zeměpisně leží v Asii, politicky patří k Evropě (EU). Zařazeno do Evropy."
       ],
@@ -1208,6 +1257,7 @@
         900,
         600
       ],
+      "accent": "#d7141a",
       "needsReview": [],
       "iso3": "CZE",
       "numeric": "203"
@@ -1234,6 +1284,7 @@
         5,
         3
       ],
+      "accent": "#dd0000",
       "needsReview": [],
       "iso3": "DEU",
       "numeric": "276"
@@ -1256,6 +1307,7 @@
         15,
         10
       ],
+      "accent": "#19E3B1",
       "needsReview": [],
       "iso3": "DJI",
       "numeric": "262"
@@ -1285,6 +1337,7 @@
         370,
         280
       ],
+      "accent": "#c60c30",
       "needsReview": [],
       "iso3": "DNK",
       "numeric": "208"
@@ -1307,6 +1360,7 @@
         1200,
         600
       ],
+      "accent": "#006b3f",
       "needsReview": [],
       "iso3": "DMA",
       "numeric": "212"
@@ -1329,6 +1383,7 @@
         900,
         600
       ],
+      "accent": "#002d62",
       "needsReview": [],
       "iso3": "DOM",
       "numeric": "214"
@@ -1354,6 +1409,7 @@
         900,
         600
       ],
+      "accent": "#006233",
       "needsReview": [],
       "iso3": "DZA",
       "numeric": "012"
@@ -1379,6 +1435,7 @@
         1440,
         960
       ],
+      "accent": "#1ea8d1",
       "needsReview": [],
       "iso3": "ECU",
       "numeric": "218"
@@ -1401,6 +1458,7 @@
         33,
         21
       ],
+      "accent": "#4891d9",
       "needsReview": [],
       "iso3": "EST",
       "numeric": "233"
@@ -1427,6 +1485,7 @@
         900,
         600
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "EGY",
       "numeric": "818"
@@ -1454,6 +1513,7 @@
         600,
         300
       ],
+      "accent": "#007a3d",
       "needsReview": [
         "Sporné území. Zařazeno jen do bonusové sady.",
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
@@ -1479,6 +1539,7 @@
         1000,
         500
       ],
+      "accent": "#ea0437",
       "needsReview": [],
       "iso3": "ERI",
       "numeric": "232"
@@ -1501,6 +1562,7 @@
         750,
         500
       ],
+      "accent": "#c60b1e",
       "needsReview": [],
       "iso3": "ESP",
       "numeric": "724"
@@ -1528,6 +1590,7 @@
         720,
         360
       ],
+      "accent": "#da121a",
       "needsReview": [],
       "iso3": "ETH",
       "numeric": "231"
@@ -1555,6 +1618,7 @@
         1800,
         1100
       ],
+      "accent": "#003580",
       "needsReview": [],
       "iso3": "FIN",
       "numeric": "246"
@@ -1580,6 +1644,7 @@
         1200,
         600
       ],
+      "accent": "#012169",
       "needsReview": [],
       "iso3": "FJI",
       "numeric": "242"
@@ -1602,6 +1667,7 @@
         1200,
         600
       ],
+      "accent": "#012169",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -1626,6 +1692,7 @@
         38,
         20
       ],
+      "accent": "#75b2dd",
       "needsReview": [],
       "iso3": "FSM",
       "numeric": "583"
@@ -1651,6 +1718,7 @@
         22,
         16
       ],
+      "accent": "#0065bd",
       "needsReview": [],
       "iso3": "FRO",
       "numeric": "234"
@@ -1673,6 +1741,7 @@
         3,
         2
       ],
+      "accent": "#ed2939",
       "needsReview": [],
       "iso3": "FRA",
       "numeric": "250"
@@ -1695,6 +1764,7 @@
         400,
         300
       ],
+      "accent": "#3a75c4",
       "needsReview": [],
       "iso3": "GAB",
       "numeric": "266"
@@ -1724,6 +1794,7 @@
         60,
         30
       ],
+      "accent": "#012169",
       "needsReview": [
         "Anglie ZÁMĚRNĚ není alias – je to samostatná vlajka v bonusové sadě."
       ],
@@ -1751,6 +1822,7 @@
         25,
         15
       ],
+      "accent": "#ce1124",
       "needsReview": [],
       "iso3": null,
       "numeric": null
@@ -1773,6 +1845,7 @@
         60,
         30
       ],
+      "accent": "#012169",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -1800,6 +1873,7 @@
         1000,
         600
       ],
+      "accent": "#0065bd",
       "needsReview": [],
       "iso3": null,
       "numeric": null
@@ -1822,6 +1896,7 @@
         830,
         498
       ],
+      "accent": "#00ab39",
       "needsReview": [],
       "iso3": null,
       "numeric": null
@@ -1844,6 +1919,7 @@
         500,
         300
       ],
+      "accent": "#fcd116",
       "needsReview": [],
       "iso3": "GRD",
       "numeric": "308"
@@ -1866,6 +1942,7 @@
         300,
         200
       ],
+      "accent": "#ff0000",
       "needsReview": [],
       "iso3": "GEO",
       "numeric": "268"
@@ -1888,6 +1965,7 @@
         36,
         24
       ],
+      "accent": "#f9dd16",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -1917,6 +1995,7 @@
         450,
         300
       ],
+      "accent": "#006b3f",
       "needsReview": [],
       "iso3": "GHA",
       "numeric": "288"
@@ -1939,6 +2018,7 @@
         512,
         256
       ],
+      "accent": "#da000c",
       "needsReview": [],
       "iso3": "GIB",
       "numeric": "292"
@@ -1961,6 +2041,7 @@
         18,
         12
       ],
+      "accent": "#d00c33",
       "needsReview": [],
       "iso3": "GRL",
       "numeric": "304"
@@ -1983,6 +2064,7 @@
         27,
         18
       ],
+      "accent": "#3a7728",
       "needsReview": [],
       "iso3": "GMB",
       "numeric": "270"
@@ -2009,6 +2091,7 @@
         3,
         2
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "GIN",
       "numeric": "324"
@@ -2031,6 +2114,7 @@
         3600,
         2400
       ],
+      "accent": "#e32118",
       "needsReview": [],
       "iso3": "GNQ",
       "numeric": "226"
@@ -2055,6 +2139,7 @@
         27,
         18
       ],
+      "accent": "#0d5eaf",
       "needsReview": [],
       "iso3": "GRC",
       "numeric": "300"
@@ -2081,6 +2166,7 @@
         960,
         600
       ],
+      "accent": "#f9f0aa",
       "needsReview": [],
       "iso3": "GTM",
       "numeric": "320"
@@ -2103,6 +2189,7 @@
         216958.34,
         116416.66
       ],
+      "accent": "#c62139",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -2127,6 +2214,7 @@
         12,
         6
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "GNB",
       "numeric": "624"
@@ -2149,6 +2237,7 @@
         500,
         300
       ],
+      "accent": "#009e49",
       "needsReview": [],
       "iso3": "GUY",
       "numeric": "328"
@@ -2171,6 +2260,7 @@
         900,
         600
       ],
+      "accent": "#de2910",
       "needsReview": [],
       "iso3": "HKG",
       "numeric": "344"
@@ -2197,6 +2287,7 @@
         72,
         36
       ],
+      "accent": "#0073cf",
       "needsReview": [],
       "iso3": "HND",
       "numeric": "340"
@@ -2219,6 +2310,7 @@
         1200,
         600
       ],
+      "accent": "#171796",
       "needsReview": [],
       "iso3": "HRV",
       "numeric": "191"
@@ -2243,6 +2335,7 @@
         500,
         300
       ],
+      "accent": "#d21034",
       "needsReview": [],
       "iso3": "HTI",
       "numeric": "332"
@@ -2267,6 +2360,7 @@
         6,
         3
       ],
+      "accent": "#cd2a3e",
       "needsReview": [],
       "iso3": "HUN",
       "numeric": "348"
@@ -2292,6 +2386,7 @@
         3,
         2
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "IDN",
       "numeric": "360"
@@ -2318,6 +2413,7 @@
         600,
         300
       ],
+      "accent": "#19E3B1",
       "needsReview": [],
       "iso3": "IRL",
       "numeric": "372"
@@ -2340,6 +2436,7 @@
         1100,
         800
       ],
+      "accent": "#0038b8",
       "needsReview": [
         "Hlavní město: Izrael uvádí Jeruzalém, většina států má velvyslanectví v Tel Avivu. Sporné."
       ],
@@ -2364,6 +2461,7 @@
         600,
         300
       ],
+      "accent": "#19E3B1",
       "needsReview": [],
       "iso3": "IMN",
       "numeric": "833"
@@ -2388,6 +2486,7 @@
         225,
         150
       ],
+      "accent": "#ff9933",
       "needsReview": [],
       "iso3": "IND",
       "numeric": "356"
@@ -2414,6 +2513,7 @@
         900,
         600
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "IRQ",
       "numeric": "368"
@@ -2436,6 +2536,7 @@
         630,
         360
       ],
+      "accent": "#da0000",
       "needsReview": [],
       "iso3": "IRN",
       "numeric": "364"
@@ -2463,6 +2564,7 @@
         2500,
         1800
       ],
+      "accent": "#003897",
       "needsReview": [],
       "iso3": "ISL",
       "numeric": "352"
@@ -2489,6 +2591,7 @@
         3,
         2
       ],
+      "accent": "#009246",
       "needsReview": [],
       "iso3": "ITA",
       "numeric": "380"
@@ -2511,6 +2614,7 @@
         30,
         18
       ],
+      "accent": "#e8112d",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -2535,6 +2639,7 @@
         12,
         6
       ],
+      "accent": "#009b3a",
       "needsReview": [],
       "iso3": "JAM",
       "numeric": "388"
@@ -2562,6 +2667,7 @@
         840,
         420
       ],
+      "accent": "#007a3d",
       "needsReview": [],
       "iso3": "JOR",
       "numeric": "400"
@@ -2587,6 +2693,7 @@
         900,
         600
       ],
+      "accent": "#bc002d",
       "needsReview": [],
       "iso3": "JPN",
       "numeric": "392"
@@ -2612,6 +2719,7 @@
         240,
         160
       ],
+      "accent": "#006600",
       "needsReview": [],
       "iso3": "KEN",
       "numeric": "404"
@@ -2634,6 +2742,7 @@
         1000,
         600
       ],
+      "accent": "#ff0000",
       "needsReview": [],
       "iso3": "KGZ",
       "numeric": "417"
@@ -2656,6 +2765,7 @@
         625,
         400
       ],
+      "accent": "#032ea1",
       "needsReview": [],
       "iso3": "KHM",
       "numeric": "116"
@@ -2678,6 +2788,7 @@
         600,
         300
       ],
+      "accent": "#c81010",
       "needsReview": [],
       "iso3": "KIR",
       "numeric": "296"
@@ -2700,6 +2811,7 @@
         500,
         300
       ],
+      "accent": "#3a75c4",
       "needsReview": [],
       "iso3": "COM",
       "numeric": "174"
@@ -2722,6 +2834,7 @@
         750,
         500
       ],
+      "accent": "#009e49",
       "needsReview": [],
       "iso3": "KNA",
       "numeric": "659"
@@ -2746,6 +2859,7 @@
         72,
         36
       ],
+      "accent": "#024fa2",
       "needsReview": [],
       "iso3": "PRK",
       "numeric": "408"
@@ -2768,6 +2882,7 @@
         72,
         48
       ],
+      "accent": "#cd2e3a",
       "needsReview": [],
       "iso3": "KOR",
       "numeric": "410"
@@ -2796,6 +2911,7 @@
         12,
         6
       ],
+      "accent": "#007a3d",
       "needsReview": [],
       "iso3": "KWT",
       "numeric": "414"
@@ -2818,6 +2934,7 @@
         1200,
         600
       ],
+      "accent": "#012169",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -2842,6 +2959,7 @@
         2000,
         1000
       ],
+      "accent": "#00afca",
       "needsReview": [],
       "iso3": "KAZ",
       "numeric": "398"
@@ -2864,6 +2982,7 @@
         600,
         400
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "LAO",
       "numeric": "418"
@@ -2886,6 +3005,7 @@
         750,
         500
       ],
+      "accent": "#ed1c24",
       "needsReview": [],
       "iso3": "LBN",
       "numeric": "422"
@@ -2908,6 +3028,7 @@
         600,
         300
       ],
+      "accent": "#66ccff",
       "needsReview": [],
       "iso3": "LCA",
       "numeric": "662"
@@ -2932,6 +3053,7 @@
         1000,
         600
       ],
+      "accent": "#002b7f",
       "needsReview": [],
       "iso3": "LIE",
       "numeric": "438"
@@ -2954,6 +3076,7 @@
         1200,
         600
       ],
+      "accent": "#ffb700",
       "needsReview": [
         "Úřední hlavní město je Srí Džajavardanapura Kotte, Kolombo je největší město a sídlo vlády."
       ],
@@ -2981,6 +3104,7 @@
         209,
         110
       ],
+      "accent": "#bf0a30",
       "needsReview": [],
       "iso3": "LBR",
       "numeric": "430"
@@ -3003,6 +3127,7 @@
         450,
         300
       ],
+      "accent": "#009543",
       "needsReview": [],
       "iso3": "LSO",
       "numeric": "426"
@@ -3030,6 +3155,7 @@
         5,
         3
       ],
+      "accent": "#c1272d",
       "needsReview": [],
       "iso3": "LTU",
       "numeric": "440"
@@ -3055,6 +3181,7 @@
         1000,
         600
       ],
+      "accent": "#00a1de",
       "needsReview": [],
       "iso3": "LUX",
       "numeric": "442"
@@ -3079,6 +3206,7 @@
         1200,
         600
       ],
+      "accent": "#9e3039",
       "needsReview": [],
       "iso3": "LVA",
       "numeric": "428"
@@ -3101,6 +3229,7 @@
         960,
         480
       ],
+      "accent": "#239e46",
       "needsReview": [],
       "iso3": "LBY",
       "numeric": "434"
@@ -3123,6 +3252,7 @@
         900,
         600
       ],
+      "accent": "#19E3B1",
       "needsReview": [],
       "iso3": "MAR",
       "numeric": "504"
@@ -3148,6 +3278,7 @@
         750,
         600
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "MCO",
       "numeric": "492"
@@ -3174,6 +3305,7 @@
         1800,
         900
       ],
+      "accent": "#cc092f",
       "needsReview": [],
       "iso3": "MDA",
       "numeric": "498"
@@ -3196,6 +3328,7 @@
         640,
         320
       ],
+      "accent": "#d3ae3b",
       "needsReview": [],
       "iso3": "MNE",
       "numeric": "499"
@@ -3218,6 +3351,7 @@
         900,
         600
       ],
+      "accent": "#007e3a",
       "needsReview": [],
       "iso3": "MDG",
       "numeric": "450"
@@ -3240,6 +3374,7 @@
         570,
         300
       ],
+      "accent": "#003893",
       "needsReview": [],
       "iso3": "MHL",
       "numeric": "584"
@@ -3262,6 +3397,7 @@
         56,
         28
       ],
+      "accent": "#d20000",
       "needsReview": [],
       "iso3": "MKD",
       "numeric": "807"
@@ -3288,6 +3424,7 @@
         450,
         300
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "MLI",
       "numeric": "466"
@@ -3317,6 +3454,7 @@
         18,
         12
       ],
+      "accent": "#fecb00",
       "needsReview": [],
       "iso3": "MMR",
       "numeric": "104"
@@ -3339,6 +3477,7 @@
         4800,
         2400
       ],
+      "accent": "#f9cf02",
       "needsReview": [],
       "iso3": "MNG",
       "numeric": "496"
@@ -3361,6 +3500,7 @@
         660,
         440
       ],
+      "accent": "#00785e",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -3385,6 +3525,7 @@
         1000,
         500
       ],
+      "accent": "#0071bc",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -3409,6 +3550,7 @@
         144,
         96
       ],
+      "accent": "#cd2a3e",
       "needsReview": [],
       "iso3": "MRT",
       "numeric": "478"
@@ -3431,6 +3573,7 @@
         1200,
         600
       ],
+      "accent": "#012169",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -3455,6 +3598,7 @@
         900,
         600
       ],
+      "accent": "#cf142b",
       "needsReview": [],
       "iso3": "MLT",
       "numeric": "470"
@@ -3477,6 +3621,7 @@
         6,
         4
       ],
+      "accent": "#00a551",
       "needsReview": [],
       "iso3": "MUS",
       "numeric": "480"
@@ -3499,6 +3644,7 @@
         720,
         480
       ],
+      "accent": "#d21034",
       "needsReview": [],
       "iso3": "MDV",
       "numeric": "462"
@@ -3521,6 +3667,7 @@
         450,
         300
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "MWI",
       "numeric": "454"
@@ -3547,6 +3694,7 @@
         980,
         560
       ],
+      "accent": "#f15770",
       "needsReview": [
         "Hlavní město se česky píše různě: Mexico City / Ciudad de México / Mexiko. Vybráno Mexico City."
       ],
@@ -3574,6 +3722,7 @@
         2800,
         1400
       ],
+      "accent": "#19E3B1",
       "needsReview": [],
       "iso3": "MYS",
       "numeric": "458"
@@ -3596,6 +3745,7 @@
         900,
         600
       ],
+      "accent": "#007168",
       "needsReview": [],
       "iso3": "MOZ",
       "numeric": "508"
@@ -3618,6 +3768,7 @@
         90,
         60
       ],
+      "accent": "#003580",
       "needsReview": [],
       "iso3": "NAM",
       "numeric": "516"
@@ -3640,6 +3791,7 @@
         900,
         450
       ],
+      "accent": "#009543",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -3666,6 +3818,7 @@
         700,
         600
       ],
+      "accent": "#0db02b",
       "needsReview": [],
       "iso3": "NER",
       "numeric": "562"
@@ -3688,6 +3841,7 @@
         6,
         3
       ],
+      "accent": "#008751",
       "needsReview": [],
       "iso3": "NGA",
       "numeric": "566"
@@ -3714,6 +3868,7 @@
         1000,
         600
       ],
+      "accent": "#510000",
       "needsReview": [],
       "iso3": "NIC",
       "numeric": "558"
@@ -3741,6 +3896,7 @@
         9,
         6
       ],
+      "accent": "#21468b",
       "needsReview": [
         "Hlavní město je Amsterdam, sídlo vlády je ale Haag."
       ],
@@ -3770,6 +3926,7 @@
         1100,
         800
       ],
+      "accent": "#ef2b2d",
       "needsReview": [],
       "iso3": "NOR",
       "numeric": "578"
@@ -3792,6 +3949,7 @@
         71.571,
         87.246
       ],
+      "accent": "#dc143c",
       "needsReview": [],
       "iso3": "NPL",
       "numeric": "524"
@@ -3814,6 +3972,7 @@
         600,
         300
       ],
+      "accent": "#002b7f",
       "needsReview": [],
       "iso3": "NRU",
       "numeric": "520"
@@ -3839,6 +3998,7 @@
         1200,
         600
       ],
+      "accent": "#012169",
       "needsReview": [],
       "iso3": "NZL",
       "numeric": "554"
@@ -3861,6 +4021,7 @@
         1200,
         600
       ],
+      "accent": "#db161b",
       "needsReview": [],
       "iso3": "OMN",
       "numeric": "512"
@@ -3883,6 +4044,7 @@
         36,
         24
       ],
+      "accent": "#005293",
       "needsReview": [],
       "iso3": "PAN",
       "numeric": "591"
@@ -3907,6 +4069,7 @@
         900,
         600
       ],
+      "accent": "#d91023",
       "needsReview": [],
       "iso3": "PER",
       "numeric": "604"
@@ -3929,6 +4092,7 @@
         600,
         400
       ],
+      "accent": "#ce1126",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -3953,6 +4117,7 @@
         768,
         576
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "PNG",
       "numeric": "598"
@@ -3977,6 +4142,7 @@
         180,
         90
       ],
+      "accent": "#0038a8",
       "needsReview": [],
       "iso3": "PHL",
       "numeric": "608"
@@ -3999,6 +4165,7 @@
         120,
         80
       ],
+      "accent": "#01411c",
       "needsReview": [],
       "iso3": "PAK",
       "numeric": "586"
@@ -4024,6 +4191,7 @@
         16,
         10
       ],
+      "accent": "#dc143c",
       "needsReview": [],
       "iso3": "POL",
       "numeric": "616"
@@ -4046,6 +4214,7 @@
         900,
         600
       ],
+      "accent": "#0050f0",
       "needsReview": [],
       "iso3": "PRI",
       "numeric": "630"
@@ -4073,6 +4242,7 @@
         6,
         3
       ],
+      "accent": "#007a3d",
       "needsReview": [
         "Hlavní město: Palestina uvádí Východní Jeruzalém, sídlem vlády je Ramalláh. Sporné."
       ],
@@ -4097,6 +4267,7 @@
         600,
         400
       ],
+      "accent": "#ff0000",
       "needsReview": [],
       "iso3": "PRT",
       "numeric": "620"
@@ -4122,6 +4293,7 @@
         800,
         500
       ],
+      "accent": "#4aadd6",
       "needsReview": [],
       "iso3": "PLW",
       "numeric": "585"
@@ -4147,6 +4319,7 @@
         600,
         330
       ],
+      "accent": "#0038a8",
       "needsReview": [],
       "iso3": "PRY",
       "numeric": "600"
@@ -4171,6 +4344,7 @@
         1400,
         550
       ],
+      "accent": "#8d1b3d",
       "needsReview": [],
       "iso3": "QAT",
       "numeric": "634"
@@ -4197,6 +4371,7 @@
         3,
         2
       ],
+      "accent": "#002b7f",
       "needsReview": [],
       "iso3": "ROU",
       "numeric": "642"
@@ -4223,6 +4398,7 @@
         1350,
         900
       ],
+      "accent": "#0c4076",
       "needsReview": [],
       "iso3": "SRB",
       "numeric": "688"
@@ -4249,6 +4425,7 @@
         9,
         6
       ],
+      "accent": "#d52b1e",
       "needsReview": [
         "Zeměpisný střed leží na Sibiři; zařazeno do Evropy podle zvyklosti."
       ],
@@ -4273,6 +4450,7 @@
         1080,
         720
       ],
+      "accent": "#20603d",
       "needsReview": [],
       "iso3": "RWA",
       "numeric": "646"
@@ -4295,6 +4473,7 @@
         750,
         500
       ],
+      "accent": "#006c35",
       "needsReview": [],
       "iso3": "SAU",
       "numeric": "682"
@@ -4317,6 +4496,7 @@
         800,
         400
       ],
+      "accent": "#0051ba",
       "needsReview": [],
       "iso3": "SLB",
       "numeric": "090"
@@ -4339,6 +4519,7 @@
         900,
         450
       ],
+      "accent": "#d62828",
       "needsReview": [],
       "iso3": "SYC",
       "numeric": "690"
@@ -4368,6 +4549,7 @@
         12,
         6
       ],
+      "accent": "#d21034",
       "needsReview": [],
       "iso3": "SDN",
       "numeric": "729"
@@ -4395,6 +4577,7 @@
         16,
         10
       ],
+      "accent": "#006aa7",
       "needsReview": [],
       "iso3": "SWE",
       "numeric": "752"
@@ -4417,6 +4600,7 @@
         4320,
         2880
       ],
+      "accent": "#ed2939",
       "needsReview": [],
       "iso3": "SGP",
       "numeric": "702"
@@ -4443,6 +4627,7 @@
         12,
         6
       ],
+      "accent": "#ed1c24",
       "needsReview": [],
       "iso3": "SVN",
       "numeric": "705"
@@ -4471,6 +4656,7 @@
         9,
         6
       ],
+      "accent": "#ee1c25",
       "needsReview": [],
       "iso3": "SVK",
       "numeric": "703"
@@ -4493,6 +4679,7 @@
         450,
         300
       ],
+      "accent": "#0072c6",
       "needsReview": [],
       "iso3": "SLE",
       "numeric": "694"
@@ -4515,6 +4702,7 @@
         800,
         600
       ],
+      "accent": "#5eb6e4",
       "needsReview": [],
       "iso3": "SMR",
       "numeric": "674"
@@ -4541,6 +4729,7 @@
         900,
         600
       ],
+      "accent": "#00853f",
       "needsReview": [],
       "iso3": "SEN",
       "numeric": "686"
@@ -4563,6 +4752,7 @@
         81,
         54
       ],
+      "accent": "#4189dd",
       "needsReview": [],
       "iso3": "SOM",
       "numeric": "706"
@@ -4585,6 +4775,7 @@
         900,
         600
       ],
+      "accent": "#377e3f",
       "needsReview": [],
       "iso3": "SUR",
       "numeric": "740"
@@ -4610,6 +4801,7 @@
         20,
         10
       ],
+      "accent": "#078930",
       "needsReview": [],
       "iso3": "SSD",
       "numeric": "728"
@@ -4632,6 +4824,7 @@
         2800,
         1400
       ],
+      "accent": "#12ad2b",
       "needsReview": [],
       "iso3": "STP",
       "numeric": "678"
@@ -4658,6 +4851,7 @@
         1005,
         567
       ],
+      "accent": "#0047ab",
       "needsReview": [],
       "iso3": "SLV",
       "numeric": "222"
@@ -4684,6 +4878,7 @@
         180,
         120
       ],
+      "accent": "#ce1126",
       "needsReview": [
         "OVĚŘENO: zdrojové SVG ukazuje starší červeno-bílo-černou vlajku se dvěma zelenými hvězdami, ne dnešní zeleno-bílo-černou se třemi červenými hvězdami. Rozhodni, kterou učit.",
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
@@ -4711,6 +4906,7 @@
         900,
         600
       ],
+      "accent": "#3e5eb9",
       "needsReview": [
         "Mbabane je správní hlavní město, Lobamba je královské a parlamentní sídlo."
       ],
@@ -4735,6 +4931,7 @@
         9600,
         4800
       ],
+      "accent": "#012169",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -4763,6 +4960,7 @@
         450,
         300
       ],
+      "accent": "#c60c30",
       "needsReview": [],
       "iso3": "TCD",
       "numeric": "148"
@@ -4785,6 +4983,7 @@
         809,
         500
       ],
+      "accent": "#006a4e",
       "needsReview": [],
       "iso3": "TGO",
       "numeric": "768"
@@ -4809,6 +5008,7 @@
         900,
         600
       ],
+      "accent": "#a51931",
       "needsReview": [],
       "iso3": "THA",
       "numeric": "764"
@@ -4831,6 +5031,7 @@
         1400,
         700
       ],
+      "accent": "#006600",
       "needsReview": [],
       "iso3": "TJK",
       "numeric": "762"
@@ -4855,6 +5056,7 @@
         1200,
         600
       ],
+      "accent": "#dc241f",
       "needsReview": [],
       "iso3": "TLS",
       "numeric": "626"
@@ -4877,6 +5079,7 @@
         900,
         600
       ],
+      "accent": "#28ae66",
       "needsReview": [],
       "iso3": "TKM",
       "numeric": "795"
@@ -4902,6 +5105,7 @@
         120,
         80
       ],
+      "accent": "#e70013",
       "needsReview": [],
       "iso3": "TUN",
       "numeric": "788"
@@ -4924,6 +5128,7 @@
         96,
         48
       ],
+      "accent": "#c10000",
       "needsReview": [],
       "iso3": "TON",
       "numeric": "776"
@@ -4951,6 +5156,7 @@
         1200,
         800
       ],
+      "accent": "#e30a17",
       "needsReview": [
         "Leží v Asii i v Evropě; zařazeno do Asie."
       ],
@@ -4975,6 +5181,7 @@
         30,
         18
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "TTO",
       "numeric": "780"
@@ -4997,6 +5204,7 @@
         1200,
         600
       ],
+      "accent": "#012169",
       "needsReview": [],
       "iso3": "TUV",
       "numeric": "798"
@@ -5019,6 +5227,7 @@
         240,
         160
       ],
+      "accent": "#fe0000",
       "needsReview": [],
       "iso3": "TWN",
       "numeric": "158"
@@ -5041,6 +5250,7 @@
         72,
         48
       ],
+      "accent": "#1eb53a",
       "needsReview": [
         "Úřední hlavní město je Dodoma, největší město a přístav je Dar es Salaam."
       ],
@@ -5065,6 +5275,7 @@
         1200,
         800
       ],
+      "accent": "#005bbb",
       "needsReview": [],
       "iso3": "UKR",
       "numeric": "804"
@@ -5087,6 +5298,7 @@
         900,
         600
       ],
+      "accent": "#fcdc04",
       "needsReview": [],
       "iso3": "UGA",
       "numeric": "800"
@@ -5116,6 +5328,7 @@
         7410,
         3900
       ],
+      "accent": "#b22234",
       "needsReview": [],
       "iso3": "USA",
       "numeric": "840"
@@ -5141,6 +5354,7 @@
         27,
         18
       ],
+      "accent": "#0038a8",
       "needsReview": [],
       "iso3": "URY",
       "numeric": "858"
@@ -5163,6 +5377,7 @@
         500,
         250
       ],
+      "accent": "#1eb53a",
       "needsReview": [],
       "iso3": "UZB",
       "numeric": "860"
@@ -5185,6 +5400,7 @@
         2500,
         2500
       ],
+      "accent": "#ffe000",
       "needsReview": [],
       "iso3": "VAT",
       "numeric": "336"
@@ -5207,6 +5423,7 @@
         72,
         48
       ],
+      "accent": "#009e60",
       "needsReview": [],
       "iso3": "VCT",
       "numeric": "670"
@@ -5232,6 +5449,7 @@
         180,
         120
       ],
+      "accent": "#cf142b",
       "needsReview": [],
       "iso3": "VEN",
       "numeric": "862"
@@ -5254,6 +5472,7 @@
         1200,
         600
       ],
+      "accent": "#ff0000",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -5278,6 +5497,7 @@
         1275,
         850
       ],
+      "accent": "#369443",
       "needsReview": [
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
@@ -5304,6 +5524,7 @@
         30,
         20
       ],
+      "accent": "#da251d",
       "needsReview": [],
       "iso3": "VNM",
       "numeric": "704"
@@ -5326,6 +5547,7 @@
         950,
         570
       ],
+      "accent": "#d21034",
       "needsReview": [],
       "iso3": "VUT",
       "numeric": "548"
@@ -5348,6 +5570,7 @@
         2880,
         1440
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "WSM",
       "numeric": "882"
@@ -5370,6 +5593,7 @@
         840,
         600
       ],
+      "accent": "#244aa5",
       "needsReview": [],
       "iso3": "XKK",
       "numeric": "983"
@@ -5396,6 +5620,7 @@
         450,
         300
       ],
+      "accent": "#ce1126",
       "needsReview": [],
       "iso3": "YEM",
       "numeric": "887"
@@ -5421,6 +5646,7 @@
         9,
         6
       ],
+      "accent": "#001489",
       "needsReview": [
         "JAR má tři hlavní města: Pretoria (vláda), Kapské Město (parlament), Bloemfontein (soudy)."
       ],
@@ -5445,6 +5671,7 @@
         2100,
         1400
       ],
+      "accent": "#198a00",
       "needsReview": [],
       "iso3": "ZMB",
       "numeric": "894"
@@ -5467,6 +5694,7 @@
         252,
         126
       ],
+      "accent": "#319208",
       "needsReview": [],
       "iso3": "ZWE",
       "numeric": "716"

@@ -59,6 +59,33 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `src/i18n/cs.ts` | **všechny** texty rozhraní |
 | `src/config/app.ts` | název aplikace, složení sady, prahy |
 
+## Vizuální systém
+
+Aplikace má jeden vizuální svět – **noční atlas**. Teze, ze které se odvíjí
+všechno ostatní: *vlajky jsou jediná sytá barva na obrazovce, rozhraní je sklo.*
+
+- **Podklad:** tmavá `--color-abyss` a nad ní polární záře ze tří měkkých
+  gradientů (`body::before`, žádný obrázek). Bez ní by sklo nemělo co matnit.
+- **Sklo ve třech silách** podle role, ne plošně: `glass-raised` pro panel
+  s hlavní akcí, `glass` pro běžné panely, `glass-thin` pro čipy a štítky.
+  Ne každý blok je karta.
+- **Barvy:** `mint` je jediná plná barva rozhraní (hlavní akce, správná
+  odpověď), `gold` je nejvyšší úroveň a oslava, `coral` chyba. Šedé jsou
+  laděné do modra, ne neutrální.
+- **Písmo:** Bricolage Grotesque na nadpisy (utilita `display`), Manrope na
+  text. Self-hostované ze `public/fonts/` – Google Fonts by porušily pravidlo
+  o žádných externích požadavcích. Řez **latin-ext je pro češtinu povinný**.
+- **Vlajky svítí:** každá má v datech pole `accent` – výraznou barvu odečtenou
+  ze svého SVG při buildu (`scripts/flag-source.ts`). Používá se na halo za
+  vlajkou a na prstenec samolepky v albu.
+- **Světlý režim záměrně není.** Na světlém podkladu sklo nemá co matnit
+  a vlajky přestanou svítit. Kdyby ho někdo chtěl, všechno jsou tokeny
+  v `@theme`, takže je to práce na jednom bloku – ale je to změna identity,
+  ne přepínač.
+- **Pohyb střídmě:** nástup panelů po řadě (`stagger`), přejezd světla po
+  správné odpovědi, roztřesení po chybě, pulz hala u zlaté vlajky. Všechno
+  respektuje `prefers-reduced-motion`.
+
 ## Konvence
 
 - **Texty:** žádný český řetězec v komponentách – všechno přes `cs` z `src/i18n/cs.ts`.

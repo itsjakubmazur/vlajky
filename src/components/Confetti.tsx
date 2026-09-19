@@ -3,11 +3,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { createRng } from '@/domain/rng';
 
-const COLORS = ['#4f46e5', '#e8a800', '#0f9d58', '#e0475b', '#22b8cf', '#f06595'];
+/** Barvy z palety aplikace, ne náhodná duha. */
+const COLORS = ['#19e3b1', '#ffc24b', '#ff6b6b', '#c3cfe6', '#4cc9f0'];
 
 /**
  * Oslava po zlaté vlajce nebo dokončeném světadílu.
- * Žádná knihovna – pár obdélníčků a CSS animace stačí a nic to nestojí.
+ * Žádná knihovna – pár obdélníčků a CSS animace stačí.
  */
 export function Confetti({ seed = 1, pieces = 60 }: { seed?: number; pieces?: number }) {
   const [visible, setVisible] = useState(true);
@@ -40,7 +41,7 @@ export function Confetti({ seed = 1, pieces = 60 }: { seed?: number; pieces?: nu
       {items.map((item) => (
         <span
           key={item.id}
-          className="absolute top-[-5vh] block animate-[confetti-fall_linear_forwards]"
+          className="absolute top-[-5vh] block rounded-[1px] animate-[confetti-fall_linear_forwards]"
           style={{
             left: `${item.left}%`,
             width: item.size,

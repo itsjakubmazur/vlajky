@@ -21,7 +21,7 @@ const FILL: Record<Mastery, string> = {
 };
 
 /** Země mimo aktivní sadu – ať nepůsobí, že na ně hráč zapomněl. */
-const OUT_OF_SET = 'var(--color-line)';
+const OUT_OF_SET = 'rgb(255 255 255 / 0.05)';
 
 export function WorldMap({
   masteryOf,
@@ -94,8 +94,8 @@ export function WorldMap({
             key={shape.id}
             d={shape.d}
             fill={fillFor(shape.code)}
-            stroke="var(--color-surface)"
-            strokeWidth={0.5}
+            stroke="rgb(6 10 20 / 0.85)"
+            strokeWidth={0.4}
             onClick={shape.code && onSelect ? () => onSelect(shape.code!) : undefined}
             className={shape.code && onSelect ? 'cursor-pointer' : undefined}
           />
@@ -109,8 +109,8 @@ export function WorldMap({
             cy={dot.y}
             r={3}
             fill={fillFor(dot.code)}
-            stroke="var(--color-surface)"
-            strokeWidth={0.8}
+            stroke="rgb(6 10 20 / 0.85)"
+            strokeWidth={0.6}
             onClick={onSelect ? () => onSelect(dot.code) : undefined}
             className={onSelect ? 'cursor-pointer' : undefined}
           />

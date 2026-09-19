@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   description: APP_TAGLINE,
   applicationName: APP_NAME,
   manifest: '/manifest.webmanifest',
-  appleWebApp: { capable: true, title: APP_NAME, statusBarStyle: 'default' },
+  appleWebApp: { capable: true, title: APP_NAME, statusBarStyle: 'black-translucent' },
   icons: { icon: '/icon.svg', apple: '/icon-180.png' },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#4f46e5',
+  themeColor: '#060a14',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',

@@ -25,7 +25,9 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
 
   if (session.phase === 'loading') {
     return (
-      <div className="flex min-h-dvh items-center justify-center text-muted">{cs.common.loading}</div>
+      <div className="flex min-h-dvh items-center justify-center text-sm font-bold text-faint">
+        {cs.common.loading}
+      </div>
     );
   }
 
@@ -63,15 +65,27 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
 
   return (
     <QuizShell index={session.index} total={session.total}>
-      <div className="flex flex-1 flex-col gap-5">
-        <h1 className="text-center text-lg font-bold text-muted">{prompt}</h1>
+      <div className="flex flex-1 flex-col">
+        {/*
+          Když je v otázce vlajka, drží se středu a odpovědi zůstávají dole
+          na dosah palce. Když vlajka v otázce není (Opačně, Dvojčata), je
+          zadání nahoře a prostor dostanou nabízené vlajky.
+        */}
+        <div
+          className={`flex flex-col gap-6 py-4 ${
+            showsFlagInQuestion ? 'flex-1 justify-center' : ''
+          }`}
+        >
+          <h1 className="display text-center text-xl text-muted">{prompt}</h1>
 
-        {showsFlagInQuestion ? (
-          <div key={question.code} className="animate-pop-in flex justify-center py-2">
-            <FlagImage code={question.code} size="xl" />
-          </div>
-        ) : null}
+          {showsFlagInQuestion ? (
+            <div key={question.code} className="animate-pop-in flex justify-center">
+              <FlagImage code={question.code} size="xl" />
+            </div>
+          ) : null}
+        </div>
 
+        <div className={`flex flex-col gap-5 ${showsFlagInQuestion ? '' : 'flex-1'}`}>
         {question.kind === 'pickCountry' || question.kind === 'pickFlag' ? (
           <OptionGrid
             options={question.options}
@@ -103,6 +117,7 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
         {session.feedback ? (
           <FeedbackPanel feedback={session.feedback} onNext={session.next} />
         ) : null}
+        </div>
       </div>
     </QuizShell>
   );

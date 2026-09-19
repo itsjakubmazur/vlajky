@@ -85,4 +85,6 @@ export interface Country {
   iso3: string | null;
   /** ISO 3166-1 numeric – napojení na polygony mapy světa. */
   numeric: string | null;
+  /** Výrazná barva z vlajky; rozhraní jí vlajku podsvítí. Odvozeno ze SVG. */
+  accent: string;
 }

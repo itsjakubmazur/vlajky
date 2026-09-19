@@ -3,7 +3,37 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { cs } from '@/i18n/cs';
-import { ProgressBar } from '@/components/ui';
+
+/**
+ * Ukazatel postupu je poskládaný z dílků – dítě na první pohled vidí,
+ * kolik otázek ještě zbývá. U dlouhých sezení by dílky byly moc drobné,
+ * tam se z nich stane obyčejný pruh.
+ */
+function Steps({ index, total }: { index: number; total: number }) {
+  if (total > 20) {
+    const pct = total > 0 ? Math.min(100, (index / total) * 100) : 0;
+    return (
+      <div className="h-1.5 w-full overflow-hidden rounded-pill bg-white/10">
+        <div
+          className="h-full rounded-pill bg-gradient-to-r from-mint-deep to-mint transition-[width] duration-500"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    );
+  }
+  return (
+    <div className="flex gap-1">
+      {Array.from({ length: total }, (_, i) => (
+        <span
+          key={i}
+          className={`h-1.5 flex-1 rounded-pill transition-colors duration-300 ${
+            i < index ? 'bg-mint' : i === index ? 'bg-mint/45' : 'bg-white/10'
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
 
 export function QuizShell({
   index,
@@ -16,23 +46,26 @@ export function QuizShell({
 }) {
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="sticky top-0 z-10 border-b border-line bg-bg/90 px-4 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-xl items-center gap-3">
+      <header
+        className="sticky z-20 px-4 py-3"
+        style={{ top: 'env(safe-area-inset-top, 0px)' }}
+      >
+        <div className="glass mx-auto flex max-w-xl items-center gap-4 rounded-pill py-2 pl-2 pr-4">
           <Link
             href="/"
-            className="touch-target -ml-2 inline-flex items-center rounded-xl px-2 text-sm font-semibold text-muted"
+            className="touch-target inline-flex items-center rounded-pill px-4 text-sm font-extrabold text-muted transition-colors hover:text-ink"
           >
             {cs.quiz.quit}
           </Link>
           <div className="flex-1">
-            <ProgressBar value={index} total={total} />
+            <Steps index={index} total={total} />
           </div>
-          <span className="w-12 text-right text-sm font-semibold tabular-nums text-muted">
+          <span className="text-sm font-extrabold tabular-nums text-faint">
             {cs.quiz.progress(Math.min(index + 1, total), total)}
           </span>
         </div>
       </header>
-      <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-5">{children}</main>
+      <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 pb-8 pt-2">{children}</main>
     </div>
   );
 }

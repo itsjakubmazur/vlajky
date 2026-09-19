@@ -10,10 +10,20 @@ import { APP_NAME } from '@/config/app';
 import { ROUTES, SLUG_BY_MODE } from '@/config/routes';
 import { cs } from '@/i18n/cs';
 import { useProgress } from '@/store/StoreProvider';
-import { ButtonLink, Card, ProgressBar } from '@/components/ui';
+import { ButtonLink, Eyebrow, Panel, ProgressRing } from '@/components/ui';
 import { MasteryDot } from '@/components/MasteryBadge';
+import { FlagImage } from '@/components/FlagImage';
 
-const MODE_ORDER = ['classic', 'reverse', 'typing', 'twins'] as const;
+/**
+ * Každý režim se představí skutečnými vlajkami, ne ikonou – Dvojčata
+ * ukazují rovnou Čad a Rumunsko, na kterých je celý režim postavený.
+ */
+const MODE_CARDS = [
+  { mode: 'classic', flags: ['jp'] },
+  { mode: 'reverse', flags: ['se', 'br'] },
+  { mode: 'typing', flags: ['cz'] },
+  { mode: 'twins', flags: ['td', 'ro'] },
+] as const;
 
 export function HomeScreen() {
   const { ready, progress } = useProgress();
@@ -41,74 +51,98 @@ export function HomeScreen() {
   const placementTotal = placementOrder(pool).length;
 
   return (
-    <div className="mx-auto w-full max-w-xl px-4 py-6">
-      <header className="mb-6">
-        <h1 className="text-3xl font-extrabold tracking-tight">{APP_NAME}</h1>
-        <p className="text-muted">{cs.sets.worldDesc}</p>
+    <div className="mx-auto w-full max-w-xl px-4 pb-10 pt-8">
+      <header className="mb-6 flex items-baseline justify-between gap-3">
+        <h1 className="display text-4xl">{APP_NAME}</h1>
+        {progress.meta.streakDays > 1 ? (
+          <span className="glass-thin rounded-pill px-3 py-1.5 text-xs font-extrabold text-gold">
+            {cs.home.streak(progress.meta.streakDays)}
+          </span>
+        ) : null}
       </header>
 
-      {ready ? (
-        <Card className="mb-4">
-          <div className="mb-2 flex items-baseline justify-between">
-            <span className="font-semibold">{cs.album.title}</span>
-            <span className="text-sm text-muted">
-              {cs.album.collected(stats.collected, pool.length)}
+      <div className="stagger flex flex-col gap-3">
+        <Panel raised className="flex items-center gap-5">
+          <ProgressRing value={stats.collected} total={pool.length}>
+            <span className="display text-2xl leading-none tabular-nums">
+              {ready ? stats.collected : '–'}
             </span>
-          </div>
-          <ProgressBar value={stats.collected} total={pool.length} />
-          <div className="mt-3 flex items-center gap-4 text-sm text-muted">
-            <span className="inline-flex items-center gap-1.5">
+            <span className="text-[0.65rem] font-bold tabular-nums text-faint">
+              z {pool.length}
+            </span>
+          </ProgressRing>
+          <div className="min-w-0 flex-1">
+            <Eyebrow>{cs.home.collectedLabel}</Eyebrow>
+            <p className="display mt-0.5 text-xl">{cs.album.title}</p>
+            <p className="mt-2 inline-flex items-center gap-2 text-sm font-bold text-gold">
               <MasteryDot mastery="gold" />
-              {stats.gold}
-            </span>
-            {progress.meta.streakDays > 1 ? (
-              <span className="ml-auto font-semibold text-brand">
-                {progress.meta.streakDays}&nbsp;🔥
-              </span>
+              <span className="tabular-nums">{stats.gold}</span>
+              <span className="font-semibold text-faint">{cs.home.goldCount}</span>
+            </p>
+          </div>
+        </Panel>
+
+        {!progress.meta.placementDone ? (
+          <Panel className="border-mint/25">
+            <Eyebrow>{cs.modes.placement.name}</Eyebrow>
+            <p className="mb-4 mt-1.5 text-sm leading-snug text-muted">
+              {progress.meta.placementIndex > 0
+                ? cs.placement.batchDone(progress.meta.placementIndex, placementTotal)
+                : cs.home.placementHint}
+            </p>
+            <ButtonLink href={ROUTES.placement} variant="secondary" className="w-full">
+              {progress.meta.placementIndex > 0 ? cs.placement.resume : cs.common.continue}
+            </ButtonLink>
+          </Panel>
+        ) : null}
+
+        <Panel raised>
+          <div className="mb-1.5 flex items-baseline justify-between gap-3">
+            <Eyebrow>{cs.home.todayLabel}</Eyebrow>
+            {stats.due > 0 ? (
+              <span className="display text-sm text-mint tabular-nums">{stats.due}</span>
             ) : null}
           </div>
-        </Card>
-      ) : null}
-
-      {!progress.meta.placementDone ? (
-        <Card className="mb-4 border-brand/30 bg-brand-soft">
-          <h2 className="font-bold">{cs.modes.placement.name}</h2>
-          <p className="mb-3 mt-1 text-sm text-muted">
-            {progress.meta.placementIndex > 0
-              ? cs.placement.batchDone(progress.meta.placementIndex, placementTotal)
-              : cs.home.placementHint}
+          <p className="display text-xl">{cs.modes.review.name}</p>
+          <p className="mb-4 mt-1 text-sm leading-snug text-muted">
+            {stats.due > 0 ? cs.home.reviewDue(stats.due) : cs.home.reviewNoneDue}
           </p>
-          <ButtonLink href={ROUTES.placement} className="w-full">
-            {progress.meta.placementIndex > 0 ? cs.placement.resume : cs.common.continue}
+          <ButtonLink href={ROUTES.play(SLUG_BY_MODE.review)} className="w-full">
+            {cs.home.play}
           </ButtonLink>
-        </Card>
-      ) : null}
+        </Panel>
+      </div>
 
-      <Card className="mb-6 border-brand/25">
-        <h2 className="font-bold">{cs.modes.review.name}</h2>
-        <p className="mb-3 mt-1 text-sm text-muted">
-          {stats.due > 0 ? cs.home.reviewDue(stats.due) : cs.home.reviewNoneDue}
-        </p>
-        <ButtonLink href={ROUTES.play(SLUG_BY_MODE.review)} className="w-full">
-          {cs.home.play}
-        </ButtonLink>
-      </Card>
-
-      <h2 className="mb-3 font-bold text-muted">{cs.home.modes}</h2>
-      <div className="mb-6 grid gap-3">
-        {MODE_ORDER.map((mode) => (
+      <h2 className="eyebrow mb-3 mt-7">{cs.home.modes}</h2>
+      <div className="stagger flex flex-col gap-2.5">
+        {MODE_CARDS.map(({ mode, flags }) => (
           <Link
             key={mode}
             href={ROUTES.play(SLUG_BY_MODE[mode])}
-            className="touch-target flex flex-col justify-center rounded-xl2 border border-line bg-surface px-4 py-3 transition-colors hover:border-brand/40"
+            className="glass touch-target flex items-center gap-4 rounded-glass px-4 py-3 transition-[border-color,transform] duration-200 hover:border-white/25 active:scale-[0.99]"
           >
-            <span className="text-lg font-bold">{cs.modes[mode].name}</span>
-            <span className="text-sm text-muted">{cs.modes[mode].desc}</span>
+            <span className="flex h-11 w-[4.5rem] shrink-0 items-center justify-center">
+              {flags.map((code, i) => (
+                <span
+                  key={code}
+                  className="block"
+                  style={{ marginLeft: i === 0 ? 0 : -14, transform: `rotate(${i === 0 ? -4 : 5}deg)` }}
+                >
+                  <FlagImage code={code} size="xs" glow={false} />
+                </span>
+              ))}
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="display block text-lg leading-tight">{cs.modes[mode].name}</span>
+              <span className="mt-0.5 block text-[0.78rem] leading-snug text-faint">
+                {cs.modes[mode].desc}
+              </span>
+            </span>
           </Link>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="mt-7 grid grid-cols-2 gap-2.5">
         <ButtonLink href={ROUTES.album} variant="secondary">
           {cs.home.album}
         </ButtonLink>
