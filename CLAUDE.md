@@ -86,9 +86,31 @@ všechno ostatní: *vlajky jsou jediná sytá barva na obrazovce, rozhraní je s
   a vlajky přestanou svítit. Kdyby ho někdo chtěl, všechno jsou tokeny
   v `@theme`, takže je to práce na jednom bloku – ale je to změna identity,
   ne přepínač.
-- **Pohyb střídmě:** nástup panelů po řadě (`stagger`), přejezd světla po
-  správné odpovědi, roztřesení po chybě, pulz hala u zlaté vlajky. Všechno
-  respektuje `prefers-reduced-motion`.
+- **Pohyb střídmě:** přechod mezi obrazovkami (`PageTransition`), nástup
+  panelů a nabídky po řadě (`stagger`), odhalení vlajky v otázce
+  (`animate-flag-reveal`), přejezd světla po správné odpovědi, roztřesení po
+  chybě, pulz hala u zlaté vlajky a napočítání výsledku (`useCountUp`).
+  Všechno respektuje `prefers-reduced-motion`.
+- **Líné načítání:** `FlagImage` má `loading="lazy"` všude kromě vlajek
+  v otázce (`priority`). Album má navíc `content-visibility: auto`, takže
+  z 197 dlaždic se opravdu načte jen to, co je vidět (ověřeno: 36).
+
+## Rozvržení na mobilu
+
+Obrazovka kvízu má **pevnou výšku a roluje se jen obsah pod hlavičkou**
+(`QuizShell`). Dřív byla hlavička `sticky` nad rolující se stránkou a na
+iPhonu se přes ni po pár pixelech posunu schoval nadpis otázky.
+
+- výška je v **`svh`**, ne `dvh` – jinak se rozvržení přepočítá, když vyjede
+  klávesnice, a obraz „poskočí“
+- `main` je sám sloupcový flex; procentní výška by v rolovacím kontejneru
+  nefungovala
+- **vstupy mají minimálně 16 px** (pravidlo ve vrstvě `base`), jinak Safari
+  na iPhonu při zaostření stránku přizoomuje
+- po zaostření vstupu se pole odroluje na střed, až když klávesnice vyjede
+- dvě rozvržení otázky: je-li v ní vlajka, drží střed a odpovědi jsou dole
+  u palce; když v ní vlajka není, tvoří zadání a nabídka jednu skupinu
+  uprostřed
 
 ## Konvence
 

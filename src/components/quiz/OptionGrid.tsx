@@ -22,7 +22,7 @@ function state(code: string, correctCode: string, chosen: string | null) {
 
 export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: OptionGridProps) {
   return (
-    <div className={`grid gap-2.5 ${asFlags ? 'h-full grid-cols-2 pb-2' : 'grid-cols-1'}`}>
+    <div className={`stagger grid gap-2.5 ${asFlags ? 'grid-cols-2' : 'grid-cols-1'}`}>
       {options.map((code) => {
         const country = requireCountry(code);
         const revealed = chosen !== null && code === correctCode;
@@ -46,7 +46,7 @@ export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: 
               />
             ) : null}
             {asFlags ? (
-              <FlagImage code={code} size="lg" />
+              <FlagImage code={code} fluid priority />
             ) : (
               <span className="display w-full text-left text-[1.15rem] leading-tight">
                 {country.nameCs}

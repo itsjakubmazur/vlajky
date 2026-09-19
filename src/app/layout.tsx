@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { APP_NAME, APP_TAGLINE } from '@/config/app';
 import { ProgressProvider } from '@/store/StoreProvider';
+import { PageTransition } from '@/components/PageTransition';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -17,13 +18,17 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
+  // Klávesnice zmenší rozvržení místo aby ho překryla (kde to prohlížeč umí).
+  interactiveWidget: 'resizes-content',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="cs">
       <body className="min-h-dvh antialiased">
-        <ProgressProvider>{children}</ProgressProvider>
+        <ProgressProvider>
+          <PageTransition>{children}</PageTransition>
+        </ProgressProvider>
       </body>
     </html>
   );

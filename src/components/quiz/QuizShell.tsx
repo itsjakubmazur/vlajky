@@ -35,6 +35,14 @@ function Steps({ index, total }: { index: number; total: number }) {
   );
 }
 
+/**
+ * Obrazovka kvízu má pevnou výšku a roluje se jen obsah pod hlavičkou.
+ *
+ * Dřív byla hlavička `sticky` nad rolující se stránkou – na iPhonu se přes ni
+ * po pár pixelech posunu schoval nadpis otázky. Takhle se hlavička hýbat
+ * nemůže. Výška je v `svh` (nejmenší viewport), aby se rozvržení nepřepočítalo,
+ * když vyjede klávesnice.
+ */
 export function QuizShell({
   index,
   total,
@@ -45,11 +53,11 @@ export function QuizShell({
   children: ReactNode;
 }) {
   return (
-    <div className="flex min-h-dvh flex-col">
-      <header
-        className="sticky z-20 px-4 py-3"
-        style={{ top: 'env(safe-area-inset-top, 0px)' }}
-      >
+    <div
+      className="flex h-[100svh] flex-col overflow-hidden"
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    >
+      <header className="shrink-0 px-4 py-3">
         <div className="glass mx-auto flex max-w-xl items-center gap-4 rounded-pill py-2 pl-2 pr-4">
           <Link
             href="/"
@@ -65,7 +73,17 @@ export function QuizShell({
           </span>
         </div>
       </header>
-      <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 pb-8 pt-2">{children}</main>
+      {/*
+        `main` je sám sloupcový flex – teprve tak se obsah uvnitř roztáhne do
+        výšky, a když je delší, kontejner se odroluje. Procentní výška by
+        v rolovacím kontejneru nefungovala.
+      */}
+      <main
+        className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-4"
+        style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
+      >
+        <div className="mx-auto flex w-full max-w-xl flex-1 flex-col">{children}</div>
+      </main>
     </div>
   );
 }

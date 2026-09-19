@@ -4,6 +4,7 @@ import { requireCountry } from '@/domain/countries';
 import { cs } from '@/i18n/cs';
 import { ROUTES } from '@/config/routes';
 import { Button, ButtonLink, Eyebrow, Panel, ProgressRing } from '@/components/ui';
+import { useCountUp } from '@/components/useCountUp';
 import { FlagImage } from '@/components/FlagImage';
 import { Confetti } from '@/components/Confetti';
 
@@ -27,13 +28,15 @@ export function ResultScreen({
   goldEarned: string[];
   onAgain: () => void;
 }) {
+  const shown = useCountUp(correct);
+
   return (
-    <div className="stagger flex flex-col gap-4 py-8">
+    <div className="stagger flex flex-col gap-4">
       {goldEarned.length > 0 ? <Confetti seed={goldEarned.length} /> : null}
 
       <Panel raised className="flex items-center gap-5">
-        <ProgressRing value={correct} total={total} size={104}>
-          <span className="display text-3xl leading-none tabular-nums">{correct}</span>
+        <ProgressRing value={shown} total={total} size={104}>
+          <span className="display text-3xl leading-none tabular-nums">{shown}</span>
           <span className="text-xs font-bold tabular-nums text-faint">z {total}</span>
         </ProgressRing>
         <div className="min-w-0">
@@ -48,7 +51,7 @@ export function ResultScreen({
           <div className="mt-3 flex flex-wrap items-end justify-center gap-4">
             {goldEarned.map((code) => (
               <span key={code} className="flex w-20 flex-col items-center gap-2">
-                <FlagImage code={code} size="md" glow pulse />
+                <FlagImage code={code} size="md" glow priority pulse />
                 <span className="text-center text-[0.7rem] font-bold leading-tight text-gold">
                   {requireCountry(code).nameCs}
                 </span>

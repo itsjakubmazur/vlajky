@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import type { Country } from '@/domain/types';
 import { suggestCountries } from '@/domain/answer/suggest';
 import { cs } from '@/i18n/cs';
@@ -20,6 +20,7 @@ export function TypingInput({
   onSkip: () => void;
 }) {
   const [value, setValue] = useState('');
+  const field = useRef<HTMLInputElement>(null);
 
   const suggestions = useMemo(
     () => (disabled ? [] : suggestCountries(value, pool)),
@@ -42,6 +43,7 @@ export function TypingInput({
         className="flex gap-2"
       >
         <input
+          ref={field}
           id="odpoved"
           value={value}
           onChange={(event) => setValue(event.target.value)}
@@ -53,7 +55,11 @@ export function TypingInput({
           enterKeyHint="done"
           placeholder={cs.quiz.inputPlaceholder}
           aria-label={cs.quiz.typeCountry}
-          className="glass touch-target display min-w-0 flex-1 rounded-pill px-5 text-lg text-ink outline-none placeholder:font-sans placeholder:font-semibold placeholder:text-faint focus:border-mint/60 disabled:opacity-50"
+          onFocus={() => {
+            // iOS posune obsah až po vyjetí klávesnice – počkáme si na ni.
+            setTimeout(() => field.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 300);
+          }}
+          className="glass touch-target display min-w-0 flex-1 rounded-pill px-5 text-[1.0625rem] text-ink outline-none placeholder:font-sans placeholder:font-semibold placeholder:text-faint focus:border-mint/60 disabled:opacity-50"
         />
         <Button type="submit" disabled={disabled || value.trim().length === 0} className="px-5">
           {cs.quiz.check}

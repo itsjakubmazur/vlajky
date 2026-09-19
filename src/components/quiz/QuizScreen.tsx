@@ -33,7 +33,13 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
 
   if (session.phase === 'done') {
     return (
-      <div className="mx-auto w-full max-w-xl px-4">
+      <div
+        className="mx-auto flex min-h-[100svh] w-full max-w-xl flex-col justify-center px-4"
+        style={{
+          paddingTop: 'calc(1.5rem + env(safe-area-inset-top, 0px))',
+          paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))',
+        }}
+      >
         <ResultScreen
           correct={session.correctCount}
           total={session.total}
@@ -65,59 +71,61 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
 
   return (
     <QuizShell index={session.index} total={session.total}>
-      <div className="flex flex-1 flex-col">
-        {/*
-          Když je v otázce vlajka, drží se středu a odpovědi zůstávají dole
-          na dosah palce. Když vlajka v otázce není (Opačně, Dvojčata), je
-          zadání nahoře a prostor dostanou nabízené vlajky.
-        */}
-        <div
-          className={`flex flex-col gap-6 py-4 ${
-            showsFlagInQuestion ? 'flex-1 justify-center' : ''
-          }`}
-        >
-          <h1 className="display text-center text-xl text-muted">{prompt}</h1>
+      {/*
+        Dvě rozvržení podle toho, co je v otázce.
 
-          {showsFlagInQuestion ? (
-            <div key={question.code} className="animate-pop-in flex justify-center">
-              <FlagImage code={question.code} size="xl" />
+        Je-li v otázce vlajka (Klasika, Napiš), drží se středu a odpovědi
+        zůstávají dole na dosah palce. Když v otázce vlajka není (Opačně,
+        Dvojčata), tvoří zadání a nabídka jednu skupinu uprostřed – nabízené
+        vlajky jsou tam to hlavní a nemá smysl je trhat od otázky.
+      */}
+      <div
+        className={`flex flex-1 flex-col ${showsFlagInQuestion ? '' : 'justify-center gap-6 py-4'}`}
+      >
+        {showsFlagInQuestion ? (
+          <div className="flex flex-1 flex-col justify-center gap-6 py-4">
+            <h1 className="display text-center text-xl text-muted">{prompt}</h1>
+            <div key={question.code} className="animate-flag-reveal flex justify-center">
+              <FlagImage code={question.code} size="xl" priority />
             </div>
+          </div>
+        ) : (
+          <h1 className="display text-center text-xl text-muted">{prompt}</h1>
+        )}
+
+        <div key={`odpovedi-${session.index}`} className="flex flex-col gap-5">
+          {question.kind === 'pickCountry' || question.kind === 'pickFlag' ? (
+            <OptionGrid
+              options={question.options}
+              asFlags={question.kind === 'pickFlag'}
+              correctCode={question.code}
+              chosen={chosen}
+              onChoose={session.answerWithCode}
+            />
           ) : null}
-        </div>
 
-        <div className={`flex flex-col gap-5 ${showsFlagInQuestion ? '' : 'flex-1'}`}>
-        {question.kind === 'pickCountry' || question.kind === 'pickFlag' ? (
-          <OptionGrid
-            options={question.options}
-            asFlags={question.kind === 'pickFlag'}
-            correctCode={question.code}
-            chosen={chosen}
-            onChoose={session.answerWithCode}
-          />
-        ) : null}
+          {question.kind === 'twins' ? (
+            <TwinsQuestion
+              options={question.options}
+              correctCode={question.code}
+              chosen={chosen}
+              onChoose={session.answerWithCode}
+            />
+          ) : null}
 
-        {question.kind === 'twins' ? (
-          <TwinsQuestion
-            options={question.options}
-            correctCode={question.code}
-            chosen={chosen}
-            onChoose={session.answerWithCode}
-          />
-        ) : null}
+          {question.kind === 'type' ? (
+            <TypingInput
+              pool={pool}
+              disabled={session.phase === 'feedback'}
+              hint={session.hint}
+              onSubmit={session.answerWithText}
+              onSkip={session.skip}
+            />
+          ) : null}
 
-        {question.kind === 'type' ? (
-          <TypingInput
-            pool={pool}
-            disabled={session.phase === 'feedback'}
-            hint={session.hint}
-            onSubmit={session.answerWithText}
-            onSkip={session.skip}
-          />
-        ) : null}
-
-        {session.feedback ? (
-          <FeedbackPanel feedback={session.feedback} onNext={session.next} />
-        ) : null}
+          {session.feedback ? (
+            <FeedbackPanel feedback={session.feedback} onNext={session.next} />
+          ) : null}
         </div>
       </div>
     </QuizShell>

@@ -52,7 +52,7 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
       {!correct ? (
         <div className="flex flex-col items-center gap-3 rounded-glass bg-white/5 p-4">
           <Eyebrow>{cs.quiz.correctAnswerIs}</Eyebrow>
-          <FlagImage code={country.code} size="xl" pulse />
+          <FlagImage code={country.code} size="xl" priority pulse />
           <span className="display text-xl">{country.nameCs}</span>
           {wroteOtherCountry ? (
             <span className="text-center text-sm text-faint">

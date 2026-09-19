@@ -3,6 +3,10 @@
 import { requireCountry } from '@/domain/countries';
 import { FlagImage } from '@/components/FlagImage';
 
+/**
+ * Dvě zaměnitelné vlajky vedle sebe. Vlajky jsou schválně co největší –
+ * celý režim stojí na tom, že se dají porovnat detaily.
+ */
 export function TwinsQuestion({
   options,
   correctCode,
@@ -17,7 +21,7 @@ export function TwinsQuestion({
   const answered = chosen !== null;
 
   return (
-    <div className="grid h-full grid-cols-2 gap-3 pb-2">
+    <div className="stagger grid grid-cols-2 gap-3">
       {options.map((code) => {
         const isCorrect = code === correctCode;
         const look = !answered
@@ -33,13 +37,11 @@ export function TwinsQuestion({
             type="button"
             disabled={answered}
             onClick={() => onChoose(code)}
-            className={`touch-target flex h-full min-h-44 flex-col items-center justify-center gap-4 rounded-glass border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${look}`}
+            className={`flex flex-col items-center justify-center gap-3 rounded-glass border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${look}`}
           >
-            <FlagImage code={code} size="lg" pulse={answered && isCorrect} />
+            <FlagImage code={code} fluid priority pulse={answered && isCorrect} />
             {answered ? (
-              <span
-                className={`display text-sm ${isCorrect ? 'text-mint' : 'text-muted'}`}
-              >
+              <span className={`display text-sm ${isCorrect ? 'text-mint' : 'text-muted'}`}>
                 {requireCountry(code).nameCs}
               </span>
             ) : null}

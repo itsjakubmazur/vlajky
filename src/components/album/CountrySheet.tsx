@@ -35,7 +35,7 @@ export function CountrySheet({
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex flex-col items-center gap-4">
-          <FlagImage code={code} size="xl" />
+          <FlagImage code={code} size="xl" priority />
           <div className="text-center">
             <h2 className="display text-2xl">{country.nameCs}</h2>
             {country.nameCsOfficial ? (

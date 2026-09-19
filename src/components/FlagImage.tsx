@@ -11,6 +11,8 @@ interface FlagImageProps {
   /** Vyšisovaná „nezískaná samolepka“ v albu. */
   muted?: boolean;
   pulse?: boolean;
+  /** Vlajka v otázce se načítá hned, zbytek až když je vidět. */
+  priority?: boolean;
   className?: string;
 }
 
@@ -28,6 +30,7 @@ export function FlagImage({
   glow,
   muted = false,
   pulse = false,
+  priority = false,
   className = '',
 }: FlagImageProps) {
   const country = getCountry(code);
@@ -63,6 +66,9 @@ export function FlagImage({
         alt=""
         aria-hidden="true"
         draggable={false}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding={priority ? 'sync' : 'async'}
+        fetchPriority={priority ? 'high' : 'auto'}
         style={style}
         className={`max-w-full object-contain ${frame} ${muted ? 'opacity-30 grayscale' : ''}`}
       />

@@ -134,7 +134,7 @@ export function AlbumScreen() {
       ) : shown.length === 0 ? (
         <p className="py-14 text-center text-sm text-faint">{cs.album.empty}</p>
       ) : (
-        <ul className="grid grid-cols-3 gap-2.5 sm:grid-cols-4">
+        <ul className="tiles grid grid-cols-3 gap-2.5 sm:grid-cols-4">
           {shown.map((country) => {
             const mastery = masteryOf(country.code);
             const earned = mastery !== 'new';

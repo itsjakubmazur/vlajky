@@ -104,6 +104,18 @@ body::before {
   }
 }
 
+/*
+ * Pod 16 px Safari na iPhonu při zaostření stránku přizoomuje.
+ * Patří to do vrstvy `base`, jinak by to přebilo i záměrně větší písmo.
+ */
+@layer base {
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1em);
+  }
+}
+
 ::selection {
   background: var(--color-mint);
   color: var(--color-abyss);
@@ -216,6 +228,41 @@ body::before {
   }
 }
 
+@keyframes flag-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(10px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tile-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes halo-pulse {
   0%, 100% { opacity: 0.55; transform: scale(1); }
   50% { opacity: 0.9; transform: scale(1.12); }
@@ -233,6 +280,33 @@ body::before {
 .animate-halo {
   animation: halo-pulse 1.6s ease-in-out 2;
 }
+.animate-flag-reveal {
+  animation: flag-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.animate-page-in {
+  animation: page-in 380ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/*
+ * Dlaždice alba. Nabíhají po řadě, ale zpoždění se po chvíli zastaví –
+ * u dvou set vlajek by jinak poslední naskočila za minutu.
+ */
+.tiles > * {
+  animation: tile-in 340ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  /* Mimo obraz se dlaždice vůbec nevykresluje – u 197 vlajek je to znát. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 118px;
+}
+.tiles > *:nth-child(1) { animation-delay: 0ms; }
+.tiles > *:nth-child(2) { animation-delay: 25ms; }
+.tiles > *:nth-child(3) { animation-delay: 50ms; }
+.tiles > *:nth-child(4) { animation-delay: 75ms; }
+.tiles > *:nth-child(5) { animation-delay: 100ms; }
+.tiles > *:nth-child(6) { animation-delay: 125ms; }
+.tiles > *:nth-child(7) { animation-delay: 150ms; }
+.tiles > *:nth-child(8) { animation-delay: 175ms; }
+.tiles > *:nth-child(9) { animation-delay: 200ms; }
+.tiles > *:nth-child(n + 10) { animation-delay: 225ms; }
 
 /* Nástup po řadě – karty na domovské obrazovce. */
 .stagger > * {
@@ -253,7 +327,10 @@ body::before {
   .animate-pop-in,
   .animate-shake,
   .animate-halo,
-  .stagger > * {
+  .animate-flag-reveal,
+  .animate-page-in,
+  .stagger > *,
+  .tiles > * {
     animation: none;
   }
 }
