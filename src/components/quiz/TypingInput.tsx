@@ -9,11 +9,13 @@ import { Button } from '@/components/ui';
 export function TypingInput({
   pool,
   disabled,
+  hint,
   onSubmit,
   onSkip,
 }: {
   pool: readonly Country[];
   disabled: boolean;
+  hint: string | null;
   onSubmit: (text: string) => void;
   onSkip: () => void;
 }) {
@@ -57,6 +59,10 @@ export function TypingInput({
           {cs.quiz.check}
         </Button>
       </form>
+
+      {hint ? (
+        <p className="glass-thin rounded-glass px-4 py-3 text-sm font-bold text-gold">{hint}</p>
+      ) : null}
 
       {suggestions.length > 0 ? (
         <ul className="flex flex-col gap-2">

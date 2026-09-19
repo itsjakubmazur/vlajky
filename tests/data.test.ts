@@ -73,6 +73,26 @@ describe('data zemí', () => {
     expect(ratio('np')).toBeLessThan(1); // Nepál je vyšší než širší
   });
 
+  it('ručně opravené vlajky mají svůj skutečný poměr stran', () => {
+    const ratio = (code: string) => {
+      const c = getCountry(code)!;
+      return c.ratio[0] / c.ratio[1];
+    };
+    expect(ratio('sy')).toBeCloseTo(3 / 2, 2); // Sýrie 2:3
+    expect(ratio('kg')).toBeCloseTo(5 / 3, 2); // Kyrgyzstán 3:5
+    expect(ratio('dm')).toBeCloseTo(2, 2); // Dominika 1:2
+  });
+
+  it('hlavní města jsou ta úřední', () => {
+    const capital = (code: string) => getCountry(code)!.capitalCs;
+    expect(capital('lk')).toBe('Srí Džajavardanapura Kotte');
+    expect(capital('bo')).toBe('Sucre');
+    expect(capital('bj')).toBe('Porto-Novo');
+    expect(capital('ci')).toBe('Yamoussoukro');
+    expect(capital('tz')).toBe('Dodoma');
+    expect(capital('bi')).toBe('Gitega');
+  });
+
   it('vazby zaměnitelných vlajek jsou oboustranné a existující', () => {
     for (const c of ALL_COUNTRIES) {
       for (const other of c.similar) {

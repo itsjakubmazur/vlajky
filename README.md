@@ -59,6 +59,23 @@ Build ověří, že ke každému kódu existuje SVG, že jsou vazby zaměniteln�
 vlajek oboustranné a že žádné dvě země nemají shodný normalizovaný název.
 Když něco nesedí, skončí chybou a řekne co.
 
+## Jak opravit nebo vyměnit vlajku
+
+Vlajky se berou z balíčku `svg-country-flags`, který se ale od roku 2021
+neaktualizuje. Když si země vlajku změní:
+
+1. Ulož správné SVG jako `data/flags-override/<kód>.svg` (kód malými písmeny,
+   např. `af.svg`). Soubor musí mít `viewBox` ve skutečném poměru stran –
+   odtud se poměr odečítá.
+2. Spusť `npm run data`.
+
+Soubor z `data/flags-override/` má přednost před balíčkem. Složka se commituje,
+takže build nepotřebuje síť.
+
+Pro složitější případy je tu `scripts/make-overrides.ts`, který pole vlajky
+nakreslí ve správném poměru a znak přenese z udržovaného balíčku `flag-icons`.
+Takhle jsou opravené Sýrie, Kyrgyzstán a Dominika.
+
 ## Kontrola dat
 
 `REVIEW.md` je generovaná tabulka všech českých názvů, hlavních měst

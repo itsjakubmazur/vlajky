@@ -8,6 +8,7 @@ import { buildSession, placementOrder } from '@/domain/quiz/session';
 import { buildAnswerIndex, checkAnswer, type AnswerResult } from '@/domain/answer/match';
 import { createRng } from '@/domain/rng';
 import { PLACEMENT_BATCH } from '@/config/app';
+import { cs } from '@/i18n/cs';
 import { useProgress, type AnswerOutcome } from '@/store/StoreProvider';
 
 /** Rejstřík se staví jednou nad všemi zeměmi – viz komentář v match.ts. */
@@ -32,6 +33,8 @@ export interface QuizSession {
   total: number;
   correctCount: number;
   feedback: Feedback | null;
+  /** Nápověda, když odpověď platí pro víc zemí. Nepočítá se jako chyba. */
+  hint: string | null;
   goldEarned: string[];
   answerWithCode: (code: string) => void;
   answerWithText: (text: string) => void;
@@ -47,6 +50,7 @@ export function useQuizSession(mode: QuizModeId): QuizSession {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [index, setIndex] = useState(0);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [hint, setHint] = useState<string | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [goldEarned, setGoldEarned] = useState<string[]>([]);
   const [nonce, setNonce] = useState(0);
@@ -85,6 +89,7 @@ export function useQuizSession(mode: QuizModeId): QuizSession {
     );
     setIndex(0);
     setFeedback(null);
+    setHint(null);
     setCorrectCount(0);
     setGoldEarned([]);
     askedAt.current = Date.now();
@@ -128,7 +133,14 @@ export function useQuizSession(mode: QuizModeId): QuizSession {
   const answerWithText = useCallback(
     (text: string) => {
       if (!question || feedback) return;
-      void submit(checkAnswer(text, question.code, answerIndex), text, true);
+      const result = checkAnswer(text, question.code, answerIndex);
+      if (result.verdict === 'ambiguous') {
+        // Dvojznačná odpověď se vůbec nezapočítá – jen se doptáme.
+        setHint(cs.quiz.ambiguous);
+        return;
+      }
+      setHint(null);
+      void submit(result, text, true);
     },
     [question, feedback, submit],
   );
@@ -140,6 +152,7 @@ export function useQuizSession(mode: QuizModeId): QuizSession {
 
   const next = useCallback(() => {
     setFeedback(null);
+    setHint(null);
     askedAt.current = Date.now();
     setIndex((i) => i + 1);
 
@@ -167,6 +180,7 @@ export function useQuizSession(mode: QuizModeId): QuizSession {
     total: questions.length,
     correctCount,
     feedback,
+    hint,
     goldEarned,
     answerWithCode,
     answerWithText,

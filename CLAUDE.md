@@ -52,6 +52,8 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `data/countries.json` | GENEROVANÉ – needitovat |
 | `scripts/build-countries.ts` | sloučení + validace dat |
 | `scripts/flag-source.ts` | jediné místo, kde se řeší zdroj SVG |
+| `data/flags-override/` | ručně opravené vlajky – mají přednost před balíčkem |
+| `scripts/make-overrides.ts` | generátor těch oprav (spouští se ručně) |
 | `src/domain/answer/match.ts` | vyhodnocení napsané odpovědi |
 | `src/domain/quiz/` | distraktory, režimy, sestavení hry |
 | `src/domain/srs/` | FSRS, úrovně zvládnutí |
@@ -95,7 +97,8 @@ všechno ostatní: *vlajky jsou jediná sytá barva na obrazovce, rozhraní je s
 - **Název aplikace** je placeholder v `src/config/app.ts` (`APP_NAME`), syn ho
   teprve vymyslí. Nikde jinde se nepíše natvrdo.
 - **Fakta o vlajkách:** raději prázdné než vymyšlené. Když si nejsme jistí,
-  `funFact` se vynechá a záznam se objeví v REVIEW.md. Teď chybí u 24 vlajek.
+  `funFact` se vynechá a záznam se objeví v REVIEW.md. Teď chybí u 23 vlajek,
+  skoro samá závislá území.
 - **Commity:** conventional commits, česky, malé kroky.
 - **Po každé změně:** `npm run check`.
 - **Žádné externí požadavky za běhu** – ani fonty, ani analytika. Všechno je
@@ -112,6 +115,22 @@ kruh na plátně 4:3, takže zmáčknutím zpět do 3:2 by vznikla elipsa.
 pokrývá i `xk`, `tw`, `ps`, `va` a `gb-eng`. Poměr stran se odečítá z `viewBox`
 zdrojového souboru, takže není psaný z hlavy.
 
+**Zastaralé vlajky se opravují přes `data/flags-override/`.** Hlavní balíček
+`svg-country-flags` se od roku 2021 neaktualizuje, takže u zemí, které si
+mezitím vlajku změnily, má přednost soubor z téhle složky. Generuje je
+`scripts/make-overrides.ts`: pole vlajky (pruhy, kříž) se nakreslí ve
+skutečném poměru stran a složitý znak se přenese z udržovaného `flag-icons`
+rovnoměrným zvětšením kolem středu – znak je kruhový a vztažený k výšce,
+takže se tím nedeformuje. Výsledky jsou v repozitáři, build tedy nepotřebuje
+síť. Opravené: **Sýrie** (2024), **Kyrgyzstán** (2023), **Dominika**.
+
+**„Kongo“ se neuznává ani jedné zemi.** Je to v češtině dvojznačné slovo,
+takže odpověď dostane výsledek `ambiguous`: nepočítá se jako chyba, jen se
+aplikace doptá, která země to má být. Viz `AMBIGUOUS_ANSWERS` v `match.ts`.
+
+**Hlavní město = to úřední.** Bez ohledu na to, které město je větší nebo kde
+sídlí vláda. Proto Srí Džajavardanapura Kotte, ne Kolombo.
+
 **Zlato nejde proklikat.** Nejvyšší úroveň zvládnutí vyžaduje aspoň jednu
 správnou odpověď v režimu Napiš. Ze čtyř možností se dá trefit náhodou.
 
@@ -124,6 +143,8 @@ Niger je chyba, ne překlep – i kdyby byla vzdálenost malá. Viz `match.ts`.
 
 ## Co čeká na kontrolu
 
-`REVIEW.md` (generovaný) má 21 otevřených otázek – sporná hlavní města,
-dvojznačné názvy (Kongo) a dvě vlajky, které se v posledních letech změnily
-(Afghánistán, Sýrie) a zdrojový balíček má jejich starší podobu.
+`REVIEW.md` (generovaný) má **jednu** otevřenou otázku: **Afghánistán**.
+Aplikace ukazuje vlajku Islámské republiky (do roku 2021). Dnešní bílou vlajku
+s vyznáním víry nemá žádný dostupný balíček a arabská kaligrafie se nedá
+poctivě nakreslit zpaměti. Až se SVG sežene, stačí ho uložit jako
+`data/flags-override/af.svg` a spustit `npm run data`.

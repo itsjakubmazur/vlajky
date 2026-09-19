@@ -109,6 +109,7 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
           <TypingInput
             pool={pool}
             disabled={session.phase === 'feedback'}
+            hint={session.hint}
             onSubmit={session.answerWithText}
             onSkip={session.skip}
           />

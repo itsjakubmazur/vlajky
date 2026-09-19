@@ -14,8 +14,21 @@ import { join } from 'node:path';
 export const FLAG_SOURCE_DIR = join(process.cwd(), 'node_modules', 'svg-country-flags', 'svg');
 export const FLAG_SOURCE_NAME = 'svg-country-flags (public domain, zdroj Wikipedia)';
 
+/**
+ * Ruční opravy. Hlavní balíček se od roku 2021 neaktualizuje, takže u zemí,
+ * které si mezitím vlajku změnily, bere přednost soubor odtud.
+ * Generuje je `scripts/make-overrides.ts` a jsou v repozitáři.
+ */
+export const FLAG_OVERRIDE_DIR = join(process.cwd(), 'data', 'flags-override');
+
 export function flagPath(code: string): string {
-  return join(FLAG_SOURCE_DIR, `${code}.svg`);
+  const override = join(FLAG_OVERRIDE_DIR, `${code}.svg`);
+  return existsSync(override) ? override : join(FLAG_SOURCE_DIR, `${code}.svg`);
+}
+
+/** Je vlajka ručně opravená? Kvůli poznámce v REVIEW.md. */
+export function isOverridden(code: string): boolean {
+  return existsSync(join(FLAG_OVERRIDE_DIR, `${code}.svg`));
 }
 
 export function hasFlag(code: string): boolean {

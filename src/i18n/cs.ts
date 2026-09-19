@@ -50,6 +50,7 @@ export const cs = {
     wrong: 'Tahle byla těžká',
     correctAnswerIs: 'Správně je',
     youWrote: (country: string) => `Napsal jsi ${country}`,
+    ambiguous: 'Takhle se jmenujou dvě země. Která to má být?',
     difference: 'V čem se liší',
     quit: 'Ukončit',
     streak: (n: number) => `${n}× správně v řadě`,

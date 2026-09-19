@@ -26,7 +26,8 @@ export const similarGroups: string[][] = [
   ['is', 'no', 'dk', 'fi', 'se'],      // severské kříže
   ['dk', 'fo', 'ax'],                  // severské kříže (bonus)
   ['jo', 'ps', 'sd', 'kw', 'eh'],      // panarabské s trojúhelníkem u žerdi
-  ['ye', 'eg', 'iq', 'sy'],            // červeno-bílo-černé pruhy
+  ['ye', 'eg', 'iq'],                  // červeno-bílo-černé pruhy
+  // Sýrie sem patřila do roku 2024; nová vlajka je zeleno-bílo-černá.
   ['at', 'lv'],                        // červeno-bílo-červené vodorovné
   ['pe', 'ca'],                        // červeno-bílo-červené svislé
   ['lr', 'us', 'my'],                  // pruhy s kantonem

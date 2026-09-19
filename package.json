@@ -36,6 +36,7 @@
     "@types/topojson-specification": "^1.0.5",
     "eslint": "9.17.0",
     "eslint-config-next": "15.3.9",
+    "flag-icons": "^7.5.0",
     "i18n-iso-countries": "^7.14.0",
     "serwist": "9.5.12",
     "svg-country-flags": "1.2.10",

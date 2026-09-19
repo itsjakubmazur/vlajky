@@ -42,7 +42,12 @@ function table(rows: Country[]): string {
   return `${head}\n${body}`;
 }
 
-const openQuestions = all.filter((c) => c.needsReview.some((r) => !r.startsWith('Chybí zajímavost')));
+const isDecided = (note: string) => note.startsWith('ROZHODNUTO:');
+const isFactNote = (note: string) => note.startsWith('Chybí zajímavost');
+const openQuestions = all.filter((c) =>
+  c.needsReview.some((r) => !isFactNote(r) && !isDecided(r)),
+);
+const decided = all.filter((c) => c.needsReview.some(isDecided));
 const missingFacts = all.filter((c) => !c.funFact);
 
 const lines: string[] = [];
@@ -81,9 +86,24 @@ if (openQuestions.length === 0) {
   lines.push('_Žádné._');
 } else {
   for (const c of openQuestions) {
-    const notes = c.needsReview.filter((r) => !r.startsWith('Chybí zajímavost'));
+    const notes = c.needsReview.filter((r) => !isFactNote(r) && !isDecided(r));
     lines.push(`- **${c.nameCs}** (\`${c.code}\`)`);
     for (const n of notes) lines.push(`  - ${n}`);
+  }
+}
+lines.push('');
+
+lines.push('## Rozhodnutá sporná místa');
+lines.push('');
+lines.push('Tady už je rozhodnuto, zapsané jen pro paměť.');
+lines.push('');
+if (decided.length === 0) {
+  lines.push('_Žádná._');
+} else {
+  for (const c of decided) {
+    for (const note of c.needsReview.filter(isDecided)) {
+      lines.push(`- **${c.nameCs}** (\`${c.code}\`) – ${note.replace('ROZHODNUTO: ', '')}`);
+    }
   }
 }
 lines.push('');

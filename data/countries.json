@@ -80,7 +80,7 @@
       ],
       "accent": "#d32011",
       "needsReview": [
-        "OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Úřední název je proto v datech taky ten starší, aby si vlajka a název neodporovaly. Rozhodni, kterou verzi učit.",
+        "NEVYŘEŠENO: aplikace ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021). Dnešní bílá vlajka s vyznáním víry není v žádném dostupném balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Až seženeš SVG, stačí ho uložit jako data/flags-override/af.svg a spustit npm run data.",
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
       "iso3": "AFG",
@@ -469,15 +469,13 @@
         "de"
       ],
       "difficulty": 2,
-      "funFact": "Barvy belgické vlajky pochází z erbu Brabantska – zlatý lev na černém poli s červenými drápy.",
+      "funFact": "Belgická vlajka je skoro čtvercová – je jen o kousek širší, než vyšší.",
       "ratio": [
         450,
         390
       ],
       "accent": "#ed2939",
-      "needsReview": [
-        "Poměr stran: oficiálně 13:15, běžně se ale používá 2:3. Zdrojové SVG má 15:13."
-      ],
+      "needsReview": [],
       "iso3": "BEL",
       "numeric": "056"
     },
@@ -573,9 +571,7 @@
         300
       ],
       "accent": "#1eb53a",
-      "needsReview": [
-        "Hlavním městem je od roku 2019 Gitega, největším městem zůstává Bujumbura."
-      ],
+      "needsReview": [],
       "iso3": "BDI",
       "numeric": "108"
     },
@@ -598,9 +594,7 @@
         10
       ],
       "accent": "#e8112d",
-      "needsReview": [
-        "Úřední hlavní město je Porto-Novo, sídlem vlády je Cotonou."
-      ],
+      "needsReview": [],
       "iso3": "BEN",
       "numeric": "204"
     },
@@ -676,9 +670,7 @@
         198.438
       ],
       "accent": "#00702d",
-      "needsReview": [
-        "Ústavním hlavním městem je Sucre, sídlem vlády La Paz."
-      ],
+      "needsReview": [],
       "iso3": "BOL",
       "numeric": "068"
     },
@@ -900,7 +892,6 @@
       "nameCs": "Konžská republika",
       "nameCsOfficial": null,
       "aliases": [
-        "Kongo",
         "Kongo-Brazzaville"
       ],
       "capitalCs": "Brazzaville",
@@ -918,7 +909,7 @@
       ],
       "accent": "#009543",
       "needsReview": [
-        "Slovo Kongo je v češtině dvojznačné. Teď platí jako alias JEN pro Konžskou republiku (Brazzaville). Chceš to tak?"
+        "ROZHODNUTO: samotné „Kongo“ neuznáváme ani jedné zemi – aplikace se doptá, která to má být."
       ],
       "iso3": "COG",
       "numeric": "178"
@@ -972,9 +963,7 @@
         300
       ],
       "accent": "#009e60",
-      "needsReview": [
-        "Úřední hlavní město je Yamoussoukro, sídlem vlády je Abidžan."
-      ],
+      "needsReview": [],
       "iso3": "CIV",
       "numeric": "384"
     },
@@ -1229,7 +1218,7 @@
       ],
       "accent": "#4e5b31",
       "needsReview": [
-        "Zeměpisně leží v Asii, politicky patří k Evropě (EU). Zařazeno do Evropy."
+        "ROZHODNUTO: zeměpisně leží v Asii, politicky patří k Evropě (EU). Vedeme ho v Evropě."
       ],
       "iso3": "CYP",
       "numeric": "196"
@@ -1357,10 +1346,10 @@
       "difficulty": 5,
       "funFact": "Uprostřed vlajky Dominiky sedí papoušek amazoňan císařský.",
       "ratio": [
-        1200,
-        600
+        600,
+        300
       ],
-      "accent": "#006b3f",
+      "accent": "#108c00",
       "needsReview": [],
       "iso3": "DMA",
       "numeric": "212"
@@ -1476,7 +1465,6 @@
       "lng": 30.8,
       "similar": [
         "iq",
-        "sy",
         "ye"
       ],
       "difficulty": 2,
@@ -1515,7 +1503,7 @@
       ],
       "accent": "#007a3d",
       "needsReview": [
-        "Sporné území. Zařazeno jen do bonusové sady.",
+        "ROZHODNUTO: sporné území, je jen v bonusové sadě.",
         "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
       ],
       "iso3": "ESH",
@@ -1796,7 +1784,7 @@
       ],
       "accent": "#012169",
       "needsReview": [
-        "Anglie ZÁMĚRNĚ není alias – je to samostatná vlajka v bonusové sadě."
+        "ROZHODNUTO: Anglie záměrně není alias, je to samostatná vlajka v bonusové sadě."
       ],
       "iso3": "GBR",
       "numeric": "826"
@@ -2437,9 +2425,7 @@
         800
       ],
       "accent": "#0038b8",
-      "needsReview": [
-        "Hlavní město: Izrael uvádí Jeruzalém, většina států má velvyslanectví v Tel Avivu. Sporné."
-      ],
+      "needsReview": [],
       "iso3": "ISR",
       "numeric": "376"
     },
@@ -2504,7 +2490,6 @@
       "lng": 44,
       "similar": [
         "eg",
-        "sy",
         "ye"
       ],
       "difficulty": 3,
@@ -2739,8 +2724,8 @@
       "difficulty": 4,
       "funFact": "Uvnitř slunce na kyrgyzské vlajce je pohled na střechu jurty.",
       "ratio": [
-        1000,
-        600
+        600,
+        360
       ],
       "accent": "#ff0000",
       "needsReview": [],
@@ -3063,7 +3048,7 @@
       "nameCs": "Srí Lanka",
       "nameCsOfficial": "Srílanská demokratická socialistická republika",
       "aliases": [],
-      "capitalCs": "Kolombo",
+      "capitalCs": "Srí Džajavardanapura Kotte",
       "continent": "asia",
       "subregion": "southAsia",
       "sovereignty": "un",
@@ -3077,9 +3062,7 @@
         600
       ],
       "accent": "#ffb700",
-      "needsReview": [
-        "Úřední hlavní město je Srí Džajavardanapura Kotte, Kolombo je největší město a sídlo vlády."
-      ],
+      "needsReview": [],
       "iso3": "LKA",
       "numeric": "144"
     },
@@ -3696,7 +3679,7 @@
       ],
       "accent": "#f15770",
       "needsReview": [
-        "Hlavní město se česky píše různě: Mexico City / Ciudad de México / Mexiko. Vybráno Mexico City."
+        "ROZHODNUTO: hlavní město se česky píše různě, vybráno Mexico City."
       ],
       "iso3": "MEX",
       "numeric": "484"
@@ -3897,9 +3880,7 @@
         6
       ],
       "accent": "#21468b",
-      "needsReview": [
-        "Hlavní město je Amsterdam, sídlo vlády je ale Haag."
-      ],
+      "needsReview": [],
       "iso3": "NLD",
       "numeric": "528"
     },
@@ -4224,7 +4205,7 @@
       "nameCs": "Palestina",
       "nameCsOfficial": "Stát Palestina",
       "aliases": [],
-      "capitalCs": "Ramalláh",
+      "capitalCs": "Východní Jeruzalém",
       "continent": "asia",
       "subregion": "westernAsia",
       "sovereignty": "observer",
@@ -4243,9 +4224,7 @@
         3
       ],
       "accent": "#007a3d",
-      "needsReview": [
-        "Hlavní město: Palestina uvádí Východní Jeruzalém, sídlem vlády je Ramalláh. Sporné."
-      ],
+      "needsReview": [],
       "iso3": "PSE",
       "numeric": "275"
     },
@@ -4427,7 +4406,7 @@
       ],
       "accent": "#d52b1e",
       "needsReview": [
-        "Zeměpisný střed leží na Sibiři; zařazeno do Evropy podle zvyklosti."
+        "ROZHODNUTO: zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti."
       ],
       "iso3": "RUS",
       "numeric": "643"
@@ -4867,22 +4846,15 @@
       "sovereignty": "un",
       "lat": 35,
       "lng": 38,
-      "similar": [
-        "eg",
-        "iq",
-        "ye"
-      ],
+      "similar": [],
       "difficulty": 3,
-      "funFact": null,
+      "funFact": "Sýrie má od konce roku 2024 zeleno-bílo-černou vlajku se třemi červenými hvězdami; předtím měla červeno-bílo-černou se dvěma zelenými.",
       "ratio": [
-        180,
-        120
+        900,
+        600
       ],
-      "accent": "#ce1126",
-      "needsReview": [
-        "OVĚŘENO: zdrojové SVG ukazuje starší červeno-bílo-černou vlajku se dvěma zelenými hvězdami, ne dnešní zeleno-bílo-černou se třemi červenými hvězdami. Rozhodni, kterou učit.",
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "accent": "#007a3d",
+      "needsReview": [],
       "iso3": "SYR",
       "numeric": "760"
     },
@@ -4907,9 +4879,7 @@
         600
       ],
       "accent": "#3e5eb9",
-      "needsReview": [
-        "Mbabane je správní hlavní město, Lobamba je královské a parlamentní sídlo."
-      ],
+      "needsReview": [],
       "iso3": "SWZ",
       "numeric": "748"
     },
@@ -5158,7 +5128,7 @@
       ],
       "accent": "#e30a17",
       "needsReview": [
-        "Leží v Asii i v Evropě; zařazeno do Asie."
+        "ROZHODNUTO: leží v Asii i v Evropě, vedeme ho v Asii."
       ],
       "iso3": "TUR",
       "numeric": "792"
@@ -5251,9 +5221,7 @@
         48
       ],
       "accent": "#1eb53a",
-      "needsReview": [
-        "Úřední hlavní město je Dodoma, největší město a přístav je Dar es Salaam."
-      ],
+      "needsReview": [],
       "iso3": "TZA",
       "numeric": "834"
     },
@@ -5611,8 +5579,7 @@
       "lng": 47.5,
       "similar": [
         "eg",
-        "iq",
-        "sy"
+        "iq"
       ],
       "difficulty": 4,
       "funFact": "Jemenská vlajka jsou jen tři pruhy – červený, bílý a černý, bez jakéhokoli znaku.",
@@ -5647,9 +5614,7 @@
         6
       ],
       "accent": "#001489",
-      "needsReview": [
-        "JAR má tři hlavní města: Pretoria (vláda), Kapské Město (parlament), Bloemfontein (soudy)."
-      ],
+      "needsReview": [],
       "iso3": "ZAF",
       "numeric": "710"
     },

@@ -80,13 +80,25 @@ describe('porovnání odpovědi – jiná země nikdy neprojde', () => {
     expect(result.matchedCode).toBe(matched);
   });
 
-  it('Kongo znamená Konžskou republiku, ne DR Kongo', () => {
-    expect(check('Kongo', 'cg').correct).toBe(true);
-    const wrong = check('Kongo', 'cd');
-    expect(wrong.correct).toBe(false);
-    expect(wrong.matchedCode).toBe('cg');
+  it('samotné Kongo se nepočítá ani jedné zemi – aplikace se doptá', () => {
+    for (const target of ['cg', 'cd']) {
+      const result = check('Kongo', target);
+      expect(result.verdict, target).toBe('ambiguous');
+      expect(result.correct, target).toBe(false);
+      expect(result.candidates, target).toEqual(['cg', 'cd']);
+    }
+  });
+
+  it('upřesněné Kongo už projde', () => {
+    expect(check('Konžská republika', 'cg').correct).toBe(true);
+    expect(check('Kongo-Brazzaville', 'cg').correct).toBe(true);
     expect(check('DR Kongo', 'cd').correct).toBe(true);
     expect(check('Demokratická republika Kongo', 'cd').correct).toBe(true);
+  });
+
+  it('dvojznačnost platí jen tam, kde dává smysl', () => {
+    // u otázky na Japonsko je „Kongo“ prostě špatná odpověď, ne nejasná
+    expect(check('Kongo', 'jp').verdict).not.toBe('ambiguous');
   });
 
   it('Anglie není Spojené království', () => {

@@ -16,8 +16,8 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 - Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
 - Států v sadě „Svět“: **197** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
 - Území v bonusové sadě: **31**
-- Zajímavost o vlajce chybí u **24** záznamů
-- Otevřených otázek k rozhodnutí: **21**
+- Zajímavost o vlajce chybí u **23** záznamů
+- Otevřených otázek k rozhodnutí: **1**
 
 ### Co NENÍ ověřené
 
@@ -28,54 +28,26 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 ## Otevřené otázky
 
 - **Afghánistán** (`af`)
-  - OVĚŘENO: zdrojové SVG ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021), ne dnešní bílou vlajku Islámského emirátu. Úřední název je proto v datech taky ten starší, aby si vlajka a název neodporovaly. Rozhodni, kterou verzi učit.
-- **Belgie** (`be`)
-  - Poměr stran: oficiálně 13:15, běžně se ale používá 2:3. Zdrojové SVG má 15:13.
-- **Burundi** (`bi`)
-  - Hlavním městem je od roku 2019 Gitega, největším městem zůstává Bujumbura.
-- **Benin** (`bj`)
-  - Úřední hlavní město je Porto-Novo, sídlem vlády je Cotonou.
-- **Bolívie** (`bo`)
-  - Ústavním hlavním městem je Sucre, sídlem vlády La Paz.
-- **Konžská republika** (`cg`)
-  - Slovo Kongo je v češtině dvojznačné. Teď platí jako alias JEN pro Konžskou republiku (Brazzaville). Chceš to tak?
-- **Pobřeží slonoviny** (`ci`)
-  - Úřední hlavní město je Yamoussoukro, sídlem vlády je Abidžan.
-- **Kypr** (`cy`)
-  - Zeměpisně leží v Asii, politicky patří k Evropě (EU). Zařazeno do Evropy.
-- **Západní Sahara** (`eh`)
-  - Sporné území. Zařazeno jen do bonusové sady.
-- **Spojené království** (`gb`)
-  - Anglie ZÁMĚRNĚ není alias – je to samostatná vlajka v bonusové sadě.
-- **Izrael** (`il`)
-  - Hlavní město: Izrael uvádí Jeruzalém, většina států má velvyslanectví v Tel Avivu. Sporné.
-- **Srí Lanka** (`lk`)
-  - Úřední hlavní město je Srí Džajavardanapura Kotte, Kolombo je největší město a sídlo vlády.
-- **Mexiko** (`mx`)
-  - Hlavní město se česky píše různě: Mexico City / Ciudad de México / Mexiko. Vybráno Mexico City.
-- **Nizozemsko** (`nl`)
-  - Hlavní město je Amsterdam, sídlo vlády je ale Haag.
-- **Palestina** (`ps`)
-  - Hlavní město: Palestina uvádí Východní Jeruzalém, sídlem vlády je Ramalláh. Sporné.
-- **Rusko** (`ru`)
-  - Zeměpisný střed leží na Sibiři; zařazeno do Evropy podle zvyklosti.
-- **Sýrie** (`sy`)
-  - OVĚŘENO: zdrojové SVG ukazuje starší červeno-bílo-černou vlajku se dvěma zelenými hvězdami, ne dnešní zeleno-bílo-černou se třemi červenými hvězdami. Rozhodni, kterou učit.
-- **Eswatini** (`sz`)
-  - Mbabane je správní hlavní město, Lobamba je královské a parlamentní sídlo.
-- **Turecko** (`tr`)
-  - Leží v Asii i v Evropě; zařazeno do Asie.
-- **Tanzanie** (`tz`)
-  - Úřední hlavní město je Dodoma, největší město a přístav je Dar es Salaam.
-- **Jihoafrická republika** (`za`)
-  - JAR má tři hlavní města: Pretoria (vláda), Kapské Město (parlament), Bloemfontein (soudy).
+  - NEVYŘEŠENO: aplikace ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021). Dnešní bílá vlajka s vyznáním víry není v žádném dostupném balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Až seženeš SVG, stačí ho uložit jako data/flags-override/af.svg a spustit npm run data.
+
+## Rozhodnutá sporná místa
+
+Tady už je rozhodnuto, zapsané jen pro paměť.
+
+- **Konžská republika** (`cg`) – samotné „Kongo“ neuznáváme ani jedné zemi – aplikace se doptá, která to má být.
+- **Kypr** (`cy`) – zeměpisně leží v Asii, politicky patří k Evropě (EU). Vedeme ho v Evropě.
+- **Západní Sahara** (`eh`) – sporné území, je jen v bonusové sadě.
+- **Spojené království** (`gb`) – Anglie záměrně není alias, je to samostatná vlajka v bonusové sadě.
+- **Mexiko** (`mx`) – hlavní město se česky píše různě, vybráno Mexico City.
+- **Rusko** (`ru`) – zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti.
+- **Turecko** (`tr`) – leží v Asii i v Evropě, vedeme ho v Asii.
 
 ## Chybějící zajímavosti
 
 U těchhle vlajek jsem nenašel fakt, za který bych ručil. Radši prázdné než vymyšlené –
 když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká vlajka).
 
-`af` Afghánistán · `ai` Anguilla · `as` Americká Samoa · `aw` Aruba · `ax` Ålandy · `bm` Bermudy · `ck` Cookovy ostrovy · `cw` Curaçao · `eh` Západní Sahara · `fk` Falklandy · `gb-nir` Severní Irsko · `gg` Guernsey · `gu` Guam · `je` Jersey · `ky` Kajmanské ostrovy · `mo` Macao · `mp` Severní Mariany · `ms` Montserrat · `nc` Nová Kaledonie · `pf` Francouzská Polynésie · `sy` Sýrie · `tc` Turks a Caicos · `vg` Britské Panenské ostrovy · `vi` Americké Panenské ostrovy
+`af` Afghánistán · `ai` Anguilla · `as` Americká Samoa · `aw` Aruba · `ax` Ålandy · `bm` Bermudy · `ck` Cookovy ostrovy · `cw` Curaçao · `eh` Západní Sahara · `fk` Falklandy · `gb-nir` Severní Irsko · `gg` Guernsey · `gu` Guam · `je` Jersey · `ky` Kajmanské ostrovy · `mo` Macao · `mp` Severní Mariany · `ms` Montserrat · `nc` Nová Kaledonie · `pf` Francouzská Polynésie · `tc` Turks a Caicos · `vg` Britské Panenské ostrovy · `vi` Americké Panenské ostrovy
 
 ## Evropa (46)
 
@@ -83,7 +55,7 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 |---|---|---|---|---|---|---|---|
 | `al` | **Albánie** | – | – | Tirana | 3 | 1.40:1 | Na albánské vlajce je černý dvouhlavý orel. |
 | `ad` | **Andorra** | – | – | Andorra la Vella | 4 | 1.43:1 | Ve znaku uprostřed andorrské vlajky jsou dvě červené krávy. |
-| `be` | **Belgie** | Belgické království | – | Brusel | 2 | 1.15:1 | Barvy belgické vlajky pochází z erbu Brabantska – zlatý lev na černém poli s červenými drápy. |
+| `be` | **Belgie** | Belgické království | – | Brusel | 2 | 1.15:1 | Belgická vlajka je skoro čtvercová – je jen o kousek širší, než vyšší. |
 | `by` | **Bělorusko** | Běloruská republika | – | Minsk | 3 | 2.00:1 | U žerdi má běloruská vlajka červený vzor převzatý z lidové výšivky. |
 | `ba` | **Bosna a Hercegovina** | – | Bosna | Sarajevo | 3 | 2.00:1 | Hvězdy na vlajce Bosny a Hercegoviny jsou na krajích useknuté, jako by jich byla nekonečná řada. |
 | `bg` | **Bulharsko** | Bulharská republika | – | Sofie | 2 | 1.67:1 | Bulharská vlajka vychází z ruské trikolóry, jen modrý pruh v ní nahradila zelená. |
@@ -165,13 +137,13 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 | `np` | **Nepál** | – | – | Káthmándú | 2 | 0.82:1 | Nepálská vlajka je jediná na světě, která není obdélník – jsou to dva trojúhelníky nad sebou. |
 | `om` | **Omán** | Sultanát Omán | – | Maskat | 4 | 2.00:1 | Ve znaku ománské vlajky jsou dvě zkřížené šavle a zahnutá dýka chandžar. |
 | `pk` | **Pákistán** | Pákistánská islámská republika | – | Islámábád | 2 | 1.50:1 | Bílý pruh u žerdi pákistánské vlajky patří nemuslimským menšinám. |
-| `ps` | **Palestina** | Stát Palestina | – | Ramalláh | 4 | 2.00:1 | Palestinská vlajka vypadá jako jordánská, jen na červeném trojúhelníku nemá hvězdu. |
+| `ps` | **Palestina** | Stát Palestina | – | Východní Jeruzalém | 4 | 2.00:1 | Palestinská vlajka vypadá jako jordánská, jen na červeném trojúhelníku nemá hvězdu. |
 | `sa` | **Saúdská Arábie** | Království Saúdská Arábie | – | Rijád | 3 | 1.50:1 | Kvůli posvátnému nápisu se saúdská vlajka nikdy nespouští na půl žerdi. |
 | `kp` | **Severní Korea** | Korejská lidově demokratická republika | KLDR | Pchjongjang | 3 | 2.00:1 | Na severokorejské vlajce je červená hvězda v bílém kruhu. |
 | `sg` | **Singapur** | Singapurská republika | – | Singapur | 3 | 1.50:1 | Na singapurské vlajce je půlměsíc a pět hvězd srovnaných do kroužku. |
 | `ae` | **Spojené arabské emiráty** | – | SAE, Emiráty | Abú Zabí | 3 | 2.00:1 | Červená, zelená, bílá a černá jsou panarabské barvy, které má na vlajce víc arabských zemí. |
-| `lk` | **Srí Lanka** | Srílanská demokratická socialistická republika | – | Kolombo | 4 | 2.00:1 | Na srílanské vlajce je lev s mečem a v rozích čtyři lístky fíkovníku. |
-| `sy` | **Sýrie** | Syrská arabská republika | – | Damašek | 3 | 1.50:1 | **— CHYBÍ —** |
+| `lk` | **Srí Lanka** | Srílanská demokratická socialistická republika | – | Srí Džajavardanapura Kotte | 4 | 2.00:1 | Na srílanské vlajce je lev s mečem a v rozích čtyři lístky fíkovníku. |
+| `sy` | **Sýrie** | Syrská arabská republika | – | Damašek | 3 | 1.50:1 | Sýrie má od konce roku 2024 zeleno-bílo-černou vlajku se třemi červenými hvězdami; předtím měla červeno-bílo-černou se dvěma zelenými. |
 | `tj` | **Tádžikistán** | Republika Tádžikistán | – | Dušanbe | 5 | 2.00:1 | Uprostřed tádžické vlajky je koruna se sedmi hvězdami. |
 | `th` | **Thajsko** | Thajské království | – | Bangkok | 2 | 1.50:1 | Thajská vlajka má pět pruhů a prostřední modrý je dvakrát širší než ostatní. |
 | `tw` | **Tchaj-wan** | Čínská republika | – | Tchaj-pej | 3 | 1.50:1 | V rohu tchajwanské vlajky je bílé slunce s dvanácti paprsky. |
@@ -209,7 +181,7 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 | `cv` | **Kapverdy** | Kapverdská republika | Kapverdské ostrovy, Cabo Verde | Praia | 5 | 1.70:1 | Na kapverdské vlajce je kruh z deseti hvězd – jedna za každý ostrov. |
 | `ke` | **Keňa** | Keňská republika | – | Nairobi | 3 | 1.50:1 | Uprostřed keňské vlajky je masajský štít a dvě zkřížená kopí. |
 | `km` | **Komory** | Komorský svaz | – | Moroni | 5 | 1.67:1 | Čtyři hvězdy na komorské vlajce jsou čtyři ostrovy souostroví. |
-| `cg` | **Konžská republika** | – | Kongo, Kongo-Brazzaville | Brazzaville | 4 | 1.50:1 | Vlajku Konžské republiky dělí šikmý žlutý pruh mezi zelenou a červenou. |
+| `cg` | **Konžská republika** | – | Kongo-Brazzaville | Brazzaville | 4 | 1.50:1 | Vlajku Konžské republiky dělí šikmý žlutý pruh mezi zelenou a červenou. |
 | `ls` | **Lesotho** | Lesothské království | – | Maseru | 5 | 1.50:1 | Uprostřed vlajky Lesotha je černý slaměný klobouk mokorotlo. |
 | `lr` | **Libérie** | Liberijská republika | – | Monrovia | 4 | 1.90:1 | Libérijská vlajka vypadá jako americká, má ale jen jedenáct pruhů a jedinou hvězdu. |
 | `ly` | **Libye** | Stát Libye | – | Tripolis | 4 | 2.00:1 | Libye měla v letech 1977 až 2011 celou vlajku jednolitě zelenou, bez jediného znaku. |
@@ -361,7 +333,7 @@ Podle nich se vybírají distraktory a staví režim Dvojčata. Čím víc přes
 - Island · Norsko · Dánsko · Finsko · Švédsko
 - Dánsko · Faerské ostrovy · Ålandy
 - Jordánsko · Palestina · Súdán · Kuvajt · Západní Sahara
-- Jemen · Egypt · Irák · Sýrie
+- Jemen · Egypt · Irák
 - Rakousko · Lotyšsko
 - Peru · Kanada
 - Libérie · Spojené státy americké · Malajsie

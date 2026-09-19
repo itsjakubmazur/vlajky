@@ -42,5 +42,5 @@ export const territories: CsCountry[] = [
   { code: 'mp', nameCs: 'Severní Mariany', capitalCs: 'Saipan', continent: 'oceania', subregion: 'micronesia', sovereignty: 'territory', lat: 15.2, lng: 145.75, difficulty: 5 },
   { code: 'fk', nameCs: 'Falklandy', capitalCs: 'Stanley', continent: 'southAmerica', subregion: 'southernCone', sovereignty: 'territory', lat: -51.8, lng: -59.5, difficulty: 5 },
   { code: 'eh', nameCs: 'Západní Sahara', capitalCs: 'Al-Ajún', continent: 'africa', subregion: 'northernAfrica', sovereignty: 'territory', lat: 24.5, lng: -13.0, difficulty: 5,
-    review: ['Sporné území. Zařazeno jen do bonusové sady.'] },
+    review: ['ROZHODNUTO: sporné území, je jen v bonusové sadě.'] },
 ];

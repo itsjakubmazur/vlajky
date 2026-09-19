@@ -37,6 +37,16 @@ export function buildAnswerIndex(countries: readonly Country[]): AnswerIndex {
   return { byLabel, labelsByCode };
 }
 
+/**
+ * Odpovědi, které v češtině znamenají víc zemí najednou.
+ *
+ * Uznat je pro jednu zemi a druhé je počítat jako chybu by byla past, která
+ * nic neučí. Místo toho se na ně dítě doptá.
+ */
+export const AMBIGUOUS_ANSWERS: Record<string, string[]> = {
+  kongo: ['cg', 'cd'],
+};
+
 export type AnswerVerdict =
   /** přesná shoda */
   | 'correct'
@@ -44,6 +54,8 @@ export type AnswerVerdict =
   | 'typo'
   /** dítě napsalo jinou existující zemi – nikdy se neuznává */
   | 'wrongCountry'
+  /** odpověď platí pro víc zemí – dítě má upřesnit, nepočítá se jako chyba */
+  | 'ambiguous'
   /** nic, co bychom poznali */
   | 'unknown'
   /** prázdný vstup */
@@ -56,6 +68,8 @@ export interface AnswerResult {
   matchedCode?: string;
   /** vzdálenost k uznanému tvaru (jen u `typo`) */
   distance?: number;
+  /** země, které odpověď může znamenat (jen u `ambiguous`) */
+  candidates?: string[];
 }
 
 interface Closest {
@@ -98,6 +112,11 @@ function closestAmong(
 export function checkAnswer(input: string, targetCode: string, index: AnswerIndex): AnswerResult {
   const normalized = normalize(input);
   if (!normalized) return { verdict: 'empty', correct: false };
+
+  const ambiguous = AMBIGUOUS_ANSWERS[normalized];
+  if (ambiguous?.includes(targetCode)) {
+    return { verdict: 'ambiguous', correct: false, candidates: ambiguous };
+  }
 
   const exact = index.byLabel.get(normalized);
   if (exact?.includes(targetCode)) {
