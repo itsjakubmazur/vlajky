@@ -72,9 +72,11 @@ všechno ostatní: *vlajky jsou jediná sytá barva na obrazovce, rozhraní je s
 - **Barvy:** `mint` je jediná plná barva rozhraní (hlavní akce, správná
   odpověď), `gold` je nejvyšší úroveň a oslava, `coral` chyba. Šedé jsou
   laděné do modra, ne neutrální.
-- **Písmo:** Bricolage Grotesque na nadpisy (utilita `display`), Manrope na
-  text. Self-hostované ze `public/fonts/` – Google Fonts by porušily pravidlo
-  o žádných externích požadavcích. Řez **latin-ext je pro češtinu povinný**.
+- **Písmo:** Figtree, jedna rodina na všechno. Nadpisy se od textu liší jen
+  tloušťkou a proklikem (utilita `display`), ne jiným písmem – v tak malém
+  rozhraní dělaly dvě rodiny víc hluku než užitku. Self-hostované ze
+  `public/fonts/` – Google Fonts by porušily pravidlo o žádných externích
+  požadavcích. Řez **latin-ext je pro češtinu povinný**.
 - **Vlajky svítí:** každá má v datech pole `accent` – výraznou barvu odečtenou
   ze svého SVG při buildu (`scripts/flag-source.ts`). Používá se na halo za
   vlajkou a na prstenec samolepky v albu.

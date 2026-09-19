@@ -8,11 +8,13 @@
 import { copyFileSync, mkdirSync, rmSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
+/**
+ * Jedno písmo na všechno – nadpisy se od textu liší jen tloušťkou a proklikem.
+ * Dvě rodiny dělaly v tak malém rozhraní víc hluku než užitku.
+ */
 const FACES = [
-  { pkg: '@fontsource-variable/bricolage-grotesque', file: 'bricolage-grotesque-latin-wght-normal.woff2' },
-  { pkg: '@fontsource-variable/bricolage-grotesque', file: 'bricolage-grotesque-latin-ext-wght-normal.woff2' },
-  { pkg: '@fontsource-variable/manrope', file: 'manrope-latin-wght-normal.woff2' },
-  { pkg: '@fontsource-variable/manrope', file: 'manrope-latin-ext-wght-normal.woff2' },
+  { pkg: '@fontsource-variable/figtree', file: 'figtree-latin-wght-normal.woff2' },
+  { pkg: '@fontsource-variable/figtree', file: 'figtree-latin-ext-wght-normal.woff2' },
 ];
 
 const outDir = join(process.cwd(), 'public', 'fonts');
