@@ -66,7 +66,7 @@ export const americas: CsCountry[] = [
   { code: 'py', nameCs: 'Paraguay', nameCsOfficial: 'Paraguayská republika', capitalCs: 'Asunción', continent: 'southAmerica', subregion: 'southernCone', sovereignty: 'un', lat: -23.4, lng: -58.4, difficulty: 4,
     funFact: 'Paraguayská vlajka má na každé straně jiný znak – jako jediná na světě.' },
   { code: 'pe', nameCs: 'Peru', nameCsOfficial: 'Peruánská republika', capitalCs: 'Lima', continent: 'southAmerica', subregion: 'andes', sovereignty: 'un', lat: -9.2, lng: -75.0, difficulty: 3,
-    funFact: 'Peruánská vlajka má tři svislé pruhy: červený, bílý a červený.' },
+    funFact: 'Peru i Kanada mají pruhy červený, bílý a červený – Kanada má uprostřed javorový list, Peru znak s vikuňou.' },
   { code: 'sr', nameCs: 'Surinam', nameCsOfficial: 'Republika Surinam', capitalCs: 'Paramaribo', continent: 'southAmerica', subregion: 'northernSouthAmerica', sovereignty: 'un', lat: 4.0, lng: -56.0, difficulty: 5,
     funFact: 'Uprostřed surinamské vlajky je velká žlutá hvězda.' },
   { code: 'uy', nameCs: 'Uruguay', nameCsOfficial: 'Uruguayská východní republika', capitalCs: 'Montevideo', continent: 'southAmerica', subregion: 'southernCone', sovereignty: 'un', lat: -33.0, lng: -56.0, difficulty: 4,

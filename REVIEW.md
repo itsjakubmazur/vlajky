@@ -280,7 +280,7 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 | `cl` | **Chile** | Chilská republika | – | Santiago de Chile | 3 | 1.50:1 | Chilská vlajka má v modrém čtverci jedinou bílou hvězdu. |
 | `co` | **Kolumbie** | Kolumbijská republika | – | Bogotá | 3 | 1.50:1 | Žlutý pruh na kolumbijské vlajce je dvakrát širší než modrý a červený. |
 | `py` | **Paraguay** | Paraguayská republika | – | Asunción | 4 | 1.82:1 | Paraguayská vlajka má na každé straně jiný znak – jako jediná na světě. |
-| `pe` | **Peru** | Peruánská republika | – | Lima | 3 | 1.50:1 | Peruánská vlajka má tři svislé pruhy: červený, bílý a červený. |
+| `pe` | **Peru** | Peruánská republika | – | Lima | 3 | 1.50:1 | Peru i Kanada mají pruhy červený, bílý a červený – Kanada má uprostřed javorový list, Peru znak s vikuňou. |
 | `sr` | **Surinam** | Republika Surinam | – | Paramaribo | 5 | 1.50:1 | Uprostřed surinamské vlajky je velká žlutá hvězda. |
 | `uy` | **Uruguay** | Uruguayská východní republika | – | Montevideo | 4 | 1.50:1 | Uruguayská vlajka má devět pruhů a v rohu Májové slunce jako Argentina. |
 | `ve` | **Venezuela** | Venezuelská bolívarovská republika | – | Caracas | 3 | 1.50:1 | Uprostřed venezuelské vlajky je oblouk z osmi bílých hvězd. |
