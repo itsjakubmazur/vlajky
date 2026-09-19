@@ -88,9 +88,9 @@ describe('zpracování odpovědi', () => {
       now,
     );
     expect(new Date(after.fsrs.due).getTime()).toBeGreaterThan(now.getTime());
-    // Rychlá správná odpověď = Easy, takže vlajka rovnou přeskočí bronz.
-    // Přesně o to v rozřazovacím testu jde: co dítě umí, se neučí znovu.
-    expect(after.mastery).toBe('silver');
+    // Rychlá správná odpověď = Easy, takže plánovač vlajku odloží daleko.
+    // Na stříbro ale jedna trefa nestačí – to je až po druhém potvrzení.
+    expect(after.mastery).toBe('bronze');
     expect(after.fsrs.stability).toBeGreaterThan(7);
   });
 });
@@ -100,6 +100,18 @@ describe('úrovně zvládnutí', () => {
 
   it('bez jediné správné odpovědi zůstává nová', () => {
     expect(computeMastery({ ...base, correct: 0, streak: 0 })).toBe('new');
+  });
+
+  it('jedna rychlá trefa dá bronz, ne rovnou stříbro', () => {
+    const lucky: CardState = {
+      ...emptyCardState('td', now),
+      seen: 1,
+      correct: 1,
+      streak: 1,
+      fsrs: { ...emptyCardState('td', now).fsrs, stability: 12 },
+    };
+    expect(computeMastery(lucky)).toBe('bronze');
+    expect(computeMastery({ ...lucky, seen: 2, correct: 2, streak: 2 })).toBe('silver');
   });
 
   it('postup na vyšší úroveň se pozná', () => {

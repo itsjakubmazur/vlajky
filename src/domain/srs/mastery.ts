@@ -10,6 +10,8 @@ import type { CardState, Mastery } from './types';
 export const MASTERY_RULES = {
   silverStability: 7,
   silverStreak: 3,
+  /** Jedna rychlá trefa může být náhoda – na stříbro chceme potvrzení. */
+  silverCorrect: 2,
   goldStability: 30,
   goldCorrect: 4,
 };
@@ -27,7 +29,11 @@ export function computeMastery(card: CardState): Mastery {
     return 'gold';
   }
 
-  if (card.streak >= MASTERY_RULES.silverStreak || stability >= MASTERY_RULES.silverStability) {
+  const confirmed = card.correct >= MASTERY_RULES.silverCorrect;
+  if (
+    card.streak >= MASTERY_RULES.silverStreak ||
+    (stability >= MASTERY_RULES.silverStability && confirmed)
+  ) {
     return 'silver';
   }
 
