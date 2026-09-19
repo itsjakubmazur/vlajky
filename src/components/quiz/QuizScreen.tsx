@@ -25,7 +25,7 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
 
   if (session.phase === 'loading') {
     return (
-      <div className="flex min-h-dvh items-center justify-center text-sm font-bold text-faint">
+      <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
         {cs.common.loading}
       </div>
     );
@@ -33,13 +33,7 @@ export function QuizScreen({ mode }: { mode: QuizModeId }) {
 
   if (session.phase === 'done') {
     return (
-      <div
-        className="mx-auto flex min-h-[100svh] w-full max-w-xl flex-col justify-center px-4"
-        style={{
-          paddingTop: 'calc(1.5rem + env(safe-area-inset-top, 0px))',
-          paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))',
-        }}
-      >
+      <div className="mx-auto flex min-h-[var(--safe-height)] w-full max-w-xl flex-col justify-center px-4 py-6">
         <ResultScreen
           correct={session.correctCount}
           total={session.total}

@@ -53,10 +53,7 @@ export function QuizShell({
   children: ReactNode;
 }) {
   return (
-    <div
-      className="flex h-[100svh] flex-col overflow-hidden"
-      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
-    >
+    <div className="flex h-[var(--safe-height)] flex-col overflow-hidden">
       <header className="shrink-0 px-4 py-3">
         <div className="glass mx-auto flex max-w-xl items-center gap-4 rounded-pill py-2 pl-2 pr-4">
           <Link
@@ -78,10 +75,7 @@ export function QuizShell({
         výšky, a když je delší, kontejner se odroluje. Procentní výška by
         v rolovacím kontejneru nefungovala.
       */}
-      <main
-        className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-4"
-        style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
-      >
+      <main className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-4 pb-6">
         <div className="mx-auto flex w-full max-w-xl flex-1 flex-col">{children}</div>
       </main>
     </div>

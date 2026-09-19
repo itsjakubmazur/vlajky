@@ -80,8 +80,9 @@ všechno ostatní: *vlajky jsou jediná sytá barva na obrazovce, rozhraní je s
   `public/fonts/` – Google Fonts by porušily pravidlo o žádných externích
   požadavcích. Řez **latin-ext je pro češtinu povinný**.
 - **Vlajky svítí:** každá má v datech pole `accent` – výraznou barvu odečtenou
-  ze svého SVG při buildu (`scripts/flag-source.ts`). Používá se na halo za
-  vlajkou a na prstenec samolepky v albu.
+  ze svého SVG při buildu (`scripts/flag-source.ts`). Halo za vlajkou je ze
+  dvou vrstev: široká rozlitá záře a těsné jasné jádro. Bez toho jádra to
+  vypadá jako mlha, ne jako světlo. Stejná barva drží prstenec samolepky.
 - **Světlý režim záměrně není.** Na světlém podkladu sklo nemá co matnit
   a vlajky přestanou svítit. Kdyby ho někdo chtěl, všechno jsou tokeny
   v `@theme`, takže je to práce na jednom bloku – ale je to změna identity,
@@ -101,6 +102,9 @@ Obrazovka kvízu má **pevnou výšku a roluje se jen obsah pod hlavičkou**
 (`QuizShell`). Dřív byla hlavička `sticky` nad rolující se stránkou a na
 iPhonu se přes ni po pár pixelech posunu schoval nadpis otázky.
 
+- **systémové lišty se řeší jednou na `body`** (`padding` z `env(safe-area-inset-*)`),
+  ne v každé obrazovce zvlášť; obrazovky přes celou výšku používají token
+  `--safe-height`
 - výška je v **`svh`**, ne `dvh` – jinak se rozvržení přepočítá, když vyjede
   klávesnice, a obraz „poskočí“
 - `main` je sám sloupcový flex; procentní výška by v rolovacím kontejneru

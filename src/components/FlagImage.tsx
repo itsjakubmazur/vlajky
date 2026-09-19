@@ -52,13 +52,24 @@ export function FlagImage({
       className={`relative isolate inline-flex shrink-0 items-center justify-center ${fluid ? 'w-full' : ''} ${className}`}
     >
       {showGlow ? (
-        <span
-          aria-hidden="true"
-          className={`pointer-events-none absolute inset-0 -z-10 rounded-full blur-2xl ${
-            size === 'xl' ? 'scale-[1.7] opacity-85' : 'scale-[1.45] opacity-60'
-          } ${pulse ? 'animate-halo' : ''}`}
-          style={{ background: `radial-gradient(60% 60% at 50% 50%, ${accent}, transparent 72%)` }}
-        />
+        <>
+          {/* Široká záře – barva vlajky rozlitá do okolí. */}
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-0 -z-20 rounded-full blur-3xl ${
+              size === 'xl' || fluid ? 'scale-[2.4]' : 'scale-[1.9]'
+            } ${pulse ? 'animate-halo' : ''}`}
+            style={{ background: `radial-gradient(55% 55% at 50% 50%, ${accent}, transparent 74%)` }}
+          />
+          {/* Těsné jádro – díky němu záře nevypadá jako mlha, ale jako světlo. */}
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-0 -z-10 rounded-full opacity-90 blur-xl ${
+              size === 'xl' || fluid ? 'scale-[1.3]' : 'scale-[1.15]'
+            } ${pulse ? 'animate-halo' : ''}`}
+            style={{ background: `radial-gradient(50% 50% at 50% 50%, ${accent}, transparent 78%)` }}
+          />
+        </>
       ) : null}
       {/* eslint-disable-next-line @next/next/no-img-element -- lokální SVG, optimalizovat není co */}
       <img

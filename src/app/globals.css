@@ -67,8 +67,21 @@ body {
   height: 100%;
 }
 
+:root {
+  /*
+   * Výška obrazovky bez systémových lišt. `svh` schválně, ne `dvh` –
+   * jinak se rozvržení přepočítá, jakmile vyjede klávesnice.
+   */
+  --safe-height: calc(
+    100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)
+  );
+}
+
 body {
   margin: 0;
+  /* Systémové lišty řešíme jednou tady, ne v každé obrazovce zvlášť. */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   background: var(--color-abyss);
   color: var(--color-ink);
   font-family: var(--font-sans);
