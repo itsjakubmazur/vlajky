@@ -14,7 +14,7 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 ## Přehled
 
 - Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
-- Států v sadě „Svět“: **196** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
+- Států v sadě „Svět“: **197** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
 - Území v bonusové sadě: **30**
 - Zajímavost o vlajce chybí u **0** záznamů
 - Otevřených otázek k rozhodnutí: **0**
@@ -33,6 +33,7 @@ _Žádné._
 
 Tady už je rozhodnuto, zapsané jen pro paměť.
 
+- **Afghánistán** (`af`) – ukazujeme černo-červeno-zelenou vlajku Islámské republiky, platnou do roku 2021. Dnešní bílou vlajku s vyznáním víry nemá žádný dostupný balíček a kaligrafii nelze poctivě nakreslit zpaměti – tohle je vědomá volba, ne otevřená otázka.
 - **Konžská republika** (`cg`) – samotné „Kongo“ neuznáváme ani jedné zemi – aplikace se doptá, která to má být.
 - **Kypr** (`cy`) – zeměpisně leží v Asii, politicky patří k Evropě (EU). Vedeme ho v Evropě.
 - **Západní Sahara** (`eh`) – sporné území, je jen v bonusové sadě.
@@ -46,7 +47,6 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 Vlajku, kterou nemáme jak ukázat správně, je lepší neukazovat vůbec.
 Až bude po ruce poctivé SVG, stačí záznam vrátit do `data/cs/*.ts`.
 
-- `af` – Afghánistán – dnešní vlajka (bílá s vyznáním víry) není v žádném dostupném balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Balíček by ukázal vlajku Islámské republiky, platnou do roku 2021.
 - `gb-nir` – Severní Irsko – od roku 1972 nemá vlastní úřední vlajku, používá se tam Union Jack. Balíček proto dodává tentýž soubor jako pro Spojené království a otázka „která země to je“ by neměla jedinou správnou odpověď. Ulsterský prapor je vlajka zrušené vlády, ne země.
 
 ## Chybějící zajímavosti
@@ -107,10 +107,11 @@ _Žádné._
 | `ua` | **Ukrajina** | – | – | Kyjev | 2 | 1.50:1 | Modrá na ukrajinské vlajce je nebe a žlutá lán obilí pod ním. |
 | `va` | **Vatikán** | Městský stát Vatikán | – | Vatikán | 3 | 1.00:1 | Vatikánská vlajka je spolu se švýcarskou jediná čtvercová a jsou na ní zkřížené klíče. |
 
-## Asie (47)
+## Asie (48)
 
 | Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
 |---|---|---|---|---|---|---|---|
+| `af` | **Afghánistán** | Afghánská islámská republika | – | Kábul | 4 | 1.50:1 | Na afghánské vlajce je mešita s modlitební nikou a kazatelnou – budova, jakou na vlajce jinde nenajdeš. |
 | `am` | **Arménie** | Arménská republika | – | Jerevan | 3 | 2.00:1 | Spodní pruh arménské vlajky se úředně popisuje jako meruňkový. |
 | `az` | **Ázerbájdžán** | Ázerbájdžánská republika | – | Baku | 4 | 2.00:1 | Na ázerbájdžánské vlajce je půlměsíc a hvězda s osmi cípy. |
 | `bh` | **Bahrajn** | Bahrajnské království | – | Manáma | 4 | 1.67:1 | Bílou a červenou odděluje na bahrajnské vlajce pět zubů – jeden za každý pilíř islámu. |

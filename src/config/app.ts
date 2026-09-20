@@ -7,22 +7,14 @@ export const APP_TAGLINE = 'Nauč se všechny vlajky světa';
 /**
  * Záznamy, které v aplikaci schválně nejsou.
  *
- * Vlajku, kterou nemáme jak ukázat správně, je lepší neukazovat vůbec –
- * naučit dítě zastaralou nebo cizí vlajku je horší než ji neučit. Až bude
- * po ruce poctivé SVG, stačí záznam vrátit do `data/cs/*.ts`, soubor uložit
- * do `data/flags-override/` a spustit `npm run data`.
+ * Netýká se to vlajek, které jsou jen zastaralé – ty ukazujeme a píšeme
+ * o nich do REVIEW.md (viz Afghánistán). Týká se to případů, kdy by otázka
+ * neměla jedinou správnou odpověď.
  *
  * `un: true` znamená, že jde o členský stát OSN – build si o to sníží
  * očekávaný počet členů, ať se nemůže stát, že nějaký zmizí omylem.
  */
 export const OMITTED: Record<string, { un: boolean; reason: string }> = {
-  af: {
-    un: true,
-    reason:
-      'Afghánistán – dnešní vlajka (bílá s vyznáním víry) není v žádném dostupném ' +
-      'balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Balíček by ' +
-      'ukázal vlajku Islámské republiky, platnou do roku 2021.',
-  },
   'gb-nir': {
     un: false,
     reason:

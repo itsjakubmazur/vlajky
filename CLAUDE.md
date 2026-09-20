@@ -258,16 +258,17 @@ spočítá odpovídající transformaci z `viewBox` (včetně výchozího
 který přepsat nejde, **skončí chybou** – radši hlasitě spadnout než tiše vydat
 rozbitou vlajku. Hlídá to i test v `tests/data.test.ts`.
 
-**Co nejde ukázat správně, se neukazuje vůbec.** Naučit dítě zastaralou nebo
-cizí vlajku je horší než ji neučit. Vynechané záznamy jsou i s důvodem
-v `OMITTED` (`src/config/app.ts`); build kontroluje, že v datech opravdu
-nejsou a o kolik se tím snižuje počet členů OSN, a REVIEW.md je vypisuje –
-aby se nemohlo stát, že nějaký zmizí omylem. Vrácení je práce na jeden řádek.
+**Afghánistán ukazuje vlajku do roku 2021, a je to vědomá volba.** Dnešní
+bílou vlajku s vyznáním víry nemá žádný dostupný balíček a kaligrafii nelze
+poctivě nakreslit zpaměti. Zastaralá vlajka je pořád lepší než žádná, takže
+záznam v datech zůstává a poznámka v REVIEW.md je `ROZHODNUTO`, ne otevřená
+otázka.
 
-- **Afghánistán** (sada Svět má proto 196 záznamů): dnešní vlajku – bílou
-  s vyznáním víry – nemá žádný dostupný balíček a arabská kaligrafie se nedá
-  poctivě nakreslit zpaměti. Balíček by ukázal vlajku Islámské republiky,
-  platnou do roku 2021.
+**Vynechává se jen to, co by udělalo otázku bez správné odpovědi.** Takový
+záznam patří i s důvodem do `OMITTED` (`src/config/app.ts`); build kontroluje,
+že v datech opravdu není a o kolik se tím snižuje počet členů OSN, a REVIEW.md
+ho vypisuje – aby se nemohlo stát, že nějaký zmizí omylem.
+
 - **Severní Irsko** (sada Území má proto 30 záznamů): od roku 1972 nemá
   vlastní úřední vlajku, používá se tam Union Jack – balíček proto dodával
   **bajt po bajtu tentýž soubor** jako pro Spojené království a otázka „která

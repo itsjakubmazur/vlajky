@@ -2,7 +2,7 @@
   "meta": {
     "generated": "scripts/build-countries.ts – NEEDITOVAT RUČNĚ",
     "flagSource": "svg-country-flags (public domain, zdroj Wikipedia)",
-    "count": 226
+    "count": 227
   },
   "countries": [
     {
@@ -59,6 +59,31 @@
       "needsReview": [],
       "iso3": "ARE",
       "numeric": "784"
+    },
+    {
+      "code": "af",
+      "nameCs": "Afghánistán",
+      "nameCsOfficial": "Afghánská islámská republika",
+      "aliases": [],
+      "capitalCs": "Kábul",
+      "continent": "asia",
+      "subregion": "southAsia",
+      "sovereignty": "un",
+      "lat": 33.9,
+      "lng": 67.7,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Na afghánské vlajce je mešita s modlitební nikou a kazatelnou – budova, jakou na vlajce jinde nenajdeš.",
+      "ratio": [
+        900,
+        600
+      ],
+      "accent": "#d32011",
+      "needsReview": [
+        "ROZHODNUTO: ukazujeme černo-červeno-zelenou vlajku Islámské republiky, platnou do roku 2021. Dnešní bílou vlajku s vyznáním víry nemá žádný dostupný balíček a kaligrafii nelze poctivě nakreslit zpaměti – tohle je vědomá volba, ne otevřená otázka."
+      ],
+      "iso3": "AFG",
+      "numeric": "004"
     },
     {
       "code": "ag",
