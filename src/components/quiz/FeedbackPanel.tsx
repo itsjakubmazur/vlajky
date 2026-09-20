@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import { useGameFeedback } from '@/components/useGameFeedback';
-import { requireCountry } from '@/domain/countries';
+import { getCountry, requireCountry } from '@/domain/countries';
+import { differenceFor } from '~data/differences';
 import { cs } from '@/i18n/cs';
 import { FlagImage } from '@/components/FlagImage';
 import { Button, Eyebrow } from '@/components/ui';
@@ -41,6 +42,16 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
     feedback.typed && result.verdict === 'wrongCountry' && result.matchedCode
       ? requireCountry(result.matchedCode)
       : null;
+
+  // Co dítě opravdu vybralo – u tlačítek kód, u psaní rozpoznaná země.
+  const chosenCode = feedback.typed ? (result.matchedCode ?? null) : feedback.given;
+  const chosen = !correct && chosenCode && chosenCode !== country.code
+    ? (getCountry(chosenCode) ?? null)
+    : null;
+
+  // Ukázat správnou vlajku ještě neřekne, jak ji příště poznat. Tohle ano –
+  // proto je to jediná věc ve zpětné vazbě, která dostane obě vlajky vedle sebe.
+  const difference = chosen ? differenceFor(country.code, chosen.code) : null;
 
   return (
     <div
@@ -82,6 +93,23 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
               {cs.quiz.youWrote(wroteOtherCountry.nameCs)}
             </span>
           ) : null}
+        </div>
+      ) : null}
+
+      {chosen && difference ? (
+        <div className="glass-thin rounded-glass p-4">
+          <Eyebrow>{cs.quiz.differenceTitle}</Eyebrow>
+          <div className="mt-3 flex items-end justify-center gap-4">
+            {[country, chosen].map((side) => (
+              <span key={side.code} className="flex w-24 flex-col items-center gap-1.5">
+                <FlagImage code={side.code} size="md" glow={false} />
+                <span className="text-center text-[0.7rem] font-bold leading-tight text-muted">
+                  {side.nameCs}
+                </span>
+              </span>
+            ))}
+          </div>
+          <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/90">{difference}</p>
         </div>
       ) : null}
 

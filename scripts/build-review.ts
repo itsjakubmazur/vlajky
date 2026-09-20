@@ -6,6 +6,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Continent, Country } from '../src/domain/types';
 import { similarGroups } from '../data/similar';
+import { differenceFor } from '../data/differences';
 import { cs } from '../src/i18n/cs';
 
 const data = JSON.parse(readFileSync(join(process.cwd(), 'data', 'countries.json'), 'utf8')) as {
@@ -141,6 +142,30 @@ lines.push('');
 const nameOf = (code: string) => all.find((c) => c.code === code)?.nameCs ?? `? ${code}`;
 for (const group of similarGroups) {
   lines.push(`- ${group.map(nameOf).join(' · ')}`);
+}
+lines.push('');
+
+lines.push('## Čím se zaměnitelné vlajky liší');
+lines.push('');
+lines.push('Tyhle věty se ukazují po chybě, když dítě zamění dvě podobné vlajky.');
+lines.push('Zkontroluj je prosím – je to to nejdůležitější, co se z aplikace učí.');
+lines.push('');
+lines.push('| Dvojice | Čím se liší |');
+lines.push('|---|---|');
+const seenPairs = new Set<string>();
+for (const group of similarGroups) {
+  for (const a of group) {
+    for (const b of group) {
+      if (a >= b) continue;
+      const key = `${a}|${b}`;
+      if (seenPairs.has(key)) continue;
+      seenPairs.add(key);
+      const note = differenceFor(a, b);
+      lines.push(
+        `| ${nameOf(a)} · ${nameOf(b)} | ${note ? escape(note) : '**— CHYBÍ —**'} |`,
+      );
+    }
+  }
 }
 lines.push('');
 

@@ -357,3 +357,118 @@ Podle nich se vybírají distraktory a staví režim Dvojčata. Čím víc přes
 - Maďarsko · Bulharsko
 - Spojené arabské emiráty · Kuvajt
 - Spojené království · Anglie · Skotsko
+
+## Čím se zaměnitelné vlajky liší
+
+Tyhle věty se ukazují po chybě, když dítě zamění dvě podobné vlajky.
+Zkontroluj je prosím – je to to nejdůležitější, co se z aplikace učí.
+
+| Dvojice | Čím se liší |
+|---|---|
+| Rumunsko · Čad | Čad má modrou tmavší, skoro námořní. Rumunsko světlejší. Jinak jsou stejné. |
+| Monako · Polsko | Monako má červenou nahoře, Polsko bílou. |
+| Indonésie · Monako | Liší se jen tvarem: Indonésie je delší (3:2), Monako skoro čtvercové (4:5). |
+| Indonésie · Polsko | Indonésie má červenou nahoře, Polsko bílou. |
+| Mali · Senegal | Senegal má uprostřed zelenou hvězdu, Mali je bez ní. |
+| Guinea · Senegal | Senegal má uprostřed zelenou hvězdu a u žerdi zelenou, Guinea červenou a bez hvězdy. |
+| Guinea · Mali | Guinea má u žerdi červenou, Mali zelenou. |
+| Irsko · Itálie | Irsko má na konci oranžovou, Itálie červenou. |
+| Pobřeží slonoviny · Irsko | Irsko má u žerdi zelenou, Pobřeží slonoviny oranžovou. |
+| Pobřeží slonoviny · Itálie | Itálie má u žerdi zelenou a na konci červenou, Pobřeží slonoviny oranžovou a zelenou. |
+| Lucembursko · Nizozemsko | Lucembursko má modrou světlejší a vlajku delší, Nizozemsko tmavě modrou. |
+| Austrálie · Nový Zéland | Nový Zéland má čtyři červené hvězdy, Austrálie šest bílých a jednu velkou pod Union Jackem. |
+| Slovinsko · Slovensko | Slovinsko má ve znaku bílou horu a hvězdy, Slovensko dvojkříž na třech vršcích. |
+| Rusko · Slovinsko | Slovinsko má u žerdi znak s horou Triglav, Rusko je bez znaku. |
+| Rusko · Slovensko | Slovensko má znak s dvojkřížem na třech kopcích, Rusko je bez znaku. |
+| Kolumbie · Ekvádor | Ekvádor má uprostřed znak s kondorem, Kolumbie je bez znaku. |
+| Kolumbie · Venezuela | Venezuela má pruhy stejně široké a oblouk bílých hvězd, Kolumbie žlutý pruh přes půlku vlajky. |
+| Ekvádor · Venezuela | Ekvádor má široký žlutý pruh a znak, Venezuela stejné pruhy a hvězdy. |
+| Island · Norsko | Island má modré pole a červený kříž, Norsko červené pole a modrý kříž. |
+| Jordánsko · Palestina | Jordánsko má v trojúhelníku bílou sedmicípou hvězdu, Palestina trojúhelník prázdný. |
+| Jordánsko · Súdán | Jordánsko má červený trojúhelník s hvězdou a černou nahoře, Súdán zelený trojúhelník a červenou nahoře. |
+| Palestina · Súdán | Palestina má černou nahoře a červený trojúhelník, Súdán červenou nahoře a zelený trojúhelník. |
+| Bahrajn · Katar | Katar je vínový, hodně dlouhý a má devět zubů, Bahrajn červený a pět. |
+| Moldavsko · Rumunsko | Moldavsko má uprostřed orla se štítem, Rumunsko je bez znaku. |
+| Moldavsko · Čad | Moldavsko má uprostřed orla, Čad je bez znaku a má tmavší modrou. |
+| Andorra · Rumunsko | Andorra má uprostřed znak se dvěma mitrami a kravami, Rumunsko je bez znaku. |
+| Andorra · Čad | Andorra má uprostřed znak, Čad je bez znaku a má tmavší modrou. |
+| Andorra · Moldavsko | Andorra má ve znaku mitry a krávy, Moldavsko orla s hlavou zubra. |
+| Kamerun · Senegal | Kamerun má žlutou hvězdu na červeném pruhu, Senegal zelenou hvězdu na žlutém. |
+| Kamerun · Mali | Kamerun má uprostřed červený pruh se žlutou hvězdou, Mali žlutý pruh bez hvězdy. |
+| Kamerun · Guinea | Kamerun má u žerdi zelenou a uprostřed žlutou hvězdu, Guinea červenou a bez hvězdy. |
+| Srbsko · Slovinsko | Srbsko má červenou nahoře, Slovinsko bílou a znak u žerdi. |
+| Srbsko · Slovensko | Srbsko má červenou nahoře, Slovensko bílou a znak s dvojkřížem. |
+| Srbsko · Rusko | Srbsko má červenou nahoře a uprostřed znak, Rusko bílou nahoře a nic. |
+| Island · Švédsko | Švédsko má žlutý kříž bez lemu, Island červený kříž v bílém lemu. |
+| Norsko · Švédsko | Norsko má červené pole a modrý kříž v bílém lemu, Švédsko modré pole a žlutý kříž. |
+| Dánsko · Island | Island má modré pole a červený kříž v bílém lemu, Dánsko červené pole a bílý kříž. |
+| Dánsko · Norsko | Norsko má modrý kříž v bílém lemu, Dánsko jen bílý kříž. |
+| Dánsko · Finsko | Finsko má bílé pole a modrý kříž, Dánsko červené pole a bílý kříž. |
+| Dánsko · Švédsko | Švédsko má modré pole a žlutý kříž, Dánsko červené pole a bílý kříž. |
+| Finsko · Island | Finsko má bílé pole a modrý kříž, Island modré pole a červený kříž. |
+| Finsko · Norsko | Norsko má červené pole, Finsko bílé. |
+| Finsko · Švédsko | Švédsko má modré pole a žlutý kříž, Finsko bílé pole a modrý kříž. |
+| Dánsko · Faerské ostrovy | Faerské ostrovy mají bílé pole a červený kříž v modrém lemu, Dánsko červené pole a bílý kříž. |
+| Ålandy · Dánsko | Ålandy mají modré pole a žlutý kříž s červeným uvnitř, Dánsko červené pole a bílý kříž. |
+| Ålandy · Faerské ostrovy | Ålandy mají modré pole a žlutý kříž, Faerské ostrovy bílé pole a červený kříž. |
+| Jordánsko · Kuvajt | Jordánsko má u žerdi trojúhelník s bílou hvězdou, Kuvajt černý lichoběžník bez hvězdy. |
+| Kuvajt · Palestina | Kuvajt má zelenou nahoře a u žerdi černý lichoběžník, Palestina černou nahoře a trojúhelník. |
+| Kuvajt · Súdán | Kuvajt má zelenou nahoře a černý lichoběžník, Súdán červenou nahoře a zelený trojúhelník. |
+| Západní Sahara · Jordánsko | Západní Sahara má červený půlměsíc s hvězdou uprostřed vlajky, Jordánsko bílou hvězdu v trojúhelníku. |
+| Západní Sahara · Palestina | Západní Sahara má uprostřed červený půlměsíc s hvězdou, Palestina nic. |
+| Západní Sahara · Súdán | Západní Sahara má černou nahoře a červený trojúhelník, Súdán červenou nahoře a zelený trojúhelník. |
+| Západní Sahara · Kuvajt | Západní Sahara má černou nahoře a červený trojúhelník, Kuvajt zelenou nahoře a černý lichoběžník. |
+| Egypt · Jemen | Egypt má uprostřed zlatého orla, Jemen je bez znaku. |
+| Egypt · Irák | Egypt má uprostřed zlatého orla, Irák zelený nápis. |
+| Irák · Jemen | Irák má uprostřed zelený nápis, Jemen nic. |
+| Rakousko · Lotyšsko | Lotyšsko má tmavě karmínovou a užší bílý pruh, Rakousko sytě červenou a pruhy stejně široké. |
+| Kanada · Peru | Kanada má uprostřed javorový list, Peru ho nemá. |
+| Libérie · Spojené státy americké | USA mají v kantonu padesát hvězd, Libérie jednu velkou. |
+| Libérie · Malajsie | Malajsie má v kantonu půlměsíc a hvězdu, Libérie jednu bílou hvězdu. |
+| Malajsie · Spojené státy americké | USA mají padesát hvězd, Malajsie půlměsíc a jednu čtrnácticípou. |
+| Itálie · Mexiko | Mexiko má uprostřed orla na kaktusu, Itálie prostřední pruh prázdný. |
+| Irsko · Mexiko | Mexiko má uprostřed orla a na konci červenou, Irsko nic a oranžovou. |
+| Pobřeží slonoviny · Mexiko | Mexiko má uprostřed orla na kaktusu, Pobřeží slonoviny nic – a jiné pořadí barev. |
+| Guatemala · Nikaragua | Guatemala má pruhy svislé, Nikaragua vodorovné a uprostřed trojúhelník s duhou. |
+| Guatemala · Salvador | Guatemala má pruhy svislé, Salvador vodorovné. |
+| Guatemala · Honduras | Guatemala má pruhy svislé, Honduras vodorovné s pěti modrými hvězdami. |
+| Nikaragua · Salvador | Nikaragua má ve znaku duhu, Salvador nápis DIOS UNION LIBERTAD. |
+| Honduras · Nikaragua | Honduras má uprostřed pět modrých hvězd, Nikaragua trojúhelník s duhou. |
+| Honduras · Salvador | Honduras má pět hvězd, Salvador znak s trojúhelníkem a nápisem. |
+| Argentina · Uruguay | Argentina má tři pruhy a slunce uprostřed, Uruguay devět pruhů a slunce v bílém rohu. |
+| Česko · Filipíny | Filipíny mají v trojúhelníku slunce a hvězdy a pruhy modrý a červený, Česko modrý klín bez kresby. |
+| Čína · Vietnam | Čína má pět žlutých hvězd v rohu, Vietnam jednu velkou uprostřed. |
+| Tunisko · Turecko | Tunisko má půlměsíc v bílém kruhu, Turecko přímo na červené. |
+| Alžírsko · Turecko | Alžírsko je zeleno-bílé, Turecko celé červené. |
+| Alžírsko · Tunisko | Alžírsko je zeleno-bílé s červeným půlměsícem, Tunisko celé červené s bílým kruhem. |
+| Indie · Niger | Indie má uprostřed modré kolo s paprsky, Niger oranžový kruh. |
+| Japonsko · Palau | Japonsko má bílé pole a červený kruh uprostřed, Palau modré pole a žlutý kruh u žerdi. |
+| Bangladéš · Japonsko | Bangladéš má zelené pole a kruh posunutý k žerdi, Japonsko bílé pole a kruh uprostřed. |
+| Bangladéš · Palau | Bangladéš má zelené pole a červený kruh, Palau světle modré a žlutý. |
+| Bolívie · Ghana | Ghana má uprostřed černou hvězdu, Bolívie znak se lamou a horou. |
+| Bolívie · Etiopie | Bolívie má červenou nahoře a znak, Etiopie zelenou nahoře a modrý kruh s hvězdou. |
+| Bolívie · Litva | Bolívie má červenou nahoře a znak, Litva žlutou nahoře a nic. |
+| Bolívie · Myanmar | Bolívie má červenou nahoře a znak, Myanmar žlutou nahoře a velkou bílou hvězdu. |
+| Ghana · Litva | Ghana má červenou nahoře a černou hvězdu, Litva žlutou nahoře a nic. |
+| Ghana · Myanmar | Ghana má červenou nahoře a černou hvězdu, Myanmar žlutou nahoře a velkou bílou. |
+| Etiopie · Ghana | Etiopie má zelenou nahoře a modrý kruh s hvězdou, Ghana červenou nahoře a černou hvězdu. |
+| Etiopie · Litva | Etiopie má zelenou nahoře a modrý kruh, Litva žlutou nahoře a nic. |
+| Etiopie · Myanmar | Etiopie má zelenou nahoře a modrý kruh, Myanmar žlutou nahoře a bílou hvězdu. |
+| Litva · Myanmar | Myanmar má uprostřed velkou bílou hvězdu, Litva nic. |
+| Austrálie · Fidži | Fidži má světle modré pole a vpravo štít, Austrálie tmavě modré a hvězdy Jižního kříže. |
+| Fidži · Nový Zéland | Fidži má světle modré pole a štít, Nový Zéland tmavě modré a čtyři červené hvězdy. |
+| Nizozemsko · Paraguay | Paraguay má uprostřed znak, Nizozemsko je bez něj. |
+| Lucembursko · Paraguay | Paraguay má uprostřed znak, Lucembursko je bez něj. |
+| Belgie · Německo | Belgie má pruhy svislé, Německo vodorovné – a v jiném pořadí. |
+| Keňa · Jižní Súdán | Jižní Súdán má u žerdi modrý trojúhelník se žlutou hvězdou, Keňa uprostřed štít. |
+| Keňa · Súdán | Keňa má uprostřed masajský štít s oštěpy, Súdán zelený trojúhelník u žerdi. |
+| Súdán · Jižní Súdán | Jižní Súdán má modrý trojúhelník se žlutou hvězdou, Súdán zelený bez hvězdy. |
+| Kostarika · Thajsko | Kostarika má široký prostřední pruh červený, Thajsko modrý. |
+| Haiti · Lichtenštejnsko | Lichtenštejnsko má u žerdi zlatou korunu, Haiti ji nemá. |
+| Řecko · Uruguay | Řecko má v rohu bílý kříž na modré, Uruguay zlaté slunce na bílé. |
+| Chile · Kuba | Chile má dva pruhy a modrý čtverec u žerdi, Kuba pět pruhů a červený trojúhelník. |
+| Bulharsko · Maďarsko | Bulharsko má bílou nahoře a zelenou uprostřed, Maďarsko červenou nahoře. |
+| Spojené arabské emiráty · Kuvajt | SAE mají u žerdi svislý červený pruh, Kuvajt černý lichoběžník – a dole červenou místo černé. |
+| Spojené království · Anglie | Anglie je jen červený kříž na bílé, Spojené království má tři kříže přes sebe. |
+| Spojené království · Skotsko | Skotsko je bílý šikmý kříž na modré, Spojené království má přes sebe i červené kříže. |
+| Anglie · Skotsko | Anglie má bílé pole a rovný červený kříž, Skotsko modré pole a bílý kříž našikmo. |

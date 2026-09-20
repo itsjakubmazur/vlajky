@@ -13,6 +13,7 @@ import { americas } from '../data/cs/americas';
 import { oceania } from '../data/cs/oceania';
 import { territories } from '../data/cs/territories';
 import { similarGroups } from '../data/similar';
+import { flagDifferences, pairKey } from '../data/differences';
 import type { CsCountry } from '../data/schema';
 import type { Country } from '../src/domain/types';
 import { CONTINENTS, SOVEREIGNTIES, SUBREGIONS } from '../src/domain/types';
@@ -104,6 +105,34 @@ for (const c of countries) {
 for (const [key, codes] of nameIndex) {
   const unique = [...new Set(codes)];
   if (unique.length > 1) fail(`Název „${key}“ patří víc zemím: ${unique.join(', ')}`);
+}
+
+// Ke každé zaměnitelné dvojici má být věta o tom, čím se liší. Chybějící
+// se jen připomene – prázdná věta je pořád lepší než vymyšlená.
+const pairsWithoutNote: string[] = [];
+for (const group of similarGroups) {
+  for (const a of group) {
+    for (const b of group) {
+      if (a >= b) continue;
+      const key = pairKey(a, b);
+      if (!flagDifferences[key] && !pairsWithoutNote.includes(key)) pairsWithoutNote.push(key);
+    }
+  }
+}
+if (pairsWithoutNote.length) {
+  warnings.push(
+    `Bez věty o rozdílu (${pairsWithoutNote.length}): ${pairsWithoutNote.join(', ')}`,
+  );
+}
+
+// Věta o rozdílu nesmí odkazovat na dvojici, která v datech není.
+for (const key of Object.keys(flagDifferences)) {
+  const [a, b] = key.split('|');
+  if (!a || !b) fail(`differences.ts: špatný klíč „${key}“`);
+  else if (!byCode.has(a) || !byCode.has(b)) fail(`differences.ts: neznámá dvojice ${key}`);
+  else if (!similarMap.get(a)?.has(b)) {
+    fail(`differences.ts: ${key} není zaměnitelná dvojice podle similar.ts`);
+  }
 }
 
 // Kontrola počtů podle sady

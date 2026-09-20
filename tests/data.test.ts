@@ -1,6 +1,8 @@
 import { readdirSync, existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { similarGroups } from '~data/similar';
+import { differenceFor, flagDifferences } from '~data/differences';
 import { ALL_COUNTRIES, getCountry } from '@/domain/countries';
 import { countriesInSet } from '~data/sets';
 import { CONTINENTS, SOVEREIGNTIES, SUBREGIONS } from '@/domain/types';
@@ -163,5 +165,35 @@ describe('data zemí', () => {
       if (c.funFact) continue;
       expect(c.needsReview.some((r) => r.includes('zajímavost')), c.code).toBe(true);
     }
+  });
+});
+
+describe('rozdíly mezi zaměnitelnými vlajkami', () => {
+  const pairs = (() => {
+    const out = new Set<string>();
+    for (const group of similarGroups) {
+      for (const a of group) for (const b of group) if (a < b) out.add(`${a}|${b}`);
+    }
+    return [...out];
+  })();
+
+  it('každá zaměnitelná dvojice má větu o rozdílu', () => {
+    const missing = pairs.filter((key) => !flagDifferences[key]);
+    expect(missing).toEqual([]);
+  });
+
+  it('žádná věta neodkazuje na dvojici mimo similar.ts', () => {
+    expect(Object.keys(flagDifferences).filter((key) => !pairs.includes(key))).toEqual([]);
+  });
+
+  it('věta zmiňuje obě země, ne jen jednu', () => {
+    // Bez obou stran by dítě nevědělo, čím se liší ta druhá.
+    const tooShort = Object.entries(flagDifferences).filter(([, text]) => text.length < 30);
+    expect(tooShort).toEqual([]);
+  });
+
+  it('na pořadí kódů ve dvojici nezáleží', () => {
+    expect(differenceFor('td', 'ro')).toBe(differenceFor('ro', 'td'));
+    expect(differenceFor('td', 'jp')).toBeNull();
   });
 });

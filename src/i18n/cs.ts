@@ -162,6 +162,7 @@ export const cs = {
     correct: 'Správně!',
     almost: 'Skoro!',
     wrong: 'Tahle byla těžká',
+    differenceTitle: 'Jak je rozeznáš',
     correctAnswerIs: 'Správně je',
     youWrote: (country: string) => `Napsal jsi ${country}`,
     ambiguous: 'Takhle se jmenujou dvě země. Která to má být?',
