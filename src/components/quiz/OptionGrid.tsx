@@ -13,6 +13,21 @@ interface OptionGridProps {
   onChoose: (code: string) => void;
 }
 
+/**
+ * Číslo klávesové zkratky. Ukáže se jen tam, kde je opravdová klávesnice
+ * (`pointer: fine`) – na mobilu by to byl jen další prvek navíc.
+ */
+function KeyHint({ index }: { index: number }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="absolute left-2 top-2 hidden h-5 w-5 items-center justify-center rounded-md bg-white/10 text-[0.65rem] font-extrabold tabular-nums text-faint [@media(pointer:fine)]:flex"
+    >
+      {index + 1}
+    </span>
+  );
+}
+
 function state(code: string, correctCode: string, chosen: string | null) {
   if (chosen === null) return 'glass hover:border-white/25 text-ink';
   if (code === correctCode) return 'border-mint/70 bg-mint/15 text-mint';
@@ -31,7 +46,7 @@ function state(code: string, correctCode: string, chosen: string | null) {
 export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: OptionGridProps) {
   return (
     <div className="stagger grid grid-cols-2 gap-2.5">
-      {options.map((code) => {
+      {options.map((code, index) => {
         const country = requireCountry(code);
         const revealed = chosen !== null && code === correctCode;
         return (
@@ -46,6 +61,7 @@ export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: 
               chosen,
             )}`}
           >
+            {chosen === null ? <KeyHint index={index} /> : null}
             {/* Přejezd světla po správné odpovědi – jedna krátká odměna. */}
             {revealed ? (
               <span

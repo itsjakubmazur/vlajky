@@ -5,6 +5,7 @@ import { requireCountry } from '@/domain/countries';
 import { FLASH_MS, type QuizModeId } from '@/domain/quiz/modes';
 import { cs } from '@/i18n/cs';
 import { useQuizSession } from '@/quiz/useQuizSession';
+import { useQuizKeyboard } from '@/quiz/useQuizKeyboard';
 import { useActivePool } from '@/quiz/useActivePool';
 import { FlagImage } from '@/components/FlagImage';
 import { QuizShell } from './QuizShell';
@@ -34,6 +35,16 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
   // dítě vsadilo tři jen tam, kde odpověď zná, a nešlo by o žádné riziko.
   const [staked, setStaked] = useState(false);
   useEffect(() => setStaked(false), [session.index, mode]);
+
+  // Klávesnice: 1–4 vyberou odpověď, Enter posune dál. Hák musí být
+  // nad všemi návraty, jinak by se pořadí háků mezi překresleními lišilo.
+  const keyboardOptions = session.question?.options ?? [];
+  useQuizKeyboard({
+    options: keyboardOptions,
+    onChoose: session.answerWithCode,
+    onNext: session.feedback ? session.next : null,
+    enabled: session.phase === 'question' || session.phase === 'feedback',
+  });
 
   if (session.phase === 'loading') {
     return (

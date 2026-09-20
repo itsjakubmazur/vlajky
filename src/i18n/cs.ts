@@ -5,6 +5,7 @@
 export const cs = {
   common: {
     back: 'Zpět',
+    home: 'Na začátek',
     next: 'Další',
     continue: 'Pokračovat',
     finish: 'Dokončit',
@@ -12,6 +13,13 @@ export const cs = {
     cancel: 'Zrušit',
     ofTotal: (a: number, b: number) => `${a} z ${b}`,
     loading: 'Načítám…',
+  },
+  errors: {
+    title: 'Něco se rozbilo',
+    desc: 'Nevadí, postup ve vlajkách je v pořádku – je uložený v tomhle zařízení.',
+    retry: 'Zkusit znovu',
+    notFoundTitle: 'Tady nic není',
+    notFoundDesc: 'Tahle stránka neexistuje. Zkus to od začátku.',
   },
   home: {
     play: 'Hrát',
