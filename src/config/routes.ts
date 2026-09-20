@@ -13,6 +13,7 @@ export const MODE_SLUGS = {
   'denni-vyzva': 'daily',
   slabiny: 'weak',
   'hlavni-mesta': 'capitals',
+  mapa: 'map',
 } as const satisfies Record<string, QuizModeId>;
 
 export type ModeSlug = keyof typeof MODE_SLUGS;

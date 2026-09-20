@@ -17,6 +17,11 @@ import {
   twinnableCountries,
 } from '@/domain/quiz/modes';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
+import {
+  MIN_SEPARATION,
+  pickMapDistractors,
+  roughDistance,
+} from '@/domain/quiz/mapDistractors';
 import { createRng } from '@/domain/rng';
 import type { CardState } from '@/domain/srs/types';
 
@@ -267,5 +272,40 @@ describe('hlavní města', () => {
     expect(touchesScheduler('pickByCapital')).toBe(false);
     expect(touchesScheduler('pickCountry')).toBe(true);
     expect(touchesScheduler('type')).toBe(true);
+  });
+});
+
+describe('otázka na mapě', () => {
+  it('nabídne čtyři místa, která se nepřekrývají', () => {
+    const q = buildQuestion({
+      mode: 'map',
+      target: requireCountry('bt'),
+      pool: world,
+      mastery: 'silver',
+      rng: createRng(11),
+      kind: 'pickOnMap',
+    });
+    expect(q.options).toContain('bt');
+    for (const a of q.options) {
+      for (const b of q.options) {
+        if (a === b) continue;
+        expect(roughDistance(requireCountry(a), requireCountry(b))).toBeGreaterThanOrEqual(
+          MIN_SEPARATION,
+        );
+      }
+    }
+  });
+
+  it('pokročilému nabídne bližší místa než začátečníkovi', () => {
+    const target = requireCountry('bt');
+    const near = pickMapDistractors(target, world, { rng: createRng(2), challenge: 0.9 });
+    const far = pickMapDistractors(target, world, { rng: createRng(2), challenge: 0 });
+    const mean = (list: typeof near) =>
+      list.reduce((sum, c) => sum + roughDistance(target, c), 0) / list.length;
+    expect(mean(near)).toBeLessThan(mean(far));
+  });
+
+  it('otázka na mapě nehne plánovačem vlajek', () => {
+    expect(touchesScheduler('pickOnMap')).toBe(false);
   });
 });

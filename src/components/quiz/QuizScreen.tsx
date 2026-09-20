@@ -13,6 +13,7 @@ import { QuizShell } from './QuizShell';
 import { OptionGrid } from './OptionGrid';
 import { TwinsQuestion } from './TwinsQuestion';
 import { TypingInput } from './TypingInput';
+import { MapQuestion } from './MapQuestion';
 import { StakePicker } from './StakePicker';
 import { FeedbackPanel } from './FeedbackPanel';
 import { ResultScreen } from './ResultScreen';
@@ -87,16 +88,19 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
         ? cs.quiz.whichIs(target.nameCs)
         : question.kind === 'type'
           ? cs.quiz.typeCountry
-          : question.kind === 'pickCapital'
-            ? cs.quiz.whichCapital
-            : question.kind === 'pickByCapital'
-              ? cs.quiz.whichFlagByCapital(target.capitalCs)
-              : cs.quiz.whichCountry;
+          : question.kind === 'pickOnMap'
+            ? cs.quiz.whereIsIt
+            : question.kind === 'pickCapital'
+              ? cs.quiz.whichCapital
+              : question.kind === 'pickByCapital'
+                ? cs.quiz.whichFlagByCapital(target.capitalCs)
+                : cs.quiz.whichCountry;
 
   const showsFlagInQuestion =
     question.kind === 'pickCountry' ||
     question.kind === 'type' ||
-    question.kind === 'pickCapital';
+    question.kind === 'pickCapital' ||
+    question.kind === 'pickOnMap';
   const awaitingStake = mode === 'risk' && !staked && !session.feedback;
   const flagVisible =
     !(mode === 'flash' && flashHidden && !session.feedback) && !awaitingStake;
@@ -150,6 +154,15 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
               options={question.options}
               asFlags={question.kind === 'pickFlag' || question.kind === 'pickByCapital'}
               label={question.kind === 'pickCapital' ? 'capital' : 'name'}
+              correctCode={question.code}
+              chosen={chosen}
+              onChoose={session.answerWithCode}
+            />
+          ) : null}
+
+          {!awaitingStake && question.kind === 'pickOnMap' ? (
+            <MapQuestion
+              options={question.options}
               correctCode={question.code}
               chosen={chosen}
               onChoose={session.answerWithCode}

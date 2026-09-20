@@ -4,7 +4,7 @@ import { useEffect, useRef, type CSSProperties } from 'react';
 import { useGameFeedback } from '@/components/useGameFeedback';
 import { getCountry, requireCountry } from '@/domain/countries';
 import { differenceFor } from '~data/differences';
-import { AUTO_NEXT_MS } from '@/domain/quiz/modes';
+import { AUTO_NEXT_MS, touchesScheduler } from '@/domain/quiz/modes';
 import { cs } from '@/i18n/cs';
 import { FlagImage } from '@/components/FlagImage';
 import { Button, Eyebrow } from '@/components/ui';
@@ -101,13 +101,26 @@ export function FeedbackPanel({
             </p>
           ) : null}
         </div>
-        <MasteryBadge
-          mastery={feedback.outcome.after}
-          label={cs.album.mastery[feedback.outcome.after]}
-        />
+        {/* Úroveň se ukazuje jen tam, kde se odpovědí opravdu pohnula –
+            u hlavních měst a mapy plánovač vlajek stojí. */}
+        {touchesScheduler(feedback.kind) ? (
+          <MasteryBadge
+            mastery={feedback.outcome.after}
+            label={cs.album.mastery[feedback.outcome.after]}
+          />
+        ) : null}
       </div>
 
-      {!correct ? (
+      {/* U otázky na mapě je odpověď vidět na mapě nad panelem – velká
+          vlajka navíc by ji vytlačila z obrazovky. */}
+      {!correct && feedback.kind === 'pickOnMap' ? (
+        <div className="rounded-glass bg-white/5 p-4 text-center">
+          <Eyebrow>{cs.quiz.correctAnswerIs}</Eyebrow>
+          <p className="display mt-1 text-xl">{country.nameCs}</p>
+        </div>
+      ) : null}
+
+      {!correct && feedback.kind !== 'pickOnMap' ? (
         <div className="flex flex-col items-center gap-3 rounded-glass bg-white/5 p-4">
           <Eyebrow>{cs.quiz.correctAnswerIs}</Eyebrow>
           <FlagImage code={country.code} size="xl" priority pulse />

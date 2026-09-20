@@ -5,6 +5,7 @@ import type { Mastery } from '@/domain/srs/types';
 import { cs } from '@/i18n/cs';
 import { FlagImage } from '@/components/FlagImage';
 import { MasteryBadge } from '@/components/MasteryBadge';
+import { MiniMap } from '@/components/map/MiniMap';
 import { Button, Eyebrow } from '@/components/ui';
 
 export function CountrySheet({
@@ -55,6 +56,13 @@ export function CountrySheet({
             <dd className="display mt-1 text-base">{cs.continents[country.continent]}</dd>
           </div>
         </dl>
+
+        <div className="glass-thin mt-2.5 rounded-2xl p-3.5">
+          <Eyebrow>{cs.album.whereTitle}</Eyebrow>
+          <div className="mt-2">
+            <MiniMap code={code} />
+          </div>
+        </div>
 
         {country.funFact ? (
           <div className="glass-thin mt-2.5 rounded-2xl p-3.5">

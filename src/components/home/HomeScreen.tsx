@@ -32,6 +32,7 @@ const MODE_CARDS = [
   { mode: 'flash', flags: ['np'] },
   { mode: 'risk', flags: ['qa'] },
   { mode: 'capitals', flags: ['fr'] },
+  { mode: 'map', flags: ['bt'] },
   { mode: 'marathon', flags: ['us', 'cn', 'in'] },
 ] as const;
 

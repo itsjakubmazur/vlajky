@@ -1,6 +1,7 @@
 import type { Country } from '../types';
 import type { Mastery } from '../srs/types';
 import { buildOptions, challengeFromMastery, pickDistractors } from './distractors';
+import { pickMapDistractors } from './mapDistractors';
 import { pick, shuffle, type Rng } from '../rng';
 
 export const QUIZ_MODES = [
@@ -17,6 +18,8 @@ export const QUIZ_MODES = [
   // Druhá osa znalosti: hlavní města. Data v `capitalCs` byla v aplikaci
   // od začátku, ukazovala se ale jen v detailu vlajky.
   'capitals',
+  // Třetí osa: kde to na světě vlastně je.
+  'map',
 ] as const;
 export type QuizModeId = (typeof QUIZ_MODES)[number] | 'placement' | 'boss' | 'weak';
 
@@ -33,6 +36,7 @@ export const SCORED_MODES: readonly QuizModeId[] = [
   'boss',
   'weak',
   'capitals',
+  'map',
 ];
 
 /**
@@ -43,7 +47,7 @@ export const SCORED_MODES: readonly QuizModeId[] = [
  * neprokázalo.
  */
 export function touchesScheduler(kind: QuestionKind): boolean {
-  return kind !== 'pickCapital' && kind !== 'pickByCapital';
+  return kind !== 'pickCapital' && kind !== 'pickByCapital' && kind !== 'pickOnMap';
 }
 
 /** Kolik životů má hráč v daném režimu; `null` = neomezeně. */
@@ -80,7 +84,9 @@ export type QuestionKind =
   /** vidí vlajku, vybírá hlavní město */
   | 'pickCapital'
   /** vidí hlavní město, vybírá vlajku */
-  | 'pickByCapital';
+  | 'pickByCapital'
+  /** vidí vlajku, ukazuje místo na mapě */
+  | 'pickOnMap';
 
 export interface Question {
   /** kód správné odpovědi */
@@ -112,6 +118,8 @@ export function kindForMode(mode: QuizModeId, rng: Rng): QuestionKind {
       return 'type';
     case 'twins':
       return 'twins';
+    case 'map':
+      return 'pickOnMap';
     case 'capitals':
       // Dvakrát z vlajky na město, jednou obráceně – ať se to nedá odjet
       // jedním směrem.
@@ -143,6 +151,20 @@ export function buildQuestion({
   kind,
 }: BuildQuestionOptions): Question {
   const resolved = kind ?? kindForMode(mode, rng);
+
+  // Na mapě rozhoduje vzdálenost, ne podobnost vlajek – ta je v otázce vidět.
+  if (resolved === 'pickOnMap') {
+    const distractors = pickMapDistractors(target, pool, {
+      rng,
+      challenge: challengeFromMastery(mastery),
+    });
+    return {
+      code: target.code,
+      kind: 'pickOnMap',
+      options: buildOptions(target, distractors, rng).map((c) => c.code),
+      mode,
+    };
+  }
 
   // Hlavní města se ptají na jinou věc než na vlajku, ale nabídka se staví
   // stejně – ze zemí. Rozdíl je jen v tom, co je na tlačítku a co v otázce.

@@ -133,6 +133,7 @@ export const cs = {
     boss: { name: 'Souboj', desc: 'Zrádná dvojice, pět otázek bez chyby' },
     weak: { name: 'Slabiny', desc: 'Vlajky, na kterých to nejčastěji láme' },
     capitals: { name: 'Hlavní města', desc: 'Vlajka → hlavní město a zpátky' },
+    map: { name: 'Kde to je', desc: 'Ukaž na mapě, odkud ta vlajka je' },
   },
   insight: {
     title: 'Jak ti to jde',
@@ -170,6 +171,8 @@ export const cs = {
     wrong: 'Tahle byla těžká',
     differenceTitle: 'Jak je rozeznáš',
     whichCapital: 'Jaké má tahle země hlavní město?',
+    whereIsIt: 'Odkud je tahle vlajka?',
+    mapHint: 'Klepni na správný špendlík.',
     whichFlagByCapital: (capital: string) => `Která země má hlavní město ${capital}?`,
     correctAnswerIs: 'Správně je',
     youWrote: (country: string) => `Napsal jsi ${country}`,
@@ -211,6 +214,8 @@ export const cs = {
     continent: 'Světadíl',
     similarFlags: 'Podobné vlajky',
     funFactTitle: 'Víš, že…',
+    whereIs: (name: string) => `Kde leží ${name}`,
+    whereTitle: 'Kde to je',
   },
   placement: {
     intro: 'Pár vlajek napříč světem. Co poznáš, to se učit nebudeš.',
