@@ -243,6 +243,8 @@ export const cs = {
     resetDone: 'Postup smazán.',
     offlineReady: 'Aplikace funguje i bez internetu.',
     about: 'O aplikaci',
+    autoNext: 'Plynulé kolo',
+    autoNextHint: 'Po správné odpovědi jede maraton, blesk, vabank a denní výzva dál samy.',
     sound: 'Zvuky',
     haptics: 'Vibrace',
     look: 'Vzhled',

@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 import { useGameFeedback } from '@/components/useGameFeedback';
 import { getCountry, requireCountry } from '@/domain/countries';
 import { differenceFor } from '~data/differences';
+import { AUTO_NEXT_MS } from '@/domain/quiz/modes';
 import { cs } from '@/i18n/cs';
 import { FlagImage } from '@/components/FlagImage';
 import { Button, Eyebrow } from '@/components/ui';
@@ -14,7 +15,16 @@ import type { Feedback } from '@/quiz/useQuizSession';
  * Po každé odpovědi: velká správná vlajka a zajímavost.
  * Po chybě žádné kárání – jen ukázat, jak to je, a jít dál.
  */
-export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext: () => void }) {
+export function FeedbackPanel({
+  feedback,
+  onNext,
+  autoNext = false,
+}: {
+  feedback: Feedback;
+  onNext: () => void;
+  /** Závodní režim se zapnutým plynulým kolem – po chvíli jede dál sám. */
+  autoNext?: boolean;
+}) {
   const panel = useRef<HTMLDivElement>(null);
   const play = useGameFeedback();
   const country = requireCountry(feedback.outcome.card.code);
@@ -30,6 +40,15 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
     // Zvuk patří k jedné odpovědi, ne ke každému překreslení.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Po chybě se nikdy nejede dál samo – to je jediné místo, kde se dítě
+  // dozví, čím se ty dvě vlajky liší.
+  const advances = autoNext && feedback.correct;
+  useEffect(() => {
+    if (!advances) return;
+    const timer = setTimeout(onNext, AUTO_NEXT_MS);
+    return () => clearTimeout(timer);
+  }, [advances, onNext]);
 
   const title = correct
     ? result.verdict === 'typo'
@@ -131,8 +150,15 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
         </div>
       ) : null}
 
-      <Button onClick={onNext} autoFocus>
-        {cs.common.next}
+      <Button onClick={onNext} autoFocus className="relative overflow-hidden">
+        {advances ? (
+          <span
+            aria-hidden="true"
+            className="absolute inset-y-0 left-0 bg-abyss/20 motion-safe:animate-[auto-next_var(--auto-next-ms)_linear_forwards] motion-reduce:hidden"
+            style={{ '--auto-next-ms': `${AUTO_NEXT_MS}ms` } as CSSProperties}
+          />
+        ) : null}
+        <span className="relative">{cs.common.next}</span>
       </Button>
     </div>
   );

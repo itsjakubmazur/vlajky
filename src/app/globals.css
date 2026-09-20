@@ -286,6 +286,16 @@ body::before {
   to { transform: translateX(220%); }
 }
 
+/* Odpočet plynulého kola – proužek přejede tlačítko „Další“. */
+@keyframes auto-next {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 @keyframes confetti-fall {
   0% {
     transform: translateY(0) rotate(0deg);

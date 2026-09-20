@@ -174,6 +174,14 @@ export function SettingsScreen() {
             on={progress.meta.hapticsOn}
             onChange={(value) => void setMeta({ hapticsOn: value })}
           />
+          <Toggle
+            label={cs.settings.autoNext}
+            on={progress.meta.autoNext}
+            onChange={(value) => void setMeta({ autoNext: value })}
+          />
+          <p className="mt-0.5 text-[0.75rem] leading-snug text-faint">
+            {cs.settings.autoNextHint}
+          </p>
         </div>
       </Panel>
 

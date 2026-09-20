@@ -47,6 +47,8 @@ export interface Meta {
   frame: string;
   theme: string;
   soundOn: boolean;
+  /** Po správné odpovědi jet v závodních režimech dál samo. */
+  autoNext: boolean;
   hapticsOn: boolean;
 }
 
@@ -81,6 +83,7 @@ export function emptyProgress(): Progress {
       frame: 'frame-classic',
       theme: 'theme-night',
       soundOn: true,
+      autoNext: true,
       hapticsOn: true,
     },
     log: [],

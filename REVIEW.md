@@ -216,13 +216,13 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 
 | Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
 |---|---|---|---|---|---|---|---|
-| `ag` | **Antigua a Barbuda** | – | – | Saint Johns | 5 | 1.50:1 | Na vlajce Antiguy a Barbudy vychází zlaté slunce nad černým pruhem. |
+| `ag` | **Antigua a Barbuda** | – | – | Saint John's | 5 | 1.50:1 | Na vlajce Antiguy a Barbudy vychází zlaté slunce nad černým pruhem. |
 | `bs` | **Bahamy** | Bahamské společenství | – | Nassau | 4 | 2.00:1 | Bahamská vlajka má tři vodorovné pruhy a u žerdi černý trojúhelník. |
 | `bb` | **Barbados** | – | – | Bridgetown | 4 | 1.50:1 | Uprostřed barbadoské vlajky je černý trojzubec, kterému chybí násada. |
 | `bz` | **Belize** | – | – | Belmopan | 5 | 1.67:1 | Belize je jediná země, která má na vlajce nakreslené lidi. |
 | `dm` | **Dominika** | Dominické společenství | – | Roseau | 5 | 2.00:1 | Uprostřed vlajky Dominiky sedí papoušek amazoňan císařský. |
 | `do` | **Dominikánská republika** | – | – | Santo Domingo | 4 | 1.50:1 | Dominikánská republika je jediná země, která má na vlajce otevřenou bibli. |
-| `gd` | **Grenada** | – | – | Saint Georges | 5 | 1.67:1 | Na grenadské vlajce je muškátový oříšek, kterým je ostrov proslulý. |
+| `gd` | **Grenada** | – | – | Saint George's | 5 | 1.67:1 | Na grenadské vlajce je muškátový oříšek, kterým je ostrov proslulý. |
 | `gt` | **Guatemala** | Guatemalská republika | – | Guatemala | 4 | 1.60:1 | Guatemalská vlajka má pruhy nastojato a ve znaku ptáka kvesala. |
 | `ht` | **Haiti** | Republika Haiti | – | Port-au-Prince | 4 | 1.67:1 | Haiti mívalo stejnou vlajku jako Lichtenštejnsko, dokud si Lichtenštejnsko nepřidalo korunu. |
 | `hn` | **Honduras** | Honduraská republika | – | Tegucigalpa | 5 | 2.00:1 | Pět hvězd uprostřed honduraské vlajky je pět zemí bývalé středoamerické federace. |

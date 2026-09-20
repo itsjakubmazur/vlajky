@@ -53,6 +53,17 @@ export function livesFor(mode: QuizModeId): number | null {
   return null;
 }
 
+/**
+ * Závodní režimy: hraje se o čas, ne o poučení.
+ *
+ * Jen v nich se po správné odpovědi posouvá dál samo – jinde má dítě číst
+ * zajímavost a rozdíl mezi podobnými vlajkami, a na to potřebuje čas.
+ */
+export const RACE_MODES: readonly QuizModeId[] = ['marathon', 'flash', 'risk', 'daily', 'boss'];
+
+/** Za jak dlouho po správné odpovědi se jede dál. */
+export const AUTO_NEXT_MS = 1400;
+
 /** Režim, kde se vlajka po chvíli schová. */
 export const FLASH_MS = 2000;
 

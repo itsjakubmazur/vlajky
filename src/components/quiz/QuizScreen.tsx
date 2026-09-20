@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { requireCountry } from '@/domain/countries';
-import { FLASH_MS, type QuizModeId } from '@/domain/quiz/modes';
+import { FLASH_MS, RACE_MODES, type QuizModeId } from '@/domain/quiz/modes';
 import { cs } from '@/i18n/cs';
 import { useQuizSession } from '@/quiz/useQuizSession';
 import { useQuizKeyboard } from '@/quiz/useQuizKeyboard';
 import { useActivePool } from '@/quiz/useActivePool';
+import { useProgress } from '@/store/StoreProvider';
 import { FlagImage } from '@/components/FlagImage';
 import { QuizShell } from './QuizShell';
 import { OptionGrid } from './OptionGrid';
@@ -18,6 +19,8 @@ import { ResultScreen } from './ResultScreen';
 
 export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string }) {
   const session = useQuizSession(mode, { bossId });
+  const { progress } = useProgress();
+  const autoNext = progress.meta.autoNext;
   const { set, pool: regionPool } = useActivePool();
   // Denní výzva a souboje jedou přes celou sadu, viz useActivePool.
   const pool = mode === 'daily' || mode === 'boss' ? set : regionPool;
@@ -173,7 +176,11 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
           ) : null}
 
           {session.feedback ? (
-            <FeedbackPanel feedback={session.feedback} onNext={session.next} />
+            <FeedbackPanel
+              feedback={session.feedback}
+              onNext={session.next}
+              autoNext={autoNext && RACE_MODES.includes(mode)}
+            />
           ) : null}
         </div>
       </div>
