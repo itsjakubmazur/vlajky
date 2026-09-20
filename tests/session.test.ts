@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { ALL_COUNTRIES, requireCountry } from '@/domain/countries';
 import { countriesInSet } from '~data/sets';
-import { buildSession, placementOrder, SESSION_LENGTH } from '@/domain/quiz/session';
+import { buildSession, SESSION_LENGTH } from '@/domain/quiz/session';
+import {
+  bandSkill,
+  bandStats,
+  estimateKnown,
+  PLACEMENT_LENGTH,
+  placementPlan,
+} from '@/domain/srs/placement';
 import { buildQuestion, kindForMode, pickTwin, twinnableCountries } from '@/domain/quiz/modes';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
 import { createRng } from '@/domain/rng';
@@ -56,20 +63,57 @@ describe('sestavení hry', () => {
 });
 
 describe('rozřazovací test', () => {
-  it('projde všechny vlajky v sadě', () => {
-    const order = placementOrder(world);
-    expect(order).toHaveLength(world.length);
-    expect(new Set(order).size).toBe(order.length);
+  it('je krátký a vzorkuje napříč obtížnostmi', () => {
+    const plan = placementPlan(world);
+    expect(plan.length).toBeLessThanOrEqual(PLACEMENT_LENGTH + 6);
+    expect(new Set(plan).size).toBe(plan.length);
+    const bands = new Set(plan.map((code) => requireCountry(code).difficulty));
+    expect(bands).toEqual(new Set([1, 2, 3, 4, 5]));
   });
 
   it('začíná od nejznámějších', () => {
-    const order = placementOrder(world);
-    expect(requireCountry(order[0]!).difficulty).toBe(1);
-    expect(requireCountry(order[order.length - 1]!).difficulty).toBe(5);
+    const plan = placementPlan(world);
+    expect(requireCountry(plan[0]!).difficulty).toBe(1);
+    expect(requireCountry(plan[plan.length - 1]!).difficulty).toBe(5);
   });
 
   it('má stabilní pořadí, aby šlo navázat po pauze', () => {
-    expect(placementOrder(world)).toEqual(placementOrder(world));
+    expect(placementPlan(world)).toEqual(placementPlan(world));
+  });
+
+  it('z výsledků odhadne, kolik vlajek dítě umí', () => {
+    const plan = placementPlan(world);
+    const allRight = Object.fromEntries(plan.map((code) => [code, true]));
+    expect(estimateKnown(bandStats(world, allRight))).toBe(world.length);
+
+    const allWrong = Object.fromEntries(plan.map((code) => [code, false]));
+    expect(estimateKnown(bandStats(world, allWrong))).toBe(0);
+  });
+
+  it('pásmo, na které se nezeptal, si nedomýšlí', () => {
+    const plan = placementPlan(world);
+    const partial = Object.fromEntries(
+      plan
+        .filter((code) => requireCountry(code).difficulty <= 2)
+        .map((code) => [code, true]),
+    );
+    const skill = bandSkill(bandStats(world, partial));
+    expect(skill[1]).toBe(1);
+    expect(skill[5]).toBeUndefined();
+  });
+
+  it('po testu se nové vlajky berou od nejslabšího pásma', () => {
+    const now = new Date('2024-05-01T10:00:00Z');
+    const codes = buildSession({
+      mode: 'classic',
+      pool: world,
+      cards: {},
+      now,
+      rng: createRng(9),
+      bandSkill: { 1: 0.2, 2: 1, 3: 1, 4: 1, 5: 1 },
+    });
+    const easy = codes.filter((code) => requireCountry(code).difficulty === 1);
+    expect(easy.length).toBeGreaterThan(0);
   });
 });
 

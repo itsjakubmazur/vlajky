@@ -11,6 +11,7 @@ export const MODE_SLUGS = {
   blesk: 'flash',
   vabank: 'risk',
   'denni-vyzva': 'daily',
+  slabiny: 'weak',
 } as const satisfies Record<string, QuizModeId>;
 
 export type ModeSlug = keyof typeof MODE_SLUGS;
@@ -29,5 +30,6 @@ export const ROUTES = {
   placement: '/rozrazovaci-test',
   settings: '/nastaveni',
   bosses: '/souboje',
+  insight: '/prehled',
   play: (slug: ModeSlug) => `/hrat/${slug}`,
 };

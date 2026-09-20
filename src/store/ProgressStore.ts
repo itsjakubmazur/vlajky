@@ -1,9 +1,10 @@
 import type { RegionId, SetId } from '~data/sets';
 import type { AnswerLog, CardState } from '@/domain/srs/types';
+import type { PlacementResults } from '@/domain/srs/placement';
 import type { DailyResult } from '@/domain/game/daily';
 
 /** Verze schématu – při změně tvaru dat se postup zmigruje, ne zahodí. */
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 
 /** Nejlepší výkon v daném režimu. */
 export interface GameRecord {
@@ -20,6 +21,8 @@ export interface Meta {
   placementDone: boolean;
   /** Kolik vlajek už v rozřazovacím testu odbavil (kvůli pauze uprostřed). */
   placementIndex: number;
+  /** Jak dopadly jednotlivé otázky testu – z toho se odhadují pásma. */
+  placementResults: PlacementResults;
   activeSet: SetId;
   /** Část světa, na kterou se hraje. */
   region: RegionId;
@@ -64,6 +67,7 @@ export function emptyProgress(): Progress {
     meta: {
       placementDone: false,
       placementIndex: 0,
+      placementResults: {},
       activeSet: 'world',
       region: 'all',
       streakDays: 0,

@@ -20,6 +20,3 @@ export const TIMING = {
 
 /** Kolik karet je v denní dávce chytrého opakování. */
 export const DAILY_REVIEW = { min: 10, max: 15 };
-
-/** Rozřazovací test se dělí na dávky, aby dítě nevyhořelo. */
-export const PLACEMENT_BATCH = 20;

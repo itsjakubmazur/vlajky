@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { MemoryStore } from '@/store/MemoryStore';
 import { migrate } from '@/store/LocalStorageStore';
-import { dayKey, emptyProgress, LOG_LIMIT, nextStreak } from '@/store/ProgressStore';
+import {
+  dayKey,
+  emptyProgress,
+  LOG_LIMIT,
+  nextStreak,
+  SCHEMA_VERSION,
+} from '@/store/ProgressStore';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
 
 describe('úložiště postupu', () => {
@@ -80,7 +86,8 @@ describe('migrace uložených dat', () => {
     const migrated = migrate({ cards: { td: {} } } as never);
     expect(migrated.meta.activeSet).toBe('world');
     expect(migrated.log).toEqual([]);
-    expect(migrated.schemaVersion).toBe(2);
+    expect(migrated.schemaVersion).toBe(SCHEMA_VERSION);
+    expect(migrated.meta.placementResults).toEqual({});
   });
 
   it('starý postup ze schématu 1 se nezahodí a herní pole se doplní', () => {

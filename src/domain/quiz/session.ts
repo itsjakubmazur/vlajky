@@ -1,6 +1,7 @@
 import type { Country } from '../types';
 import type { CardState } from '../srs/types';
 import { dailyBatch, isDue, isNew } from '../srs/scheduler';
+import { weakest } from '../srs/insight';
 import { shuffle, type Rng } from '../rng';
 import { twinnableCountries, type QuizModeId } from './modes';
 import { dailyCodes } from '../game/daily';
@@ -19,6 +20,11 @@ export interface SessionOptions {
   dayKey?: string;
   /** Který souboj se hraje. */
   bossId?: string;
+  /**
+   * Úspěšnost v jednotlivých pásmech obtížnosti z rozřazovacího testu.
+   * Nové vlajky se pak berou od pásma, které dítěti šlo nejhůř.
+   */
+  bandSkill?: Record<number, number>;
 }
 
 /**
@@ -37,6 +43,7 @@ export function buildSession({
   length = SESSION_LENGTH,
   dayKey,
   bossId,
+  bandSkill,
 }: SessionOptions): string[] {
   const candidates = mode === 'twins' ? twinnableCountries(pool) : [...pool];
 
@@ -61,6 +68,14 @@ export function buildSession({
     );
   }
 
+  // Trénink slabin: přesně ty vlajky, na kterých to dítě nejčastěji láme.
+  if (mode === 'weak') {
+    const codes = new Set(candidates.map((c) => c.code));
+    return weakest(Object.values(cards), (code) => codes.has(code), length).map(
+      (item) => item.code,
+    );
+  }
+
   if (mode === 'review') {
     return dailyBatch(
       Object.values(cards),
@@ -71,15 +86,24 @@ export function buildSession({
   }
 
   const due: string[] = [];
-  const fresh: string[] = [];
+  const freshCountries: Country[] = [];
   const known: string[] = [];
 
   for (const country of shuffle(candidates, rng)) {
     const card = cards[country.code];
-    if (isNew(card)) fresh.push(country.code);
+    if (isNew(card)) freshCountries.push(country);
     else if (isDue(card!, now)) due.push(country.code);
     else known.push(country.code);
   }
+
+  // Když je po rozřazovacím testu, bere se nejdřív pásmo, které šlo nejhůř.
+  // Bez testu zůstává náhodné pořadí – dosazovat odhad by bylo vymýšlení.
+  if (bandSkill) {
+    freshCountries.sort(
+      (a, b) => (bandSkill[a.difficulty] ?? 1) - (bandSkill[b.difficulty] ?? 1),
+    );
+  }
+  const fresh = freshCountries.map((c) => c.code);
 
   // Trocha už zvládnutých vlajek v každé hře je schválně – dítě potřebuje
   // i pocit, že mu to jde, ne jen samé nové.
@@ -98,17 +122,4 @@ export function buildSession({
   }
 
   return shuffle(selected.slice(0, length), rng);
-}
-
-/**
- * Rozřazovací test jde přes všechny vlajky v pevném pořadí od nejznámějších,
- * aby dítě nezačalo Tuvalu. Pořadí je stabilní, takže po pauze lze navázat.
- */
-export function placementOrder(pool: readonly Country[]): string[] {
-  return [...pool]
-    .sort((a, b) => {
-      if (a.difficulty !== b.difficulty) return a.difficulty - b.difficulty;
-      return a.code.localeCompare(b.code);
-    })
-    .map((c) => c.code);
 }

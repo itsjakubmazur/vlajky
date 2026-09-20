@@ -15,7 +15,7 @@ export const QUIZ_MODES = [
   'risk',
   'daily',
 ] as const;
-export type QuizModeId = (typeof QUIZ_MODES)[number] | 'placement' | 'boss';
+export type QuizModeId = (typeof QUIZ_MODES)[number] | 'placement' | 'boss' | 'weak';
 
 /** Režimy, ve kterých se hraje o rekord a počítají se body. */
 export const SCORED_MODES: readonly QuizModeId[] = [
@@ -28,6 +28,7 @@ export const SCORED_MODES: readonly QuizModeId[] = [
   'risk',
   'daily',
   'boss',
+  'weak',
 ];
 
 /** Kolik životů má hráč v daném režimu; `null` = neomezeně. */
@@ -79,7 +80,9 @@ export function kindForMode(mode: QuizModeId, rng: Rng): QuestionKind {
     case 'twins':
       return 'twins';
     case 'review':
-      // Chytré opakování střídá způsoby, ať to není stereotyp.
+    case 'weak':
+      // Chytré opakování i trénink slabin střídají způsoby, ať to není
+      // stereotyp – a hlavně ať se vlajka pozná i z druhé strany.
       return pick(['pickCountry', 'pickFlag', 'type'] as const, rng) ?? 'pickCountry';
   }
 }

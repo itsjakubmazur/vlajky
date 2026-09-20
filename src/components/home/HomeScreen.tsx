@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 import { useActivePool } from '@/quiz/useActivePool';
 import { isDue } from '@/domain/srs/scheduler';
-import { placementOrder } from '@/domain/quiz/session';
+import { placementPlan } from '@/domain/srs/placement';
 import { rankProgress } from '@/domain/game/ranks';
 import { bossesFor } from '@/domain/game/bosses';
 import { dayKey } from '@/domain/game/day';
@@ -59,7 +59,7 @@ export function HomeScreen() {
   // Souboje spojují i vlajky z různých světadílů, proto celá sada.
   const bosses = useMemo(() => bossesFor(set), [set]);
   const dailyDone = progress.meta.dailyResults[today];
-  const placementTotal = placementOrder(set).length;
+  const placementTotal = placementPlan(set).length;
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pb-10 pt-8">
@@ -226,13 +226,18 @@ export function HomeScreen() {
         })}
       </div>
 
-      <div className="mt-7 grid grid-cols-2 gap-2.5">
-        <ButtonLink href={ROUTES.album} variant="secondary">
-          {cs.home.album}
+      <div className="mt-7 flex flex-col gap-2.5">
+        <ButtonLink href={ROUTES.insight} variant="secondary">
+          {cs.insight.open}
         </ButtonLink>
-        <ButtonLink href={ROUTES.settings} variant="secondary">
-          {cs.home.settings}
-        </ButtonLink>
+        <div className="grid grid-cols-2 gap-2.5">
+          <ButtonLink href={ROUTES.album} variant="secondary">
+            {cs.home.album}
+          </ButtonLink>
+          <ButtonLink href={ROUTES.settings} variant="secondary">
+            {cs.home.settings}
+          </ButtonLink>
+        </div>
       </div>
     </div>
   );

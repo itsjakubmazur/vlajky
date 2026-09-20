@@ -23,6 +23,8 @@ import { DAILY_COUNT, dailyCodes, shareText } from '@/domain/game/daily';
 import { dailyMissions, isComplete, missionProgress } from '@/domain/game/missions';
 import { UNLOCKS, unlockedIds } from '@/domain/game/unlocks';
 import { buildSession } from '@/domain/quiz/session';
+import { fadingSoon, weakest } from '@/domain/srs/insight';
+import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
 import { livesFor } from '@/domain/quiz/modes';
 import { createRng } from '@/domain/rng';
 
@@ -326,5 +328,49 @@ describe('odemykání', () => {
   it('samotné body neodemknou to, co chce zlaté vlajky', () => {
     const ids = unlockedIds({ totalPoints: 500_000, golds: 0, bosses: 0 });
     expect(ids).not.toContain('frame-gold');
+  });
+});
+
+describe('přehled slabin a předpověď', () => {
+  const now = new Date('2026-03-01T10:00:00Z');
+  const inSet = () => true;
+
+  it('nejslabší jsou ty s největším podílem chyb', () => {
+    const cards = [
+      { ...emptyCardState('fr', now), seen: 10, correct: 9 },
+      { ...emptyCardState('td', now), seen: 10, correct: 2 },
+      { ...emptyCardState('ro', now), seen: 10, correct: 5 },
+      { ...emptyCardState('jp', now), seen: 10, correct: 10 },
+    ];
+    const weak = weakest(cards, inSet);
+    expect(weak.map((w) => w.code)).toEqual(['td', 'ro', 'fr']);
+    expect(weak[0]!.errorRate).toBeCloseTo(0.8);
+  });
+
+  it('jedna chyba u nové vlajky nepředběhne vlajku s historií', () => {
+    const cards = [
+      { ...emptyCardState('fr', now), seen: 1, correct: 0 },
+      { ...emptyCardState('td', now), seen: 6, correct: 3 },
+    ];
+    expect(weakest(cards, inSet).map((w) => w.code)).toEqual(['td', 'fr']);
+  });
+
+  it('předpověď bere jen vlajky, které ještě nejsou po termínu', () => {
+    let fresh = emptyCardState('td', now);
+    fresh = applyAnswer(fresh, { correct: true, elapsedMs: 3000, mode: 'classic' }, now);
+    const overdue = {
+      ...emptyCardState('ro', now),
+      seen: 3,
+      correct: 3,
+      fsrs: { ...fresh.fsrs, due: new Date(now.getTime() - 86_400_000).toISOString() },
+    };
+    const codes = fadingSoon([fresh, overdue], inSet, now).map((f) => f.code);
+    expect(codes).not.toContain('ro');
+  });
+
+  it('nikdy neviděná vlajka v přehledu není', () => {
+    const unseen = emptyCardState('tv', now);
+    expect(weakest([unseen], inSet)).toEqual([]);
+    expect(fadingSoon([unseen], inSet, now)).toEqual([]);
   });
 });

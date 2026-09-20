@@ -5,10 +5,12 @@ import { requireCountry } from '@/domain/countries';
 import type { QuizModeId } from '@/domain/quiz/modes';
 import type { RoundTally } from '@/domain/game/score';
 import { shareText } from '@/domain/game/daily';
+import { bandStats, estimateKnown } from '@/domain/srs/placement';
 import { cs } from '@/i18n/cs';
 import { APP_NAME } from '@/config/app';
 import { ROUTES } from '@/config/routes';
 import { useProgress, type RoundOutcome } from '@/store/StoreProvider';
+import { useActivePool } from '@/quiz/useActivePool';
 import { useGameFeedback } from '@/components/useGameFeedback';
 import { Button, ButtonLink, Eyebrow, Panel, ProgressRing } from '@/components/ui';
 import { useCountUp } from '@/components/useCountUp';
@@ -41,6 +43,7 @@ export function ResultScreen({
   onAgain: () => void;
 }) {
   const { progress, masteryOf } = useProgress();
+  const { set } = useActivePool();
   const [detail, setDetail] = useState<string | null>(null);
   const play = useGameFeedback();
   const shownPoints = useCountUp(tally.points, 1100);
@@ -78,6 +81,11 @@ export function ResultScreen({
 
   const celebrate = isRecord || goldEarned.length > 0 || bossWon;
 
+  // Po rozřazovacím testu se z pásem odhadne, kolik vlajek dítě umí –
+  // jinak by 24 otázek skončilo bez jediné odpovědi na „a co tedy umím?“.
+  const placementKnown =
+    mode === 'placement' ? estimateKnown(bandStats(set, progress.meta.placementResults)) : null;
+
   return (
     <div className="stagger flex flex-col gap-4">
       {celebrate ? <Confetti seed={tally.points || 1} /> : null}
@@ -100,6 +108,14 @@ export function ResultScreen({
           </p>
         </div>
       </Panel>
+
+      {placementKnown !== null ? (
+        <Panel className="border-mint/30">
+          <Eyebrow>{cs.placement.done}</Eyebrow>
+          <p className="display mt-1 text-lg">{cs.placement.summary(placementKnown, set.length)}</p>
+          <p className="mt-1 text-[0.78rem] leading-snug text-faint">{cs.insight.estimateHint}</p>
+        </Panel>
+      ) : null}
 
       <div className="grid grid-cols-2 gap-2.5">
         <Panel className={isRecord ? 'border-gold/40' : ''}>

@@ -11,12 +11,13 @@ import {
   type Question,
   type QuizModeId,
 } from '@/domain/quiz/modes';
-import { buildSession, placementOrder } from '@/domain/quiz/session';
+import { buildSession } from '@/domain/quiz/session';
+import { bandSkill, bandStats, placementPlan } from '@/domain/srs/placement';
+import type { PlacementResults } from '@/domain/srs/placement';
 import { buildAnswerIndex, checkAnswer, type AnswerResult } from '@/domain/answer/match';
 import { isDue } from '@/domain/srs/scheduler';
 import { clampElapsed, pointsFor, speedOf, stakeLoss, type RoundTally } from '@/domain/game/score';
 import { createRng } from '@/domain/rng';
-import { PLACEMENT_BATCH } from '@/config/app';
 import { cs } from '@/i18n/cs';
 import { dayKey } from '@/store/ProgressStore';
 import { useProgress, type AnswerOutcome, type RoundOutcome } from '@/store/StoreProvider';
@@ -99,6 +100,12 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
   /** Čas strávený mimo aplikaci – z měření odpovědi se odečítá. */
   const awayMs = useRef(0);
   const awaySince = useRef<number | null>(null);
+  /**
+   * Výsledky rozřazovacího testu se sbírají do refu a teprve pak ukládají.
+   * Kdyby se skládaly ze stavu, o poslední odpověď by se dalo při rychlém
+   * klepání přijít.
+   */
+  const placementAnswers = useRef<PlacementResults>({});
 
   useEffect(() => {
     const onVisibility = () => {
@@ -122,9 +129,10 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
   const { set, pool: regionPool, region } = useActivePool();
 
   // Denní výzva musí být pro všechny stejná, souboje spojují vlajky
-  // z různých světadílů a chytré opakování musí mít přednost před filtrem –
-  // jinak by karty mimo vybranou část světa tiše vypadly z hlavy.
-  const ignoresRegion = mode === 'daily' || mode === 'boss' || mode === 'review';
+  // z různých světadílů a opakování i trénink slabin mají přednost před
+  // filtrem – jinak by karty mimo vybranou část světa tiše vypadly z hlavy.
+  const ignoresRegion =
+    mode === 'daily' || mode === 'boss' || mode === 'review' || mode === 'weak';
   const pool = ignoresRegion ? set : regionPool;
 
   // V malé části světa by nešly poskládat čtyři možnosti, tak se na
@@ -139,13 +147,11 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     if (!ready) return;
     const rng = createRng(Date.now() ^ nonce);
     const now = new Date();
+    placementAnswers.current = { ...progress.meta.placementResults };
 
     const codes =
       mode === 'placement'
-        ? placementOrder(pool).slice(
-            progress.meta.placementIndex,
-            progress.meta.placementIndex + PLACEMENT_BATCH,
-          )
+        ? placementPlan(pool).slice(progress.meta.placementIndex)
         : buildSession({
             mode,
             pool,
@@ -154,6 +160,9 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
             rng,
             dayKey: dayKey(now),
             bossId: config.bossId,
+            bandSkill: progress.meta.placementDone
+              ? bandSkill(bandStats(pool, progress.meta.placementResults))
+              : undefined,
           });
 
     setQuestions(
@@ -164,7 +173,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
           pool: distractorPool,
           mastery: progress.cards[code]?.mastery ?? 'new',
           rng,
-          kind: mode === 'review' ? kindForMode('review', rng) : undefined,
+          kind: mode === 'review' || mode === 'weak' ? kindForMode(mode, rng) : undefined,
         }),
       ),
     );
@@ -231,6 +240,10 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         isPlacement: mode === 'placement',
         assisted,
       });
+
+      if (mode === 'placement') {
+        placementAnswers.current[question.code] = result.correct;
+      }
 
       if (result.correct) {
         setCorrectCount((c) => c + 1);
@@ -303,8 +316,12 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
 
     if (mode === 'placement') {
       const done = progress.meta.placementIndex + 1;
-      const total = placementOrder(pool).length;
-      void setMeta({ placementIndex: done, placementDone: done >= total });
+      const total = placementPlan(pool).length;
+      void setMeta({
+        placementIndex: done,
+        placementDone: done >= total,
+        placementResults: { ...placementAnswers.current },
+      });
     }
   }, [mode, progress.meta.placementIndex, pool, setMeta]);
 
