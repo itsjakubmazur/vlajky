@@ -5,18 +5,30 @@ import { similarGroups } from '~data/similar';
 import { differenceFor, flagDifferences } from '~data/differences';
 import { ALL_COUNTRIES, getCountry } from '@/domain/countries';
 import { countriesInSet } from '~data/sets';
+import { OMITTED_UN } from '@/config/app';
 import { CONTINENTS, SOVEREIGNTIES, SUBREGIONS } from '@/domain/types';
 
 const world = countriesInSet([...ALL_COUNTRIES], 'world');
 const territories = countriesInSet([...ALL_COUNTRIES], 'territories');
 
+const OMITTED = Object.keys(OMITTED_UN);
+
 describe('data zemí', () => {
-  it('sada Svět má 197 záznamů', () => {
-    expect(world.length).toBe(197);
+  it('sada Svět má 197 záznamů minus schválně vynechané', () => {
+    expect(world.length).toBe(197 - OMITTED.length);
   });
 
-  it('obsahuje 193 členů OSN', () => {
-    expect(ALL_COUNTRIES.filter((c) => c.sovereignty === 'un').length).toBe(193);
+  it('obsahuje všechny členy OSN kromě schválně vynechaných', () => {
+    expect(ALL_COUNTRIES.filter((c) => c.sovereignty === 'un').length).toBe(
+      193 - OMITTED.length,
+    );
+  });
+
+  it('vynechaný stát v datech opravdu není', () => {
+    // Vlajku, kterou nemáme jak ukázat správně, je lepší neukazovat vůbec.
+    for (const code of OMITTED) {
+      expect(ALL_COUNTRIES.map((c) => c.code)).not.toContain(code);
+    }
   });
 
   it('obsahuje Vatikán, Palestinu, Kosovo i Tchaj-wan', () => {

@@ -18,6 +18,7 @@ import type { CsCountry } from '../data/schema';
 import type { Country } from '../src/domain/types';
 import { CONTINENTS, SOVEREIGNTIES, SUBREGIONS } from '../src/domain/types';
 import { normalize } from '../src/domain/text/normalize';
+import { OMITTED_UN } from '../src/config/app';
 import { hasFlag, readAccent, readRatio, FLAG_SOURCE_NAME } from './flag-source';
 
 const source: CsCountry[] = [...europe, ...asia, ...africa, ...americas, ...oceania, ...territories];
@@ -135,9 +136,17 @@ for (const key of Object.keys(flagDifferences)) {
   }
 }
 
-// Kontrola počtů podle sady
+// Kontrola počtů podle sady. Vynechané státy jsou vyjmenované v OMITTED_UN,
+// ať se nemůže stát, že nějaký zmizí omylem.
+const omitted = Object.keys(OMITTED_UN);
+for (const code of omitted) {
+  if (byCode.has(code)) fail(`${code} je v OMITTED_UN, ale zároveň v datech`);
+}
+const expectedUn = 193 - omitted.length;
 const unCount = countries.filter((c) => c.sovereignty === 'un').length;
-if (unCount !== 193) fail(`Členů OSN má být 193, je ${unCount}`);
+if (unCount !== expectedUn) {
+  fail(`Členů OSN má být ${expectedUn} (193 minus ${omitted.length} vynechaných), je ${unCount}`);
+}
 
 // Pokrytí mapou světa (chybějící = malé ostrovní státy, jen upozornění)
 type Geometry = { id?: string };

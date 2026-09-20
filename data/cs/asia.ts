@@ -1,8 +1,6 @@
 import type { CsCountry } from '../schema';
 
 export const asia: CsCountry[] = [
-  { code: 'af', nameCs: 'Afghánistán', nameCsOfficial: 'Afghánská islámská republika', capitalCs: 'Kábul', continent: 'asia', subregion: 'southAsia', sovereignty: 'un', lat: 33.9, lng: 67.7, difficulty: 4,
-    review: ['NEVYŘEŠENO: aplikace ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021). Dnešní bílá vlajka s vyznáním víry není v žádném dostupném balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Až seženeš SVG, stačí ho uložit jako data/flags-override/af.svg a spustit npm run data.'] },
   { code: 'am', nameCs: 'Arménie', nameCsOfficial: 'Arménská republika', capitalCs: 'Jerevan', continent: 'asia', subregion: 'caucasus', sovereignty: 'un', lat: 40.2, lng: 45.0, difficulty: 3,
     funFact: 'Spodní pruh arménské vlajky se úředně popisuje jako meruňkový.' },
   { code: 'az', nameCs: 'Ázerbájdžán', nameCsOfficial: 'Ázerbájdžánská republika', capitalCs: 'Baku', continent: 'asia', subregion: 'caucasus', sovereignty: 'un', lat: 40.3, lng: 47.7, difficulty: 4,

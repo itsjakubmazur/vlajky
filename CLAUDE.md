@@ -257,6 +257,15 @@ spočítá odpovídající transformaci z `viewBox` (včetně výchozího
 který přepsat nejde, **skončí chybou** – radši hlasitě spadnout než tiše vydat
 rozbitou vlajku. Hlídá to i test v `tests/data.test.ts`.
 
+**Afghánistán v aplikaci není.** Dnešní vlajku (bílá s vyznáním víry) nemá
+žádný dostupný balíček a arabská kaligrafie se nedá poctivě nakreslit zpaměti;
+balíček by ukázal vlajku Islámské republiky, platnou do roku 2021. Naučit dítě
+zastaralou vlajku je horší než ji neučit, takže sada má 196 záznamů místo 197.
+Vynechané státy jsou vyjmenované v `OMITTED_UN` (`src/config/app.ts`), hlídá
+je build i test a jsou vypsané v REVIEW.md – aby se nemohlo stát, že nějaký
+zmizí omylem. Až bude SVG po ruce, stačí zemi vrátit do `data/cs/asia.ts`,
+soubor uložit jako `data/flags-override/af.svg` a spustit `npm run data`.
+
 **„Kongo“ se neuznává ani jedné zemi.** Je to v češtině dvojznačné slovo,
 takže odpověď dostane výsledek `ambiguous`: nepočítá se jako chyba, jen se
 aplikace doptá, která země to má být. Viz `AMBIGUOUS_ANSWERS` v `match.ts`.
@@ -290,11 +299,6 @@ Niger je chyba, ne překlep – i kdyby byla vzdálenost malá. Viz `match.ts`.
 
 ## Co čeká na kontrolu
 
-`REVIEW.md` (generovaný) má **jednu** otevřenou otázku: **Afghánistán**.
-Nově je v něm navíc tabulka **„Čím se zaměnitelné vlajky liší“** (107 vět) –
-je to to nejdůležitější, co se z aplikace dá naučit, takže stojí za přečtení.
-
-Aplikace ukazuje vlajku Islámské republiky (do roku 2021). Dnešní bílou vlajku
-s vyznáním víry nemá žádný dostupný balíček a arabská kaligrafie se nedá
-poctivě nakreslit zpaměti. Až se SVG sežene, stačí ho uložit jako
-`data/flags-override/af.svg` a spustit `npm run data`.
+`REVIEW.md` (generovaný) nemá otevřenou otázku. Za přečtení stojí tabulka
+**„Čím se zaměnitelné vlajky liší“** (107 vět) – je to to nejdůležitější,
+co se z aplikace dá naučit.

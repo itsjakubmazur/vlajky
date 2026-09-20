@@ -14,10 +14,10 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 ## Přehled
 
 - Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
-- Států v sadě „Svět“: **197** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
+- Států v sadě „Svět“: **196** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
 - Území v bonusové sadě: **31**
-- Zajímavost o vlajce chybí u **23** záznamů
-- Otevřených otázek k rozhodnutí: **1**
+- Zajímavost o vlajce chybí u **22** záznamů
+- Otevřených otázek k rozhodnutí: **0**
 
 ### Co NENÍ ověřené
 
@@ -27,8 +27,7 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 
 ## Otevřené otázky
 
-- **Afghánistán** (`af`)
-  - NEVYŘEŠENO: aplikace ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021). Dnešní bílá vlajka s vyznáním víry není v žádném dostupném balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Až seženeš SVG, stačí ho uložit jako data/flags-override/af.svg a spustit npm run data.
+_Žádné._
 
 ## Rozhodnutá sporná místa
 
@@ -42,12 +41,19 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 - **Rusko** (`ru`) – zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti.
 - **Turecko** (`tr`) – leží v Asii i v Evropě, vedeme ho v Asii.
 
+## Schválně vynechané státy
+
+Vlajku, kterou nemáme jak ukázat správně, je lepší neukazovat vůbec.
+Až bude po ruce poctivé SVG, stačí zemi vrátit do `data/cs/*.ts`.
+
+- `af` – Afghánistán – dnešní vlajka (bílá s vyznáním víry) není v žádném dostupném balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Balíček by ukázal vlajku Islámské republiky, platnou do roku 2021.
+
 ## Chybějící zajímavosti
 
 U těchhle vlajek jsem nenašel fakt, za který bych ručil. Radši prázdné než vymyšlené –
 když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká vlajka).
 
-`af` Afghánistán · `ai` Anguilla · `as` Americká Samoa · `aw` Aruba · `ax` Ålandy · `bm` Bermudy · `ck` Cookovy ostrovy · `cw` Curaçao · `eh` Západní Sahara · `fk` Falklandy · `gb-nir` Severní Irsko · `gg` Guernsey · `gu` Guam · `je` Jersey · `ky` Kajmanské ostrovy · `mo` Macao · `mp` Severní Mariany · `ms` Montserrat · `nc` Nová Kaledonie · `pf` Francouzská Polynésie · `tc` Turks a Caicos · `vg` Britské Panenské ostrovy · `vi` Americké Panenské ostrovy
+`ai` Anguilla · `as` Americká Samoa · `aw` Aruba · `ax` Ålandy · `bm` Bermudy · `ck` Cookovy ostrovy · `cw` Curaçao · `eh` Západní Sahara · `fk` Falklandy · `gb-nir` Severní Irsko · `gg` Guernsey · `gu` Guam · `je` Jersey · `ky` Kajmanské ostrovy · `mo` Macao · `mp` Severní Mariany · `ms` Montserrat · `nc` Nová Kaledonie · `pf` Francouzská Polynésie · `tc` Turks a Caicos · `vg` Britské Panenské ostrovy · `vi` Americké Panenské ostrovy
 
 ## Evropa (46)
 
@@ -100,11 +106,10 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 | `ua` | **Ukrajina** | – | – | Kyjev | 2 | 1.50:1 | Modrá na ukrajinské vlajce je nebe a žlutá lán obilí pod ním. |
 | `va` | **Vatikán** | Městský stát Vatikán | – | Vatikán | 3 | 1.00:1 | Vatikánská vlajka je spolu se švýcarskou jediná čtvercová a jsou na ní zkřížené klíče. |
 
-## Asie (48)
+## Asie (47)
 
 | Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
 |---|---|---|---|---|---|---|---|
-| `af` | **Afghánistán** | Afghánská islámská republika | – | Kábul | 4 | 1.50:1 | **— CHYBÍ —** |
 | `am` | **Arménie** | Arménská republika | – | Jerevan | 3 | 2.00:1 | Spodní pruh arménské vlajky se úředně popisuje jako meruňkový. |
 | `az` | **Ázerbájdžán** | Ázerbájdžánská republika | – | Baku | 4 | 2.00:1 | Na ázerbájdžánské vlajce je půlměsíc a hvězda s osmi cípy. |
 | `bh` | **Bahrajn** | Bahrajnské království | – | Manáma | 4 | 1.67:1 | Bílou a červenou odděluje na bahrajnské vlajce pět zubů – jeden za každý pilíř islámu. |

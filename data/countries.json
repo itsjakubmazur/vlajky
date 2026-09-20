@@ -2,7 +2,7 @@
   "meta": {
     "generated": "scripts/build-countries.ts – NEEDITOVAT RUČNĚ",
     "flagSource": "svg-country-flags (public domain, zdroj Wikipedia)",
-    "count": 228
+    "count": 227
   },
   "countries": [
     {
@@ -59,32 +59,6 @@
       "needsReview": [],
       "iso3": "ARE",
       "numeric": "784"
-    },
-    {
-      "code": "af",
-      "nameCs": "Afghánistán",
-      "nameCsOfficial": "Afghánská islámská republika",
-      "aliases": [],
-      "capitalCs": "Kábul",
-      "continent": "asia",
-      "subregion": "southAsia",
-      "sovereignty": "un",
-      "lat": 33.9,
-      "lng": 67.7,
-      "similar": [],
-      "difficulty": 4,
-      "funFact": null,
-      "ratio": [
-        900,
-        600
-      ],
-      "accent": "#d32011",
-      "needsReview": [
-        "NEVYŘEŠENO: aplikace ukazuje černo-červeno-zelenou vlajku Islámské republiky (do roku 2021). Dnešní bílá vlajka s vyznáním víry není v žádném dostupném balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Až seženeš SVG, stačí ho uložit jako data/flags-override/af.svg a spustit npm run data.",
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
-      "iso3": "AFG",
-      "numeric": "004"
     },
     {
       "code": "ag",
