@@ -1,4 +1,4 @@
-import { readdirSync, existsSync } from 'node:fs';
+import { readdirSync, existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ALL_COUNTRIES, getCountry } from '@/domain/countries';
@@ -135,6 +135,17 @@ describe('data zemí', () => {
     const files = new Set(readdirSync(dir));
     for (const c of ALL_COUNTRIES) {
       expect(files.has(`${c.code}.svg`), c.code).toBe(true);
+    }
+  });
+
+  it('žádná vlajka nepoužívá vnořený <svg>', () => {
+    // `transform` na elementu <svg> je až SVG 2 a Safari ho ignoruje –
+    // znak se pak vykreslí jinde a jinak velký než v Chromu.
+    const dir = join(process.cwd(), 'public', 'flags');
+    if (!existsSync(dir)) return; // vlajky se generují buildem
+    for (const file of readdirSync(dir)) {
+      const svg = readFileSync(join(dir, file), 'utf8');
+      expect((svg.match(/<svg/g) ?? []).length, file).toBe(1);
     }
   });
 

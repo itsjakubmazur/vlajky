@@ -176,6 +176,14 @@ rovnoměrným zvětšením kolem středu – znak je kruhový a vztažený k vý
 takže se tím nedeformuje. Výsledky jsou v repozitáři, build tedy nepotřebuje
 síť. Opravené: **Sýrie** (2024), **Kyrgyzstán** (2023), **Dominika**.
 
+**Vnořený `<svg>` se při buildu zplošťuje do `<g>`.** `transform` na elementu
+`<svg>` je až SVG 2 a Safari ho ignoruje – znak se pak vykreslí jinde a jinak
+velký než v Chromu. Přesně tím trpělo Slovinsko. `scripts/copy-flags.ts`
+spočítá odpovídající transformaci z `viewBox` (včetně výchozího
+`preserveAspectRatio`) a zapíše ji na `<g>`. Když narazí na vnořený `<svg>`,
+který přepsat nejde, **skončí chybou** – radši hlasitě spadnout než tiše vydat
+rozbitou vlajku. Hlídá to i test v `tests/data.test.ts`.
+
 **„Kongo“ se neuznává ani jedné zemi.** Je to v češtině dvojznačné slovo,
 takže odpověď dostane výsledek `ambiguous`: nepočítá se jako chyba, jen se
 aplikace doptá, která země to má být. Viz `AMBIGUOUS_ANSWERS` v `match.ts`.
