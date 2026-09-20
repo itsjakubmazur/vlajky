@@ -5,6 +5,8 @@ import { useMemo } from 'react';
 import { useActivePool } from '@/quiz/useActivePool';
 import { isDue } from '@/domain/srs/scheduler';
 import { placementPlan } from '@/domain/srs/placement';
+import { weakest } from '@/domain/srs/insight';
+import { nextUp } from '@/domain/game/nextUp';
 import { rankProgress } from '@/domain/game/ranks';
 import { bossesFor } from '@/domain/game/bosses';
 import { dayKey } from '@/domain/game/day';
@@ -55,6 +57,30 @@ export function HomeScreen() {
     return { due, collected, gold };
   }, [pool, progress.cards]);
 
+  // Jedno velké tlačítko, které rozhodne za dítě. Slabiny se počítají
+  // přes celou sadu – stejně jako je ukazuje přehled.
+  const weakCount = useMemo(() => {
+    const codes = new Set(set.map((c) => c.code));
+    return weakest(Object.values(progress.cards), (code) => codes.has(code)).length;
+  }, [set, progress.cards]);
+
+  const suggestion = nextUp({
+    placementDone: progress.meta.placementDone,
+    dailyDone: Boolean(progress.meta.dailyResults[today]),
+    dueCount: stats.due,
+    weakCount,
+  });
+
+  const suggestionHref =
+    suggestion.mode === 'placement'
+      ? ROUTES.placement
+      : ROUTES.play(SLUG_BY_MODE[suggestion.mode]);
+
+  const suggestionLabel =
+    suggestion.reason === 'review'
+      ? cs.home.nextUp.review(stats.due)
+      : cs.home.nextUp[suggestion.reason];
+
   const rank = rankProgress(progress.meta.totalPoints);
   // Souboje spojují i vlajky z různých světadílů, proto celá sada.
   const bosses = useMemo(() => bossesFor(set), [set]);
@@ -71,6 +97,15 @@ export function HomeScreen() {
           </span>
         ) : null}
       </header>
+
+      {/* Velké „Hrát“ – rozcestník až pod ním. */}
+      <Panel raised className="mb-5 border-mint/30">
+        <Eyebrow>{cs.home.nextUpTitle}</Eyebrow>
+        <p className="mb-4 mt-1.5 text-sm leading-snug text-muted">{suggestionLabel}</p>
+        <ButtonLink href={suggestionHref} className="w-full">
+          {cs.home.play}
+        </ButtonLink>
+      </Panel>
 
       <div className="mb-5">
         <RegionPicker />

@@ -22,6 +22,7 @@ import { BOSS_QUESTIONS, bossName, bossesFor } from '@/domain/game/bosses';
 import { DAILY_COUNT, dailyCodes, shareText } from '@/domain/game/daily';
 import { dailyMissions, isComplete, missionProgress } from '@/domain/game/missions';
 import { UNLOCKS, unlockedIds } from '@/domain/game/unlocks';
+import { nextUp } from '@/domain/game/nextUp';
 import { buildSession } from '@/domain/quiz/session';
 import { fadingSoon, weakest } from '@/domain/srs/insight';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
@@ -372,5 +373,26 @@ describe('přehled slabin a předpověď', () => {
     const unseen = emptyCardState('tv', now);
     expect(weakest([unseen], inSet)).toEqual([]);
     expect(fadingSoon([unseen], inSet, now)).toEqual([]);
+  });
+});
+
+describe('co hrát teď', () => {
+  const base = { placementDone: true, dailyDone: true, dueCount: 0, weakCount: 0 };
+
+  it('bez rozřazovacího testu začíná testem', () => {
+    expect(nextUp({ ...base, placementDone: false, dueCount: 5 }).mode).toBe('placement');
+  });
+
+  it('denní výzva má přednost před opakováním – po půlnoci je pryč', () => {
+    expect(nextUp({ ...base, dailyDone: false, dueCount: 20 }).reason).toBe('daily');
+  });
+
+  it('pak to, co je po termínu, a teprve potom slabiny', () => {
+    expect(nextUp({ ...base, dueCount: 3, weakCount: 9 }).mode).toBe('review');
+    expect(nextUp({ ...base, weakCount: 9 }).mode).toBe('weak');
+  });
+
+  it('když nic nehoří, nabídne klasiku', () => {
+    expect(nextUp(base).mode).toBe('classic');
   });
 });

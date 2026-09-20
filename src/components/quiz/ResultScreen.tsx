@@ -18,6 +18,9 @@ import { FlagImage } from '@/components/FlagImage';
 import { Confetti } from '@/components/Confetti';
 import { CountrySheet } from '@/components/album/CountrySheet';
 
+/** Kolik vlajek se vejde do „Co ti uteklo“, než z toho bude zeď. */
+const MISSED_SHOWN = 12;
+
 function encouragement(correct: number, total: number): string {
   if (total === 0) return cs.result.encouragement.keepGoing;
   const ratio = correct / total;
@@ -81,6 +84,10 @@ export function ResultScreen({
 
   const celebrate = isRecord || goldEarned.length > 0 || bossWon;
 
+  // Dvacet vlajek pod sebou už není přehled, ale zeď. Zbytek najde dítě
+  // v přehledu slabin, kam patří.
+  const shownMissed = missed.slice(0, MISSED_SHOWN);
+
   // Po rozřazovacím testu se z pásem odhadne, kolik vlajek dítě umí –
   // jinak by 24 otázek skončilo bez jediné odpovědi na „a co tedy umím?“.
   const placementKnown =
@@ -117,24 +124,27 @@ export function ResultScreen({
         </Panel>
       ) : null}
 
-      <div className="grid grid-cols-2 gap-2.5">
-        <Panel className={isRecord ? 'border-gold/40' : ''}>
-          <Eyebrow>{isRecord ? cs.game.record : cs.records.title}</Eyebrow>
-          <p className={`display mt-1 text-lg tabular-nums ${isRecord ? 'text-gold' : ''}`}>
-            {isRecord
-              ? outcome?.previous
-                ? cs.game.recordBefore(outcome.previous.points)
-                : cs.game.record
-              : best
-                ? cs.game.bestEver(best.points)
-                : cs.game.noRecord}
-          </p>
-        </Panel>
-        <Panel>
-          <Eyebrow>{cs.game.combo}</Eyebrow>
-          <p className="display mt-1 text-lg tabular-nums text-gold">{tally.bestCombo}×</p>
-        </Panel>
-      </div>
+      {/* Rozřazovací test se o rekord nehraje, tak se ani neukazuje. */}
+      {placementKnown === null ? (
+        <div className="grid grid-cols-2 gap-2.5">
+          <Panel className={isRecord ? 'border-gold/40' : ''}>
+            <Eyebrow>{isRecord ? cs.game.record : cs.records.title}</Eyebrow>
+            <p className={`display mt-1 text-lg tabular-nums ${isRecord ? 'text-gold' : ''}`}>
+              {isRecord
+                ? outcome?.previous
+                  ? cs.game.recordBefore(outcome.previous.points)
+                  : cs.game.record
+                : best
+                  ? cs.game.bestEver(best.points)
+                  : cs.game.noRecord}
+            </p>
+          </Panel>
+          <Panel>
+            <Eyebrow>{cs.game.combo}</Eyebrow>
+            <p className="display mt-1 text-lg tabular-nums text-gold">{tally.bestCombo}×</p>
+          </Panel>
+        </div>
+      ) : null}
 
       {goldEarned.length > 0 ? (
         <Panel className="border-gold/35">
@@ -156,7 +166,7 @@ export function ResultScreen({
         <Panel>
           <Eyebrow>{cs.game.missed}</Eyebrow>
           <div className="mt-3 flex flex-wrap gap-2">
-            {missed.map((code, i) => (
+            {shownMissed.map((code, i) => (
               <button
                 key={`${code}-${i}`}
                 type="button"
@@ -170,6 +180,11 @@ export function ResultScreen({
               </button>
             ))}
           </div>
+          {missed.length > shownMissed.length ? (
+            <p className="mt-2.5 text-[0.72rem] font-semibold text-faint">
+              {cs.game.missedMore(missed.length - shownMissed.length)}
+            </p>
+          ) : null}
         </Panel>
       ) : null}
 
@@ -184,7 +199,9 @@ export function ResultScreen({
       ) : null}
 
       <div className="flex flex-col gap-2.5">
-        {mode === 'daily' ? (
+        {placementKnown !== null ? (
+          <ButtonLink href={ROUTES.home}>{cs.home.play}</ButtonLink>
+        ) : mode === 'daily' ? (
           <Button onClick={() => void share()} variant={copied ? 'secondary' : 'primary'}>
             {copied ? cs.daily.copied : cs.daily.share}
           </Button>

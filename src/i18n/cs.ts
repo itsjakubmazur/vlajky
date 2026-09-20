@@ -39,6 +39,15 @@ export const cs = {
     regionAll: 'Celý svět',
     regionCount: (n: number) => `${n} vlajek`,
     todayLabel: 'Dnes',
+    nextUpTitle: 'Co teď',
+    nextUp: {
+      placement: 'Začni rozřazovacím testem',
+      daily: 'Zahraj si dnešní výzvu',
+      review: (n: number) =>
+        n === 1 ? 'Jedna vlajka čeká na zopakování' : `${n} vlajek čeká na zopakování`,
+      weak: 'Vezmi si na paškál svoje slabiny',
+      classic: 'Nic nehoří – prostě si zahraj',
+    },
   },
   game: {
     points: 'bodů',
@@ -59,6 +68,7 @@ export const cs = {
     stake: 'Sázka',
     stakeHint: 'Vsaď dřív, než uvidíš vlajku. Čím víc, tím víc získáš – ale chyba bolí.',
     missed: 'Co ti uteklo',
+    missedMore: (n: number) => (n === 1 ? '…a ještě jedna' : `…a ještě ${n} dalších`),
     rank: 'Hodnost',
     ranks: {
       novacek: 'Nováček',
