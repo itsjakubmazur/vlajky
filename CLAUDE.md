@@ -10,6 +10,7 @@ testera, který už vlajky umí hodně dobře.
 | **1 – MVP** | ✅ hotovo | 5 režimů, album, mapa, rozřazovací test, FSRS, PWA offline |
 | **1b – gamifikace** | ✅ hotovo | body a kombo, 4 nové režimy, denní výzva, mise, hodnosti, souboje, odemykání, zvuky |
 | **1c – učení** | ✅ hotovo | krátký rozřazovací test, přehled „Jak ti to jde“, režim Slabiny, klávesnice, obrazovky pro chyby |
+| **1d – tři osy** | ✅ hotovo | rozdíly podobných vlajek, Hlavní města, Kde to je (mapa), přehled záměn, graf sbírky, hledání v albu |
 | 2 – Supabase | ⬜ nezačato | rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
@@ -58,19 +59,21 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 |---|---|
 | `data/cs/*.ts` | **ruční zdroj pravdy** pro česká data (názvy, města, zajímavosti) |
 | `data/similar.ts` | skupiny zaměnitelných vlajek |
+| `data/differences.ts` | **ruční** věty „čím se ty dvě vlajky liší“ (107 dvojic) |
 | `data/countries.json` | GENEROVANÉ – needitovat |
 | `scripts/build-countries.ts` | sloučení + validace dat |
 | `scripts/flag-source.ts` | jediné místo, kde se řeší zdroj SVG |
 | `data/flags-override/` | ručně opravené vlajky – mají přednost před balíčkem |
 | `scripts/make-overrides.ts` | generátor těch oprav (spouští se ručně) |
 | `src/domain/answer/match.ts` | vyhodnocení napsané odpovědi |
-| `src/domain/quiz/` | distraktory, režimy, sestavení hry |
+| `src/domain/quiz/` | distraktory, režimy, sestavení hry, vzdálenosti pro mapu |
 | `src/domain/srs/` | FSRS, úrovně zvládnutí, rozřazovací vzorek, přehled slabin |
 | `src/domain/game/` | body, hodnosti, souboje, denní výzva, mise, odemykání, „co hrát teď“ |
 | `src/store/ProgressStore.ts` | rozhraní úložiště (fáze 2 = nová implementace) |
 | `src/i18n/cs.ts` | **všechny** texty rozhraní |
 | `src/config/app.ts` | název aplikace, složení sady, prahy |
 | `src/quiz/useActivePool.ts` | co se zrovna hraje: sada × část světa |
+| `src/components/map/geometry.ts` | geometrie světové mapy – jedna projekce pro album, kvíz i detail |
 
 ## Vizuální systém
 
@@ -173,6 +176,44 @@ Gamifikace dává důvod hrát, tahle vrstva dává důvod se něco naučit.
   před opakováním schválně – po půlnoci je nenávratně pryč.
 - **Po kole je vidět, co uteklo** – dvanáct vlajek, klepnutím se otevře
   detail. Zbytek patří do přehledu slabin.
+- **Po chybě je vidět, čím se ty dvě vlajky liší.** Ukázat správnou vlajku
+  samo o sobě neřekne, jak ji příště poznat. `data/differences.ts` má větu
+  ke každé ze 107 zaměnitelných dvojic, build i test hlídají, že žádná
+  nechybí a že neodkazuje na dvojici mimo `similar.ts`. Celá tabulka je
+  v REVIEW.md ke kontrole. Chybějící věta = neukáže se nic, nevymýšlí se.
+- **S čím si to pleteš.** Do logu se ukládá i špatná odpověď (`given`),
+  takže přehled umí říct „Niger sis 4× dal jako Nigérii“ a rovnou k tomu
+  přidat větu o rozdílu.
+- **Graf sbírky.** Z logu se historie vyčíst nedá (strop 500 odpovědí),
+  proto se po každé odpovědi ukládá denní snímek (`meta.history`, 120 dní).
+  Nasbírané a zlaté jsou dva grafy pod sebou, ne dvě čáry v jednom – zlaté
+  jsou podmnožina nasbíraných, rozdíl mezi čarami by nic neznamenal. Dny
+  bez hraní přenášejí poslední hodnotu; sbírka se sama nezmenšuje.
+
+## Tři osy znalosti
+
+Vlajka sama je jen jedna otázka. Data v `countries.json` unesou tři.
+
+| Osa | Režim | Co je v otázce |
+|---|---|---|
+| vlajka → země | Klasika, Opačně, Napiš, Dvojčata… | vlajka nebo název |
+| vlajka → hlavní město | Hlavní města | vlajka i název města (oba směry) |
+| vlajka → místo na světě | Kde to je | vlajka a čtyři špendlíky na mapě |
+
+**Hlavní města ani mapa nehýbou plánovačem vlajek** (`touchesScheduler`).
+Vlajka je v obou případech v otázce vidět, takže správná odpověď není důkaz,
+že ji dítě pozná, a špatná není důkaz opaku. Body, mise i hodnost se počítají
+normálně – jen karta vlajky zůstane, kde byla. Proto se u těchhle otázek
+neukazuje ani odznak úrovně: tvrdil by změnu, která se nestala.
+
+**Na mapě rozhoduje vzdálenost, ne podobnost vlajek.** Klepat přímo do obrysů
+zemí by na telefonu nešlo (Lucembursko má na světové mapě pár pixelů), takže
+se nabídnou čtyři špendlíky vzdálené od sebe aspoň 15° (`MIN_SEPARATION`).
+Začátečník dostane body rozházené po světě, pokročilý sousední země.
+
+**Plynulé kolo.** V závodních režimech (`RACE_MODES`) se po správné odpovědi
+jede dál samo po 1,4 s. Jinde ne: v klasice a opakování má dítě číst
+zajímavost a rozdíl. Po chybě nikdy – tam se to „jak je rozeznáš“ dozví.
 
 ## Konvence
 
@@ -250,6 +291,9 @@ Niger je chyba, ne překlep – i kdyby byla vzdálenost malá. Viz `match.ts`.
 ## Co čeká na kontrolu
 
 `REVIEW.md` (generovaný) má **jednu** otevřenou otázku: **Afghánistán**.
+Nově je v něm navíc tabulka **„Čím se zaměnitelné vlajky liší“** (107 vět) –
+je to to nejdůležitější, co se z aplikace dá naučit, takže stojí za přečtení.
+
 Aplikace ukazuje vlajku Islámské republiky (do roku 2021). Dnešní bílou vlajku
 s vyznáním víry nemá žádný dostupný balíček a arabská kaligrafie se nedá
 poctivě nakreslit zpaměti. Až se SVG sežene, stačí ho uložit jako
