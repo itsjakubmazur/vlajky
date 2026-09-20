@@ -4,6 +4,8 @@ import { useMemo, useState } from 'react';
 import { requireCountry } from '@/domain/countries';
 import { bandStats, estimateKnown } from '@/domain/srs/placement';
 import { confusions, fadingSoon, weakest, FORECAST_DAYS } from '@/domain/srs/insight';
+import { series } from '@/domain/game/history';
+import { dayKey } from '@/domain/game/day';
 import { differenceFor } from '~data/differences';
 import { ROUTES, SLUG_BY_MODE } from '@/config/routes';
 import { cs } from '@/i18n/cs';
@@ -12,6 +14,10 @@ import { useProgress } from '@/store/StoreProvider';
 import { FlagImage } from '@/components/FlagImage';
 import { CountrySheet } from '@/components/album/CountrySheet';
 import { ButtonLink, Eyebrow, Panel } from '@/components/ui';
+import { ProgressChart } from './ProgressChart';
+
+/** Kolik dní ukazuje graf. Měsíc je dost na to, aby byl vidět postup. */
+const CHART_DAYS = 30;
 
 /** Malá dlaždice s vlajkou, názvem a jedním číslem pod ním. */
 function FlagStat({
@@ -67,6 +73,11 @@ export function InsightScreen() {
   );
   const mixUps = useMemo(() => confusions(progress.log, inSet), [progress.log, inSet]);
 
+  const chart = useMemo(
+    () => series(progress.meta.history, dayKey(new Date()), CHART_DAYS),
+    [progress.meta.history],
+  );
+
   const estimate = useMemo(() => {
     if (!progress.meta.placementDone) return null;
     return estimateKnown(bandStats(set, progress.meta.placementResults));
@@ -77,6 +88,17 @@ export function InsightScreen() {
       <h1 className="display mb-6 text-3xl">{cs.insight.title}</h1>
 
       <div className="stagger flex flex-col gap-3">
+        <Panel>
+          <Eyebrow>{cs.insight.chartTitle}</Eyebrow>
+          {chart.length >= 2 ? (
+            <div className="mt-3">
+              <ProgressChart points={chart} total={set.length} />
+            </div>
+          ) : (
+            <p className="mt-1.5 text-sm leading-snug text-muted">{cs.insight.chartEmpty}</p>
+          )}
+        </Panel>
+
         {estimate !== null ? (
           <Panel>
             <Eyebrow>{cs.modes.placement.name}</Eyebrow>

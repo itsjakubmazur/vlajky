@@ -17,6 +17,9 @@ import { isLevelUp } from '@/domain/srs/mastery';
 import type { CardState, Mastery } from '@/domain/srs/types';
 import type { RoundTally } from '@/domain/game/score';
 import type { DailyResult } from '@/domain/game/daily';
+import { snapshotOf, withSnapshot } from '@/domain/game/history';
+import { ALL_COUNTRIES } from '@/domain/countries';
+import { countriesInSet } from '~data/sets';
 import { LocalStorageStore } from './LocalStorageStore';
 import {
   dayKey,
@@ -59,6 +62,16 @@ interface ProgressContextValue {
 }
 
 const ProgressContext = createContext<ProgressContextValue | null>(null);
+
+/** Kódy v sadě se počítají jednou na sadu, ne při každé odpovědi. */
+const setCodes = new Map<SetId, string[]>();
+function codesInActiveSet(set: SetId): string[] {
+  const found = setCodes.get(set);
+  if (found) return found;
+  const codes = countriesInSet([...ALL_COUNTRIES], set).map((c) => c.code);
+  setCodes.set(set, codes);
+  return codes;
+}
 
 export function ProgressProvider({
   children,
@@ -114,9 +127,20 @@ export function ProgressProvider({
         at: now.toISOString(),
         ...(input.given ? { given: input.given } : {}),
       });
+      // Denní snímek sbírky – graf v přehledu se z logu poskládat nedá,
+      // ten má strop na 500 odpovědí.
+      const cards = input.skipsScheduler
+        ? progress.cards
+        : { ...progress.cards, [code]: card };
+
       await storeRef.current.setMeta({
         lastPlayedDay: today,
         streakDays: nextStreak(progress.meta, today),
+        history: withSnapshot(
+          progress.meta.history,
+          today,
+          snapshotOf(cards, codesInActiveSet(progress.meta.activeSet)),
+        ),
       });
 
       const updated = await storeRef.current.load();

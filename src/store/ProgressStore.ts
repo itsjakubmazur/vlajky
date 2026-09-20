@@ -2,6 +2,7 @@ import type { RegionId, SetId } from '~data/sets';
 import type { AnswerLog, CardState } from '@/domain/srs/types';
 import type { PlacementResults } from '@/domain/srs/placement';
 import type { DailyResult } from '@/domain/game/daily';
+import type { History } from '@/domain/game/history';
 
 /** Verze schématu – při změně tvaru dat se postup zmigruje, ne zahodí. */
 export const SCHEMA_VERSION = 3;
@@ -43,6 +44,8 @@ export interface Meta {
   dailyResults: Record<string, DailyResult>;
   /** Vyzvednuté mise podle dne. */
   missionsClaimed: Record<string, string[]>;
+  /** Stav sbírky po dnech – z toho se kreslí graf v přehledu. */
+  history: History;
   /** Vybraný rámeček a téma z odemčených. */
   frame: string;
   theme: string;
@@ -80,6 +83,7 @@ export function emptyProgress(): Progress {
       bossesBeaten: [],
       dailyResults: {},
       missionsClaimed: {},
+      history: {},
       frame: 'frame-classic',
       theme: 'theme-night',
       soundOn: true,

@@ -23,9 +23,11 @@ import { DAILY_COUNT, dailyCodes, shareText } from '@/domain/game/daily';
 import { dailyMissions, isComplete, missionProgress } from '@/domain/game/missions';
 import { UNLOCKS, unlockedIds } from '@/domain/game/unlocks';
 import { nextUp } from '@/domain/game/nextUp';
+import { series, snapshotOf, withSnapshot } from '@/domain/game/history';
 import { buildSession } from '@/domain/quiz/session';
-import { confusions, fadingSoon, weakest } from '@/domain/srs/insight';
+import { confusions, fadingSoon, recall, weakest } from '@/domain/srs/insight';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
+import type { CardState } from '@/domain/srs/types';
 import { livesFor } from '@/domain/quiz/modes';
 import { createRng } from '@/domain/rng';
 
@@ -423,5 +425,74 @@ describe('s čím si to pleteš', () => {
     expect(confusions(log, (code) => code !== 'ng')).toEqual([
       { code: 'ne', given: 'in', count: 1 },
     ]);
+  });
+});
+
+describe('průběh sbírky v čase', () => {
+  const cards = {
+    fr: { ...emptyCardState('fr', new Date()), mastery: 'gold' as const },
+    td: { ...emptyCardState('td', new Date()), mastery: 'bronze' as const },
+    jp: emptyCardState('jp', new Date()),
+  };
+
+  it('snímek spočítá nasbírané a zlaté v sadě', () => {
+    expect(snapshotOf(cards, ['fr', 'td', 'jp'])).toEqual({ collected: 2, gold: 1 });
+    expect(snapshotOf(cards, ['jp'])).toEqual({ collected: 0, gold: 0 });
+  });
+
+  it('historie se drží na daném počtu dní', () => {
+    let history = {};
+    for (let i = 1; i <= 10; i++) {
+      history = withSnapshot(history, `2026-03-${String(i).padStart(2, '0')}`, { collected: i, gold: 0 }, 3);
+    }
+    expect(Object.keys(history).sort()).toEqual(['2026-03-08', '2026-03-09', '2026-03-10']);
+  });
+
+  it('den bez hraní přenese poslední stav, nespadne na nulu', () => {
+    const history = {
+      '2026-03-01': { collected: 10, gold: 2 },
+      '2026-03-03': { collected: 14, gold: 3 },
+    };
+    const points = series(history, '2026-03-04', 5);
+    expect(points.map((p) => p.collected)).toEqual([10, 10, 14, 14]);
+    expect(points.map((p) => p.carried)).toEqual([false, true, false, true]);
+  });
+
+  it('před prvním záznamem graf nezačíná falešnou nulou', () => {
+    const points = series({ '2026-03-03': { collected: 5, gold: 1 } }, '2026-03-04', 10);
+    expect(points).toHaveLength(2);
+    expect(points[0]!.day).toBe('2026-03-03');
+  });
+
+  it('bez historie není co kreslit', () => {
+    expect(series({}, '2026-03-04', 10)).toEqual([]);
+  });
+});
+
+describe('přehled nespadne na poškozených datech', () => {
+  const now = new Date('2026-03-01T10:00:00Z');
+
+  // Vlajka, kterou dítě netrefilo v rozřazovacím testu: `seen` roste,
+  // ale plánovačem karta neprošla, takže nemá `last_review`.
+  const neverScheduled: CardState = {
+    ...emptyCardState('ne', now),
+    seen: 3,
+    correct: 0,
+    fsrs: {
+      ...emptyCardState('ne', now).fsrs,
+      due: new Date(now.getTime() + 3 * 86_400_000).toISOString(),
+    },
+  };
+
+  it('vybavení karty bez plánovače je nula, ne výjimka', () => {
+    expect(recall(neverScheduled, now)).toBe(0);
+  });
+
+  it('předpověď takovou kartu vynechá', () => {
+    expect(fadingSoon([neverScheduled], () => true, now)).toEqual([]);
+  });
+
+  it('mezi slabinami ale zůstane – chyby se počítají dál', () => {
+    expect(weakest([neverScheduled], () => true).map((w) => w.code)).toEqual(['ne']);
   });
 });

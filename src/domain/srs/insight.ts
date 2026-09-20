@@ -17,10 +17,19 @@ export const FADING_THRESHOLD = 0.8;
  *
  * Bere se rovnou z FSRS, ne z vlastního vzorce – jinak by se přehled
  * rozcházel s tím, co plánovač doopravdy dělá.
+ *
+ * Karta bez `last_review` ještě nikdy neprošla plánovačem (tak dopadne
+ * vlajka, kterou dítě netrefilo v rozřazovacím testu) – nemá co vyprchat
+ * a FSRS by na ní spadl na „Invalid date“. Přehled je jen přehled: když
+ * se čísla nepodaří spočítat, nemá kvůli tomu spadnout celá obrazovka.
  */
 export function recall(card: CardState, now: Date): number {
-  if (card.seen === 0) return 0;
-  return scheduler.get_retrievability(fromStored(card.fsrs), now, false);
+  if (card.seen === 0 || !card.fsrs.last_review) return 0;
+  try {
+    return scheduler.get_retrievability(fromStored(card.fsrs), now, false);
+  } catch {
+    return 0;
+  }
 }
 
 export interface WeakFlag {
@@ -82,7 +91,10 @@ export function fadingSoon(
   const horizon = new Date(now.getTime() + days * 86_400_000);
 
   return cards
-    .filter((card) => card.seen > 0 && !isDue(card, now) && inPool(card.code))
+    .filter(
+      (card) =>
+        card.seen > 0 && card.fsrs.last_review && !isDue(card, now) && inPool(card.code),
+    )
     .map((card) => ({ code: card.code, recall: recall(card, horizon) }))
     .filter((item) => item.recall < FADING_THRESHOLD)
     .sort((a, b) => a.recall - b.recall || a.code.localeCompare(b.code))

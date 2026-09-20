@@ -6,12 +6,14 @@ import { useMemo, useState } from 'react';
 import { ALL_COUNTRIES } from '@/domain/countries';
 import { countriesInSet } from '~data/sets';
 import { CONTINENTS, type Continent } from '@/domain/types';
+import { MASTERY_LEVELS, type Mastery } from '@/domain/srs/types';
+import { normalize } from '@/domain/text/normalize';
 import { cs } from '@/i18n/cs';
 import { ROUTES } from '@/config/routes';
 import { useProgress } from '@/store/StoreProvider';
 import { FlagImage } from '@/components/FlagImage';
 import { MasteryDot } from '@/components/MasteryBadge';
-import { Panel, ProgressBar } from '@/components/ui';
+import { Button, Panel, ProgressBar } from '@/components/ui';
 import { Confetti } from '@/components/Confetti';
 import { CountrySheet } from './CountrySheet';
 
@@ -22,6 +24,7 @@ const WorldMap = dynamic(() => import('./WorldMap').then((m) => m.WorldMap), {
 });
 
 type Filter = Continent | 'all';
+type LevelFilter = Mastery | 'all';
 type Tab = 'stickers' | 'map';
 
 /** Získaná samolepka má prstenec v barvě úrovně, nezískaná je jen obrys. */
@@ -35,6 +38,8 @@ const RING = {
 export function AlbumScreen() {
   const { progress, masteryOf } = useProgress();
   const [filter, setFilter] = useState<Filter>('all');
+  const [level, setLevel] = useState<LevelFilter>('all');
+  const [query, setQuery] = useState('');
   const [tab, setTab] = useState<Tab>('stickers');
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -44,20 +49,36 @@ export function AlbumScreen() {
   );
   const codesInSet = useMemo(() => new Set(pool.map((c) => c.code)), [pool]);
 
+  // Hledá se bez diakritiky a i v aliasech – „svedsko“ i „Sverige“ najdou
+  // totéž, stejně jako při psaní odpovědi.
+  const needle = normalize(query);
+
   const shown = useMemo(
     () =>
-      (filter === 'all' ? pool : pool.filter((c) => c.continent === filter)).sort((a, b) =>
-        a.nameCs.localeCompare(b.nameCs, 'cs'),
-      ),
-    [pool, filter],
+      pool
+        .filter((c) => filter === 'all' || c.continent === filter)
+        .filter((c) => level === 'all' || masteryOf(c.code) === level)
+        .filter(
+          (c) =>
+            needle === '' ||
+            [c.nameCs, c.nameCsOfficial ?? '', ...c.aliases].some((label) =>
+              normalize(label).includes(needle),
+            ),
+        )
+        .sort((a, b) => a.nameCs.localeCompare(b.nameCs, 'cs')),
+    [pool, filter, level, needle, masteryOf],
   );
+
+  const filtered = filter !== 'all' || level !== 'all' || needle !== '';
 
   const collected = shown.filter((c) => masteryOf(c.code) !== 'new').length;
   const allGold = shown.length > 0 && shown.every((c) => masteryOf(c.code) === 'gold');
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 pb-10 pt-8">
-      {allGold && filter !== 'all' ? <Confetti seed={shown.length} /> : null}
+      {allGold && filter !== 'all' && level === 'all' && needle === '' ? (
+        <Confetti seed={shown.length} />
+      ) : null}
 
       <header className="mb-5 flex items-center gap-4">
         <Link
@@ -74,7 +95,7 @@ export function AlbumScreen() {
           <p className="display text-lg tabular-nums">
             {cs.album.collected(collected, shown.length)}
           </p>
-          {allGold && filter !== 'all' ? (
+          {allGold && filter !== 'all' && level === 'all' && needle === '' ? (
             <span className="text-xs font-extrabold text-gold">
               {cs.album.continentDone(cs.continents[filter])}
             </span>
@@ -115,6 +136,33 @@ export function AlbumScreen() {
         ))}
       </div>
 
+      {tab === 'stickers' ? (
+        <div className="mb-3 flex flex-col gap-3">
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder={cs.album.search}
+            aria-label={cs.album.search}
+            className="glass-thin touch-target w-full rounded-pill px-5 text-ink placeholder:text-faint"
+          />
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
+            {(['all', ...MASTERY_LEVELS] as LevelFilter[]).map((value) => (
+              <button
+                key={value}
+                onClick={() => setLevel(value)}
+                className={`inline-flex shrink-0 items-center gap-2 rounded-pill px-4 py-2 text-[0.8rem] font-extrabold transition-colors duration-200 ${
+                  level === value ? 'bg-ink text-abyss' : 'glass-thin text-muted hover:text-ink'
+                }`}
+              >
+                {value === 'all' ? null : <MasteryDot mastery={value} />}
+                {value === 'all' ? cs.album.levelAll : cs.album.mastery[value]}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
       {tab === 'map' ? (
         <Panel>
           <WorldMap
@@ -132,7 +180,24 @@ export function AlbumScreen() {
           </div>
         </Panel>
       ) : shown.length === 0 ? (
-        <p className="py-14 text-center text-sm text-faint">{cs.album.empty}</p>
+        <div className="py-14 text-center">
+          <p className="text-sm text-faint">
+            {filtered ? cs.album.searchEmpty : cs.album.empty}
+          </p>
+          {filtered ? (
+            <Button
+              variant="secondary"
+              className="mt-4 h-10 min-h-10 px-5 text-xs"
+              onClick={() => {
+                setFilter('all');
+                setLevel('all');
+                setQuery('');
+              }}
+            >
+              {cs.album.clearFilters}
+            </Button>
+          ) : null}
+        </div>
       ) : (
         <ul className="tiles grid grid-cols-3 gap-2.5 sm:grid-cols-4">
           {shown.map((country) => {
