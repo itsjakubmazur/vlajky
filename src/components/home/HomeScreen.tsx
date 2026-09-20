@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo } from 'react';
-import { ALL_COUNTRIES } from '@/domain/countries';
-import { countriesInSet } from '~data/sets';
+import { useActivePool } from '@/quiz/useActivePool';
 import { isDue } from '@/domain/srs/scheduler';
 import { placementOrder } from '@/domain/quiz/session';
 import { rankProgress } from '@/domain/game/ranks';
@@ -17,6 +16,7 @@ import { ButtonLink, Eyebrow, Panel, ProgressBar, ProgressRing } from '@/compone
 import { MasteryDot } from '@/components/MasteryBadge';
 import { FlagImage } from '@/components/FlagImage';
 import { MissionsPanel } from './MissionsPanel';
+import { RegionPicker } from './RegionPicker';
 
 /**
  * Každý režim se představí skutečnými vlajkami, ne ikonou – Dvojčata
@@ -36,10 +36,9 @@ export function HomeScreen() {
   const { ready, progress } = useProgress();
   const today = dayKey(new Date());
 
-  const pool = useMemo(
-    () => countriesInSet([...ALL_COUNTRIES], progress.meta.activeSet),
-    [progress.meta.activeSet],
-  );
+  // Domovská ukazuje čísla za vybranou část světa – „12 ze 46“ dává
+  // při hraní Evropy větší smysl než „12 ze 197“.
+  const { set, pool, region } = useActivePool();
 
   const stats = useMemo(() => {
     const now = new Date();
@@ -57,9 +56,10 @@ export function HomeScreen() {
   }, [pool, progress.cards]);
 
   const rank = rankProgress(progress.meta.totalPoints);
-  const bosses = useMemo(() => bossesFor(pool), [pool]);
+  // Souboje spojují i vlajky z různých světadílů, proto celá sada.
+  const bosses = useMemo(() => bossesFor(set), [set]);
   const dailyDone = progress.meta.dailyResults[today];
-  const placementTotal = placementOrder(pool).length;
+  const placementTotal = placementOrder(set).length;
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pb-10 pt-8">
@@ -71,6 +71,10 @@ export function HomeScreen() {
           </span>
         ) : null}
       </header>
+
+      <div className="mb-5">
+        <RegionPicker />
+      </div>
 
       <div className="stagger flex flex-col gap-3">
         {/* Hodnost – jediné, co jde pořád dopředu. */}
@@ -185,7 +189,7 @@ export function HomeScreen() {
       <h2 className="eyebrow mb-3 mt-7">{cs.home.modes}</h2>
       <div className="stagger flex flex-col gap-2.5">
         {MODE_CARDS.map(({ mode, flags }) => {
-          const record = progress.meta.records[mode];
+          const record = progress.meta.records[`${mode}:${region}`];
           return (
             <Link
               key={mode}

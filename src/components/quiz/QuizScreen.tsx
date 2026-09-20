@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import { ALL_COUNTRIES, requireCountry } from '@/domain/countries';
-import { countriesInSet } from '~data/sets';
+import { useEffect, useState } from 'react';
+import { requireCountry } from '@/domain/countries';
 import { FLASH_MS, type QuizModeId } from '@/domain/quiz/modes';
 import { cs } from '@/i18n/cs';
-import { useProgress } from '@/store/StoreProvider';
 import { useQuizSession } from '@/quiz/useQuizSession';
+import { useActivePool } from '@/quiz/useActivePool';
 import { FlagImage } from '@/components/FlagImage';
 import { QuizShell } from './QuizShell';
 import { OptionGrid } from './OptionGrid';
@@ -17,12 +16,10 @@ import { FeedbackPanel } from './FeedbackPanel';
 import { ResultScreen } from './ResultScreen';
 
 export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string }) {
-  const { progress } = useProgress();
   const session = useQuizSession(mode, { bossId });
-  const pool = useMemo(
-    () => countriesInSet([...ALL_COUNTRIES], progress.meta.activeSet),
-    [progress.meta.activeSet],
-  );
+  const { set, pool: regionPool } = useActivePool();
+  // Denní výzva a souboje jedou přes celou sadu, viz useActivePool.
+  const pool = mode === 'daily' || mode === 'boss' ? set : regionPool;
 
   // Režim Blesk: vlajka po dvou sekundách zmizí a odpovídá se po paměti.
   const [flashHidden, setFlashHidden] = useState(false);

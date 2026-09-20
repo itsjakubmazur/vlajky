@@ -16,6 +16,13 @@ testera, který už vlajky umí hodně dobře.
 Sada „Území“ (31 závislých území včetně Anglie, Skotska, Walesu) už v datech je
 a jde zapnout v Nastavení.
 
+**Část světa** se vybírá na domovské obrazovce a platí pro všechny režimy
+naráz (`meta.region`, `useActivePool`). Denní výzva a souboje ji schválně
+ignorují: denní výzva musí být pro všechny stejná, jinak by nešla porovnat,
+a souboje spojují i vlajky z různých světadílů (Irsko a Pobřeží slonoviny).
+Rekordy se vedou zvlášť pro každou část světa (`mode:region`), aby se
+maraton po Evropě nemísil s maratonem přes celý svět.
+
 ## Příkazy
 
 ```bash
@@ -62,6 +69,7 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `src/store/ProgressStore.ts` | rozhraní úložiště (fáze 2 = nová implementace) |
 | `src/i18n/cs.ts` | **všechny** texty rozhraní |
 | `src/config/app.ts` | název aplikace, složení sady, prahy |
+| `src/quiz/useActivePool.ts` | co se zrovna hraje: sada × část světa |
 
 ## Vizuální systém
 

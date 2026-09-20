@@ -1,5 +1,5 @@
 import { WORLD_SET } from '@/config/app';
-import type { Country } from '@/domain/types';
+import { CONTINENTS, type Continent, type Country } from '@/domain/types';
 
 export type SetId = 'world' | 'territories';
 
@@ -25,4 +25,27 @@ export const SETS: Record<SetId, FlagSet> = {
 
 export function countriesInSet(all: Country[], set: SetId): Country[] {
   return all.filter(SETS[set].filter);
+}
+
+/** Část světa, na kterou se zrovna hraje. */
+export type RegionId = Continent | 'all';
+
+export const REGIONS: readonly RegionId[] = ['all', ...CONTINENTS];
+
+export function countriesInRegion(pool: readonly Country[], region: RegionId): Country[] {
+  return region === 'all' ? [...pool] : pool.filter((c) => c.continent === region);
+}
+
+/**
+ * Nejmenší rozumná velikost části světa.
+ *
+ * Pod touhle hranicí by nešly poskládat ani čtyři možnosti, takže se taková
+ * část vůbec nenabízí. Týká se to hlavně bonusové sady území.
+ */
+export const MIN_REGION_SIZE = 8;
+
+export function playableRegions(pool: readonly Country[]): RegionId[] {
+  return REGIONS.filter(
+    (region) => region === 'all' || countriesInRegion(pool, region).length >= MIN_REGION_SIZE,
+  );
 }

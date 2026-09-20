@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ALL_COUNTRIES, requireCountry } from '@/domain/countries';
-import { countriesInSet } from '~data/sets';
+import { MIN_REGION_SIZE } from '~data/sets';
 import {
   buildQuestion,
   kindForMode,
@@ -20,6 +20,7 @@ import { PLACEMENT_BATCH } from '@/config/app';
 import { cs } from '@/i18n/cs';
 import { dayKey } from '@/store/ProgressStore';
 import { useProgress, type AnswerOutcome, type RoundOutcome } from '@/store/StoreProvider';
+import { useActivePool } from './useActivePool';
 
 /** Rejstřík se staví jednou nad všemi zeměmi – viz komentář v match.ts. */
 const answerIndex = buildAnswerIndex(ALL_COUNTRIES);
@@ -93,10 +94,19 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
   const roundStart = useRef<number>(Date.now());
   const settled = useRef(false);
 
-  const pool = useMemo(
-    () => countriesInSet([...ALL_COUNTRIES], progress.meta.activeSet),
-    [progress.meta.activeSet],
-  );
+  const { set, pool: regionPool, region } = useActivePool();
+
+  // Denní výzva musí být pro všechny stejná a souboje spojují i vlajky
+  // z různých světadílů – obojí proto ignoruje vybranou část světa.
+  const ignoresRegion = mode === 'daily' || mode === 'boss';
+  const pool = ignoresRegion ? set : regionPool;
+
+  // V malé části světa by nešly poskládat čtyři možnosti, tak se na
+  // distraktory sáhne do celé sady.
+  const distractorPool = pool.length >= MIN_REGION_SIZE ? pool : set;
+
+  /** Rekord se vede zvlášť pro každou část světa – jinak by se mísily. */
+  const recordKey = ignoresRegion ? mode : `${mode}:${region}`;
 
   // Otázky se sestaví jednou na začátku hry, ne při každém překreslení.
   useEffect(() => {
@@ -125,7 +135,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         buildQuestion({
           mode,
           target: requireCountry(code),
-          pool,
+          pool: distractorPool,
           mastery: progress.cards[code]?.mastery ?? 'new',
           rng,
           kind: mode === 'review' ? kindForMode('review', rng) : undefined,
@@ -150,7 +160,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     // nereagujeme na každou změnu postupu, jinak by se hra přestavěla po
     // každé odpovědi.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, mode, nonce, config.bossId]);
+  }, [ready, mode, nonce, config.bossId, region, progress.meta.activeSet]);
 
   const question = questions[index] ?? null;
   const outOfLives = lives !== null && lives <= 0;
@@ -274,7 +284,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     const final = { ...tally, elapsedMs: Date.now() - roundStart.current };
 
     void (async () => {
-      const outcome = await finishRound(mode, final);
+      const outcome = await finishRound(recordKey, final);
       setRoundOutcome(outcome);
 
       if (mode === 'boss' && config.bossId && final.correct === final.total && final.total > 0) {
@@ -291,7 +301,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         });
       }
     })();
-  }, [finished, mode, tally, finishRound, beatBoss, saveDaily, config.bossId]);
+  }, [finished, mode, recordKey, tally, finishRound, beatBoss, saveDaily, config.bossId]);
 
   const restart = useCallback(() => setNonce((n) => n + 1), []);
 

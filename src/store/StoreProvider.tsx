@@ -10,7 +10,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import type { SetId } from '~data/sets';
+import type { RegionId, SetId } from '~data/sets';
 import type { AnswerInput } from '@/domain/srs/scheduler';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
 import { isLevelUp } from '@/domain/srs/mastery';
@@ -49,6 +49,7 @@ interface ProgressContextValue {
   recordAnswer: (code: string, input: AnswerInput) => Promise<AnswerOutcome>;
   setMeta: (patch: Partial<Meta>) => Promise<void>;
   setActiveSet: (set: SetId) => Promise<void>;
+  setRegion: (region: RegionId) => Promise<void>;
   reset: () => Promise<void>;
   /** Uzavře kolo: připíše body a případně zapíše rekord. */
   finishRound: (mode: string, tally: RoundTally) => Promise<RoundOutcome>;
@@ -137,6 +138,13 @@ export function ProgressProvider({
     [setMeta],
   );
 
+  const setRegion = useCallback(
+    async (region: RegionId) => {
+      await setMeta({ region });
+    },
+    [setMeta],
+  );
+
   const finishRound = useCallback(
     async (mode: string, tally: RoundTally): Promise<RoundOutcome> => {
       const previous = progress.meta.records[mode] ?? null;
@@ -211,6 +219,7 @@ export function ProgressProvider({
       recordAnswer,
       setMeta,
       setActiveSet,
+      setRegion,
       reset,
       finishRound,
       beatBoss,
@@ -225,6 +234,7 @@ export function ProgressProvider({
       recordAnswer,
       setMeta,
       setActiveSet,
+      setRegion,
       reset,
       finishRound,
       beatBoss,

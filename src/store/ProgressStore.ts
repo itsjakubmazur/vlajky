@@ -1,4 +1,4 @@
-import type { SetId } from '~data/sets';
+import type { RegionId, SetId } from '~data/sets';
 import type { AnswerLog, CardState } from '@/domain/srs/types';
 import type { DailyResult } from '@/domain/game/daily';
 
@@ -21,6 +21,8 @@ export interface Meta {
   /** Kolik vlajek už v rozřazovacím testu odbavil (kvůli pauze uprostřed). */
   placementIndex: number;
   activeSet: SetId;
+  /** Část světa, na kterou se hraje. */
+  region: RegionId;
   /** Kolik dní po sobě si hrál. */
   streakDays: number;
   /** Poslední den hraní jako YYYY-MM-DD. */
@@ -63,6 +65,7 @@ export function emptyProgress(): Progress {
       placementDone: false,
       placementIndex: 0,
       activeSet: 'world',
+      region: 'all',
       streakDays: 0,
       lastPlayedDay: null,
       totalAnswers: 0,

@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { ALL_COUNTRIES, getCountry, requireCountry } from '@/domain/countries';
-import { countriesInSet } from '~data/sets';
+import {
+  countriesInRegion,
+  countriesInSet,
+  MIN_REGION_SIZE,
+  playableRegions,
+  REGIONS,
+} from '~data/sets';
 import {
   BASE_POINTS,
   comboMultiplier,
@@ -216,6 +222,82 @@ describe('mise', () => {
       at: new Date().toISOString(),
     }));
     expect(missionProgress(mission, { ...ctx, today })).toBe(0);
+  });
+});
+
+describe('část světa', () => {
+  it('„celý svět“ nic neodfiltruje', () => {
+    expect(countriesInRegion(world, 'all')).toHaveLength(world.length);
+  });
+
+  it('světadíl vybere jen své vlajky', () => {
+    const europe = countriesInRegion(world, 'europe');
+    expect(europe.length).toBeGreaterThan(40);
+    for (const c of europe) expect(c.continent).toBe('europe');
+    expect(europe.length).toBeLessThan(world.length);
+  });
+
+  it('součet světadílů dá celou sadu', () => {
+    const sum = REGIONS.filter((r) => r !== 'all').reduce(
+      (n, r) => n + countriesInRegion(world, r).length,
+      0,
+    );
+    expect(sum).toBe(world.length);
+  });
+
+  it('ve světě jsou hratelné všechny světadíly', () => {
+    expect(playableRegions(world)).toEqual(REGIONS);
+    for (const region of REGIONS) {
+      if (region === 'all') continue;
+      expect(countriesInRegion(world, region).length).toBeGreaterThanOrEqual(MIN_REGION_SIZE);
+    }
+  });
+
+  it('v bonusové sadě se moc malé světadíly vůbec nenabízejí', () => {
+    const territories = countriesInSet([...ALL_COUNTRIES], 'territories');
+    const offered = playableRegions(territories);
+    expect(offered).toContain('all');
+    for (const region of offered) {
+      if (region === 'all') continue;
+      expect(countriesInRegion(territories, region).length).toBeGreaterThanOrEqual(
+        MIN_REGION_SIZE,
+      );
+    }
+    expect(offered.length).toBeLessThan(REGIONS.length);
+  });
+
+  it('hra ve světadílu se drží svého světadílu', () => {
+    const africa = countriesInRegion(world, 'africa');
+    const codes = buildSession({
+      mode: 'classic',
+      pool: africa,
+      cards: {},
+      now: new Date(),
+      rng: createRng(4),
+    });
+    expect(codes.length).toBeGreaterThan(0);
+    for (const code of codes) expect(requireCountry(code).continent).toBe('africa');
+  });
+
+  it('maraton po světadílu projde všechny jeho vlajky', () => {
+    const oceania = countriesInRegion(world, 'oceania');
+    const codes = buildSession({
+      mode: 'marathon',
+      pool: oceania,
+      cards: {},
+      now: new Date(),
+      rng: createRng(5),
+    });
+    expect(codes).toHaveLength(oceania.length);
+    expect(new Set(codes).size).toBe(oceania.length);
+  });
+
+  it('denní výzva se částí světa neřídí – jinak by nešla porovnat', () => {
+    const fromWorld = dailyCodes('2026-09-20', world);
+    const fromEurope = dailyCodes('2026-09-20', countriesInRegion(world, 'europe'));
+    expect(fromWorld).not.toEqual(fromEurope);
+    // proto se v aplikaci denní výzvě předává vždy celá sada
+    expect(dailyCodes('2026-09-20', world)).toEqual(fromWorld);
   });
 });
 

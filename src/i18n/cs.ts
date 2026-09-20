@@ -27,6 +27,9 @@ export const cs = {
     streak: (n: number) => (n === 1 ? '1 den v řadě' : n < 5 ? `${n} dny v řadě` : `${n} dní v řadě`),
     goldCount: 've zlatě',
     collectedLabel: 'Nasbíráno',
+    region: 'Část světa',
+    regionAll: 'Celý svět',
+    regionCount: (n: number) => `${n} vlajek`,
     todayLabel: 'Dnes',
   },
   game: {
