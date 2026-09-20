@@ -15,9 +15,24 @@ export const SPEED_MS = {
   normal: 6000,
 };
 
+/**
+ * Strop pro délku odpovědi.
+ *
+ * Když dítě odloží telefon uprostřed otázky, nemá se to počítat jako
+ * „pomalá odpověď“ – plánovač by se z toho učil nesmysl. Stopky se navíc
+ * zastavují, když je aplikace na pozadí (viz useQuizSession).
+ */
+export const MAX_ANSWER_MS = 60_000;
+
+export function clampElapsed(elapsedMs: number): number {
+  if (!Number.isFinite(elapsedMs) || elapsedMs < 0) return 0;
+  return Math.min(elapsedMs, MAX_ANSWER_MS);
+}
+
 export type Speed = 'flash' | 'fast' | 'normal' | 'slow';
 
-export function speedOf(elapsedMs: number): Speed {
+export function speedOf(rawElapsedMs: number): Speed {
+  const elapsedMs = clampElapsed(rawElapsedMs);
   if (elapsedMs < SPEED_MS.flash) return 'flash';
   if (elapsedMs < SPEED_MS.fast) return 'fast';
   if (elapsedMs < SPEED_MS.normal) return 'normal';

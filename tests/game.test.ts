@@ -13,6 +13,8 @@ import {
   nextComboStep,
   pointsFor,
   speedOf,
+  clampElapsed,
+  MAX_ANSWER_MS,
   stakeLoss,
 } from '@/domain/game/score';
 import { RANKS, rankFor, rankProgress } from '@/domain/game/ranks';
@@ -32,6 +34,13 @@ describe('rychlost a kombo', () => {
     expect(speedOf(2500)).toBe('fast');
     expect(speedOf(5000)).toBe('normal');
     expect(speedOf(20000)).toBe('slow');
+  });
+
+  it('odložený čas se ořízne a nesmyslný vstup nespadne', () => {
+    expect(clampElapsed(-5)).toBe(0);
+    expect(clampElapsed(Number.NaN)).toBe(0);
+    expect(clampElapsed(10 * 60 * 1000)).toBe(MAX_ANSWER_MS);
+    expect(speedOf(10 * 60 * 1000)).toBe('slow');
   });
 
   it('násobič roste se sérií a zastaví se na stropě', () => {

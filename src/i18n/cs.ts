@@ -49,7 +49,8 @@ export const cs = {
       slow: '',
     },
     stake: 'Sázka',
-    stakeHint: 'Čím víc vsadíš, tím víc získáš – ale chyba bolí.',
+    stakeHint: 'Vsaď dřív, než uvidíš vlajku. Čím víc, tím víc získáš – ale chyba bolí.',
+    missed: 'Co ti uteklo',
     rank: 'Hodnost',
     ranks: {
       novacek: 'Nováček',

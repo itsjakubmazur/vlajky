@@ -73,6 +73,35 @@ describe('zpracování odpovědi', () => {
     expect(card.mastery).toBe('gold');
   });
 
+  it('napovězená odpověď na zlato nestačí', () => {
+    let card = emptyCardState('td', now);
+    for (let i = 0; i < 8; i++) {
+      card = applyAnswer(card, { correct: true, elapsedMs: 800, mode: 'classic' }, later(i * 20));
+    }
+    // Klepnutí na našeptávač není napsání názvu – zlato se za něj nedává.
+    card = applyAnswer(
+      card,
+      { correct: true, elapsedMs: 3000, mode: 'typing', assisted: true },
+      later(200),
+    );
+    expect(card.typedCorrect).toBe(0);
+    expect(card.mastery).toBe('silver');
+  });
+
+  it('pauza mimo aplikaci nezkazí hodnocení', () => {
+    const paused = applyAnswer(
+      emptyCardState('td', now),
+      { correct: true, elapsedMs: 10 * 60 * 1000, mode: 'classic' },
+      now,
+    );
+    const capped = applyAnswer(
+      emptyCardState('td', now),
+      { correct: true, elapsedMs: 60_000, mode: 'classic' },
+      now,
+    );
+    expect(paused.fsrs.stability).toBe(capped.fsrs.stability);
+  });
+
   it('rozřazovací test neznámou vlajku nepohřbí', () => {
     const fresh = emptyCardState('td', now);
     const after = applyAnswer(fresh, { correct: false, elapsedMs: 4000, mode: 'classic', isPlacement: true }, now);

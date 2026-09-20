@@ -16,7 +16,7 @@ export function TypingInput({
   pool: readonly Country[];
   disabled: boolean;
   hint: string | null;
-  onSubmit: (text: string) => void;
+  onSubmit: (text: string, viaSuggestion?: boolean) => void;
   onSkip: () => void;
 }) {
   const [value, setValue] = useState('');
@@ -27,10 +27,10 @@ export function TypingInput({
     [value, pool, disabled],
   );
 
-  const send = (text: string) => {
+  const send = (text: string, viaSuggestion = false) => {
     if (disabled || !text.trim()) return;
     setValue('');
-    onSubmit(text);
+    onSubmit(text, viaSuggestion);
   };
 
   return (
@@ -76,7 +76,7 @@ export function TypingInput({
             <li key={suggestion.country.code}>
               <button
                 type="button"
-                onClick={() => send(suggestion.country.nameCs)}
+                onClick={() => send(suggestion.country.nameCs, true)}
                 className="glass touch-target display w-full rounded-pill px-5 text-left text-base transition-colors hover:border-mint/40 hover:text-mint"
               >
                 {suggestion.country.nameCs}

@@ -30,6 +30,11 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
     return () => clearTimeout(timer);
   }, [mode, session.index]);
 
+  // Vabank: sází se naslepo. Vlajka se odhalí teprve po sázce – jinak by
+  // dítě vsadilo tři jen tam, kde odpověď zná, a nešlo by o žádné riziko.
+  const [staked, setStaked] = useState(false);
+  useEffect(() => setStaked(false), [session.index, mode]);
+
   if (session.phase === 'loading') {
     return (
       <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
@@ -46,6 +51,7 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
           tally={session.tally}
           outcome={session.roundOutcome}
           goldEarned={session.goldEarned}
+          missed={session.missed}
           onAgain={session.restart}
         />
       </div>
@@ -70,7 +76,9 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
           : cs.quiz.whichCountry;
 
   const showsFlagInQuestion = question.kind === 'pickCountry' || question.kind === 'type';
-  const flagVisible = !(mode === 'flash' && flashHidden && !session.feedback);
+  const awaitingStake = mode === 'risk' && !staked && !session.feedback;
+  const flagVisible =
+    !(mode === 'flash' && flashHidden && !session.feedback) && !awaitingStake;
 
   return (
     <QuizShell
@@ -102,11 +110,17 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
         )}
 
         <div key={`odpovedi-${session.index}`} className="flex flex-col gap-4">
-          {mode === 'risk' && !session.feedback ? (
-            <StakePicker value={session.stake} onChange={session.setStake} />
+          {awaitingStake ? (
+            <StakePicker
+              value={session.stake}
+              onChange={(value) => {
+                session.setStake(value);
+                setStaked(true);
+              }}
+            />
           ) : null}
 
-          {question.kind === 'pickCountry' || question.kind === 'pickFlag' ? (
+          {!awaitingStake && (question.kind === 'pickCountry' || question.kind === 'pickFlag') ? (
             <OptionGrid
               options={question.options}
               asFlags={question.kind === 'pickFlag'}
@@ -116,7 +130,7 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
             />
           ) : null}
 
-          {question.kind === 'twins' ? (
+          {!awaitingStake && question.kind === 'twins' ? (
             <TwinsQuestion
               options={question.options}
               correctCode={question.code}
@@ -125,7 +139,7 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
             />
           ) : null}
 
-          {question.kind === 'type' ? (
+          {!awaitingStake && question.kind === 'type' ? (
             <TypingInput
               pool={pool}
               disabled={session.phase === 'feedback'}

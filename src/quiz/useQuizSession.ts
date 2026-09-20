@@ -14,7 +14,7 @@ import {
 import { buildSession, placementOrder } from '@/domain/quiz/session';
 import { buildAnswerIndex, checkAnswer, type AnswerResult } from '@/domain/answer/match';
 import { isDue } from '@/domain/srs/scheduler';
-import { pointsFor, speedOf, stakeLoss, type RoundTally } from '@/domain/game/score';
+import { clampElapsed, pointsFor, speedOf, stakeLoss, type RoundTally } from '@/domain/game/score';
 import { createRng } from '@/domain/rng';
 import { PLACEMENT_BATCH } from '@/config/app';
 import { cs } from '@/i18n/cs';
@@ -50,6 +50,8 @@ export interface QuizSession {
   feedback: Feedback | null;
   hint: string | null;
   goldEarned: string[];
+  /** Vlajky, které v tomhle kole utekly – ukazují se na konci. */
+  missed: string[];
   /** Série správných odpovědí za sebou. */
   combo: number;
   bestCombo: number;
@@ -62,7 +64,7 @@ export interface QuizSession {
   tally: RoundTally;
   roundOutcome: RoundOutcome | null;
   answerWithCode: (code: string) => void;
-  answerWithText: (text: string) => void;
+  answerWithText: (text: string, viaSuggestion?: boolean) => void;
   skip: () => void;
   next: () => void;
   restart: () => void;
@@ -82,6 +84,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
   const [hint, setHint] = useState<string | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [goldEarned, setGoldEarned] = useState<string[]>([]);
+  const [missed, setMissed] = useState<string[]>([]);
   const [combo, setCombo] = useState(0);
   const [bestCombo, setBestCombo] = useState(0);
   const [points, setPoints] = useState(0);
@@ -93,12 +96,35 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
   const askedAt = useRef<number>(Date.now());
   const roundStart = useRef<number>(Date.now());
   const settled = useRef(false);
+  /** Čas strávený mimo aplikaci – z měření odpovědi se odečítá. */
+  const awayMs = useRef(0);
+  const awaySince = useRef<number | null>(null);
+
+  useEffect(() => {
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') {
+        awaySince.current = Date.now();
+      } else if (awaySince.current !== null) {
+        awayMs.current += Date.now() - awaySince.current;
+        awaySince.current = null;
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => document.removeEventListener('visibilitychange', onVisibility);
+  }, []);
+
+  /** Kolik času dítě nad otázkou skutečně strávilo. */
+  const measureElapsed = useCallback(() => {
+    const away = awayMs.current + (awaySince.current ? Date.now() - awaySince.current : 0);
+    return clampElapsed(Date.now() - askedAt.current - away);
+  }, []);
 
   const { set, pool: regionPool, region } = useActivePool();
 
-  // Denní výzva musí být pro všechny stejná a souboje spojují i vlajky
-  // z různých světadílů – obojí proto ignoruje vybranou část světa.
-  const ignoresRegion = mode === 'daily' || mode === 'boss';
+  // Denní výzva musí být pro všechny stejná, souboje spojují vlajky
+  // z různých světadílů a chytré opakování musí mít přednost před filtrem –
+  // jinak by karty mimo vybranou část světa tiše vypadly z hlavy.
+  const ignoresRegion = mode === 'daily' || mode === 'boss' || mode === 'review';
   const pool = ignoresRegion ? set : regionPool;
 
   // V malé části světa by nešly poskládat čtyři možnosti, tak se na
@@ -147,6 +173,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     setHint(null);
     setCorrectCount(0);
     setGoldEarned([]);
+    setMissed([]);
     setCombo(0);
     setBestCombo(0);
     setPoints(0);
@@ -156,6 +183,8 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     settled.current = false;
     askedAt.current = Date.now();
     roundStart.current = Date.now();
+    awayMs.current = 0;
+    awaySince.current = null;
     // Sezení se staví jen při startu (a při restartu přes `nonce`) – záměrně
     // nereagujeme na každou změnu postupu, jinak by se hra přestavěla po
     // každé odpovědi.
@@ -179,9 +208,9 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
   );
 
   const submit = useCallback(
-    async (result: AnswerResult, given: string | null, typed = false) => {
+    async (result: AnswerResult, given: string | null, typed = false, assisted = false) => {
       if (!question) return;
-      const elapsedMs = Date.now() - askedAt.current;
+      const elapsedMs = measureElapsed();
       const card = progress.cards[question.code];
       const due = card ? isDue(card, new Date()) : false;
 
@@ -200,6 +229,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         elapsedMs,
         mode: question.kind === 'type' ? 'typing' : question.mode,
         isPlacement: mode === 'placement',
+        assisted,
       });
 
       if (result.correct) {
@@ -214,6 +244,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         setCombo(0);
         setPoints((p) => Math.max(0, p - lost));
         setLives((l) => (l === null ? null : l - 1));
+        setMissed((m) => (m.includes(question.code) ? m : [...m, question.code]));
       }
 
       if (outcome.after === 'gold' && outcome.before !== 'gold') {
@@ -229,7 +260,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         speed: speedOf(elapsedMs),
       });
     },
-    [question, recordAnswer, mode, combo, stake, progress.cards],
+    [question, recordAnswer, mode, combo, stake, progress.cards, measureElapsed],
   );
 
   const answerWithCode = useCallback(
@@ -242,7 +273,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
   );
 
   const answerWithText = useCallback(
-    (text: string) => {
+    (text: string, viaSuggestion = false) => {
       if (!question || feedback) return;
       const result = checkAnswer(text, question.code, answerIndex);
       if (result.verdict === 'ambiguous') {
@@ -251,7 +282,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         return;
       }
       setHint(null);
-      void submit(result, text, true);
+      void submit(result, text, true, viaSuggestion);
     },
     [question, feedback, submit],
   );
@@ -266,6 +297,8 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     setHint(null);
     setStake(1);
     askedAt.current = Date.now();
+    awayMs.current = 0;
+    awaySince.current = null;
     setIndex((i) => i + 1);
 
     if (mode === 'placement') {
@@ -322,6 +355,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     feedback,
     hint,
     goldEarned,
+    missed,
     combo,
     bestCombo,
     points,

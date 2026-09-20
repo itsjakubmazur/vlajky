@@ -14,6 +14,7 @@ import { Button, ButtonLink, Eyebrow, Panel, ProgressRing } from '@/components/u
 import { useCountUp } from '@/components/useCountUp';
 import { FlagImage } from '@/components/FlagImage';
 import { Confetti } from '@/components/Confetti';
+import { CountrySheet } from '@/components/album/CountrySheet';
 
 function encouragement(correct: number, total: number): string {
   if (total === 0) return cs.result.encouragement.keepGoing;
@@ -29,15 +30,18 @@ export function ResultScreen({
   tally,
   outcome,
   goldEarned,
+  missed,
   onAgain,
 }: {
   mode: QuizModeId;
   tally: RoundTally;
   outcome: RoundOutcome | null;
   goldEarned: string[];
+  missed: string[];
   onAgain: () => void;
 }) {
-  const { progress } = useProgress();
+  const { progress, masteryOf } = useProgress();
+  const [detail, setDetail] = useState<string | null>(null);
   const play = useGameFeedback();
   const shownPoints = useCountUp(tally.points, 1100);
   const [copied, setCopied] = useState(false);
@@ -130,6 +134,37 @@ export function ResultScreen({
             ))}
           </div>
         </Panel>
+      ) : null}
+
+      {missed.length > 0 ? (
+        <Panel>
+          <Eyebrow>{cs.game.missed}</Eyebrow>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {missed.map((code, i) => (
+              <button
+                key={`${code}-${i}`}
+                type="button"
+                onClick={() => setDetail(code)}
+                className="glass-thin flex w-[4.75rem] flex-col items-center gap-1.5 rounded-2xl p-2 transition-colors hover:border-white/20"
+              >
+                <FlagImage code={code} size="sm" glow={false} />
+                <span className="text-center text-[0.65rem] font-bold leading-tight text-muted">
+                  {requireCountry(code).nameCs}
+                </span>
+              </button>
+            ))}
+          </div>
+        </Panel>
+      ) : null}
+
+      {detail ? (
+        <CountrySheet
+          code={detail}
+          mastery={masteryOf(detail)}
+          inSet={() => true}
+          onSelect={setDetail}
+          onClose={() => setDetail(null)}
+        />
       ) : null}
 
       <div className="flex flex-col gap-2.5">

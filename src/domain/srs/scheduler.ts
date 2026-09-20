@@ -1,6 +1,7 @@
 import { createEmptyCard, fsrs, generatorParameters, Rating, State } from 'ts-fsrs';
 import type { Grade } from 'ts-fsrs';
 import { TIMING, DAILY_REVIEW } from '@/config/app';
+import { clampElapsed } from '../game/score';
 import type { CardState, StoredCard } from './types';
 import { fromStored, toStored } from './types';
 import { computeMastery } from './mastery';
@@ -14,6 +15,14 @@ export interface AnswerInput {
   mode: string;
   /** rozřazovací test se chová jinak: neúspěch kartu nepohřbívá */
   isPlacement?: boolean;
+  /**
+   * Odpověď vznikla klepnutím na našeptávač.
+   *
+   * Taková odpověď je fakticky výběr ze seznamu, ne napsaný název – proto
+   * se nepočítá do `typedCorrect` a nevede ke zlatu. Jinak by šlo pravidlo
+   * „zlato nejde proklikat“ obejít.
+   */
+  assisted?: boolean;
 }
 
 /**
@@ -21,8 +30,9 @@ export interface AnswerInput {
  * Rychlá správná odpověď znamená, že to dítě opravdu umí – plánovač pak
  * kartu odloží dál a nebude ho otravovat tím, co zná.
  */
-export function ratingFor({ correct, elapsedMs, mode }: AnswerInput): Grade {
+export function ratingFor({ correct, elapsedMs: raw, mode }: AnswerInput): Grade {
   if (!correct) return Rating.Again;
+  const elapsedMs = clampElapsed(raw);
   if (elapsedMs > TIMING.slowMs) return Rating.Hard;
   if (elapsedMs < TIMING.fastMs || mode === 'typing') return Rating.Easy;
   return Rating.Good;
@@ -62,7 +72,9 @@ export function applyAnswer(card: CardState, input: AnswerInput, now: Date): Car
     seen: card.seen + 1,
     correct: card.correct + (input.correct ? 1 : 0),
     streak: input.correct ? card.streak + 1 : 0,
-    typedCorrect: card.typedCorrect + (input.correct && input.mode === 'typing' ? 1 : 0),
+    typedCorrect:
+      card.typedCorrect +
+      (input.correct && input.mode === 'typing' && !input.assisted ? 1 : 0),
     updatedAt: now.toISOString(),
   };
   next.mastery = computeMastery(next);
