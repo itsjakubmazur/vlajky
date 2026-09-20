@@ -2,7 +2,7 @@
   "meta": {
     "generated": "scripts/build-countries.ts – NEEDITOVAT RUČNĚ",
     "flagSource": "svg-country-flags (public domain, zdroj Wikipedia)",
-    "count": 227
+    "count": 226
   },
   "countries": [
     {
@@ -1786,31 +1786,6 @@
       ],
       "accent": "#ce1124",
       "needsReview": [],
-      "iso3": null,
-      "numeric": null
-    },
-    {
-      "code": "gb-nir",
-      "nameCs": "Severní Irsko",
-      "nameCsOfficial": null,
-      "aliases": [],
-      "capitalCs": "Belfast",
-      "continent": "europe",
-      "subregion": "northernEurope",
-      "sovereignty": "territory",
-      "lat": 54.6,
-      "lng": -6.7,
-      "similar": [],
-      "difficulty": 4,
-      "funFact": null,
-      "ratio": [
-        60,
-        30
-      ],
-      "accent": "#012169",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
       "iso3": null,
       "numeric": null
     },

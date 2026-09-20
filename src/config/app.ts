@@ -5,18 +5,32 @@ export const APP_NAME = 'Vlajky';
 export const APP_TAGLINE = 'Nauč se všechny vlajky světa';
 
 /**
- * Členské státy OSN, které v aplikaci schválně nejsou.
+ * Záznamy, které v aplikaci schválně nejsou.
  *
  * Vlajku, kterou nemáme jak ukázat správně, je lepší neukazovat vůbec –
- * naučit dítě zastaralou vlajku je horší než ji neučit. Až bude po ruce
- * poctivé SVG, stačí zemi vrátit do `data/cs/*.ts`, uložit soubor do
- * `data/flags-override/` a spustit `npm run data`.
+ * naučit dítě zastaralou nebo cizí vlajku je horší než ji neučit. Až bude
+ * po ruce poctivé SVG, stačí záznam vrátit do `data/cs/*.ts`, soubor uložit
+ * do `data/flags-override/` a spustit `npm run data`.
+ *
+ * `un: true` znamená, že jde o členský stát OSN – build si o to sníží
+ * očekávaný počet členů, ať se nemůže stát, že nějaký zmizí omylem.
  */
-export const OMITTED_UN: Record<string, string> = {
-  af:
-    'Afghánistán – dnešní vlajka (bílá s vyznáním víry) není v žádném dostupném ' +
-    'balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Balíček by ' +
-    'ukázal vlajku Islámské republiky, platnou do roku 2021.',
+export const OMITTED: Record<string, { un: boolean; reason: string }> = {
+  af: {
+    un: true,
+    reason:
+      'Afghánistán – dnešní vlajka (bílá s vyznáním víry) není v žádném dostupném ' +
+      'balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Balíček by ' +
+      'ukázal vlajku Islámské republiky, platnou do roku 2021.',
+  },
+  'gb-nir': {
+    un: false,
+    reason:
+      'Severní Irsko – od roku 1972 nemá vlastní úřední vlajku, používá se tam ' +
+      'Union Jack. Balíček proto dodává tentýž soubor jako pro Spojené království ' +
+      'a otázka „která země to je“ by neměla jedinou správnou odpověď. Ulsterský ' +
+      'prapor je vlajka zrušené vlády, ne země.',
+  },
 };
 
 /** Složení sady „Svět“. Změnou tohoto objektu se mění rozsah hry. */

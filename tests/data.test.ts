@@ -5,28 +5,27 @@ import { similarGroups } from '~data/similar';
 import { differenceFor, flagDifferences } from '~data/differences';
 import { ALL_COUNTRIES, getCountry } from '@/domain/countries';
 import { countriesInSet } from '~data/sets';
-import { OMITTED_UN } from '@/config/app';
+import { OMITTED } from '@/config/app';
 import { CONTINENTS, SOVEREIGNTIES, SUBREGIONS } from '@/domain/types';
 
 const world = countriesInSet([...ALL_COUNTRIES], 'world');
 const territories = countriesInSet([...ALL_COUNTRIES], 'territories');
 
-const OMITTED = Object.keys(OMITTED_UN);
+const omittedCodes = Object.keys(OMITTED);
+const omittedUn = Object.values(OMITTED).filter((item) => item.un).length;
 
 describe('data zemí', () => {
   it('sada Svět má 197 záznamů minus schválně vynechané', () => {
-    expect(world.length).toBe(197 - OMITTED.length);
+    expect(world.length).toBe(197 - omittedUn);
   });
 
   it('obsahuje všechny členy OSN kromě schválně vynechaných', () => {
-    expect(ALL_COUNTRIES.filter((c) => c.sovereignty === 'un').length).toBe(
-      193 - OMITTED.length,
-    );
+    expect(ALL_COUNTRIES.filter((c) => c.sovereignty === 'un').length).toBe(193 - omittedUn);
   });
 
   it('vynechaný stát v datech opravdu není', () => {
     // Vlajku, kterou nemáme jak ukázat správně, je lepší neukazovat vůbec.
-    for (const code of OMITTED) {
+    for (const code of omittedCodes) {
       expect(ALL_COUNTRIES.map((c) => c.code)).not.toContain(code);
     }
   });
@@ -207,5 +206,21 @@ describe('rozdíly mezi zaměnitelnými vlajkami', () => {
   it('na pořadí kódů ve dvojici nezáleží', () => {
     expect(differenceFor('td', 'ro')).toBe(differenceFor('ro', 'td'));
     expect(differenceFor('td', 'jp')).toBeNull();
+  });
+});
+
+describe('žádné dvě vlajky nevypadají stejně', () => {
+  it('každý kód má vlastní soubor s vlastním obsahem', () => {
+    // Dvě země se stejnou kresbou by udělaly otázku bez jediné správné
+    // odpovědi – přesně tím trpělo Severní Irsko s Union Jackem.
+    const byContent = new Map<string, string[]>();
+    for (const country of ALL_COUNTRIES) {
+      const svg = readFileSync(join(process.cwd(), 'public', 'flags', `${country.code}.svg`), 'utf8');
+      const list = byContent.get(svg) ?? [];
+      list.push(country.code);
+      byContent.set(svg, list);
+    }
+    const duplicates = [...byContent.values()].filter((codes) => codes.length > 1);
+    expect(duplicates).toEqual([]);
   });
 });

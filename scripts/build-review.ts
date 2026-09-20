@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import type { Continent, Country } from '../src/domain/types';
 import { similarGroups } from '../data/similar';
 import { differenceFor } from '../data/differences';
-import { OMITTED_UN } from '../src/config/app';
+import { OMITTED } from '../src/config/app';
 import { cs } from '../src/i18n/cs';
 
 const data = JSON.parse(readFileSync(join(process.cwd(), 'data', 'countries.json'), 'utf8')) as {
@@ -110,17 +110,17 @@ if (decided.length === 0) {
 }
 lines.push('');
 
-lines.push('## Schválně vynechané státy');
+lines.push('## Schválně vynechané záznamy');
 lines.push('');
 lines.push('Vlajku, kterou nemáme jak ukázat správně, je lepší neukazovat vůbec.');
-lines.push('Až bude po ruce poctivé SVG, stačí zemi vrátit do `data/cs/*.ts`.');
+lines.push('Až bude po ruce poctivé SVG, stačí záznam vrátit do `data/cs/*.ts`.');
 lines.push('');
-const omittedEntries = Object.entries(OMITTED_UN);
+const omittedEntries = Object.entries(OMITTED);
 if (omittedEntries.length === 0) {
   lines.push('_Žádné._');
 } else {
-  for (const [code, reason] of omittedEntries) {
-    lines.push(`- \`${code}\` – ${reason}`);
+  for (const [code, item] of omittedEntries) {
+    lines.push(`- \`${code}\` – ${item.reason}`);
   }
 }
 lines.push('');

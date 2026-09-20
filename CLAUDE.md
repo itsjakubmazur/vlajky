@@ -257,14 +257,22 @@ spočítá odpovídající transformaci z `viewBox` (včetně výchozího
 který přepsat nejde, **skončí chybou** – radši hlasitě spadnout než tiše vydat
 rozbitou vlajku. Hlídá to i test v `tests/data.test.ts`.
 
-**Afghánistán v aplikaci není.** Dnešní vlajku (bílá s vyznáním víry) nemá
-žádný dostupný balíček a arabská kaligrafie se nedá poctivě nakreslit zpaměti;
-balíček by ukázal vlajku Islámské republiky, platnou do roku 2021. Naučit dítě
-zastaralou vlajku je horší než ji neučit, takže sada má 196 záznamů místo 197.
-Vynechané státy jsou vyjmenované v `OMITTED_UN` (`src/config/app.ts`), hlídá
-je build i test a jsou vypsané v REVIEW.md – aby se nemohlo stát, že nějaký
-zmizí omylem. Až bude SVG po ruce, stačí zemi vrátit do `data/cs/asia.ts`,
-soubor uložit jako `data/flags-override/af.svg` a spustit `npm run data`.
+**Co nejde ukázat správně, se neukazuje vůbec.** Naučit dítě zastaralou nebo
+cizí vlajku je horší než ji neučit. Vynechané záznamy jsou i s důvodem
+v `OMITTED` (`src/config/app.ts`); build kontroluje, že v datech opravdu
+nejsou a o kolik se tím snižuje počet členů OSN, a REVIEW.md je vypisuje –
+aby se nemohlo stát, že nějaký zmizí omylem. Vrácení je práce na jeden řádek.
+
+- **Afghánistán** (sada Svět má proto 196 záznamů): dnešní vlajku – bílou
+  s vyznáním víry – nemá žádný dostupný balíček a arabská kaligrafie se nedá
+  poctivě nakreslit zpaměti. Balíček by ukázal vlajku Islámské republiky,
+  platnou do roku 2021.
+- **Severní Irsko** (sada Území má proto 30 záznamů): od roku 1972 nemá
+  vlastní úřední vlajku, používá se tam Union Jack – balíček proto dodával
+  **bajt po bajtu tentýž soubor** jako pro Spojené království a otázka „která
+  země to je“ neměla jedinou správnou odpověď. Ulsterský prapor je vlajka
+  zrušené vlády, ne země. Že se žádné dvě vlajky neshodují, hlídá od té doby
+  test v `tests/data.test.ts`.
 
 **„Kongo“ se neuznává ani jedné zemi.** Je to v češtině dvojznačné slovo,
 takže odpověď dostane výsledek `ambiguous`: nepočítá se jako chyba, jen se

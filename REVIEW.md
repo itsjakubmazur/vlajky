@@ -15,8 +15,8 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 
 - Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
 - Států v sadě „Svět“: **196** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
-- Území v bonusové sadě: **31**
-- Zajímavost o vlajce chybí u **22** záznamů
+- Území v bonusové sadě: **30**
+- Zajímavost o vlajce chybí u **21** záznamů
 - Otevřených otázek k rozhodnutí: **0**
 
 ### Co NENÍ ověřené
@@ -41,19 +41,20 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 - **Rusko** (`ru`) – zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti.
 - **Turecko** (`tr`) – leží v Asii i v Evropě, vedeme ho v Asii.
 
-## Schválně vynechané státy
+## Schválně vynechané záznamy
 
 Vlajku, kterou nemáme jak ukázat správně, je lepší neukazovat vůbec.
-Až bude po ruce poctivé SVG, stačí zemi vrátit do `data/cs/*.ts`.
+Až bude po ruce poctivé SVG, stačí záznam vrátit do `data/cs/*.ts`.
 
 - `af` – Afghánistán – dnešní vlajka (bílá s vyznáním víry) není v žádném dostupném balíčku a arabskou kaligrafii nelze poctivě nakreslit zpaměti. Balíček by ukázal vlajku Islámské republiky, platnou do roku 2021.
+- `gb-nir` – Severní Irsko – od roku 1972 nemá vlastní úřední vlajku, používá se tam Union Jack. Balíček proto dodává tentýž soubor jako pro Spojené království a otázka „která země to je“ by neměla jedinou správnou odpověď. Ulsterský prapor je vlajka zrušené vlády, ne země.
 
 ## Chybějící zajímavosti
 
 U těchhle vlajek jsem nenašel fakt, za který bych ručil. Radši prázdné než vymyšlené –
 když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká vlajka).
 
-`ai` Anguilla · `as` Americká Samoa · `aw` Aruba · `ax` Ålandy · `bm` Bermudy · `ck` Cookovy ostrovy · `cw` Curaçao · `eh` Západní Sahara · `fk` Falklandy · `gb-nir` Severní Irsko · `gg` Guernsey · `gu` Guam · `je` Jersey · `ky` Kajmanské ostrovy · `mo` Macao · `mp` Severní Mariany · `ms` Montserrat · `nc` Nová Kaledonie · `pf` Francouzská Polynésie · `tc` Turks a Caicos · `vg` Britské Panenské ostrovy · `vi` Americké Panenské ostrovy
+`ai` Anguilla · `as` Americká Samoa · `aw` Aruba · `ax` Ålandy · `bm` Bermudy · `ck` Cookovy ostrovy · `cw` Curaçao · `eh` Západní Sahara · `fk` Falklandy · `gg` Guernsey · `gu` Guam · `je` Jersey · `ky` Kajmanské ostrovy · `mo` Macao · `mp` Severní Mariany · `ms` Montserrat · `nc` Nová Kaledonie · `pf` Francouzská Polynésie · `tc` Turks a Caicos · `vg` Britské Panenské ostrovy · `vi` Americké Panenské ostrovy
 
 ## Evropa (46)
 
@@ -281,7 +282,7 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 | `tv` | **Tuvalu** | – | – | Funafuti | 5 | 2.00:1 | Devět hvězd na tuvalské vlajce je rozmístěných jako devět ostrovů v moři. |
 | `vu` | **Vanuatu** | Republika Vanuatu | – | Port Vila | 5 | 1.67:1 | Na vlajce Vanuatu je zahnutý prasečí kel a dva listy kapradiny. |
 
-## Bonusová sada: Území (31)
+## Bonusová sada: Území (30)
 
 | Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
 |---|---|---|---|---|---|---|---|
@@ -310,7 +311,6 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 | `nc` | **Nová Kaledonie** | – | – | Nouméa | 5 | 2.00:1 | **— CHYBÍ —** |
 | `im` | **Ostrov Man** | – | – | Douglas | 4 | 2.00:1 | Na vlajce Ostrova Man jsou tři nohy v brnění spojené do kolečka. |
 | `pr` | **Portoriko** | – | – | San Juan | 3 | 1.50:1 | Portorická vlajka vypadá jako kubánská s prohozenou modrou a červenou. |
-| `gb-nir` | **Severní Irsko** | – | – | Belfast | 4 | 2.00:1 | **— CHYBÍ —** |
 | `mp` | **Severní Mariany** | – | – | Saipan | 5 | 2.00:1 | **— CHYBÍ —** |
 | `gb-sct` | **Skotsko** | – | – | Edinburgh | 3 | 1.67:1 | Skotská vlajka je bílý šikmý kříž svatého Ondřeje na modré. |
 | `tc` | **Turks a Caicos** | – | – | Cockburn Town | 5 | 2.00:1 | **— CHYBÍ —** |

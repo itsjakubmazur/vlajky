@@ -8,7 +8,6 @@ export const territories: CsCountry[] = [
     funFact: 'Skotská vlajka je bílý šikmý kříž svatého Ondřeje na modré.' },
   { code: 'gb-wls', nameCs: 'Wales', capitalCs: 'Cardiff', continent: 'europe', subregion: 'northernEurope', sovereignty: 'territory', lat: 52.3, lng: -3.7, difficulty: 3,
     funFact: 'Na velšské vlajce je červený drak – a ve Union Jacku není vůbec zastoupený.' },
-  { code: 'gb-nir', nameCs: 'Severní Irsko', capitalCs: 'Belfast', continent: 'europe', subregion: 'northernEurope', sovereignty: 'territory', lat: 54.6, lng: -6.7, difficulty: 4 },
   { code: 'gl', nameCs: 'Grónsko', capitalCs: 'Nuuk', continent: 'northAmerica', subregion: 'northAmerica', sovereignty: 'territory', lat: 72.0, lng: -40.0, difficulty: 3,
     funFact: 'Grónská vlajka má kruh napůl červený a napůl bílý – jako slunce nad ledem.' },
   { code: 'fo', nameCs: 'Faerské ostrovy', capitalCs: 'Tórshavn', continent: 'europe', subregion: 'northernEurope', sovereignty: 'territory', lat: 62.0, lng: -6.8, difficulty: 4,
