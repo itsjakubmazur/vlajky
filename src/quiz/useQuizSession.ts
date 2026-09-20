@@ -19,7 +19,7 @@ import type { PlacementResults } from '@/domain/srs/placement';
 import { buildAnswerIndex, checkAnswer, type AnswerResult } from '@/domain/answer/match';
 import { isDue } from '@/domain/srs/scheduler';
 import { clampElapsed, pointsFor, speedOf, stakeLoss, type RoundTally } from '@/domain/game/score';
-import { createRng } from '@/domain/rng';
+import { createRng, seedFromString } from '@/domain/rng';
 import { cs } from '@/i18n/cs';
 import { dayKey } from '@/store/ProgressStore';
 import { useProgress, type AnswerOutcome, type RoundOutcome } from '@/store/StoreProvider';
@@ -77,6 +77,10 @@ export interface QuizSession {
 
 export interface SessionConfig {
   bossId?: string;
+  /** Předepsané vlajky – v turnaji dostanou všichni hráči stejné otázky. */
+  codes?: readonly string[];
+  /** Hra se nepočítá nikam: ani do plánovače, ani do bodů a rekordů. */
+  offTheRecord?: boolean;
 }
 
 export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): QuizSession {
@@ -158,15 +162,21 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
   /** Rekord se vede zvlášť pro každou část světa – jinak by se mísily. */
   const recordKey = ignoresRegion ? mode : `${mode}:${region}`;
 
+  const codesKey = config.codes?.join(',') ?? '';
+
   // Otázky se sestaví jednou na začátku hry, ne při každém překreslení.
   useEffect(() => {
     if (!ready) return;
-    const rng = createRng(Date.now() ^ nonce);
+    // V turnaji musí vyjít stejně nejen seznam vlajek, ale i nabídky pod
+    // nimi – jinak by měl každý hráč jinak těžkou otázku. Proto se semínko
+    // odvozuje od kola, ne od času.
+    const rng = config.codes ? createRng(seedFromString(codesKey)) : createRng(Date.now() ^ nonce);
     const now = new Date();
     placementAnswers.current = { ...progress.meta.placementResults };
 
-    const codes =
-      mode === 'placement'
+    const codes = config.codes
+      ? [...config.codes]
+      : mode === 'placement'
         ? placementPlan(pool).slice(progress.meta.placementIndex)
         : buildSession({
             mode,
@@ -187,7 +197,9 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
           mode,
           target: requireCountry(code),
           pool: distractorPool,
-          mastery: progress.cards[code]?.mastery ?? 'new',
+          // Turnaj hraje i táta a babička: obtížnost nabídek se neodvozuje
+          // od toho, jak vlajku umí majitel zařízení, ale je pro všechny stejná.
+          mastery: config.codes ? 'silver' : (progress.cards[code]?.mastery ?? 'new'),
           rng,
           // Režimy, které míchají směr otázky, si typ losují ke každé zvlášť.
           kind:
@@ -216,9 +228,10 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     awaySince.current = null;
     // Sezení se staví jen při startu (a při restartu přes `nonce`) – záměrně
     // nereagujeme na každou změnu postupu, jinak by se hra přestavěla po
-    // každé odpovědi.
+    // každé odpovědi. V závislostech je proto `codesKey`, ne pole `codes`:
+    // nové pole při každém překreslení by hák roztočilo dokola.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, mode, nonce, config.bossId, region, progress.meta.activeSet]);
+  }, [ready, mode, nonce, config.bossId, codesKey, region, progress.meta.activeSet]);
 
   const question = questions[index] ?? null;
   const outOfLives = lives !== null && lives <= 0;
@@ -269,6 +282,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         assisted,
         // Hlavní města netestují vlajku – viz `touchesScheduler`.
         skipsScheduler: !touchesScheduler(question.kind),
+        offTheRecord: config.offTheRecord ?? false,
         ...(wrongPick && wrongPick !== question.code ? { given: wrongPick } : {}),
       });
 
@@ -305,7 +319,16 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         speed: speedOf(elapsedMs),
       });
     },
-    [question, recordAnswer, mode, combo, stake, progress.cards, measureElapsed],
+    [
+      question,
+      recordAnswer,
+      mode,
+      combo,
+      stake,
+      progress.cards,
+      measureElapsed,
+      config.offTheRecord,
+    ],
   );
 
   const answerWithCode = useCallback(
@@ -362,6 +385,8 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     if (!finished || settled.current) return;
     settled.current = true;
 
+    // Turnaj má vlastní počítání; do rekordů ani hodnosti majitele nepatří.
+    if (config.offTheRecord) return;
     if (!SCORED_MODES.includes(mode)) return;
     const final = { ...tally, elapsedMs: Date.now() - roundStart.current };
 
@@ -383,7 +408,17 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         });
       }
     })();
-  }, [finished, mode, recordKey, tally, finishRound, beatBoss, saveDaily, config.bossId]);
+  }, [
+    finished,
+    mode,
+    recordKey,
+    tally,
+    finishRound,
+    beatBoss,
+    saveDaily,
+    config.bossId,
+    config.offTheRecord,
+  ]);
 
   const restart = useCallback(() => setNonce((n) => n + 1), []);
 

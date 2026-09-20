@@ -3,6 +3,7 @@ import type { AnswerLog, CardState } from '@/domain/srs/types';
 import type { PlacementResults } from '@/domain/srs/placement';
 import type { DailyResult } from '@/domain/game/daily';
 import type { History } from '@/domain/game/history';
+import type { PartyState } from '@/domain/game/party';
 
 /** Verze schématu – při změně tvaru dat se postup zmigruje, ne zahodí. */
 export const SCHEMA_VERSION = 3;
@@ -46,6 +47,13 @@ export interface Meta {
   missionsClaimed: Record<string, string[]>;
   /** Stav sbírky po dnech – z toho se kreslí graf v přehledu. */
   history: History;
+  /**
+   * Rozehraný turnaj, nebo `null`.
+   *
+   * Drží se v úložišti schválně: na dovolené se tablet uspí nebo se
+   * omylem zavře karta a nikdo nechce přijít o tři odehraná kola.
+   */
+  party: PartyState | null;
   /** Vybraný rámeček a téma z odemčených. */
   frame: string;
   theme: string;
@@ -84,6 +92,7 @@ export function emptyProgress(): Progress {
       dailyResults: {},
       missionsClaimed: {},
       history: {},
+      party: null,
       frame: 'frame-classic',
       theme: 'theme-night',
       soundOn: true,

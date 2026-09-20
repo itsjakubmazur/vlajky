@@ -11,6 +11,7 @@ testera, který už vlajky umí hodně dobře.
 | **1b – gamifikace** | ✅ hotovo | body a kombo, 4 nové režimy, denní výzva, mise, hodnosti, souboje, odemykání, zvuky |
 | **1c – učení** | ✅ hotovo | krátký rozřazovací test, přehled „Jak ti to jde“, režim Slabiny, klávesnice, obrazovky pro chyby |
 | **1d – tři osy** | ✅ hotovo | rozdíly podobných vlajek, Hlavní města, Kde to je (mapa), přehled záměn, graf sbírky, hledání v albu |
+| **1e – turnaj** | ✅ hotovo | hra více hráčů na jednom zařízení, stejné otázky pro všechny, pořadí podle vyhraných kol |
 | 2 – Supabase | ⬜ nezačato | rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
@@ -214,6 +215,33 @@ Začátečník dostane body rozházené po světě, pokročilý sousední země.
 **Plynulé kolo.** V závodních režimech (`RACE_MODES`) se po správné odpovědi
 jede dál samo po 1,4 s. Jinde ne: v klasice a opakování má dítě číst
 zajímavost a rozdíl. Po chybě nikdy – tam se to „jak je rozeznáš“ dozví.
+
+## Turnaj u jednoho zařízení
+
+Rodina má na dovolené jeden tablet, ne pět. Turnaj (`/turnaj`) se proto hraje
+po sobě: kolo si vylosuje seznam vlajek a **každý hráč dostane přesně ten
+samý** – jinak by se výsledky nedaly porovnat.
+
+- **Stejné musí být i nabídky pod otázkou**, ne jen seznam vlajek. Semínko
+  generátoru se proto odvozuje od kola (`seedFromString(codesKey)`), ne
+  z času, a obtížnost distraktorů je pevná (`silver`) místo podle toho, jak
+  vlajku umí majitel zařízení.
+- **Turnaj se nepočítá nikam** (`offTheRecord`): ani do plánovače, ani do
+  logu, bodů, rekordů, série dní a hodnosti. Hraje na tom i táta a babička,
+  takže by to jinak rozhodilo synovo učení. Ověřeno: postup před turnajem
+  a po něm je bajt po bajtu stejný.
+- **Stav turnaje žije v úložišti** (`meta.party`), ne jen v paměti obrazovky –
+  tablet se uspí nebo se omylem zavře karta a nikdo nechce přijít o odehraná
+  kola.
+- **Předávání zařízení má mezikrok.** Kdyby hra naskočila hned, další hráč by
+  viděl konec toho předchozího.
+- **V pořadí rozhodují vyhraná kola, až při shodě body** – jinak by jedno
+  vydařené kolo přebilo tři těsně vyhraná. Shoda bodů dělí první místo,
+  nerozhoduje se mincí.
+- Turnaj respektuje vybranou **část světa** a dá se hrát v osmi režimech
+  (`PARTY_MODES`). Chybí schválně opakování a slabiny (jedou podle paměti
+  majitele), denní výzva (je jedna na den), souboj (potřebuje dvojici)
+  a maraton (nemá konec).
 
 ## Konvence
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { requireCountry } from '@/domain/countries';
 import { FLASH_MS, RACE_MODES, type QuizModeId } from '@/domain/quiz/modes';
+import type { RoundTally } from '@/domain/game/score';
 import { cs } from '@/i18n/cs';
 import { useQuizSession } from '@/quiz/useQuizSession';
 import { useQuizKeyboard } from '@/quiz/useQuizKeyboard';
@@ -18,8 +19,23 @@ import { StakePicker } from './StakePicker';
 import { FeedbackPanel } from './FeedbackPanel';
 import { ResultScreen } from './ResultScreen';
 
-export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string }) {
-  const session = useQuizSession(mode, { bossId });
+export function QuizScreen({
+  mode,
+  bossId,
+  codes,
+  offTheRecord,
+  onFinish,
+}: {
+  mode: QuizModeId;
+  bossId?: string;
+  /** Předepsané vlajky – v turnaji dostanou všichni hráči stejné otázky. */
+  codes?: readonly string[];
+  /** Hra se nepočítá do postupu majitele zařízení. */
+  offTheRecord?: boolean;
+  /** Když je zadané, výsledek si převezme volající a obrazovka výsledku se neukáže. */
+  onFinish?: (tally: RoundTally) => void;
+}) {
+  const session = useQuizSession(mode, { bossId, codes, offTheRecord });
   const { progress } = useProgress();
   const autoNext = progress.meta.autoNext;
   const { set, pool: regionPool } = useActivePool();
@@ -50,6 +66,15 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
     enabled: session.phase === 'question' || session.phase === 'feedback',
   });
 
+  // Turnaj si výsledek kola převezme sám – ResultScreen by ukazoval rekordy
+  // a hodnost majitele zařízení, což s cizím hráčem nemá co dělat.
+  const finished = session.phase === 'done';
+  useEffect(() => {
+    if (finished && onFinish) onFinish(session.tally);
+    // Kolo se uzavírá jednou; `tally` se po dohrání už nemění.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finished]);
+
   if (session.phase === 'loading') {
     return (
       <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
@@ -59,6 +84,13 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
   }
 
   if (session.phase === 'done') {
+    if (onFinish) {
+      return (
+        <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
+          {cs.common.loading}
+        </div>
+      );
+    }
     return (
       <div className="mx-auto flex min-h-[var(--safe-height)] w-full max-w-xl flex-col justify-center px-4 py-6">
         <ResultScreen

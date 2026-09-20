@@ -33,5 +33,6 @@ export const ROUTES = {
   settings: '/nastaveni',
   bosses: '/souboje',
   insight: '/prehled',
+  party: '/turnaj',
   play: (slug: ModeSlug) => `/hrat/${slug}`,
 };

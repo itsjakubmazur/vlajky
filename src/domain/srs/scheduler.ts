@@ -33,6 +33,13 @@ export interface AnswerInput {
   skipsScheduler?: boolean;
   /** Co dítě vybralo místo správné odpovědi – jen do logu, plánovač to neřeší. */
   given?: string;
+  /**
+   * Odpověď se nepočítá nikam.
+   *
+   * V turnaji hraje na zařízení i táta a babička. Kdyby se jejich odpovědi
+   * ukládaly, rozhodily by majiteli plánovač, statistiky i sérii dní.
+   */
+  offTheRecord?: boolean;
 }
 
 /**

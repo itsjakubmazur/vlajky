@@ -7,6 +7,7 @@ import { isDue } from '@/domain/srs/scheduler';
 import { placementPlan } from '@/domain/srs/placement';
 import { weakest } from '@/domain/srs/insight';
 import { nextUp } from '@/domain/game/nextUp';
+import { roundsPlayed } from '@/domain/game/party';
 import { rankProgress } from '@/domain/game/ranks';
 import { bossesFor } from '@/domain/game/bosses';
 import { dayKey } from '@/domain/game/day';
@@ -195,6 +196,23 @@ export function HomeScreen() {
             className="w-full"
           >
             {cs.home.play}
+          </ButtonLink>
+        </Panel>
+
+        {/* Turnaj u jednoho zařízení – na dovolenou s rodinou. */}
+        <Panel className={progress.meta.party ? 'border-mint/30' : ''}>
+          <Eyebrow>{cs.party.title}</Eyebrow>
+          <p className="mb-4 mt-1.5 text-sm leading-snug text-muted">
+            {progress.meta.party
+              ? cs.party.resumeHint(roundsPlayed(progress.meta.party))
+              : cs.party.desc}
+          </p>
+          <ButtonLink
+            href={ROUTES.party}
+            variant={progress.meta.party ? 'primary' : 'secondary'}
+            className="w-full"
+          >
+            {progress.meta.party ? cs.party.resume : cs.party.open}
           </ButtonLink>
         </Panel>
 

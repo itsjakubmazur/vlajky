@@ -115,6 +115,12 @@ export function ProgressProvider({
       const now = new Date();
       const current = progress.cards[code] ?? emptyCardState(code, now);
       const before = current.mastery;
+
+      // Turnaj se nezapisuje vůbec – ani karta, ani log, ani série dní.
+      if (input.offTheRecord) {
+        return { before, after: before, levelUp: false, card: current };
+      }
+
       const card = input.skipsScheduler ? current : applyAnswer(current, input, now);
 
       const today = dayKey(now);

@@ -24,6 +24,17 @@ import { dailyMissions, isComplete, missionProgress } from '@/domain/game/missio
 import { UNLOCKS, unlockedIds } from '@/domain/game/unlocks';
 import { nextUp } from '@/domain/game/nextUp';
 import { series, snapshotOf, withSnapshot } from '@/domain/game/history';
+import {
+  createParty,
+  currentRound,
+  isRoundComplete,
+  playerOnTurn,
+  recordScore,
+  roundWinners,
+  roundsPlayed,
+  standings,
+  startRound,
+} from '@/domain/game/party';
 import { buildSession } from '@/domain/quiz/session';
 import { confusions, fadingSoon, recall, weakest } from '@/domain/srs/insight';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
@@ -494,5 +505,65 @@ describe('přehled nespadne na poškozených datech', () => {
 
   it('mezi slabinami ale zůstane – chyby se počítají dál', () => {
     expect(weakest([neverScheduled], () => true).map((w) => w.code)).toEqual(['ne']);
+  });
+});
+
+describe('turnaj u jednoho zařízení', () => {
+  const players = [
+    { id: 'p1', name: 'Táta' },
+    { id: 'p2', name: 'Maruška' },
+  ];
+  const score = (points: number, correct = 5) => ({
+    correct,
+    total: 5,
+    points,
+    bestCombo: correct,
+    elapsedMs: 10_000,
+  });
+
+  it('kolo dostane jeden seznam vlajek pro všechny hráče', () => {
+    const state = startRound(createParty(players, 'classic', 5), ['fr', 'de']);
+    expect(currentRound(state)!.codes).toEqual(['fr', 'de']);
+    // Hráči se střídají v pořadí, ve kterém jsou zapsaní.
+    expect(playerOnTurn(state)!.id).toBe('p1');
+  });
+
+  it('po zapsání výsledku je na řadě další hráč', () => {
+    let state = startRound(createParty(players, 'classic', 5), ['fr']);
+    state = recordScore(state, 'p1', score(900));
+    expect(playerOnTurn(state)!.id).toBe('p2');
+    expect(isRoundComplete(state)).toBe(false);
+
+    state = recordScore(state, 'p2', score(500));
+    expect(playerOnTurn(state)).toBeUndefined();
+    expect(isRoundComplete(state)).toBe(true);
+  });
+
+  it('kolo vyhrává nejvyšší počet bodů, shoda dělí první místo', () => {
+    let state = startRound(createParty(players, 'classic', 5), ['fr']);
+    state = recordScore(state, 'p1', score(900));
+    state = recordScore(state, 'p2', score(900));
+    expect(roundWinners(currentRound(state)!)).toEqual(['p1', 'p2']);
+  });
+
+  it('v pořadí rozhodují vyhraná kola, až potom body', () => {
+    let state = createParty(players, 'classic', 5);
+    // Táta vyhrál dvě kola těsně, Maruška jedno o hodně.
+    state = recordScore(recordScore(startRound(state, ['a']), 'p1', score(300)), 'p2', score(200));
+    state = recordScore(recordScore(startRound(state, ['b']), 'p1', score(300)), 'p2', score(200));
+    state = recordScore(recordScore(startRound(state, ['c']), 'p1', score(100)), 'p2', score(5000));
+
+    const table = standings(state);
+    expect(table[0]!.player.id).toBe('p1');
+    expect(table[0]!.wins).toBe(2);
+    expect(table[1]!.points).toBeGreaterThan(table[0]!.points);
+    expect(roundsPlayed(state)).toBe(3);
+  });
+
+  it('rozehrané kolo se do pořadí nepočítá', () => {
+    let state = startRound(createParty(players, 'classic', 5), ['fr']);
+    state = recordScore(state, 'p1', score(900));
+    expect(standings(state).every((row) => row.wins === 0 && row.points === 0)).toBe(true);
+    expect(roundsPlayed(state)).toBe(0);
   });
 });
