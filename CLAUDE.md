@@ -9,6 +9,7 @@ testera, který už vlajky umí hodně dobře.
 |---|---|---|
 | **1 – MVP** | ✅ hotovo | 5 režimů, album, mapa, rozřazovací test, FSRS, PWA offline |
 | **1b – gamifikace** | ✅ hotovo | body a kombo, 4 nové režimy, denní výzva, mise, hodnosti, souboje, odemykání, zvuky |
+| **1c – učení** | ✅ hotovo | krátký rozřazovací test, přehled „Jak ti to jde“, režim Slabiny, klávesnice, obrazovky pro chyby |
 | 2 – Supabase | ⬜ nezačato | rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
@@ -64,8 +65,8 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `scripts/make-overrides.ts` | generátor těch oprav (spouští se ručně) |
 | `src/domain/answer/match.ts` | vyhodnocení napsané odpovědi |
 | `src/domain/quiz/` | distraktory, režimy, sestavení hry |
-| `src/domain/srs/` | FSRS, úrovně zvládnutí |
-| `src/domain/game/` | body, hodnosti, souboje, denní výzva, mise, odemykání |
+| `src/domain/srs/` | FSRS, úrovně zvládnutí, rozřazovací vzorek, přehled slabin |
+| `src/domain/game/` | body, hodnosti, souboje, denní výzva, mise, odemykání, „co hrát teď“ |
 | `src/store/ProgressStore.ts` | rozhraní úložiště (fáze 2 = nová implementace) |
 | `src/i18n/cs.ts` | **všechny** texty rozhraní |
 | `src/config/app.ts` | název aplikace, složení sady, prahy |
@@ -150,6 +151,29 @@ pro něj neměl žádné napětí – doslova řekl, že je to „jak kvíz na S
 - **Zvuky** se generují ve Web Audio, žádné soubory – drží to pravidlo
   o nulových externích požadavcích a nezvětšuje offline cache.
 
+## Učení
+
+Gamifikace dává důvod hrát, tahle vrstva dává důvod se něco naučit.
+
+- **Rozřazovací test je vzorek, ne inventura.** 24 otázek napříč pásmy
+  obtížnosti místo všech 197 vlajek po dvacítkách. Z výsledku se odhadne
+  zbytek pásma (`estimateKnown`) a nové vlajky se pak berou od pásma, které
+  šlo nejhůř (`bandSkill` → `buildSession`). Odhad nic netvrdí: na každou
+  vlajku se hra stejně zeptá, mění se jen pořadí. Pásmo, na které se test
+  nezeptal, zůstává prázdné – dosazovat za něj číslo by bylo vymýšlení.
+- **Plánovač je vidět.** Obrazovka „Jak ti to jde“ (`/prehled`) ukazuje
+  slabiny (deset vlajek s největším podílem chyb) a „Brzy vyprchá“ – vlajky,
+  u kterých do tří dnů spadne pravděpodobnost vybavení pod 80 %. Číslo se
+  bere rovnou z FSRS (`get_retrievability`), ne z vlastního vzorce, jinak by
+  se přehled rozcházel s tím, co plánovač doopravdy dělá.
+- **Režim Slabiny** hraje přesně těch deset vlajek, ignoruje část světa
+  (stejně jako opakování) a střídá směr otázky.
+- **„Co teď“** (`game/nextUp.ts`) je jedno velké tlačítko na domovské:
+  test → denní výzva → co je po termínu → slabiny → klasika. Denní výzva je
+  před opakováním schválně – po půlnoci je nenávratně pryč.
+- **Po kole je vidět, co uteklo** – dvanáct vlajek, klepnutím se otevře
+  detail. Zbytek patří do přehledu slabin.
+
 ## Konvence
 
 - **Texty:** žádný český řetězec v komponentách – všechno přes `cs` z `src/i18n/cs.ts`.
@@ -200,7 +224,21 @@ aplikace doptá, která země to má být. Viz `AMBIGUOUS_ANSWERS` v `match.ts`.
 sídlí vláda. Proto Srí Džajavardanapura Kotte, ne Kolombo.
 
 **Zlato nejde proklikat.** Nejvyšší úroveň zvládnutí vyžaduje aspoň jednu
-správnou odpověď v režimu Napiš. Ze čtyř možností se dá trefit náhodou.
+správnou odpověď v režimu Napiš. Ze čtyř možností se dá trefit náhodou –
+a klepnutí na našeptávač je taky výběr ze seznamu, ne napsaný název, takže
+se do `typedCorrect` nepočítá (`assisted` v `AnswerInput`).
+
+**Měřený čas se zastaví, když dítě odejde jinam.** Body i hodnocení FSRS
+stojí na rychlosti odpovědi, takže přepnutí karty uprostřed otázky by z ní
+udělalo „pomalou“. `useQuizSession` odečítá čas mimo aplikaci
+(`visibilitychange`) a `clampElapsed` navíc drží strop na minutě.
+
+**Maraton míchá pořadí uvnitř pásem obtížnosti.** Pořád začíná od
+nejznámějších, ale ne pokaždé stejnou dvacítkou. Pásma zůstávají, takže
+rekordy z různých běhů jdou dál srovnat.
+
+**Vabank se sází naslepo.** Vlajka se odhalí až po sázce – jinak by dítě
+vsadilo tři jen tam, kde odpověď zná, a o nic by nešlo.
 
 **Rozřazovací test neplýtvá.** Rychlá správná odpověď kartu odloží daleko do
 budoucna, špatná odpověď ji nechá novou (netrestá se neznalost toho, co se
