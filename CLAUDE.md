@@ -222,8 +222,9 @@ zajímavost a rozdíl. Po chybě nikdy – tam se to „jak je rozeznáš“ doz
 - **Název aplikace** je placeholder v `src/config/app.ts` (`APP_NAME`), syn ho
   teprve vymyslí. Nikde jinde se nepíše natvrdo.
 - **Fakta o vlajkách:** raději prázdné než vymyšlené. Když si nejsme jistí,
-  `funFact` se vynechá a záznam se objeví v REVIEW.md. Teď chybí u 23 vlajek,
-  skoro samá závislá území.
+  `funFact` se vynechá a záznam se objeví v REVIEW.md. Teď má fakt **každá**
+  vlajka; ta poslední dvacítka (závislá území) vznikla dohledáním ze zdrojů,
+  ne z hlavy, takže stojí za kontrolu v REVIEW.md.
 - **Commity:** conventional commits, česky, malé kroky.
 - **Po každé změně:** `npm run check`.
 - **Žádné externí požadavky za běhu** – ani fonty, ani analytika. Všechno je

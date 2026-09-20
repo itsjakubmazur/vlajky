@@ -166,7 +166,9 @@ describe('data zemí', () => {
     for (const c of ALL_COUNTRIES) {
       if (!c.funFact) continue;
       expect(c.funFact.length, c.code).toBeLessThanOrEqual(160);
-      const sentences = c.funFact.split(/[.!?]\s+/).filter(Boolean);
+      // Věta končí tečkou, po které následuje velké písmeno. Bez té
+      // podmínky by „od 30. let 19. století“ vyšlo jako tři věty.
+      const sentences = c.funFact.split(/[.!?]\s+(?=[A-ZÁ-Ž])/u).filter(Boolean);
       expect(sentences.length, `${c.code}: ${c.funFact}`).toBeLessThanOrEqual(2);
     }
   });

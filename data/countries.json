@@ -96,15 +96,13 @@
       "lng": -63.1,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Tři oranžoví delfíni plavou v kruhu – kruh má znamenat, že ostrov drží pohromadě.",
       "ratio": [
         1200,
         600
       ],
       "accent": "#012169",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "AIA",
       "numeric": "660"
     },
@@ -215,15 +213,13 @@
       "lng": -170.7,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Orel drží samojské odznaky moci: válečný kyj a oháňku z kokosových vláken.",
       "ratio": [
         1000,
         500
       ],
       "accent": "#000066",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "ASM",
       "numeric": "016"
     },
@@ -291,15 +287,13 @@
       "lng": -69.97,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Hvězda má čtyři cípy jako čtyři světové strany – na Arubu se lidé sjeli odevšad. Dva žluté pruhy jsou turisté a nerosty, ze kterých ostrov žije.",
       "ratio": [
         27,
         18
       ],
       "accent": "#418fde",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "ABW",
       "numeric": "533"
     },
@@ -319,15 +313,13 @@
         "fo"
       ],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Je to švédská vlajka s červeným křížem navíc: Ålandy jsou švédsky mluvící část Finska, tak mají v jedné vlajce obě země.",
       "ratio": [
         260,
         170
       ],
       "accent": "#0053a5",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "ALA",
       "numeric": "248"
     },
@@ -585,15 +577,13 @@
       "lng": -64.75,
       "similar": [],
       "difficulty": 4,
-      "funFact": null,
+      "funFact": "Britská území mívají modré pole, Bermudy mají červené – to byla vlajka obchodních lodí. Ve znaku je lev a loď Sea Venture, která tu v roce 1609 ztroskotala.",
       "ratio": [
         1000,
         500
       ],
       "accent": "#c8102e",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "BMU",
       "numeric": "060"
     },
@@ -954,15 +944,13 @@
       "lng": -159.8,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Patnáct hvězd v kruhu je patnáct ostrovů. Předtím byla vlajka zelená a hvězdy zlaté.",
       "ratio": [
         9600,
         4800
       ],
       "accent": "#012169",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "COK",
       "numeric": "184"
     },
@@ -1160,15 +1148,13 @@
       "lng": -69,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Dvě hvězdy jsou dva ostrovy: velké Curaçao a malé Klein Curaçao, na kterém nikdo nebydlí.",
       "ratio": [
         54,
         36
       ],
       "accent": "#002b7f",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "CUW",
       "numeric": "531"
     },
@@ -1470,15 +1456,14 @@
         "sd"
       ],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Má barvy, které nosí většina arabských vlajek – černou, bílou, zelenou a červenou.",
       "ratio": [
         600,
         300
       ],
       "accent": "#007a3d",
       "needsReview": [
-        "ROZHODNUTO: sporné území, je jen v bonusové sadě.",
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
+        "ROZHODNUTO: sporné území, je jen v bonusové sadě."
       ],
       "iso3": "ESH",
       "numeric": "732"
@@ -1624,15 +1609,13 @@
       "lng": -59.5,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Ve znaku je beran kvůli ovcím a loď Desire, ze které ostrovy v roce 1592 poprvé uviděli.",
       "ratio": [
         1200,
         600
       ],
       "accent": "#012169",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "FLK",
       "numeric": "238"
     },
@@ -1897,15 +1880,13 @@
       "lng": -2.6,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Zlatý kříž uvnitř anglického přibyl až v roce 1985 – do té doby měli Guernsey i Anglie na sportovních akcích úplně stejnou vlajku a pletlo se to.",
       "ratio": [
         36,
         24
       ],
       "accent": "#f9dd16",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "GGY",
       "numeric": "831"
     },
@@ -2121,15 +2102,13 @@
       "lng": 144.8,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Znak má tvar prakového kamene, jaký používali staří Čamorové. Pluje v něm rychlá plachetnice proa.",
       "ratio": [
         216958.34,
         116416.66
       ],
       "accent": "#c62139",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "GUM",
       "numeric": "316"
     },
@@ -2543,15 +2522,13 @@
       "lng": -2.1,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Šikmý červený kříž má Jersey od 30. let 19. století, koruna přibyla až v roce 1981.",
       "ratio": [
         30,
         18
       ],
       "accent": "#e8112d",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "JEY",
       "numeric": "832"
     },
@@ -2863,15 +2840,13 @@
       "lng": -81.2,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Tři zelené hvězdy jsou tři ostrovy. Nad štítem je želva a ananas – ananas kvůli poutu s Jamajkou.",
       "ratio": [
         1200,
         600
       ],
       "accent": "#012169",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "CYM",
       "numeric": "136"
     },
@@ -3427,15 +3402,13 @@
       "lng": 113.5,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Lotos má tři okvětní lístky jako tři části Macaa: poloostrov a dva ostrovy. Pod ním je most, který je spojuje.",
       "ratio": [
         660,
         440
       ],
       "accent": "#00785e",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "MAC",
       "numeric": "446"
     },
@@ -3452,15 +3425,13 @@
       "lng": 145.75,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Šedý kámen latte je podstavec, na jakém stály čamorské domy. Kolem hvězdy je mwar – věnec z živých květů.",
       "ratio": [
         1000,
         500
       ],
       "accent": "#0071bc",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "MNP",
       "numeric": "580"
     },
@@ -3500,15 +3471,13 @@
       "lng": -62.2,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Žena s harfou na štítu je Erin, symbol Irska. Na Montserrat se Irové stěhovali už od roku 1632.",
       "ratio": [
         1200,
         600
       ],
       "accent": "#012169",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "MSR",
       "numeric": "500"
     },
@@ -3718,15 +3687,13 @@
       "lng": 165.5,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Nová Kaledonie používá dvě vlajky vedle sebe – francouzskou a tuhle kanackou. Na žlutém kotouči je flèche faîtière, vyřezávaná špice z vrcholu kanackého domu.",
       "ratio": [
         900,
         450
       ],
       "accent": "#009543",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "NCL",
       "numeric": "540"
     },
@@ -4017,15 +3984,13 @@
       "lng": -149.6,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Na vlnách pluje dvojitá kánoe a v ní pět postav – pět souostroví, ze kterých se Francouzská Polynésie skládá.",
       "ratio": [
         600,
         400
       ],
       "accent": "#ce1126",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "PYF",
       "numeric": "258"
     },
@@ -4845,15 +4810,13 @@
       "lng": -71.6,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Na štítu je mušle, langusta a kaktus zvaný turkova hlava – právě po něm se ostrovy Turks nejspíš jmenují.",
       "ratio": [
         9600,
         4800
       ],
       "accent": "#012169",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "TCA",
       "numeric": "796"
     },
@@ -5384,15 +5347,13 @@
       "lng": -64.6,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Na štítu je svatá Uršula a jedenáct lamp. Kolumbus ostrovy pojmenoval po ní a jejích jedenácti tisících družkách – jedna lampa je tisíc.",
       "ratio": [
         1200,
         600
       ],
       "accent": "#ff0000",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "VGB",
       "numeric": "092"
     },
@@ -5409,15 +5370,13 @@
       "lng": -64.8,
       "similar": [],
       "difficulty": 5,
-      "funFact": null,
+      "funFact": "Mezi písmeny V a I drží orel tři modré šípy – tři hlavní ostrovy: Saint Croix, Saint Thomas a Saint John.",
       "ratio": [
         1275,
         850
       ],
       "accent": "#369443",
-      "needsReview": [
-        "Chybí zajímavost o vlajce – doplň, nebo nech prázdné."
-      ],
+      "needsReview": [],
       "iso3": "VIR",
       "numeric": "850"
     },

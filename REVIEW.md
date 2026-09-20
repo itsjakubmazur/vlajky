@@ -16,7 +16,7 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 - Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
 - Států v sadě „Svět“: **196** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
 - Území v bonusové sadě: **30**
-- Zajímavost o vlajce chybí u **21** záznamů
+- Zajímavost o vlajce chybí u **0** záznamů
 - Otevřených otázek k rozhodnutí: **0**
 
 ### Co NENÍ ověřené
@@ -54,7 +54,7 @@ Až bude po ruce poctivé SVG, stačí záznam vrátit do `data/cs/*.ts`.
 U těchhle vlajek jsem nenašel fakt, za který bych ručil. Radši prázdné než vymyšlené –
 když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká vlajka).
 
-`ai` Anguilla · `as` Americká Samoa · `aw` Aruba · `ax` Ålandy · `bm` Bermudy · `ck` Cookovy ostrovy · `cw` Curaçao · `eh` Západní Sahara · `fk` Falklandy · `gg` Guernsey · `gu` Guam · `je` Jersey · `ky` Kajmanské ostrovy · `mo` Macao · `mp` Severní Mariany · `ms` Montserrat · `nc` Nová Kaledonie · `pf` Francouzská Polynésie · `tc` Turks a Caicos · `vg` Britské Panenské ostrovy · `vi` Americké Panenské ostrovy
+_Žádné._
 
 ## Evropa (46)
 
@@ -286,36 +286,36 @@ když něco víš, doplníme. Aplikace funguje i bez nich (ukáže se jen velká
 
 | Kód | Český název | Úřední název | Aliasy | Hlavní město | Obtížnost | Poměr | Zajímavost o vlajce |
 |---|---|---|---|---|---|---|---|
-| `ax` | **Ålandy** | – | – | Mariehamn | 5 | 1.53:1 | **— CHYBÍ —** |
-| `as` | **Americká Samoa** | – | – | Pago Pago | 5 | 2.00:1 | **— CHYBÍ —** |
-| `vi` | **Americké Panenské ostrovy** | – | – | Charlotte Amalie | 5 | 1.50:1 | **— CHYBÍ —** |
+| `ax` | **Ålandy** | – | – | Mariehamn | 5 | 1.53:1 | Je to švédská vlajka s červeným křížem navíc: Ålandy jsou švédsky mluvící část Finska, tak mají v jedné vlajce obě země. |
+| `as` | **Americká Samoa** | – | – | Pago Pago | 5 | 2.00:1 | Orel drží samojské odznaky moci: válečný kyj a oháňku z kokosových vláken. |
+| `vi` | **Americké Panenské ostrovy** | – | – | Charlotte Amalie | 5 | 1.50:1 | Mezi písmeny V a I drží orel tři modré šípy – tři hlavní ostrovy: Saint Croix, Saint Thomas a Saint John. |
 | `gb-eng` | **Anglie** | – | – | Londýn | 2 | 1.67:1 | Anglická vlajka je červený kříž svatého Jiří – ve Union Jacku tvoří tu rovnou část. |
-| `ai` | **Anguilla** | – | – | The Valley | 5 | 2.00:1 | **— CHYBÍ —** |
-| `aw` | **Aruba** | – | – | Oranjestad | 5 | 1.50:1 | **— CHYBÍ —** |
-| `bm` | **Bermudy** | – | – | Hamilton | 4 | 2.00:1 | **— CHYBÍ —** |
-| `vg` | **Britské Panenské ostrovy** | – | – | Road Town | 5 | 2.00:1 | **— CHYBÍ —** |
-| `ck` | **Cookovy ostrovy** | – | – | Avarua | 5 | 2.00:1 | **— CHYBÍ —** |
-| `cw` | **Curaçao** | – | – | Willemstad | 5 | 1.50:1 | **— CHYBÍ —** |
+| `ai` | **Anguilla** | – | – | The Valley | 5 | 2.00:1 | Tři oranžoví delfíni plavou v kruhu – kruh má znamenat, že ostrov drží pohromadě. |
+| `aw` | **Aruba** | – | – | Oranjestad | 5 | 1.50:1 | Hvězda má čtyři cípy jako čtyři světové strany – na Arubu se lidé sjeli odevšad. Dva žluté pruhy jsou turisté a nerosty, ze kterých ostrov žije. |
+| `bm` | **Bermudy** | – | – | Hamilton | 4 | 2.00:1 | Britská území mívají modré pole, Bermudy mají červené – to byla vlajka obchodních lodí. Ve znaku je lev a loď Sea Venture, která tu v roce 1609 ztroskotala. |
+| `vg` | **Britské Panenské ostrovy** | – | – | Road Town | 5 | 2.00:1 | Na štítu je svatá Uršula a jedenáct lamp. Kolumbus ostrovy pojmenoval po ní a jejích jedenácti tisících družkách – jedna lampa je tisíc. |
+| `ck` | **Cookovy ostrovy** | – | – | Avarua | 5 | 2.00:1 | Patnáct hvězd v kruhu je patnáct ostrovů. Předtím byla vlajka zelená a hvězdy zlaté. |
+| `cw` | **Curaçao** | – | – | Willemstad | 5 | 1.50:1 | Dvě hvězdy jsou dva ostrovy: velké Curaçao a malé Klein Curaçao, na kterém nikdo nebydlí. |
 | `fo` | **Faerské ostrovy** | – | – | Tórshavn | 4 | 1.38:1 | Faerská vlajka má severský kříž v červené a modré na bílém poli. |
-| `fk` | **Falklandy** | – | – | Stanley | 5 | 2.00:1 | **— CHYBÍ —** |
-| `pf` | **Francouzská Polynésie** | – | – | Papeete | 5 | 1.50:1 | **— CHYBÍ —** |
+| `fk` | **Falklandy** | – | – | Stanley | 5 | 2.00:1 | Ve znaku je beran kvůli ovcím a loď Desire, ze které ostrovy v roce 1592 poprvé uviděli. |
+| `pf` | **Francouzská Polynésie** | – | – | Papeete | 5 | 1.50:1 | Na vlnách pluje dvojitá kánoe a v ní pět postav – pět souostroví, ze kterých se Francouzská Polynésie skládá. |
 | `gi` | **Gibraltar** | – | – | Gibraltar | 4 | 2.00:1 | Na gibraltarské vlajce je hrad se zlatým klíčem, který visí z brány. |
 | `gl` | **Grónsko** | – | – | Nuuk | 3 | 1.50:1 | Grónská vlajka má kruh napůl červený a napůl bílý – jako slunce nad ledem. |
-| `gu` | **Guam** | – | – | Hagåtña | 5 | 1.86:1 | **— CHYBÍ —** |
-| `gg` | **Guernsey** | – | – | Saint Peter Port | 5 | 1.50:1 | **— CHYBÍ —** |
+| `gu` | **Guam** | – | – | Hagåtña | 5 | 1.86:1 | Znak má tvar prakového kamene, jaký používali staří Čamorové. Pluje v něm rychlá plachetnice proa. |
+| `gg` | **Guernsey** | – | – | Saint Peter Port | 5 | 1.50:1 | Zlatý kříž uvnitř anglického přibyl až v roce 1985 – do té doby měli Guernsey i Anglie na sportovních akcích úplně stejnou vlajku a pletlo se to. |
 | `hk` | **Hongkong** | – | – | Hongkong | 3 | 1.50:1 | Na hongkongské vlajce je bílý květ blahovičníku s pěti okvětními lístky. |
-| `je` | **Jersey** | – | – | Saint Helier | 5 | 1.67:1 | **— CHYBÍ —** |
-| `ky` | **Kajmanské ostrovy** | – | – | George Town | 5 | 2.00:1 | **— CHYBÍ —** |
-| `mo` | **Macao** | – | – | Macao | 5 | 1.50:1 | **— CHYBÍ —** |
-| `ms` | **Montserrat** | – | – | Plymouth | 5 | 2.00:1 | **— CHYBÍ —** |
-| `nc` | **Nová Kaledonie** | – | – | Nouméa | 5 | 2.00:1 | **— CHYBÍ —** |
+| `je` | **Jersey** | – | – | Saint Helier | 5 | 1.67:1 | Šikmý červený kříž má Jersey od 30. let 19. století, koruna přibyla až v roce 1981. |
+| `ky` | **Kajmanské ostrovy** | – | – | George Town | 5 | 2.00:1 | Tři zelené hvězdy jsou tři ostrovy. Nad štítem je želva a ananas – ananas kvůli poutu s Jamajkou. |
+| `mo` | **Macao** | – | – | Macao | 5 | 1.50:1 | Lotos má tři okvětní lístky jako tři části Macaa: poloostrov a dva ostrovy. Pod ním je most, který je spojuje. |
+| `ms` | **Montserrat** | – | – | Plymouth | 5 | 2.00:1 | Žena s harfou na štítu je Erin, symbol Irska. Na Montserrat se Irové stěhovali už od roku 1632. |
+| `nc` | **Nová Kaledonie** | – | – | Nouméa | 5 | 2.00:1 | Nová Kaledonie používá dvě vlajky vedle sebe – francouzskou a tuhle kanackou. Na žlutém kotouči je flèche faîtière, vyřezávaná špice z vrcholu kanackého domu. |
 | `im` | **Ostrov Man** | – | – | Douglas | 4 | 2.00:1 | Na vlajce Ostrova Man jsou tři nohy v brnění spojené do kolečka. |
 | `pr` | **Portoriko** | – | – | San Juan | 3 | 1.50:1 | Portorická vlajka vypadá jako kubánská s prohozenou modrou a červenou. |
-| `mp` | **Severní Mariany** | – | – | Saipan | 5 | 2.00:1 | **— CHYBÍ —** |
+| `mp` | **Severní Mariany** | – | – | Saipan | 5 | 2.00:1 | Šedý kámen latte je podstavec, na jakém stály čamorské domy. Kolem hvězdy je mwar – věnec z živých květů. |
 | `gb-sct` | **Skotsko** | – | – | Edinburgh | 3 | 1.67:1 | Skotská vlajka je bílý šikmý kříž svatého Ondřeje na modré. |
-| `tc` | **Turks a Caicos** | – | – | Cockburn Town | 5 | 2.00:1 | **— CHYBÍ —** |
+| `tc` | **Turks a Caicos** | – | – | Cockburn Town | 5 | 2.00:1 | Na štítu je mušle, langusta a kaktus zvaný turkova hlava – právě po něm se ostrovy Turks nejspíš jmenují. |
 | `gb-wls` | **Wales** | – | – | Cardiff | 3 | 1.67:1 | Na velšské vlajce je červený drak – a ve Union Jacku není vůbec zastoupený. |
-| `eh` | **Západní Sahara** | – | – | Al-Ajún | 5 | 2.00:1 | **— CHYBÍ —** |
+| `eh` | **Západní Sahara** | – | – | Al-Ajún | 5 | 2.00:1 | Má barvy, které nosí většina arabských vlajek – černou, bílou, zelenou a červenou. |
 
 ## Skupiny zaměnitelných vlajek
 
