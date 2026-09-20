@@ -72,7 +72,10 @@ export function kindForMode(mode: QuizModeId, rng: Rng): QuestionKind {
     case 'daily':
       return 'pickCountry';
     case 'boss':
-      return 'twins';
+      // Souboj střídá směry: dvě vlajky vedle sebe a občas obráceně
+      // vlajka a jména ze skupiny. Pořád dokola „která je Čad“ se dá
+      // uhádnout ze zvyku, ne ze znalosti.
+      return pick(['twins', 'twins', 'pickCountry'] as const, rng) ?? 'twins';
     case 'reverse':
       return 'pickFlag';
     case 'typing':

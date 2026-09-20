@@ -84,6 +84,8 @@ export const cs = {
       combo: 'Dej 6 správných v řadě',
       newFlags: 'Potkej 3 vlajky, které jsi ještě neviděl',
     },
+    switchRegion: 'Hrát jen tenhle světadíl',
+    switchRegionHint: 'Hraješ jinou část světa, tahle mise se tak plnit nebude.',
   },
   bosses: {
     title: 'Souboje',

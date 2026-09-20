@@ -47,11 +47,20 @@ export function buildSession({
 }: SessionOptions): string[] {
   const candidates = mode === 'twins' ? twinnableCountries(pool) : [...pool];
 
-  // Maraton jde přes celou sadu – od nejznámějších, ať se dá vůbec rozjet.
+  // Maraton jde přes celou sadu od nejznámějších, ať se dá vůbec rozjet.
+  // Uvnitř pásma obtížnosti se ale pořadí pokaždé zamíchá – jinak by každý
+  // běh začínal stejnou dvacítkou a maraton by se naučil nazpaměť.
+  // Pásma zůstávají, takže rekordy z různých běhů jdou pořád srovnat.
   if (mode === 'marathon') {
-    return [...pool]
-      .sort((a, b) => a.difficulty - b.difficulty || a.code.localeCompare(b.code))
-      .map((c) => c.code);
+    const byBand = new Map<number, Country[]>();
+    for (const country of pool) {
+      const list = byBand.get(country.difficulty);
+      if (list) list.push(country);
+      else byBand.set(country.difficulty, [country]);
+    }
+    return [...byBand.entries()]
+      .sort(([a], [b]) => a - b)
+      .flatMap(([, list]) => shuffle(list, rng).map((c) => c.code));
   }
 
   if (mode === 'daily') {

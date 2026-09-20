@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ALL_COUNTRIES, requireCountry } from '@/domain/countries';
 import { MIN_REGION_SIZE } from '~data/sets';
+import { bossById } from '@/domain/game/bosses';
 import {
   buildQuestion,
   kindForMode,
@@ -137,7 +138,19 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
 
   // V malé části světa by nešly poskládat čtyři možnosti, tak se na
   // distraktory sáhne do celé sady.
-  const distractorPool = pool.length >= MIN_REGION_SIZE ? pool : set;
+  const regionDistractors = pool.length >= MIN_REGION_SIZE ? pool : set;
+
+  // V souboji se nabízejí jen vlajky z dané skupiny. Kdyby se braly
+  // z celé sady, byla by otázka „Čad, nebo Japonsko?“ – žádný souboj.
+  const bossPool = useMemo(() => {
+    if (mode !== 'boss' || !config.bossId) return null;
+    const boss = bossById(set, config.bossId);
+    if (!boss) return null;
+    const codes = new Set(boss.codes);
+    return set.filter((country) => codes.has(country.code));
+  }, [mode, config.bossId, set]);
+
+  const distractorPool = bossPool ?? regionDistractors;
 
   /** Rekord se vede zvlášť pro každou část světa – jinak by se mísily. */
   const recordKey = ignoresRegion ? mode : `${mode}:${region}`;
@@ -173,7 +186,11 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
           pool: distractorPool,
           mastery: progress.cards[code]?.mastery ?? 'new',
           rng,
-          kind: mode === 'review' || mode === 'weak' ? kindForMode(mode, rng) : undefined,
+          // Režimy, které míchají směr otázky, si typ losují ke každé zvlášť.
+          kind:
+            mode === 'review' || mode === 'weak' || mode === 'boss'
+              ? kindForMode(mode, rng)
+              : undefined,
         }),
       ),
     );

@@ -210,3 +210,25 @@ describe('postup se propisuje do hry', () => {
     expect(new Date(card.fsrs.due).getTime()).toBeGreaterThan(now.getTime());
   });
 });
+
+describe('maraton a souboje', () => {
+  it('maraton drží pásma obtížnosti, ale pořadí v nich míchá', () => {
+    const a = buildSession({ mode: 'marathon', pool: world, cards: {}, now, rng: createRng(1) });
+    const b = buildSession({ mode: 'marathon', pool: world, cards: {}, now, rng: createRng(2) });
+
+    expect(a).toHaveLength(world.length);
+    expect(new Set(a).size).toBe(a.length);
+    expect(a).not.toEqual(b);
+
+    const levels = a.map((code) => requireCountry(code).difficulty);
+    expect([...levels].sort((x, y) => x - y)).toEqual(levels);
+  });
+
+  it('souboj střídá směr otázky', () => {
+    const rng = createRng(7);
+    const kinds = new Set(
+      Array.from({ length: 40 }, () => kindForMode('boss', rng)),
+    );
+    expect(kinds).toEqual(new Set(['twins', 'pickCountry']));
+  });
+});

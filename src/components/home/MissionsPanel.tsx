@@ -7,6 +7,7 @@ import { todayContext } from '@/domain/game/todayView';
 import { dayKey } from '@/domain/game/day';
 import { cs } from '@/i18n/cs';
 import { useProgress } from '@/store/StoreProvider';
+import { useActivePool } from '@/quiz/useActivePool';
 import { Button, Eyebrow, Panel, ProgressBar } from '@/components/ui';
 
 function missionLabel(mission: Mission): string {
@@ -18,8 +19,11 @@ function missionLabel(mission: Mission): string {
 
 /** Tři úkoly na den. Splní se napříč hrami, nemusí se na ně hrát zvlášť. */
 export function MissionsPanel() {
-  const { progress, claimMission } = useProgress();
+  const { progress, claimMission, setMeta } = useProgress();
   const today = dayKey(new Date());
+  // V bonusové sadě území nemusí mít světadíl dost vlajek na hraní –
+  // přepnutí se pak nenabízí, aby nevedlo do prázdna.
+  const { region, regions } = useActivePool();
 
   const missions = useMemo(() => dailyMissions(today), [today]);
   const ctx = useMemo(
@@ -50,6 +54,30 @@ export function MissionsPanel() {
                   {cs.missions.reward(mission.reward)}
                 </span>
               </div>
+              {/*
+                Mise na světadíl se nedá splnit, když se hraje jiná část
+                světa – ta otázka se prostě nepoloží. Místo tiché nesplnitelné
+                mise nabídneme přepnutí na jedno klepnutí.
+              */}
+              {!isClaimed &&
+              !done &&
+              mission.kind === 'continent' &&
+              region !== 'all' &&
+              region !== mission.continent &&
+              regions.includes(mission.continent!) ? (
+                <div className="glass-thin mt-0.5 flex flex-col gap-2 rounded-2xl p-3">
+                  <span className="text-[0.72rem] leading-snug text-faint">
+                    {cs.missions.switchRegionHint}
+                  </span>
+                  <Button
+                    variant="secondary"
+                    className="h-10 min-h-10 self-start px-4 text-xs"
+                    onClick={() => void setMeta({ region: mission.continent! })}
+                  >
+                    {cs.missions.switchRegion}
+                  </Button>
+                </div>
+              ) : null}
               {isClaimed ? null : done ? (
                 <Button
                   className="h-10 min-h-10 self-start px-4 text-xs"
