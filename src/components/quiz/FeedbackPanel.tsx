@@ -43,6 +43,11 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
       ? requireCountry(result.matchedCode)
       : null;
 
+  // U „vlajka → hlavní město“ je správná odpověď město, ne země.
+  const asksCapital = feedback.kind === 'pickCapital';
+  // Věta o rozdílu vlajek dává smysl jen tam, kde se vlajka poznávala.
+  const asksFlag = feedback.kind !== 'pickCapital' && feedback.kind !== 'pickByCapital';
+
   // Co dítě opravdu vybralo – u tlačítek kód, u psaní rozpoznaná země.
   const chosenCode = feedback.typed ? (result.matchedCode ?? null) : feedback.given;
   const chosen = !correct && chosenCode && chosenCode !== country.code
@@ -51,7 +56,7 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
 
   // Ukázat správnou vlajku ještě neřekne, jak ji příště poznat. Tohle ano –
   // proto je to jediná věc ve zpětné vazbě, která dostane obě vlajky vedle sebe.
-  const difference = chosen ? differenceFor(country.code, chosen.code) : null;
+  const difference = chosen && asksFlag ? differenceFor(country.code, chosen.code) : null;
 
   return (
     <div
@@ -87,7 +92,13 @@ export function FeedbackPanel({ feedback, onNext }: { feedback: Feedback; onNext
         <div className="flex flex-col items-center gap-3 rounded-glass bg-white/5 p-4">
           <Eyebrow>{cs.quiz.correctAnswerIs}</Eyebrow>
           <FlagImage code={country.code} size="xl" priority pulse />
-          <span className="display text-xl">{country.nameCs}</span>
+          {/* U hlavních měst je správná odpověď město, ne země. */}
+          <span className="display text-xl">
+            {asksCapital ? country.capitalCs : country.nameCs}
+          </span>
+          {asksCapital ? (
+            <span className="text-sm text-faint">{country.nameCs}</span>
+          ) : null}
           {wroteOtherCountry ? (
             <span className="text-center text-sm text-faint">
               {cs.quiz.youWrote(wroteOtherCountry.nameCs)}

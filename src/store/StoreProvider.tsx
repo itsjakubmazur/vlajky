@@ -102,16 +102,17 @@ export function ProgressProvider({
       const now = new Date();
       const current = progress.cards[code] ?? emptyCardState(code, now);
       const before = current.mastery;
-      const card = applyAnswer(current, input, now);
+      const card = input.skipsScheduler ? current : applyAnswer(current, input, now);
 
       const today = dayKey(now);
-      await storeRef.current.saveCards([card]);
+      if (!input.skipsScheduler) await storeRef.current.saveCards([card]);
       await storeRef.current.logAnswer({
         code,
         mode: input.mode,
         correct: input.correct,
         elapsedMs: input.elapsedMs,
         at: now.toISOString(),
+        ...(input.given ? { given: input.given } : {}),
       });
       await storeRef.current.setMeta({
         lastPlayedDay: today,

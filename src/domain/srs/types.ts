@@ -32,6 +32,13 @@ export interface AnswerLog {
   correct: boolean;
   elapsedMs: number;
   at: string;
+  /**
+   * Kód země, kterou dítě vybralo místo správné.
+   *
+   * Bez toho se dá zjistit jen *že* chybovalo, ne *s čím si to plete* –
+   * a přitom právě to je jediné, co se dá potom natrénovat.
+   */
+  given?: string;
 }
 
 export function toStored(card: Card): StoredCard {

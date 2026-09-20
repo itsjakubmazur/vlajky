@@ -14,6 +14,9 @@ export const QUIZ_MODES = [
   'flash',
   'risk',
   'daily',
+  // Druhá osa znalosti: hlavní města. Data v `capitalCs` byla v aplikaci
+  // od začátku, ukazovala se ale jen v detailu vlajky.
+  'capitals',
 ] as const;
 export type QuizModeId = (typeof QUIZ_MODES)[number] | 'placement' | 'boss' | 'weak';
 
@@ -29,7 +32,19 @@ export const SCORED_MODES: readonly QuizModeId[] = [
   'daily',
   'boss',
   'weak',
+  'capitals',
 ];
+
+/**
+ * Posouvá odpověď na takovou otázku plánovač vlajek?
+ *
+ * Hlavní města se ptají na jinou znalost a vlajku mají přímo v otázce –
+ * počítat je jako zopakování vlajky by hlásilo zvládnutí, které dítě
+ * neprokázalo.
+ */
+export function touchesScheduler(kind: QuestionKind): boolean {
+  return kind !== 'pickCapital' && kind !== 'pickByCapital';
+}
 
 /** Kolik životů má hráč v daném režimu; `null` = neomezeně. */
 export function livesFor(mode: QuizModeId): number | null {
@@ -50,7 +65,11 @@ export type QuestionKind =
   /** vidí vlajku, píše název */
   | 'type'
   /** vidí dvě zaměnitelné vlajky vedle sebe */
-  | 'twins';
+  | 'twins'
+  /** vidí vlajku, vybírá hlavní město */
+  | 'pickCapital'
+  /** vidí hlavní město, vybírá vlajku */
+  | 'pickByCapital';
 
 export interface Question {
   /** kód správné odpovědi */
@@ -82,6 +101,10 @@ export function kindForMode(mode: QuizModeId, rng: Rng): QuestionKind {
       return 'type';
     case 'twins':
       return 'twins';
+    case 'capitals':
+      // Dvakrát z vlajky na město, jednou obráceně – ať se to nedá odjet
+      // jedním směrem.
+      return pick(['pickCapital', 'pickCapital', 'pickByCapital'] as const, rng) ?? 'pickCapital';
     case 'review':
     case 'weak':
       // Chytré opakování i trénink slabin střídají způsoby, ať to není
@@ -109,6 +132,18 @@ export function buildQuestion({
   kind,
 }: BuildQuestionOptions): Question {
   const resolved = kind ?? kindForMode(mode, rng);
+
+  // Hlavní města se ptají na jinou věc než na vlajku, ale nabídka se staví
+  // stejně – ze zemí. Rozdíl je jen v tom, co je na tlačítku a co v otázce.
+  if (resolved === 'pickCapital' || resolved === 'pickByCapital') {
+    const distractors = pickDistractors(target, pool, { rng, challenge: 0.5 });
+    return {
+      code: target.code,
+      kind: resolved,
+      options: buildOptions(target, distractors, rng).map((c) => c.code),
+      mode,
+    };
+  }
 
   if (resolved === 'type') {
     return { code: target.code, kind: 'type', options: [], mode };

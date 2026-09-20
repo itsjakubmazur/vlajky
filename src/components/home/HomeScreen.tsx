@@ -31,6 +31,7 @@ const MODE_CARDS = [
   { mode: 'twins', flags: ['td', 'ro'] },
   { mode: 'flash', flags: ['np'] },
   { mode: 'risk', flags: ['qa'] },
+  { mode: 'capitals', flags: ['fr'] },
   { mode: 'marathon', flags: ['us', 'cn', 'in'] },
 ] as const;
 

@@ -84,9 +84,16 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
         ? cs.quiz.whichIs(target.nameCs)
         : question.kind === 'type'
           ? cs.quiz.typeCountry
-          : cs.quiz.whichCountry;
+          : question.kind === 'pickCapital'
+            ? cs.quiz.whichCapital
+            : question.kind === 'pickByCapital'
+              ? cs.quiz.whichFlagByCapital(target.capitalCs)
+              : cs.quiz.whichCountry;
 
-  const showsFlagInQuestion = question.kind === 'pickCountry' || question.kind === 'type';
+  const showsFlagInQuestion =
+    question.kind === 'pickCountry' ||
+    question.kind === 'type' ||
+    question.kind === 'pickCapital';
   const awaitingStake = mode === 'risk' && !staked && !session.feedback;
   const flagVisible =
     !(mode === 'flash' && flashHidden && !session.feedback) && !awaitingStake;
@@ -131,10 +138,15 @@ export function QuizScreen({ mode, bossId }: { mode: QuizModeId; bossId?: string
             />
           ) : null}
 
-          {!awaitingStake && (question.kind === 'pickCountry' || question.kind === 'pickFlag') ? (
+          {!awaitingStake &&
+          (question.kind === 'pickCountry' ||
+            question.kind === 'pickFlag' ||
+            question.kind === 'pickCapital' ||
+            question.kind === 'pickByCapital') ? (
             <OptionGrid
               options={question.options}
-              asFlags={question.kind === 'pickFlag'}
+              asFlags={question.kind === 'pickFlag' || question.kind === 'pickByCapital'}
+              label={question.kind === 'pickCapital' ? 'capital' : 'name'}
               correctCode={question.code}
               chosen={chosen}
               onChoose={session.answerWithCode}

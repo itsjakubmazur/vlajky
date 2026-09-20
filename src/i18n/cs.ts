@@ -132,6 +132,7 @@ export const cs = {
     daily: { name: 'Denní výzva', desc: 'Deset vlajek pro všechny stejných' },
     boss: { name: 'Souboj', desc: 'Zrádná dvojice, pět otázek bez chyby' },
     weak: { name: 'Slabiny', desc: 'Vlajky, na kterých to nejčastěji láme' },
+    capitals: { name: 'Hlavní města', desc: 'Vlajka → hlavní město a zpátky' },
   },
   insight: {
     title: 'Jak ti to jde',
@@ -139,6 +140,11 @@ export const cs = {
     estimate: (known: number, total: number) =>
       `Podle rozřazovacího testu umíš zhruba ${known} z ${total} vlajek.`,
     estimateHint: 'Je to odhad ze vzorku – na všechny se hra stejně zeptá.',
+    confusionTitle: 'S čím si to pleteš',
+    confusionDesc: 'Nejčastější záměny. Klepni a ukáže se, čím se ty dvě liší.',
+    confusionEmpty: 'Zatím si nic nepleteš – nebo je toho málo na statistiku.',
+    confusionCount: (n: number) => (n === 1 ? '1×' : `${n}×`),
+    confusionLegend: 'správně → co jsi dal',
     weakTitle: 'Slabiny',
     weakDesc: 'Vlajky, na kterých to láme nejčastěji.',
     weakEmpty: 'Zatím ti žádná vlajka nedělá potíže. Zahraj si a uvidíme.',
@@ -163,6 +169,8 @@ export const cs = {
     almost: 'Skoro!',
     wrong: 'Tahle byla těžká',
     differenceTitle: 'Jak je rozeznáš',
+    whichCapital: 'Jaké má tahle země hlavní město?',
+    whichFlagByCapital: (capital: string) => `Která země má hlavní město ${capital}?`,
     correctAnswerIs: 'Správně je',
     youWrote: (country: string) => `Napsal jsi ${country}`,
     ambiguous: 'Takhle se jmenujou dvě země. Která to má být?',

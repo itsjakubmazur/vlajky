@@ -24,7 +24,7 @@ import { dailyMissions, isComplete, missionProgress } from '@/domain/game/missio
 import { UNLOCKS, unlockedIds } from '@/domain/game/unlocks';
 import { nextUp } from '@/domain/game/nextUp';
 import { buildSession } from '@/domain/quiz/session';
-import { fadingSoon, weakest } from '@/domain/srs/insight';
+import { confusions, fadingSoon, weakest } from '@/domain/srs/insight';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
 import { livesFor } from '@/domain/quiz/modes';
 import { createRng } from '@/domain/rng';
@@ -394,5 +394,34 @@ describe('co hrát teď', () => {
 
   it('když nic nehoří, nabídne klasiku', () => {
     expect(nextUp(base).mode).toBe('classic');
+  });
+});
+
+describe('s čím si to pleteš', () => {
+  const at = '2026-03-01T10:00:00Z';
+  const log = [
+    { code: 'ne', mode: 'classic', correct: false, elapsedMs: 3000, at, given: 'ng' },
+    { code: 'ne', mode: 'classic', correct: false, elapsedMs: 3000, at, given: 'ng' },
+    { code: 'ne', mode: 'classic', correct: false, elapsedMs: 3000, at, given: 'in' },
+    { code: 'td', mode: 'classic', correct: false, elapsedMs: 3000, at },
+    { code: 'ro', mode: 'classic', correct: true, elapsedMs: 3000, at, given: 'td' },
+  ];
+
+  it('sečte dvojice a seřadí je podle četnosti', () => {
+    const found = confusions(log, () => true);
+    expect(found[0]).toEqual({ code: 'ne', given: 'ng', count: 2 });
+    expect(found).toHaveLength(2);
+  });
+
+  it('chyba bez zaznamenané odpovědi ani správná odpověď se nepočítají', () => {
+    const found = confusions(log, () => true);
+    expect(found.some((c) => c.code === 'td')).toBe(false);
+    expect(found.some((c) => c.code === 'ro')).toBe(false);
+  });
+
+  it('respektuje sadu', () => {
+    expect(confusions(log, (code) => code !== 'ng')).toEqual([
+      { code: 'ne', given: 'in', count: 1 },
+    ]);
   });
 });

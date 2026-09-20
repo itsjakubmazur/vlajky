@@ -23,6 +23,16 @@ export interface AnswerInput {
    * „zlato nejde proklikat“ obejít.
    */
   assisted?: boolean;
+  /**
+   * Odpověď netestovala vlajku (režim Hlavní města).
+   *
+   * Vlajka je v otázce vidět, takže by se plánovači hlásilo zvládnutí, které
+   * dítě neprokázalo. Odpověď se proto zaloguje a body za ni jsou, ale
+   * kartou vlajky nehne.
+   */
+  skipsScheduler?: boolean;
+  /** Co dítě vybralo místo správné odpovědi – jen do logu, plánovač to neřeší. */
+  given?: string;
 }
 
 /**

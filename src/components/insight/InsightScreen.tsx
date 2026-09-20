@@ -3,7 +3,8 @@
 import { useMemo, useState } from 'react';
 import { requireCountry } from '@/domain/countries';
 import { bandStats, estimateKnown } from '@/domain/srs/placement';
-import { fadingSoon, weakest, FORECAST_DAYS } from '@/domain/srs/insight';
+import { confusions, fadingSoon, weakest, FORECAST_DAYS } from '@/domain/srs/insight';
+import { differenceFor } from '~data/differences';
 import { ROUTES, SLUG_BY_MODE } from '@/config/routes';
 import { cs } from '@/i18n/cs';
 import { useActivePool } from '@/quiz/useActivePool';
@@ -64,6 +65,7 @@ export function InsightScreen() {
     () => fadingSoon(cards, inSet, new Date()),
     [cards, inSet],
   );
+  const mixUps = useMemo(() => confusions(progress.log, inSet), [progress.log, inSet]);
 
   const estimate = useMemo(() => {
     if (!progress.meta.placementDone) return null;
@@ -111,6 +113,49 @@ export function InsightScreen() {
                 {cs.insight.train}
               </ButtonLink>
             </>
+          ) : null}
+        </Panel>
+
+        <Panel>
+          <Eyebrow>{cs.insight.confusionTitle}</Eyebrow>
+          <p className="mt-1.5 text-sm leading-snug text-muted">
+            {ready && mixUps.length === 0 ? cs.insight.confusionEmpty : cs.insight.confusionDesc}
+          </p>
+          {mixUps.length > 0 ? (
+            <p className="mt-1 text-[0.7rem] font-semibold text-faint">
+              {cs.insight.confusionLegend}
+            </p>
+          ) : null}
+          {mixUps.length > 0 ? (
+            <ul className="mt-3 flex flex-col gap-2">
+              {mixUps.map((item) => (
+                <li key={`${item.code}-${item.given}`}>
+                  <button
+                    type="button"
+                    onClick={() => setDetail(item.code)}
+                    className="glass-thin flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-colors hover:border-white/20"
+                  >
+                    <FlagImage code={item.code} size="xs" glow={false} />
+                    <FlagImage code={item.given} size="xs" glow={false} />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[0.8rem] font-bold leading-tight">
+                        {requireCountry(item.code).nameCs}
+                        <span className="font-semibold text-faint"> → </span>
+                        {requireCountry(item.given).nameCs}
+                      </span>
+                      {differenceFor(item.code, item.given) ? (
+                        <span className="mt-0.5 block text-[0.7rem] leading-snug text-faint">
+                          {differenceFor(item.code, item.given)}
+                        </span>
+                      ) : null}
+                    </span>
+                    <span className="display shrink-0 text-sm tabular-nums text-coral">
+                      {cs.insight.confusionCount(item.count)}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
           ) : null}
         </Panel>
 

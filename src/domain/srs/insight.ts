@@ -1,5 +1,5 @@
 import { fsrs, generatorParameters } from 'ts-fsrs';
-import type { CardState } from './types';
+import type { AnswerLog, CardState } from './types';
 import { fromStored } from './types';
 import { isDue } from './scheduler';
 
@@ -86,5 +86,39 @@ export function fadingSoon(
     .map((card) => ({ code: card.code, recall: recall(card, horizon) }))
     .filter((item) => item.recall < FADING_THRESHOLD)
     .sort((a, b) => a.recall - b.recall || a.code.localeCompare(b.code))
+    .slice(0, limit);
+}
+
+export interface Confusion {
+  /** Správná odpověď. */
+  code: string;
+  /** Co dítě odpovědělo místo ní. */
+  given: string;
+  count: number;
+}
+
+/**
+ * S čím si dítě co plete.
+ *
+ * Statistika „5 chyb u Nigeru“ neřekne, co s tím. „Niger sis 4× spletl
+ * s Nigérií“ ano – a rovnou ukáže na souboj, který to řeší.
+ */
+export function confusions(
+  log: readonly AnswerLog[],
+  inPool: (code: string) => boolean,
+  limit = INSIGHT_LIMIT,
+): Confusion[] {
+  const counts = new Map<string, Confusion>();
+  for (const entry of log) {
+    if (entry.correct || !entry.given) continue;
+    if (!inPool(entry.code) || !inPool(entry.given)) continue;
+    const key = `${entry.code}|${entry.given}`;
+    const found = counts.get(key);
+    if (found) found.count += 1;
+    else counts.set(key, { code: entry.code, given: entry.given, count: 1 });
+  }
+
+  return [...counts.values()]
+    .sort((a, b) => b.count - a.count || a.code.localeCompare(b.code))
     .slice(0, limit);
 }

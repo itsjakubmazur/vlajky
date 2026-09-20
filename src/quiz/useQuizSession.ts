@@ -9,6 +9,7 @@ import {
   kindForMode,
   livesFor,
   SCORED_MODES,
+  touchesScheduler,
   type Question,
   type QuizModeId,
 } from '@/domain/quiz/modes';
@@ -37,6 +38,8 @@ export interface Feedback {
   given: string | null;
   /** Psalo se, nebo klikalo? Podle toho vypadá zpětná vazba. */
   typed: boolean;
+  /** Na co se otázka ptala – zpětná vazba u hlavních měst vypadá jinak. */
+  kind: Question['kind'];
   /** Body za tuhle odpověď. */
   gained: number;
   /** Jak rychle to bylo. */
@@ -250,12 +253,23 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
       });
       const lost = result.correct ? 0 : stakeLoss(stake);
 
+      // Co dítě vybralo místo správné odpovědi – u tlačítek kód, u psaní
+      // rozpoznaná země. Z toho se pak dá říct, s čím si to plete.
+      const wrongPick = result.correct
+        ? undefined
+        : typed
+          ? (result.matchedCode ?? undefined)
+          : (given ?? undefined);
+
       const outcome = await recordAnswer(question.code, {
         correct: result.correct,
         elapsedMs,
         mode: question.kind === 'type' ? 'typing' : question.mode,
         isPlacement: mode === 'placement',
         assisted,
+        // Hlavní města netestují vlajku – viz `touchesScheduler`.
+        skipsScheduler: !touchesScheduler(question.kind),
+        ...(wrongPick && wrongPick !== question.code ? { given: wrongPick } : {}),
       });
 
       if (mode === 'placement') {
@@ -286,6 +300,7 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
         outcome,
         given,
         typed,
+        kind: question.kind,
         gained: result.correct ? gained : -lost,
         speed: speedOf(elapsedMs),
       });

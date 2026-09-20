@@ -7,6 +7,8 @@ interface OptionGridProps {
   options: string[];
   /** Ukázat vlajky místo názvů (režim Opačně). */
   asFlags?: boolean;
+  /** Co je na tlačítku napsané – název země, nebo hlavní město. */
+  label?: 'name' | 'capital';
   correctCode: string;
   /** Co dítě vybralo – teprve pak se barví. */
   chosen: string | null;
@@ -43,7 +45,14 @@ function state(code: string, correctCode: string, chosen: string | null) {
  * s bodováním za rychlost počítá. Řádky mají stejnou výšku, takže
  * „Demokratická republika Kongo“ nerozhodí sousedy.
  */
-export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: OptionGridProps) {
+export function OptionGrid({
+  options,
+  asFlags,
+  label = 'name',
+  correctCode,
+  chosen,
+  onChoose,
+}: OptionGridProps) {
   return (
     <div className="stagger grid grid-cols-2 gap-2.5">
       {options.map((code, index) => {
@@ -73,7 +82,7 @@ export function OptionGrid({ options, asFlags, correctCode, chosen, onChoose }: 
               <FlagImage code={code} fluid priority />
             ) : (
               <span className="display text-center text-[0.95rem] leading-tight text-balance">
-                {country.nameCs}
+                {label === 'capital' ? country.capitalCs : country.nameCs}
               </span>
             )}
           </button>

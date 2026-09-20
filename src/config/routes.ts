@@ -12,6 +12,7 @@ export const MODE_SLUGS = {
   vabank: 'risk',
   'denni-vyzva': 'daily',
   slabiny: 'weak',
+  'hlavni-mesta': 'capitals',
 } as const satisfies Record<string, QuizModeId>;
 
 export type ModeSlug = keyof typeof MODE_SLUGS;

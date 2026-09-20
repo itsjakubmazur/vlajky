@@ -9,7 +9,13 @@ import {
   PLACEMENT_LENGTH,
   placementPlan,
 } from '@/domain/srs/placement';
-import { buildQuestion, kindForMode, pickTwin, twinnableCountries } from '@/domain/quiz/modes';
+import {
+  buildQuestion,
+  kindForMode,
+  pickTwin,
+  touchesScheduler,
+  twinnableCountries,
+} from '@/domain/quiz/modes';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
 import { createRng } from '@/domain/rng';
 import type { CardState } from '@/domain/srs/types';
@@ -230,5 +236,36 @@ describe('maraton a souboje', () => {
       Array.from({ length: 40 }, () => kindForMode('boss', rng)),
     );
     expect(kinds).toEqual(new Set(['twins', 'pickCountry']));
+  });
+});
+
+describe('hlavní města', () => {
+  it('střídá oba směry', () => {
+    const rng = createRng(3);
+    const kinds = new Set(Array.from({ length: 40 }, () => kindForMode('capitals', rng)));
+    expect(kinds).toEqual(new Set(['pickCapital', 'pickByCapital']));
+  });
+
+  it('nabídne čtyři země, z toho jednu správnou', () => {
+    const q = buildQuestion({
+      mode: 'capitals',
+      target: requireCountry('fr'),
+      pool: world,
+      mastery: 'silver',
+      rng: createRng(4),
+      kind: 'pickCapital',
+    });
+    expect(q.options).toHaveLength(4);
+    expect(q.options).toContain('fr');
+    expect(new Set(q.options).size).toBe(4);
+  });
+
+  it('otázka na hlavní město nehne plánovačem vlajek', () => {
+    // Vlajka je v otázce vidět, takže by se hlásilo zvládnutí, které dítě
+    // neprokázalo.
+    expect(touchesScheduler('pickCapital')).toBe(false);
+    expect(touchesScheduler('pickByCapital')).toBe(false);
+    expect(touchesScheduler('pickCountry')).toBe(true);
+    expect(touchesScheduler('type')).toBe(true);
   });
 });
