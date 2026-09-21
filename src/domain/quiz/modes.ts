@@ -20,6 +20,8 @@ export const QUIZ_MODES = [
   'capitals',
   // Třetí osa: kde to na světě vlastně je.
   'map',
+  // Pět vlajek najednou na mapu – nápad osmiletého testera.
+  'sort',
 ] as const;
 export type QuizModeId = (typeof QUIZ_MODES)[number] | 'placement' | 'boss' | 'weak';
 
@@ -37,6 +39,7 @@ export const SCORED_MODES: readonly QuizModeId[] = [
   'weak',
   'capitals',
   'map',
+  'sort',
 ];
 
 /**
@@ -47,7 +50,12 @@ export const SCORED_MODES: readonly QuizModeId[] = [
  * neprokázalo.
  */
 export function touchesScheduler(kind: QuestionKind): boolean {
-  return kind !== 'pickCapital' && kind !== 'pickByCapital' && kind !== 'pickOnMap';
+  return (
+    kind !== 'pickCapital' &&
+    kind !== 'pickByCapital' &&
+    kind !== 'pickOnMap' &&
+    kind !== 'sortToContinent'
+  );
 }
 
 /** Kolik životů má hráč v daném režimu; `null` = neomezeně. */
@@ -86,7 +94,9 @@ export type QuestionKind =
   /** vidí hlavní město, vybírá vlajku */
   | 'pickByCapital'
   /** vidí vlajku, ukazuje místo na mapě */
-  | 'pickOnMap';
+  | 'pickOnMap'
+  /** pět vlajek najednou se rozděluje na světadíly */
+  | 'sortToContinent';
 
 export interface Question {
   /** kód správné odpovědi */
@@ -120,6 +130,8 @@ export function kindForMode(mode: QuizModeId, rng: Rng): QuestionKind {
       return 'twins';
     case 'map':
       return 'pickOnMap';
+    case 'sort':
+      return 'sortToContinent';
     case 'capitals':
       // Dvakrát z vlajky na město, jednou obráceně – ať se to nedá odjet
       // jedním směrem.

@@ -165,6 +165,23 @@ export const cs = {
     weak: { name: 'Slabiny', desc: 'Vlajky, na kterých to nejčastěji láme' },
     capitals: { name: 'Hlavní města', desc: 'Vlajka → hlavní město a zpátky' },
     map: { name: 'Kde to je', desc: 'Ukaž na mapě, odkud ta vlajka je' },
+    sort: { name: 'Roztřiď', desc: 'Pět vlajek najednou na správné světadíly' },
+  },
+  sort: {
+    prompt: 'Rozděl vlajky na světadíly',
+    hint: 'Chytni vlajku a táhni ji na světadíl. Nebo ji klepni a pak klepni na světadíl.',
+    picked: 'Teď klepni na světadíl',
+    batch: (done: number, total: number) => `${done}. sada z ${total}`,
+    check: 'Vyhodnotit',
+    remaining: (n: number) =>
+      n === 1 ? 'Zbývá 1 vlajka' : n < 5 ? `Zbývají ${n} vlajky` : `Zbývá ${n} vlajek`,
+    perfect: 'Čistá pětka!',
+    perfectBonus: (points: number) => `+${points} b navíc`,
+    resultTitle: 'Jak to dopadlo',
+    belongsTo: (continentGenitive: string) => `Patří do ${continentGenitive}`,
+    nextBatch: 'Další sada',
+    finishRound: 'Ukončit kolo',
+    undo: 'Vrátit',
   },
   insight: {
     title: 'Jak ti to jde',
@@ -265,6 +282,18 @@ export const cs = {
     resume: 'Pokračovat v testu',
     done: 'Rozřazovací test hotový!',
     summary: (known: number, total: number) => `Odhadem umíš ${known} z ${total} vlajek.`,
+  },
+  /**
+   * Druhý pád světadílů. Čeština se neskloňuje vzorcem, takže tvary musí
+   * být vypsané – „patří do Afriky“, ne „patří do Afrika“.
+   */
+  continentsGenitive: {
+    europe: 'Evropy',
+    asia: 'Asie',
+    africa: 'Afriky',
+    northAmerica: 'Severní Ameriky',
+    southAmerica: 'Jižní Ameriky',
+    oceania: 'Oceánie',
   },
   continents: {
     europe: 'Evropa',

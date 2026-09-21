@@ -22,6 +22,15 @@ import {
   pickMapDistractors,
   roughDistance,
 } from '@/domain/quiz/mapDistractors';
+import {
+  SORT_BATCH,
+  SORT_ROUND,
+  gradeBatch,
+  isBatchComplete,
+  toBatches,
+  zonesFor,
+} from '@/domain/quiz/sorting';
+import { CONTINENTS } from '@/domain/types';
 import { createRng } from '@/domain/rng';
 import type { CardState } from '@/domain/srs/types';
 
@@ -307,5 +316,48 @@ describe('otázka na mapě', () => {
 
   it('otázka na mapě nehne plánovačem vlajek', () => {
     expect(touchesScheduler('pickOnMap')).toBe(false);
+  });
+});
+
+describe('režim Roztřiď', () => {
+  it('rozdělí kolo na sady po pěti', () => {
+    const codes = Array.from({ length: SORT_ROUND }, (_, i) => `c${i}`);
+    const batches = toBatches(codes);
+    expect(batches).toHaveLength(3);
+    expect(batches.every((b) => b.length === SORT_BATCH)).toBe(true);
+  });
+
+  it('poslední sada smí být kratší', () => {
+    expect(toBatches(['a', 'b', 'c', 'd', 'e', 'f']).map((b) => b.length)).toEqual([5, 1]);
+  });
+
+  it('vyhodnotí, kam která vlajka patřila', () => {
+    const batch = ['fr', 'ke', 'pe'];
+    const graded = gradeBatch(
+      batch,
+      { fr: 'europe', ke: 'europe', pe: null },
+      (code) => requireCountry(code).continent,
+    );
+    expect(graded.map((r) => r.ok)).toEqual([true, false, false]);
+    expect(graded[1]!.correct).toBe('africa');
+    // Nepřiřazená vlajka se počítá jako chyba, ne jako výjimka.
+    expect(graded[2]!.chosen).toBeNull();
+  });
+
+  it('sada je hotová, až má každá vlajka svůj světadíl', () => {
+    expect(isBatchComplete(['fr', 'ke'], { fr: 'europe' })).toBe(false);
+    expect(isBatchComplete(['fr', 'ke'], { fr: 'europe', ke: 'africa' })).toBe(true);
+  });
+
+  it('nabídne aspoň čtyři světadíly, ať se nedá počítat z nabídky', () => {
+    // Sada jen z Evropy by jinak prozradila odpověď tím, že je na výběr jedna.
+    const onlyEurope = ['fr', 'de', 'es'].map((code) => requireCountry(code));
+    const zones = zonesFor(onlyEurope, CONTINENTS);
+    expect(zones.length).toBeGreaterThanOrEqual(4);
+    expect(zones).toContain('europe');
+  });
+
+  it('otázka na světadíl nehne plánovačem vlajek', () => {
+    expect(touchesScheduler('sortToContinent')).toBe(false);
   });
 });

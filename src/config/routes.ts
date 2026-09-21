@@ -14,6 +14,7 @@ export const MODE_SLUGS = {
   slabiny: 'weak',
   'hlavni-mesta': 'capitals',
   mapa: 'map',
+  roztrid: 'sort',
 } as const satisfies Record<string, QuizModeId>;
 
 export type ModeSlug = keyof typeof MODE_SLUGS;

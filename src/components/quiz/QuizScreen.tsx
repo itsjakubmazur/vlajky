@@ -18,14 +18,9 @@ import { MapQuestion } from './MapQuestion';
 import { StakePicker } from './StakePicker';
 import { FeedbackPanel } from './FeedbackPanel';
 import { ResultScreen } from './ResultScreen';
+import { SortScreen } from '@/components/sort/SortScreen';
 
-export function QuizScreen({
-  mode,
-  bossId,
-  codes,
-  offTheRecord,
-  onFinish,
-}: {
+export interface QuizScreenProps {
   mode: QuizModeId;
   bossId?: string;
   /** Předepsané vlajky – v turnaji dostanou všichni hráči stejné otázky. */
@@ -34,7 +29,29 @@ export function QuizScreen({
   offTheRecord?: boolean;
   /** Když je zadané, výsledek si převezme volající a obrazovka výsledku se neukáže. */
   onFinish?: (tally: RoundTally) => void;
-}) {
+}
+
+/**
+ * Rozcestník mezi hrami.
+ *
+ * Roztřiď se neptá po jedné otázce, ale rozděluje celou sadu – má proto
+ * vlastní obrazovku. Díky tomu, že se rozhoduje tady, funguje v turnaji
+ * úplně stejně jako ostatní režimy a turnaj o něm nemusí nic vědět.
+ */
+export function QuizScreen(props: QuizScreenProps) {
+  if (props.mode === 'sort') {
+    return (
+      <SortScreen
+        codes={props.codes}
+        offTheRecord={props.offTheRecord}
+        onFinish={props.onFinish}
+      />
+    );
+  }
+  return <QuizRunner {...props} />;
+}
+
+function QuizRunner({ mode, bossId, codes, offTheRecord, onFinish }: QuizScreenProps) {
   const session = useQuizSession(mode, { bossId, codes, offTheRecord });
   const { progress } = useProgress();
   const autoNext = progress.meta.autoNext;

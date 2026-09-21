@@ -12,6 +12,7 @@ testera, který už vlajky umí hodně dobře.
 | **1c – učení** | ✅ hotovo | krátký rozřazovací test, přehled „Jak ti to jde“, režim Slabiny, klávesnice, obrazovky pro chyby |
 | **1d – tři osy** | ✅ hotovo | rozdíly podobných vlajek, Hlavní města, Kde to je (mapa), přehled záměn, graf sbírky, hledání v albu |
 | **1e – turnaj** | ✅ hotovo | hra více hráčů na jednom zařízení, stejné otázky pro všechny, pořadí podle vyhraných kol |
+| **1f – Roztřiď** | ✅ hotovo | pět vlajek najednou na světadíly tažením prstu, názvy až ve vyhodnocení |
 | 2 – Supabase | ⬜ nezačato | rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
@@ -200,6 +201,7 @@ Vlajka sama je jen jedna otázka. Data v `countries.json` unesou tři.
 | vlajka → země | Klasika, Opačně, Napiš, Dvojčata… | vlajka nebo název |
 | vlajka → hlavní město | Hlavní města | vlajka i název města (oba směry) |
 | vlajka → místo na světě | Kde to je | vlajka a čtyři špendlíky na mapě |
+| vlajka → světadíl | Roztřiď | pět vlajek naráz, mapa se zónami |
 
 **Hlavní města ani mapa nehýbou plánovačem vlajek** (`touchesScheduler`).
 Vlajka je v obou případech v otázce vidět, takže správná odpověď není důkaz,
@@ -211,6 +213,27 @@ neukazuje ani odznak úrovně: tvrdil by změnu, která se nestala.
 zemí by na telefonu nešlo (Lucembursko má na světové mapě pár pixelů), takže
 se nabídnou čtyři špendlíky vzdálené od sebe aspoň 15° (`MIN_SEPARATION`).
 Začátečník dostane body rozházené po světě, pokročilý sousední země.
+
+**Roztřiď je jiný tvar hry, proto má vlastní obrazovku.** Neptá se po jedné
+otázce – rozdělí se celá sada pěti vlajek a **název země se ukáže až ve
+vyhodnocení**. Dokud se třídí, jsou na obrazovce jen vlajky, takže se nedá
+jet po jménech („Chile zní jihoamericky“) a musí se poznat vlajka. Nápad je
+osmiletého testera.
+
+- Rozhodnutí, jestli jde o Roztřiď, padá v `QuizScreen` (rozcestník na
+  `SortScreen`). Díky tomu **funguje v turnaji úplně stejně** jako ostatní
+  režimy a turnaj o něm nemusí vědět nic.
+- **Ovládá se dvěma způsoby schválně**: tažením prstu i klepnutím na vlajku
+  a pak na světadíl. Tažení je zábavnější, klepání spolehlivější – a na malé
+  Evropě je ten rozdíl znát. Vlajka pod prstem musí mít `pointer-events: none`,
+  jinak by ji `elementFromPoint` viděl místo mapy.
+- **Nabízejí se aspoň čtyři světadíly** (`zonesFor`), i když jich sada
+  potřebuje míň – jinak by šlo odpověď odvodit z nabídky.
+- **Ignoruje vybranou část světa.** Kdyby se hrála jen Evropa, byly by
+  všechny vlajky z jednoho světadílu a nebylo by co třídit.
+- Jako hlavní města a mapa **nehýbe plánovačem vlajek** – ptá se na zeměpis
+  a vlajka je vidět. Sada, ve které sedí všech pět, dává bonus
+  (`SORT_PERFECT_BONUS`).
 
 **Plynulé kolo.** V závodních režimech (`RACE_MODES`) se po správné odpovědi
 jede dál samo po 1,4 s. Jinde ne: v klasice a opakování má dítě číst

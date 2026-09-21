@@ -34,6 +34,7 @@ const MODE_CARDS = [
   { mode: 'risk', flags: ['qa'] },
   { mode: 'capitals', flags: ['fr'] },
   { mode: 'map', flags: ['bt'] },
+  { mode: 'sort', flags: ['ke', 'pe', 'th'] },
   { mode: 'marathon', flags: ['us', 'cn', 'in'] },
 ] as const;
 

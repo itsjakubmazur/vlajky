@@ -37,7 +37,7 @@ import { PartyStandings } from './PartyStandings';
  */
 export function PartyScreen() {
   const { ready, progress, setMeta } = useProgress();
-  const { pool } = useActivePool();
+  const { set, pool } = useActivePool();
   const party = progress.meta.party;
 
   // `handoff` = čeká se, až si zařízení převezme hráč na řadě.
@@ -55,13 +55,14 @@ export function PartyScreen() {
     (mode: QuizModeId, length: number) =>
       buildSession({
         mode,
-        pool,
+        // Roztřiď potřebuje vlajky z různých světadílů, jinak není co třídit.
+        pool: mode === 'sort' ? set : pool,
         cards: {},
         now: new Date(),
         rng: createRng(Date.now()),
         length,
       }).slice(0, length),
-    [pool],
+    [pool, set],
   );
 
   const begin = (players: PartyPlayer[], mode: QuizModeId, length: number) => {

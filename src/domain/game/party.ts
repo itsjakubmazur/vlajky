@@ -34,6 +34,7 @@ export const PARTY_MODES: readonly QuizModeId[] = [
   'risk',
   'capitals',
   'map',
+  'sort',
 ];
 
 export interface PartyPlayer {
