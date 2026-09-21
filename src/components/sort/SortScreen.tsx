@@ -2,14 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { flagUrl, requireCountry } from '@/domain/countries';
-import { CONTINENTS, type Continent } from '@/domain/types';
+import type { Continent } from '@/domain/types';
 import {
   SORT_PERFECT_BONUS,
   SORT_ROUND,
   gradeBatch,
   isBatchComplete,
   toBatches,
-  zonesFor,
+  SORT_ZONES,
   type Assignment,
   type SortResult,
 } from '@/domain/quiz/sorting';
@@ -99,8 +99,8 @@ export function SortScreen({
   }, [ready, codes?.join(','), nonce, progress.meta.activeSet]);
 
   const batch = useMemo(() => batches[batchIndex] ?? [], [batches, batchIndex]);
-  const countries = useMemo(() => batch.map((code) => requireCountry(code)), [batch]);
-  const zones = useMemo(() => zonesFor(countries, CONTINENTS), [countries]);
+  // Zón je vždycky šest – viz SORT_ZONES.
+  const zones = SORT_ZONES;
 
   // --- braní vlajek do ruky ----------------------------------------------
   const [held, setHeld] = useState<string | null>(null);
@@ -108,14 +108,37 @@ export function SortScreen({
   const [hovered, setHovered] = useState<Continent | null>(null);
   const start = useRef<{ x: number; y: number } | null>(null);
 
-  const zoneAt = useCallback(
-    (x: number, y: number): Continent | null => {
-      const holder = document.elementFromPoint(x, y)?.closest('[data-continent]');
-      const value = holder?.getAttribute('data-continent') as Continent | null;
-      return value && zones.includes(value) ? value : null;
-    },
-    [zones],
-  );
+  const mapBox = useRef<HTMLDivElement>(null);
+  const zoneCenters = useRef(new Map<Continent, SVGCircleElement>());
+
+  /**
+   * Který světadíl je pod prstem.
+   *
+   * Rozhoduje vzdálenost k jeho středu, ne trefa do kolečka: na telefonu
+   * má mapa třetinovou šířku a přesné terče by byly pod 30 px. Takhle se
+   * počítá nejbližší světadíl v rozumném okolí a prst nemusí být přesný.
+   */
+  const zoneAt = useCallback((x: number, y: number): Continent | null => {
+    const map = mapBox.current?.getBoundingClientRect();
+    if (!map) return null;
+    if (x < map.left || x > map.right || y < map.top || y > map.bottom) return null;
+
+    let best: Continent | null = null;
+    let bestDistance = Infinity;
+    for (const [continent, element] of zoneCenters.current) {
+      const rect = element.getBoundingClientRect();
+      const distance = Math.hypot(
+        x - (rect.left + rect.width / 2),
+        y - (rect.top + rect.height / 2),
+      );
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        best = continent;
+      }
+    }
+    // Uprostřed oceánu daleko od všeho se vlajka nepustí.
+    return bestDistance <= map.width * 0.28 ? best : null;
+  }, []);
 
   const assign = useCallback(
     (code: string, continent: Continent) => {
@@ -307,8 +330,16 @@ export function SortScreen({
           </h1>
         </div>
 
-        <div onPointerUp={onMapTap} className="glass-thin rounded-glass p-1.5">
-          <ContinentMap zones={zones} active={hovered} reveal={results !== null}>
+        <div ref={mapBox} onPointerUp={onMapTap} className="glass-thin rounded-glass p-1.5">
+          <ContinentMap
+            zones={zones}
+            active={hovered}
+            reveal={results !== null}
+            zoneRef={(continent, element) => {
+              if (element) zoneCenters.current.set(continent, element);
+              else zoneCenters.current.delete(continent);
+            }}
+          >
             {(continent, x, y) => (
               <PinnedFlags
                 continent={continent}

@@ -28,7 +28,7 @@ import {
   gradeBatch,
   isBatchComplete,
   toBatches,
-  zonesFor,
+  SORT_ZONES,
 } from '@/domain/quiz/sorting';
 import { CONTINENTS } from '@/domain/types';
 import { createRng } from '@/domain/rng';
@@ -349,12 +349,13 @@ describe('režim Roztřiď', () => {
     expect(isBatchComplete(['fr', 'ke'], { fr: 'europe', ke: 'africa' })).toBe(true);
   });
 
-  it('nabídne aspoň čtyři světadíly, ať se nedá počítat z nabídky', () => {
-    // Sada jen z Evropy by jinak prozradila odpověď tím, že je na výběr jedna.
-    const onlyEurope = ['fr', 'de', 'es'].map((code) => requireCountry(code));
-    const zones = zonesFor(onlyEurope, CONTINENTS);
-    expect(zones.length).toBeGreaterThanOrEqual(4);
-    expect(zones).toContain('europe');
+  it('nabízí vždy všech šest světadílů', () => {
+    // Doplňovat zóny jen podle potřeby sady prozrazovalo odpověď: Oceánie
+    // se nikdy nedoplňovala jako výplň, takže její přítomnost byla nápověda.
+    expect([...SORT_ZONES]).toEqual([...CONTINENTS]);
+    expect(SORT_ZONES).toHaveLength(6);
+    expect(SORT_ZONES).toContain('oceania');
+    expect(SORT_ZONES).toContain('southAmerica');
   });
 
   it('otázka na světadíl nehne plánovačem vlajek', () => {

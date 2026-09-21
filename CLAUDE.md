@@ -225,10 +225,16 @@ osmiletého testera.
   režimy a turnaj o něm nemusí vědět nic.
 - **Ovládá se dvěma způsoby schválně**: tažením prstu i klepnutím na vlajku
   a pak na světadíl. Tažení je zábavnější, klepání spolehlivější – a na malé
-  Evropě je ten rozdíl znát. Vlajka pod prstem musí mít `pointer-events: none`,
-  jinak by ji `elementFromPoint` viděl místo mapy.
-- **Nabízejí se aspoň čtyři světadíly** (`zonesFor`), i když jich sada
-  potřebuje míň – jinak by šlo odpověď odvodit z nabídky.
+  Evropě je ten rozdíl znát.
+- **Nabízí se vždy všech šest světadílů** (`SORT_ZONES`). Nejdřív se
+  ukazovaly jen ty, které sada potřebovala, doplněné na čtyři – jenže
+  doplňovalo se od začátku seznamu, takže Evropa, Asie, Afrika a Severní
+  Amerika byly výplň, kdežto Oceánie a Jižní Amerika nikdy. Objevit se
+  Oceánie, byla to nápověda. Šest zón pokaždé neprozradí nic a mapa navíc
+  vypadá stejně každou sadu, takže se z ní dá naučit i zeměpis.
+- **O trefě rozhoduje vzdálenost ke středu světadílu, ne zásah do terče.**
+  Na telefonu má mapa třetinovou šířku a přesné terče by byly pod 30 px.
+  Mimo mapu nebo uprostřed oceánu daleko od všeho se vlajka nepustí.
 - **Ignoruje vybranou část světa.** Kdyby se hrála jen Evropa, byly by
   všechny vlajky z jednoho světadílu a nebylo by co třídit.
 - Jako hlavní města a mapa **nehýbe plánovačem vlajek** – ptá se na zeměpis

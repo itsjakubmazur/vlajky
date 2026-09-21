@@ -1,4 +1,4 @@
-import type { Continent, Country } from '../types';
+import { CONTINENTS, type Continent } from '../types';
 
 /**
  * Režim Roztřiď: pět vlajek najednou na mapu světa.
@@ -55,21 +55,14 @@ export function isBatchComplete(batch: readonly string[], assignment: Assignment
 }
 
 /**
- * Světadíly, mezi kterými se v dané sadě rozhoduje.
+ * Světadíly, mezi kterými se rozhoduje: vždycky všech šest.
  *
- * Nabízejí se všechny, ve kterých sada má aspoň jednu vlajku, doplněné
- * na aspoň čtyři – kdyby se ukázaly jen ty správné, stačilo by počítat.
+ * Dřív se nabízely jen ty, které sada potřebovala, doplněné na čtyři –
+ * jenže doplňovalo se vždy od začátku seznamu, takže Evropa, Asie, Afrika
+ * a Severní Amerika byly výplň, kdežto Oceánie a Jižní Amerika nikdy.
+ * Objevit se Oceánie, prozradilo to, že jedna z vlajek je odtamtud.
+ *
+ * Šest zón pokaždé neprozradí nic a mapa navíc vypadá stejně každou sadu,
+ * takže se dítě naučí i to, kde který světadíl na mapě je.
  */
-export function zonesFor(
-  batch: readonly Country[],
-  all: readonly Continent[],
-  minimum = 4,
-): Continent[] {
-  const needed = new Set(batch.map((c) => c.continent));
-  const zones = all.filter((continent) => needed.has(continent));
-  for (const continent of all) {
-    if (zones.length >= minimum) break;
-    if (!zones.includes(continent)) zones.push(continent);
-  }
-  return all.filter((continent) => zones.includes(continent));
-}
+export const SORT_ZONES: readonly Continent[] = CONTINENTS;

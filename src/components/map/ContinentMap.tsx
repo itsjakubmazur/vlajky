@@ -26,7 +26,7 @@ export function ContinentMap({
   zones,
   active,
   reveal,
-  onZoneRect,
+  zoneRef,
   children,
 }: {
   /** Které světadíly jsou v téhle sadě ve hře. */
@@ -35,8 +35,8 @@ export function ContinentMap({
   active?: Continent | null;
   /** Ve vyhodnocení se zvýrazní jen správné světadíly. */
   reveal?: boolean;
-  /** Oznámí polohu zóny v obrazovkových bodech (kvůli tažení prstem). */
-  onZoneRect?: (continent: Continent, element: SVGGElement | null) => void;
+  /** Předá terč zóny, aby šlo měřit, kam prst dopadl. */
+  zoneRef?: (continent: Continent, element: SVGCircleElement | null) => void;
   /** Vlajky připnuté k jednotlivým světadílům; dostanou i polohu kotvy. */
   children?: (continent: Continent, x: number, y: number) => React.ReactNode;
 }) {
@@ -85,13 +85,16 @@ export function ContinentMap({
       </g>
 
       {anchors.map(({ continent, x, y }) => (
-        <g
-          key={continent}
-          ref={(element) => onZoneRect?.(continent, element)}
-          data-continent={continent}
-        >
-          {/* Terč pro prst – větší než popisek, ať se to dá trefit. */}
-          <circle cx={x} cy={y} r={34} fill="transparent" />
+        <g key={continent} data-continent={continent}>
+          {/* Střed světadílu. Rozhoduje se podle vzdálenosti k němu, ne podle
+              velikosti kolečka – na telefonu by byl terč jen pár pixelů. */}
+          <circle
+            ref={(element) => zoneRef?.(continent, element)}
+            cx={x}
+            cy={y}
+            r={10}
+            fill="transparent"
+          />
           <text
             x={x}
             y={y}
