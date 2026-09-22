@@ -3,7 +3,8 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { similarGroups } from '~data/similar';
 import { differenceFor, flagDifferences } from '~data/differences';
-import { ALL_COUNTRIES, getCountry } from '@/domain/countries';
+import { ALL_COUNTRIES, getCountry, requireCountry } from '@/domain/countries';
+import { buildAnswerIndex, checkAnswer } from '@/domain/answer/match';
 import { countriesInSet } from '~data/sets';
 import { OMITTED } from '@/config/app';
 import { CONTINENTS, SOVEREIGNTIES, SUBREGIONS } from '@/domain/types';
@@ -224,5 +225,22 @@ describe('žádné dvě vlajky nevypadají stejně', () => {
     }
     const duplicates = [...byContent.values()].filter((codes) => codes.length > 1);
     expect(duplicates).toEqual([]);
+  });
+});
+
+describe('Svazijsko má český název', () => {
+  const index = buildAnswerIndex(ALL_COUNTRIES);
+
+  it('v aplikaci je Svazijsko, ne Eswatini', () => {
+    // Král zemi v roce 2018 přejmenoval na Eswatini, ale to je jméno
+    // anglické a svazijské. Český název se tím nezměnil – Názvoslovná
+    // komise ČÚZK i ministerstvo zahraničí dál píšou Svazijsko.
+    expect(requireCountry('sz').nameCs).toBe('Svazijsko');
+  });
+
+  it('uzná se ale obojí', () => {
+    for (const answer of ['Svazijsko', 'Eswatini', 'eSwatini', 'Svazijské království']) {
+      expect(checkAnswer(answer, 'sz', index).correct, answer).toBe(true);
+    }
   });
 });

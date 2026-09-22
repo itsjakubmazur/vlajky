@@ -40,6 +40,7 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 - **Spojené království** (`gb`) – Anglie záměrně není alias, je to samostatná vlajka v bonusové sadě.
 - **Mexiko** (`mx`) – hlavní město se česky píše různě, vybráno Mexico City.
 - **Rusko** (`ru`) – zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti.
+- **Svazijsko** (`sz`) – král zemi v roce 2018 přejmenoval na Eswatini, ale to je jméno anglické a svazijské – český název se tím nezměnil. Názvoslovná komise ČÚZK, ministerstvo zahraničí i česká Wikipedie dál píšou Svazijsko, takže v aplikaci je Svazijsko a Eswatini se uznává jako druhý tvar odpovědi.
 - **Turecko** (`tr`) – leží v Asii i v Evropě, vedeme ho v Asii.
 
 ## Schválně vynechané záznamy
@@ -175,7 +176,6 @@ _Žádné._
 | `dj` | **Džibutsko** | Džibutská republika | – | Džibuti | 5 | 1.50:1 | Na džibutské vlajce je bílý trojúhelník s červenou hvězdou. |
 | `eg` | **Egypt** | Egyptská arabská republika | – | Káhira | 2 | 1.50:1 | Uprostřed egyptské vlajky je zlatý Saladinův orel. |
 | `er` | **Eritrea** | Stát Eritrea | – | Asmara | 5 | 2.00:1 | V červeném trojúhelníku eritrejské vlajky je zlatá olivová ratolest ve věnci. |
-| `sz` | **Eswatini** | Království Eswatini | Svazijsko | Mbabane | 5 | 1.50:1 | Na vlajce Eswatini leží naležato válečný štít a dvě kopí. |
 | `et` | **Etiopie** | Etiopská federativní demokratická republika | – | Addis Abeba | 3 | 2.00:1 | Etiopská zelená, žlutá a červená posloužila jako vzor vlajkám mnoha dalších afrických zemí. |
 | `ga` | **Gabon** | Gabonská republika | – | Libreville | 4 | 1.33:1 | Žlutý pruh uprostřed gabonské vlajky připomíná rovník, který zemí prochází. |
 | `gm` | **Gambie** | Gambijská republika | – | Banjul | 4 | 1.50:1 | Modrý pruh uprostřed gambijské vlajky je řeka Gambie, kolem které se celá země táhne. |
@@ -212,6 +212,7 @@ _Žádné._
 | `cf` | **Středoafrická republika** | – | – | Bangui | 5 | 1.50:1 | Vlajka Středoafrické republiky spojuje panafrické barvy s francouzskou trikolórou – svislý červený pruh je protíná. |
 | `sd` | **Súdán** | Súdánská republika | – | Chartúm | 4 | 2.00:1 | Súdánská vlajka má u žerdi zelený trojúhelník, palestinská červený. |
 | `st` | **Svatý Tomáš a Princův ostrov** | – | – | São Tomé | 5 | 2.00:1 | Dvě černé hvězdy na vlajce znamenají dva hlavní ostrovy země. |
+| `sz` | **Svazijsko** | Svazijské království | Eswatini | Mbabane | 5 | 1.50:1 | Černá a bílá na štítu svazijské vlajky znamenají, že tu vedle sebe žijí černí i bílí. |
 | `tz` | **Tanzanie** | Sjednocená republika Tanzanie | – | Dodoma | 4 | 1.50:1 | Tanzanskou vlajku dělí šikmý černý pruh se žlutými okraji. |
 | `tg` | **Togo** | Tožská republika | – | Lomé | 5 | 1.62:1 | Togo má pět pruhů a v červeném rohu bílou hvězdu. |
 | `tn` | **Tunisko** | Tuniská republika | – | Tunis | 3 | 1.50:1 | Uprostřed tuniské vlajky je v bílém kruhu červený půlměsíc s hvězdou. |

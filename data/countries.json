@@ -4799,10 +4799,10 @@
     },
     {
       "code": "sz",
-      "nameCs": "Eswatini",
-      "nameCsOfficial": "Království Eswatini",
+      "nameCs": "Svazijsko",
+      "nameCsOfficial": "Svazijské království",
       "aliases": [
-        "Svazijsko"
+        "Eswatini"
       ],
       "capitalCs": "Mbabane",
       "continent": "africa",
@@ -4812,13 +4812,15 @@
       "lng": 31.5,
       "similar": [],
       "difficulty": 5,
-      "funFact": "Na vlajce Eswatini leží naležato válečný štít a dvě kopí.",
+      "funFact": "Černá a bílá na štítu svazijské vlajky znamenají, že tu vedle sebe žijí černí i bílí.",
       "ratio": [
         900,
         600
       ],
       "accent": "#3e5eb9",
-      "needsReview": [],
+      "needsReview": [
+        "ROZHODNUTO: král zemi v roce 2018 přejmenoval na Eswatini, ale to je jméno anglické a svazijské – český název se tím nezměnil. Názvoslovná komise ČÚZK, ministerstvo zahraničí i česká Wikipedie dál píšou Svazijsko, takže v aplikaci je Svazijsko a Eswatini se uznává jako druhý tvar odpovědi."
+      ],
       "iso3": "SWZ",
       "numeric": "748"
     },

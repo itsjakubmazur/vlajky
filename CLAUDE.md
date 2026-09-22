@@ -337,6 +337,13 @@ ho vypisuje – aby se nemohlo stát, že nějaký zmizí omylem.
 takže odpověď dostane výsledek `ambiguous`: nepočítá se jako chyba, jen se
 aplikace doptá, která země to má být. Viz `AMBIGUOUS_ANSWERS` v `match.ts`.
 
+**Svazijsko, ne Eswatini.** Král zemi v roce 2018 přejmenoval, ale Eswatini
+je jméno anglické a svazijské – **český název se tím nezměnil**. Názvoslovná
+komise ČÚZK, ministerstvo zahraničí i česká Wikipedie dál píšou Svazijsko,
+takže to je `nameCs`; Eswatini je alias, takže se uzná jako odpověď. Obecně:
+`nameCs` je vždycky český název podle českých zdrojů, ne přepis toho, jak si
+země říká sama. Hlídá to test v `tests/data.test.ts`.
+
 **Hlavní město = to úřední.** Bez ohledu na to, které město je větší nebo kde
 sídlí vláda. Proto Srí Džajavardanapura Kotte, ne Kolombo.
 
