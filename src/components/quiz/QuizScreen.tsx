@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { requireCountry } from '@/domain/countries';
 import { FLASH_MS, RACE_MODES, type QuizModeId } from '@/domain/quiz/modes';
 import type { RoundTally } from '@/domain/game/score';
@@ -58,6 +58,10 @@ function QuizRunner({ mode, bossId, codes, offTheRecord, onFinish }: QuizScreenP
   const { set, pool: regionPool } = useActivePool();
   // Denní výzva a souboje jedou přes celou sadu, viz useActivePool.
   const pool = mode === 'daily' || mode === 'boss' ? set : regionPool;
+
+  // Mapa se ořízne na to, co se zrovna hraje. Při vybrané Evropě nemá smysl
+  // ukazovat celý svět a tři špendlíky namačkané na dva centimetry.
+  const frameCodes = useMemo(() => pool.map((country) => country.code), [pool]);
 
   // Režim Blesk: vlajka po dvou sekundách zmizí a odpovídá se po paměti.
   const [flashHidden, setFlashHidden] = useState(false);
@@ -215,6 +219,7 @@ function QuizRunner({ mode, bossId, codes, offTheRecord, onFinish }: QuizScreenP
               correctCode={question.code}
               chosen={chosen}
               onChoose={session.answerWithCode}
+              frameCodes={frameCodes}
             />
           ) : null}
 

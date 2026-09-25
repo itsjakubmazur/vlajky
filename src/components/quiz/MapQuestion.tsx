@@ -1,14 +1,22 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 import { requireCountry } from '@/domain/countries';
 import { cs } from '@/i18n/cs';
 import { worldGeometry } from '@/components/map/geometry';
 
-/** Poloměr špendlíku v soustavě mapy. */
+/** Poloměr špendlíku na světové mapě; ve výřezu se úměrně zmenší. */
 const PIN_R = 15;
-/** Neviditelná plocha pro prst – špendlík sám by byl na dotyk malý. */
-const PIN_HIT_R = 30;
+/**
+ * Jak daleko od špendlíku ještě klepnutí platí, v obrazovkových bodech.
+ *
+ * Sám špendlík má na mapě kolem 23 px, což je na prst málo. Nerozhoduje
+ * se proto zásahem do kolečka, ale vzdáleností k nejbližšímu špendlíku –
+ * stejně jako v režimu Roztřiď.
+ */
+const TAP_REACH = 44;
+/** Velikost popisku pod špendlíkem na světové mapě. */
+const LABEL_SIZE = 13;
 
 function color(code: string, correctCode: string, chosen: string | null) {
   if (chosen === null) return { fill: 'var(--color-mint)', text: 'var(--color-abyss)' };
@@ -29,13 +37,31 @@ export function MapQuestion({
   correctCode,
   chosen,
   onChoose,
+  frameCodes,
 }: {
   options: string[];
   correctCode: string;
   chosen: string | null;
   onChoose: (code: string) => void;
+  /**
+   * Země, na které se má mapa oříznout – to, co se zrovna hraje.
+   *
+   * Schválně celá vybraná část světa, ne jen ty čtyři nabídnuté: výřez
+   * podle nabídky by se měnil s každou otázkou a prozrazoval by, kde
+   * zhruba odpověď leží.
+   */
+  frameCodes: readonly string[];
 }) {
-  const { shapes, viewBox, project } = useMemo(worldGeometry, []);
+  const { shapes, project, frameFor } = useMemo(worldGeometry, []);
+  const frame = useMemo(() => frameFor(frameCodes), [frameFor, frameCodes]);
+
+  // Špendlík má zůstat na obrazovce stejně velký, ať se kouká na svět
+  // nebo na Evropu – s menším plátnem se proto musí zmenšit i on.
+  const pinR = PIN_R * frame.scale;
+  const labelSize = LABEL_SIZE * frame.scale;
+
+  const mapBox = useRef<HTMLDivElement>(null);
+  const pinRefs = useRef(new Map<string, SVGCircleElement>());
 
   const pins = useMemo(
     () =>
@@ -47,9 +73,42 @@ export function MapQuestion({
     [options, project],
   );
 
+  /** Nejbližší špendlík k místu klepnutí, když je dost blízko. */
+  const pick = (x: number, y: number) => {
+    if (chosen !== null) return;
+    const map = mapBox.current?.getBoundingClientRect();
+    if (!map) return;
+
+    let best: string | null = null;
+    let bestDistance = Infinity;
+    for (const [code, element] of pinRefs.current) {
+      const rect = element.getBoundingClientRect();
+      const distance = Math.hypot(
+        x - (rect.left + rect.width / 2),
+        y - (rect.top + rect.height / 2),
+      );
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        best = code;
+      }
+    }
+
+    const reach = Math.max(TAP_REACH, map.width * 0.12);
+    if (best && bestDistance <= reach) onChoose(best);
+  };
+
   return (
-    <div className="glass-thin rounded-glass p-2">
-      <svg viewBox={viewBox} className="h-auto w-full" role="group" aria-label={cs.album.map}>
+    <div
+      ref={mapBox}
+      className="glass-thin rounded-glass p-2"
+      onPointerUp={(event) => pick(event.clientX, event.clientY)}
+    >
+      <svg
+        viewBox={frame.viewBox}
+        className="h-auto w-full"
+        role="group"
+        aria-label={cs.album.map}
+      >
         <g>
           {shapes.map((shape) => (
             <path
@@ -57,7 +116,7 @@ export function MapQuestion({
               d={shape.d}
               fill="rgb(255 255 255 / 0.08)"
               stroke="rgb(6 10 20 / 0.85)"
-              strokeWidth={0.4}
+              strokeWidth={0.4 * frame.scale}
             />
           ))}
         </g>
@@ -68,34 +127,35 @@ export function MapQuestion({
             return (
               <g
                 key={pin.code}
-                onClick={chosen === null ? () => onChoose(pin.code) : undefined}
                 className={chosen === null ? 'cursor-pointer' : undefined}
-                role={chosen === null ? 'button' : undefined}
                 aria-label={revealed ? pin.name : undefined}
               >
-                <circle cx={pin.x} cy={pin.y} r={PIN_HIT_R} fill="transparent" />
                 <circle
+                  ref={(element) => {
+                    if (element) pinRefs.current.set(pin.code, element);
+                    else pinRefs.current.delete(pin.code);
+                  }}
                   cx={pin.x}
                   cy={pin.y}
-                  r={PIN_R}
+                  r={pinR}
                   fill={fill}
                   stroke="rgb(6 10 20 / 0.7)"
-                  strokeWidth={1.5}
+                  strokeWidth={1.5 * frame.scale}
                   className="transition-[fill] duration-300"
                 />
                 {revealed ? (
                   <text
                     x={pin.x}
-                    y={pin.y + PIN_R + 14}
+                    y={pin.y + pinR + labelSize}
                     textAnchor="middle"
-                    fontSize={13}
+                    fontSize={labelSize}
                     fontWeight={800}
                     fill={pin.code === correctCode ? 'var(--color-mint)' : 'var(--color-muted)'}
                   >
                     {pin.name}
                   </text>
                 ) : (
-                  <circle cx={pin.x} cy={pin.y} r={PIN_R / 2.6} fill={text} opacity={0.45} />
+                  <circle cx={pin.x} cy={pin.y} r={pinR / 2.6} fill={text} opacity={0.45} />
                 )}
               </g>
             );

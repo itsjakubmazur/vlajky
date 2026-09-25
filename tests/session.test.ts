@@ -21,6 +21,7 @@ import {
   MIN_SEPARATION,
   pickMapDistractors,
   roughDistance,
+  separationFor,
 } from '@/domain/quiz/mapDistractors';
 import {
   SORT_BATCH,
@@ -294,14 +295,36 @@ describe('otázka na mapě', () => {
       rng: createRng(11),
       kind: 'pickOnMap',
     });
+    expect(q.options).toHaveLength(4);
     expect(q.options).toContain('bt');
+    const separation = separationFor(world);
     for (const a of q.options) {
       for (const b of q.options) {
         if (a === b) continue;
         expect(roughDistance(requireCountry(a), requireCountry(b))).toBeGreaterThanOrEqual(
-          MIN_SEPARATION,
+          separation,
         );
       }
+    }
+  });
+
+  it('i v malé části světa nabídne čtyři možnosti', () => {
+    // Na světové rozteči 15° se ve vybrané Evropě čtvrtá země nevešla
+    // a otázka nabídla jen tři. Mapa je přitom přiblížená na Evropu,
+    // takže i menší rozestup je na obrazovce pořád velký.
+    const europe = world.filter((c) => c.continent === 'europe');
+    expect(separationFor(europe)).toBeLessThan(MIN_SEPARATION);
+
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const q = buildQuestion({
+        mode: 'map',
+        target: requireCountry('cz'),
+        pool: europe,
+        mastery: 'silver',
+        rng: createRng(seed),
+        kind: 'pickOnMap',
+      });
+      expect(q.options, `semínko ${seed}`).toHaveLength(4);
     }
   });
 

@@ -214,6 +214,23 @@ zemí by na telefonu nešlo (Lucembursko má na světové mapě pár pixelů), t
 se nabídnou čtyři špendlíky vzdálené od sebe aspoň 15° (`MIN_SEPARATION`).
 Začátečník dostane body rozházené po světě, pokročilý sousední země.
 
+**Mapa se ořízne na to, co se zrovna hraje** (`frameFor` v `map/geometry.ts`).
+Při vybrané Evropě nemá smysl ukazovat celý svět a tři špendlíky namačkané
+na dva centimetry. Tři věci, které se k tomu váží:
+
+- **Výřez se počítá z bodů, kam se sázejí špendlíky, ne z obrysů.** Rusko je
+  v datech Evropa a jeho obrys sahá k Pacifiku, takže podle obrysů vycházela
+  „Evropa“ skoro jako celý svět.
+- **Rozteč špendlíků se počítá z rozlohy toho, co se hraje** (`separationFor`),
+  ne z pevných 15°. Na světové rozteči se ve vybrané Evropě čtvrtá země
+  nevešla a otázka nabízela jen tři možnosti. Mapa je přitom přiblížená,
+  takže menší rozestup je na obrazovce pořád velký: svět 15°, Evropa 6°,
+  Jižní Amerika 2,5°.
+- **Špendlík je na obrazovce pořád stejně velký** – poloměr se násobí
+  `frame.scale`, protože se zmenšuje plátno. A jako v Roztřiď rozhoduje
+  o trefě vzdálenost k nejbližšímu špendlíku, ne zásah do kolečka: to má
+  jen 23 px, což je na prst málo.
+
 **Roztřiď je jiný tvar hry, proto má vlastní obrazovku.** Neptá se po jedné
 otázce – rozdělí se celá sada pěti vlajek a **název země se ukáže až ve
 vyhodnocení**. Dokud se třídí, jsou na obrazovce jen vlajky, takže se nedá

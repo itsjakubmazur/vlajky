@@ -1,7 +1,7 @@
 import type { Country } from '../types';
 import type { Mastery } from '../srs/types';
 import { buildOptions, challengeFromMastery, pickDistractors } from './distractors';
-import { pickMapDistractors } from './mapDistractors';
+import { pickMapDistractors, separationFor } from './mapDistractors';
 import { pick, shuffle, type Rng } from '../rng';
 
 export const QUIZ_MODES = [
@@ -169,6 +169,8 @@ export function buildQuestion({
     const distractors = pickMapDistractors(target, pool, {
       rng,
       challenge: challengeFromMastery(mastery),
+      // V malé části světa se na světovou rozteč čtvrtá země nevejde.
+      minSeparation: separationFor(pool),
     });
     return {
       code: target.code,
