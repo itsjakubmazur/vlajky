@@ -8,6 +8,16 @@ import { ALL_COUNTRIES } from '@/domain/countries';
 const WIDTH = 900;
 const HEIGHT = 440;
 
+/**
+ * Nejmenší poměr stran výřezu (šířka ku výšce).
+ *
+ * Vyšší mapa se na telefonu nevejde pod vlajku a musela by se zmenšit,
+ * aby se vešla do dostupné výšky – a s ní by se zmenšily i špendlíky.
+ * Radši ukázat kus oceánu navíc než mapu, na které nic není vidět.
+ * Odpovídá zhruba poměru místa, které na mapu na telefonu zbývá.
+ */
+const MIN_FRAME_RATIO = 1.5;
+
 export interface MapShape {
   id: string;
   /** Kód země, pokud jsme polygon uměli spárovat. */
@@ -44,14 +54,66 @@ export interface WorldGeometry {
   frameFor: (codes: readonly string[]) => MapFrame;
 }
 
-let cached: WorldGeometry | null = null;
+const cache = new Map<number, WorldGeometry>();
 
 /**
- * Geometrie světové mapy. Počítá se jednou na celou aplikaci – album
- * i kvíz s mapou kreslí tentýž podklad, takže nemá smysl ji mít dvakrát
- * a projekce musí být stejná, jinak by puntíky neseděly na pevninu.
+ * O kolik stupňů pootočit projekci, aby se daná část světa nelámala vejpůl.
+ *
+ * Projekce je středěná na nultý poledník, takže mapa má šev na 180°. Oceánie
+ * leží po obou jeho stranách: podle zeměpisných délek se rozpíná přes 354°,
+ * ale její nejkratší oblouk má jen 54° – je to kompaktní oblast, jen leží
+ * přes šev. Bez pootočení by se z ní výřez nedal udělat vůbec.
+ *
+ * Pravidlo je obecné, ne „když Oceánie“: najde se největší mezera mezi
+ * zeměpisnými délkami a oblast se vystředí na oblouk, který zbyde. U pěti
+ * ze šesti světadílů z toho vyjde nula, protože šev neprotínají – jejich
+ * mapa tedy zůstává přesně taková, jaká byla.
  */
-export function worldGeometry(): WorldGeometry {
+export function rotationFor(codes: readonly string[]): number {
+  const lngs: number[] = [];
+  for (const code of codes) {
+    const country = ALL_COUNTRIES.find((c) => c.code === code);
+    if (country) lngs.push(country.lng);
+  }
+  if (lngs.length < 2) return 0;
+
+  lngs.sort((a, b) => a - b);
+  const plain = lngs[lngs.length - 1]! - lngs[0]!;
+
+  let gap = 0;
+  let arcStart = lngs[0]!;
+  for (let i = 0; i < lngs.length; i++) {
+    const next = i === lngs.length - 1 ? lngs[0]! + 360 : lngs[i + 1]!;
+    if (next - lngs[i]! > gap) {
+      gap = next - lngs[i]!;
+      arcStart = next;
+    }
+  }
+
+  const arc = 360 - gap;
+  /*
+    Otáčí se jen tam, kde oblast *vypadá* rozpůlená: podle délek se rozpíná
+    přes víc než půl zeměkoule, ale ve skutečnosti se vejde do míň než
+    poloviny toho rozpětí. Celý svět tuhle podmínku nesplní (rozpíná se přes
+    359° a nejkratší oblouk má 340°), takže zůstává středěný na nultý
+    poledník tak, jak ho děti znají z atlasu.
+  */
+  if (plain <= 180 || arc > plain / 2) return 0;
+
+  const center = ((arcStart + arc / 2 + 540) % 360) - 180;
+  return -Math.round(center);
+}
+
+/**
+ * Geometrie světové mapy pro dané pootočení projekce.
+ *
+ * Počítá se jednou na pootočení a drží se v paměti: album, detail vlajky
+ * i Roztřiď berou nulu, takže sdílejí jednu mapu, a projekce je pro ně
+ * stejná – jinak by puntíky neseděly na pevninu.
+ */
+export function worldGeometry(rotationLng = 0): WorldGeometry {
+  const key = Math.round(rotationLng);
+  const cached = cache.get(key);
   if (cached) return cached;
 
   const topo = topology as unknown as Topology;
@@ -66,7 +128,9 @@ export function worldGeometry(): WorldGeometry {
     features: collection.features.filter((f) => String(f.id) !== '010'),
   };
 
-  const projection = geoNaturalEarth1().fitSize([WIDTH, HEIGHT], withoutAntarctica);
+  const projection = geoNaturalEarth1()
+    .rotate([key, 0])
+    .fitSize([WIDTH, HEIGHT], withoutAntarctica);
   const path = geoPath(projection);
 
   const codeByNumeric = new Map<string, string>();
@@ -115,12 +179,11 @@ export function worldGeometry(): WorldGeometry {
    * vycházela „Evropa“ skoro jako celý svět. Podle bodů je výřez pravdivý:
    * co je v něm vidět, je přesně to, na co se dá klepnout.
    *
-   * Výřez si **drží svůj vlastní poměr stran**, jen se usadí mezi čtverec
-   * a poměr světa. Původně se dorovnával na poměr světa (2,26:1) a to dělalo
+   * Výřez si **drží svůj vlastní poměr stran**, jen se usadí mezi poměrem
+   * `MIN_FRAME_RATIO` a poměrem světa. Původně se dorovnával na poměr světa (2,26:1) a to dělalo
    * každý světadíl zbytečně širokým: Evropa vycházela 343 jednotek místo
    * potřebných 185, Jižní Amerika 437 místo 133. Půlka mapy pak byla prázdný
-   * oceán a všechno zbytečně malé. Čtverec je dolní mez proto, že vyšší
-   * mapa by se na telefonu už nevešla pod vlajku.
+   * oceán a všechno zbytečně malé.
    *
    * Výřez se nikdy nezvětší přes celý svět a nezmenší pod šestinu jeho
    * šířky – u jedné malinké země by jinak vyšlo takové zvětšení, že by
@@ -153,7 +216,7 @@ export function worldGeometry(): WorldGeometry {
     let height = bottom - top + margin * 2;
 
     // Poměr stran mezi čtvercem a poměrem světa.
-    const own = Math.min(Math.max(width / height, 1), ratio);
+    const own = Math.min(Math.max(width / height, MIN_FRAME_RATIO), ratio);
     if (width / height < own) width = height * own;
     else height = width / own;
 
@@ -174,7 +237,7 @@ export function worldGeometry(): WorldGeometry {
     return { viewBox: `${x} ${y} ${width} ${height}`, scale: width / world.width };
   };
 
-  cached = {
+  const geometry: WorldGeometry = {
     shapes,
     dots,
     viewBox: `${world.x} ${world.y} ${world.width} ${world.height}`,
@@ -184,5 +247,6 @@ export function worldGeometry(): WorldGeometry {
     },
     frameFor,
   };
-  return cached;
+  cache.set(key, geometry);
+  return geometry;
 }

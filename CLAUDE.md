@@ -229,17 +229,30 @@ na dva centimetry. Tři věci, které se k tomu váží:
 - **Výřez si drží svůj vlastní poměr stran**, jen se usadí mezi čtverec
   a poměr světa (2,26:1). Dorovnávání na poměr světa dělalo každý světadíl
   2–3× širším, než potřeboval: Evropa 343 jednotek místo 185, Jižní Amerika
-  437 místo 133. Půlka mapy pak byl prázdný oceán. Čtverec je dolní mez,
-  protože vyšší mapa už se na telefonu nevejde pod vlajku; `max-h-[34svh]`
-  a `preserveAspectRatio="xMidYMid meet"` to doladí na malých displejích.
+  437 místo 133. Půlka mapy pak byl prázdný oceán. `max-h-[34svh]`
+  a `preserveAspectRatio="xMidYMid meet"` jsou záchranná brzda pro malé
+  displeje.
 - **Rozteč špendlíků se počítá z rozlohy toho, co se hraje** (`separationFor`),
   ne z pevného čísla: zhruba šestina delší strany, nejvýš `MIN_SEPARATION`.
   Mapa je u menší části přiblížená, takže menší rozestup je na obrazovce
-  pořád velký. Změřeno na iPhonu, nejtěsnější dvojice ze čtyř otázek:
-  svět 30 px, Evropa 49, Asie 51, Afrika 38, Severní Amerika 31,
-  Jižní Amerika 25, Oceánie 22.
-- **Oceánie zůstává na celé mapě světa.** Leží po obou stranách 180. poledníku
-  a projekce je středěná na nultý, takže se jí výřez zmenšit nedá.
+  pořád velký.
+- **Rotaci projekce si vybírá každá část světa sama** (`rotationFor`).
+  Projekce je středěná na nultý poledník, takže mapa má šev na 180. – a
+  Oceánie leží po obou jeho stranách: podle zeměpisných délek se rozpíná přes
+  354°, ale její nejkratší oblouk má jen 54°. Je to kompaktní oblast, jen
+  leží přes šev. Pravidlo je obecné, ne „když Oceánie“: otočí se ta oblast,
+  která *vypadá* rozpůlená (rozpětí přes půl zeměkoule, ale vejde se do míň
+  než poloviny toho rozpětí). Pěti ze šesti světadílů i celému světu z toho
+  vyjde nula, takže jejich mapa zůstává středěná na nultý poledník tak, jak
+  ji děti znají z atlasu. Geometrie se drží v paměti pro každé pootočení
+  zvlášť; album, detail vlajky i Roztřiď berou nulu, takže sdílejí jednu.
+- **Špendlík i popisek jsou na obrazovce pořád stejně velké** (16 a ~10 px),
+  protože se jejich rozměr násobí `frame.scale`. Aby to platilo, nesmí se
+  mapa zmenšovat kvůli výšce – proto má výřez dolní mez poměru stran
+  (`MIN_FRAME_RATIO`) místo čtverce: vyšší mapa by se na telefonu musela
+  zmenšit a s ní i špendlíky. Změřeno na iPhonu, nejtěsnější dvojice z deseti
+  otázek: svět 30 px, Evropa 28, Asie 39, Afrika 35, Severní Amerika 26,
+  Jižní Amerika 29, Oceánie 63.
 - **Špendlík je na obrazovce pořád stejně velký** – poloměr se násobí
   `frame.scale`, protože se zmenšuje plátno. A jako v Roztřiď rozhoduje
   o trefě vzdálenost k nejbližšímu špendlíku, ne zásah do kolečka: to má

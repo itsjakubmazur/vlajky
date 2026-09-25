@@ -3,10 +3,13 @@
 import { useMemo, useRef } from 'react';
 import { requireCountry } from '@/domain/countries';
 import { cs } from '@/i18n/cs';
-import { worldGeometry } from '@/components/map/geometry';
+import { rotationFor, worldGeometry } from '@/components/map/geometry';
 
-/** Poloměr špendlíku na světové mapě; ve výřezu se úměrně zmenší. */
-const PIN_R = 15;
+/**
+ * Poloměr špendlíku na světové mapě; ve výřezu se úměrně zmenší, takže na
+ * obrazovce zůstává stejný. Na telefonu z toho vyjde kolem 16 px v průměru.
+ */
+const PIN_R = 21;
 /**
  * Jak daleko od špendlíku ještě klepnutí platí, v obrazovkových bodech.
  *
@@ -15,8 +18,8 @@ const PIN_R = 15;
  * stejně jako v režimu Roztřiď.
  */
 const TAP_REACH = 44;
-/** Velikost popisku pod špendlíkem na světové mapě. */
-const LABEL_SIZE = 13;
+/** Velikost popisku pod špendlíkem; taky se přepočítává na stálou velikost. */
+const LABEL_SIZE = 28;
 
 function color(code: string, correctCode: string, chosen: string | null) {
   if (chosen === null) return { fill: 'var(--color-mint)', text: 'var(--color-abyss)' };
@@ -52,7 +55,10 @@ export function MapQuestion({
    */
   frameCodes: readonly string[];
 }) {
-  const { shapes, project, frameFor } = useMemo(worldGeometry, []);
+  // Oceánie leží po obou stranách 180. poledníku, takže se pro ni projekce
+  // pootočí. Ostatním částem světa vyjde nula a mapa zůstává beze změny.
+  const rotation = useMemo(() => rotationFor(frameCodes), [frameCodes]);
+  const { shapes, project, frameFor } = useMemo(() => worldGeometry(rotation), [rotation]);
   const frame = useMemo(() => frameFor(frameCodes), [frameFor, frameCodes]);
 
   // Špendlík má zůstat na obrazovce stejně velký, ať se kouká na svět
