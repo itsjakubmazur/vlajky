@@ -4330,8 +4330,8 @@
       "continent": "europe",
       "subregion": "easternEurope",
       "sovereignty": "un",
-      "lat": 61.5,
-      "lng": 100,
+      "lat": 55.8,
+      "lng": 37.6,
       "similar": [
         "rs",
         "si",
@@ -4345,7 +4345,8 @@
       ],
       "accent": "#d52b1e",
       "needsReview": [
-        "ROZHODNUTO: zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti."
+        "ROZHODNUTO: zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti.",
+        "ROZHODNUTO: souřadnice proto ukazují na Moskvu, ne na zeměpisný střed země. Ostatní velké státy mají v datech svůj střed, ale ruský by táhl špendlík i výřez mapy z Evropy až ke Střední Asii."
       ],
       "iso3": "RUS",
       "numeric": "643"

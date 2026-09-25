@@ -40,6 +40,7 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 - **Spojené království** (`gb`) – Anglie záměrně není alias, je to samostatná vlajka v bonusové sadě.
 - **Mexiko** (`mx`) – hlavní město se česky píše různě, vybráno Mexico City.
 - **Rusko** (`ru`) – zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti.
+- **Rusko** (`ru`) – souřadnice proto ukazují na Moskvu, ne na zeměpisný střed země. Ostatní velké státy mají v datech svůj střed, ale ruský by táhl špendlík i výřez mapy z Evropy až ke Střední Asii.
 - **Svazijsko** (`sz`) – král zemi v roce 2018 přejmenoval na Eswatini, ale to je jméno anglické a svazijské – český název se tím nezměnil. Názvoslovná komise ČÚZK, ministerstvo zahraničí i česká Wikipedie dál píšou Svazijsko, takže v aplikaci je Svazijsko a Eswatini se uznává jako druhý tvar odpovědi.
 - **Turecko** (`tr`) – leží v Asii i v Evropě, vedeme ho v Asii.
 

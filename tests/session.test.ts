@@ -385,3 +385,32 @@ describe('režim Roztřiď', () => {
     expect(touchesScheduler('sortToContinent')).toBe(false);
   });
 });
+
+describe('otázka na mapě má vždy čtyři možnosti', () => {
+  const regions = ['europe', 'asia', 'africa', 'northAmerica', 'southAmerica', 'oceania'] as const;
+
+  it('ve všech částech světa a pro všechny úrovně', () => {
+    // Tři možnosti jsou samy o sobě nápověda, že se čtvrtá nevešla –
+    // a šance na tip skočí z jedné ku čtyřem na jednu ku třem.
+    for (const region of [null, ...regions]) {
+      const pool = region === null ? world : world.filter((c) => c.continent === region);
+      const separation = separationFor(pool);
+      for (const mastery of ['new', 'silver', 'gold'] as const) {
+        for (let seed = 0; seed < 25; seed++) {
+          const target = pool[seed % pool.length]!;
+          const q = buildQuestion({
+            mode: 'map',
+            target,
+            pool,
+            mastery,
+            rng: createRng(seed),
+            kind: 'pickOnMap',
+          });
+          expect(q.options, `${region ?? 'svět'} / ${mastery} / ${target.code}`).toHaveLength(4);
+          expect(new Set(q.options).size).toBe(4);
+        }
+      }
+      expect(separation).toBeGreaterThan(0);
+    }
+  });
+});

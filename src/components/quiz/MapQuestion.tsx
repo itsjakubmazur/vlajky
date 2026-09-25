@@ -103,9 +103,15 @@ export function MapQuestion({
       className="glass-thin rounded-glass p-2"
       onPointerUp={(event) => pick(event.clientX, event.clientY)}
     >
+      {/*
+        Strop výšky: u čtvercových výřezů (Jižní Amerika) by mapa na telefonu
+        přetekla pod okraj obrazovky a musela by se k ní rolovat. `meet`
+        ji v takovém případě zmenší a vycentruje, místo aby ji ořízl.
+      */}
       <svg
         viewBox={frame.viewBox}
-        className="h-auto w-full"
+        preserveAspectRatio="xMidYMid meet"
+        className="h-auto max-h-[34svh] w-full"
         role="group"
         aria-label={cs.album.map}
       >

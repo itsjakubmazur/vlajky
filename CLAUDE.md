@@ -211,8 +211,13 @@ neukazuje ani odznak úrovně: tvrdil by změnu, která se nestala.
 
 **Na mapě rozhoduje vzdálenost, ne podobnost vlajek.** Klepat přímo do obrysů
 zemí by na telefonu nešlo (Lucembursko má na světové mapě pár pixelů), takže
-se nabídnou čtyři špendlíky vzdálené od sebe aspoň 15° (`MIN_SEPARATION`).
+se nabídnou čtyři špendlíky vzdálené od sebe.
 Začátečník dostane body rozházené po světě, pokročilý sousední země.
+
+**Čtyři možnosti jsou povinné, rozteč je jen přání.** Tři špendlíky samy o sobě
+prozradí, že se čtvrtý nevešel, a šance na tip skočí z jedné ku čtyřem na jednu
+ku třem. Když se při plné rozteči čtvrtá země nenajde, `pickMapDistractors` ji
+postupně povolí až na nulu. Hlídá to test přes všechny části světa a úrovně.
 
 **Mapa se ořízne na to, co se zrovna hraje** (`frameFor` v `map/geometry.ts`).
 Při vybrané Evropě nemá smysl ukazovat celý svět a tři špendlíky namačkané
@@ -221,11 +226,20 @@ na dva centimetry. Tři věci, které se k tomu váží:
 - **Výřez se počítá z bodů, kam se sázejí špendlíky, ne z obrysů.** Rusko je
   v datech Evropa a jeho obrys sahá k Pacifiku, takže podle obrysů vycházela
   „Evropa“ skoro jako celý svět.
+- **Výřez si drží svůj vlastní poměr stran**, jen se usadí mezi čtverec
+  a poměr světa (2,26:1). Dorovnávání na poměr světa dělalo každý světadíl
+  2–3× širším, než potřeboval: Evropa 343 jednotek místo 185, Jižní Amerika
+  437 místo 133. Půlka mapy pak byl prázdný oceán. Čtverec je dolní mez,
+  protože vyšší mapa už se na telefonu nevejde pod vlajku; `max-h-[34svh]`
+  a `preserveAspectRatio="xMidYMid meet"` to doladí na malých displejích.
 - **Rozteč špendlíků se počítá z rozlohy toho, co se hraje** (`separationFor`),
-  ne z pevných 15°. Na světové rozteči se ve vybrané Evropě čtvrtá země
-  nevešla a otázka nabízela jen tři možnosti. Mapa je přitom přiblížená,
-  takže menší rozestup je na obrazovce pořád velký: svět 15°, Evropa 6°,
-  Jižní Amerika 2,5°.
+  ne z pevného čísla: zhruba šestina delší strany, nejvýš `MIN_SEPARATION`.
+  Mapa je u menší části přiblížená, takže menší rozestup je na obrazovce
+  pořád velký. Změřeno na iPhonu, nejtěsnější dvojice ze čtyř otázek:
+  svět 30 px, Evropa 49, Asie 51, Afrika 38, Severní Amerika 31,
+  Jižní Amerika 25, Oceánie 22.
+- **Oceánie zůstává na celé mapě světa.** Leží po obou stranách 180. poledníku
+  a projekce je středěná na nultý, takže se jí výřez zmenšit nedá.
 - **Špendlík je na obrazovce pořád stejně velký** – poloměr se násobí
   `frame.scale`, protože se zmenšuje plátno. A jako v Roztřiď rozhoduje
   o trefě vzdálenost k nejbližšímu špendlíku, ne zásah do kolečka: to má
@@ -360,6 +374,12 @@ komise ČÚZK, ministerstvo zahraničí i česká Wikipedie dál píšou Svazijs
 takže to je `nameCs`; Eswatini je alias, takže se uzná jako odpověď. Obecně:
 `nameCs` je vždycky český název podle českých zdrojů, ne přepis toho, jak si
 země říká sama. Hlídá to test v `tests/data.test.ts`.
+
+**Rusko je na mapě ukotvené v Evropě.** Ostatní velké státy mají v datech
+svůj zeměpisný střed (USA 39/−98, Brazílie −10/−53), jenže ruský leží na
+Sibiři – a Rusko je v aplikaci zařazené do Evropy. Špendlík i výřez mapy by
+kvůli němu táhly „Evropu“ až ke Střední Asii, takže `lat`/`lng` ukazují na
+Moskvu. Hlídá to test: žádná evropská země nemá `lng` nad 60.
 
 **Hlavní město = to úřední.** Bez ohledu na to, které město je větší nebo kde
 sídlí vláda. Proto Srí Džajavardanapura Kotte, ne Kolombo.

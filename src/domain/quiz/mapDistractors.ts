@@ -7,7 +7,7 @@ import { shuffle, type Rng } from '../rng';
  * Bez něj by dvě nabídnuté země mohly padnout na sebe a otázka by se
  * nedala prstem vůbec trefit.
  */
-export const MIN_SEPARATION = 15;
+export const MIN_SEPARATION = 22;
 
 /** Pod tuhle rozteč se nejde ani v té nejmenší části světa. */
 export const MIN_SEPARATION_FLOOR = 2.5;
@@ -35,11 +35,13 @@ export function separationFor(pool: readonly Country[]): number {
     maxLat = Math.max(maxLat, country.lat);
   }
 
-  const span = Math.hypot(maxLng - minLng, maxLat - minLat);
-  // Zhruba dvacetina úhlopříčky toho, co se hraje. U celého světa to vyjde
-  // nad strop, takže se uplatní `MIN_SEPARATION` – jinak se rozteč zmenší
-  // spolu s mapou, která je v té chvíli přiblížená.
-  return Math.max(MIN_SEPARATION_FLOOR, Math.min(MIN_SEPARATION, span * 0.05));
+  // Rozhoduje delší strana, protože ta určuje, jak moc je mapa přiblížená.
+  const span = Math.max(maxLng - minLng, maxLat - minLat);
+  // Zhruba šestina té strany. U celého světa to vyjde nad strop, takže se
+  // uplatní `MIN_SEPARATION`; u menší části se rozteč zmenší spolu s mapou,
+  // která je v té chvíli přiblížená, a špendlíky zůstanou stejně daleko
+  // od sebe na obrazovce.
+  return Math.max(MIN_SEPARATION_FLOOR, Math.min(MIN_SEPARATION, span * 0.18));
 }
 
 /**
@@ -82,30 +84,48 @@ export function pickMapDistractors(
   pool: readonly Country[],
   { count = 3, rng, challenge = 0.5, minSeparation = MIN_SEPARATION }: MapDistractorOptions,
 ): Country[] {
-  const candidates = pool
-    .filter((c) => c.code !== target.code)
-    .map((c) => ({ country: c, distance: roughDistance(target, c) }))
-    .filter((c) => c.distance >= minSeparation)
-    .sort((a, b) => a.distance - b.distance);
+  const others = pool.filter((c) => c.code !== target.code);
+  if (others.length === 0) return [];
 
-  if (candidates.length === 0) return [];
+  /** Pokus o výběr při dané rozteči; může jich vrátit míň, než je potřeba. */
+  const attempt = (separation: number): Country[] => {
+    const candidates = others
+      .map((c) => ({ country: c, distance: roughDistance(target, c) }))
+      .filter((c) => c.distance >= separation)
+      .sort((a, b) => a.distance - b.distance);
+    if (candidates.length === 0) return [];
 
-  // Z čeho se losuje: u těžké otázky z nejbližších, u lehké z nejvzdálenějších.
-  const bandSize = Math.max(count * 3, 12);
-  const start =
-    challenge >= 0.5
-      ? 0
-      : Math.max(0, Math.floor((candidates.length - bandSize) * (1 - challenge * 2)));
-  const band = candidates.slice(start, start + bandSize);
+    // Z čeho se losuje: u těžké otázky z nejbližších, u lehké z nejvzdálenějších.
+    const bandSize = Math.max(count * 3, 12);
+    const start =
+      challenge >= 0.5
+        ? 0
+        : Math.max(0, Math.floor((candidates.length - bandSize) * (1 - challenge * 2)));
+    const band = candidates.slice(start, start + bandSize);
 
-  const chosen: Country[] = [];
-  for (const { country } of shuffle(band.length ? band : candidates, rng)) {
-    if (chosen.length >= count) break;
-    // Špendlíky se nesmí překrývat ani mezi sebou.
-    if (chosen.some((other) => roughDistance(other, country) < minSeparation)) continue;
-    chosen.push(country);
+    const chosen: Country[] = [];
+    for (const { country } of shuffle(band.length ? band : candidates, rng)) {
+      if (chosen.length >= count) break;
+      // Špendlíky se nesmí překrývat ani mezi sebou.
+      if (chosen.some((other) => roughDistance(other, country) < separation)) continue;
+      chosen.push(country);
+    }
+    return chosen;
+  };
+
+  /**
+   * Rozteč je přání, ne podmínka.
+   *
+   * Otázka musí mít vždycky čtyři možnosti – tři jsou nápověda, že se
+   * čtvrtá nevešla. Když se při plné rozteči nenajdou, povolí se postupně
+   * až na nulu. Radši dva špendlíky blízko sebe než otázka, kde je šance
+   * na tip jedna ku třem.
+   */
+  for (const relaxation of [1, 0.6, 0.3, 0]) {
+    const chosen = attempt(minSeparation * relaxation);
+    if (chosen.length >= count) return chosen;
   }
 
-  // Když je část světa malá, radši méně možností než dvě na sobě.
-  return chosen;
+  // Sem se dostaneme jen v části světa, která nemá dost zemí.
+  return attempt(0);
 }

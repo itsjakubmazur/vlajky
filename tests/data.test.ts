@@ -244,3 +244,23 @@ describe('Svazijsko má český název', () => {
     }
   });
 });
+
+describe('Rusko je ukotvené v Evropě', () => {
+  it('jeho souřadnice leží v evropské části, ne na Sibiři', () => {
+    // Ostatní velké státy mají v datech svůj zeměpisný střed, jenže ruský
+    // leží na Sibiři – a Rusko je v aplikaci zařazené do Evropy. Špendlík
+    // i výřez mapy by kvůli němu táhly „Evropu“ až ke Střední Asii.
+    const ru = requireCountry('ru');
+    expect(ru.continent).toBe('europe');
+    expect(ru.lng).toBeLessThan(60);
+  });
+
+  it('žádná evropská země netrčí do Asie', () => {
+    const europe = ALL_COUNTRIES.filter(
+      (c) => c.continent === 'europe' && c.sovereignty !== 'territory',
+    );
+    for (const country of europe) {
+      expect(country.lng, country.nameCs).toBeLessThan(60);
+    }
+  });
+});

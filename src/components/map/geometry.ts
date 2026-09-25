@@ -115,10 +115,16 @@ export function worldGeometry(): WorldGeometry {
    * vycházela „Evropa“ skoro jako celý svět. Podle bodů je výřez pravdivý:
    * co je v něm vidět, je přesně to, na co se dá klepnout.
    *
-   * Poměr stran se drží stejný jako u světa, aby mapa seděla do stejného
-   * místa v rozvržení. Výřez se nikdy nezvětší přes celý svět a nezmenší
-   * pod jeho šestinu – u jedné malinké země by jinak vyšlo takové
-   * zvětšení, že by na mapě nebylo vidět nic známého.
+   * Výřez si **drží svůj vlastní poměr stran**, jen se usadí mezi čtverec
+   * a poměr světa. Původně se dorovnával na poměr světa (2,26:1) a to dělalo
+   * každý světadíl zbytečně širokým: Evropa vycházela 343 jednotek místo
+   * potřebných 185, Jižní Amerika 437 místo 133. Půlka mapy pak byla prázdný
+   * oceán a všechno zbytečně malé. Čtverec je dolní mez proto, že vyšší
+   * mapa by se na telefonu už nevešla pod vlajku.
+   *
+   * Výřez se nikdy nezvětší přes celý svět a nezmenší pod šestinu jeho
+   * šířky – u jedné malinké země by jinak vyšlo takové zvětšení, že by
+   * na mapě nebylo vidět nic známého, podle čeho se zorientovat.
    */
   const frameFor = (codes: readonly string[]): MapFrame => {
     const ratio = world.width / world.height;
@@ -146,11 +152,19 @@ export function worldGeometry(): WorldGeometry {
     let width = right - left + margin * 2;
     let height = bottom - top + margin * 2;
 
-    if (width / height < ratio) width = height * ratio;
-    width = Math.min(world.width, Math.max(width, world.width / 6));
-    height = width / ratio;
+    // Poměr stran mezi čtvercem a poměrem světa.
+    const own = Math.min(Math.max(width / height, 1), ratio);
+    if (width / height < own) width = height * own;
+    else height = width / own;
 
-    if (width >= world.width) return whole;
+    if (width > world.width || height > world.height) return whole;
+
+    // Spodní mez zvětšení.
+    if (width < world.width / 6) {
+      const grow = world.width / 6 / width;
+      width *= grow;
+      height *= grow;
+    }
 
     const centerX = (left + right) / 2;
     const centerY = (top + bottom) / 2;
