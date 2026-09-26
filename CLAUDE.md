@@ -221,15 +221,15 @@ postupně povolí až na nulu. Hlídá to test přes všechny části světa a �
 
 **Mapa se ořízne na to, co se zrovna hraje** (`frameFor` v `map/geometry.ts`).
 Při vybrané Evropě nemá smysl ukazovat celý svět a tři špendlíky namačkané
-na dva centimetry. Tři věci, které se k tomu váží:
+na dva centimetry. Pět věcí, které se k tomu váží:
 
 - **Výřez se počítá z bodů, kam se sázejí špendlíky, ne z obrysů.** Rusko je
   v datech Evropa a jeho obrys sahá k Pacifiku, takže podle obrysů vycházela
   „Evropa“ skoro jako celý svět.
-- **Výřez si drží svůj vlastní poměr stran**, jen se usadí mezi čtverec
-  a poměr světa (2,26:1). Dorovnávání na poměr světa dělalo každý světadíl
-  2–3× širším, než potřeboval: Evropa 343 jednotek místo 185, Jižní Amerika
-  437 místo 133. Půlka mapy pak byl prázdný oceán. `max-h-[34svh]`
+- **Výřez si drží svůj vlastní poměr stran**, jen se usadí mezi
+  `MIN_FRAME_RATIO` (1,5:1) a poměr světa (2,26:1). Dorovnávání na poměr
+  světa dělalo každý světadíl 2–3× širším, než potřeboval: Evropa 343 jednotek
+  místo 185, Jižní Amerika 437 místo 133. Půlka mapy pak byl prázdný oceán. `max-h-[34svh]`
   a `preserveAspectRatio="xMidYMid meet"` jsou záchranná brzda pro malé
   displeje.
 - **Rozteč špendlíků se počítá z rozlohy toho, co se hraje** (`separationFor`),
@@ -252,11 +252,8 @@ na dva centimetry. Tři věci, které se k tomu váží:
   (`MIN_FRAME_RATIO`) místo čtverce: vyšší mapa by se na telefonu musela
   zmenšit a s ní i špendlíky. Změřeno na iPhonu, nejtěsnější dvojice z deseti
   otázek: svět 30 px, Evropa 28, Asie 39, Afrika 35, Severní Amerika 26,
-  Jižní Amerika 29, Oceánie 63.
-- **Špendlík je na obrazovce pořád stejně velký** – poloměr se násobí
-  `frame.scale`, protože se zmenšuje plátno. A jako v Roztřiď rozhoduje
-  o trefě vzdálenost k nejbližšímu špendlíku, ne zásah do kolečka: to má
-  jen 23 px, což je na prst málo.
+  Jižní Amerika 29, Oceánie 63. A jako v Roztřiď rozhoduje o trefě vzdálenost
+  k nejbližšímu špendlíku, ne zásah do kolečka – to je na prst málo.
 
 **Roztřiď je jiný tvar hry, proto má vlastní obrazovku.** Neptá se po jedné
 otázce – rozdělí se celá sada pěti vlajek a **název země se ukáže až ve
