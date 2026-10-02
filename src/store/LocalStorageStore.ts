@@ -1,23 +1,49 @@
-import type { AnswerLog, CardState } from '@/domain/srs/types';
 import {
+  BaseProgressStore,
   emptyProgress,
-  LOG_LIMIT,
-  SCHEMA_VERSION,
-  type Meta,
+  migrate,
   type Progress,
-  type ProgressStore,
+  type StoreHealth,
 } from './ProgressStore';
 
 const KEY = 'vlajky.progress.v1';
+/** Starší kopie postupu. Když se hlavní záznam poškodí, bere se tahle. */
+const KEY_BACKUP = 'vlajky.progress.v1.zaloha';
+/** Sem se odloží záznam, který se nepodařilo přečíst. Nikdy se nemaže. */
+const KEY_BROKEN = 'vlajky.progress.v1.poskozeno';
+
+/** Jak často se obnovuje záloha. Častěji by se zbytečně zapisovalo dvakrát. */
+const BACKUP_EVERY_MS = 10 * 60 * 1000;
 
 /**
- * Úložiště v localStorage. Všechno drží v paměti a po každé změně zapíše
- * celý balík – při dvou stech vlajkách jde o desítky kilobajtů, takže je to
- * levnější než chytré inkrementální zápisy.
+ * Úložiště v localStorage.
+ *
+ * Tři věci, které tu nejsou pro parádu, ale protože se bez nich postup
+ * ztrácel:
+ *
+ * 1. **Před každou změnou se čte ze storage, ne z paměti.** Na tabletu bývá
+ *    aplikace otevřená ve dvou záložkách a každá by si jinak držela vlastní
+ *    kopii; ta starší by při prvním zápisu přepsala práci té druhé.
+ * 2. **Poškozený záznam se nepřepíše, odloží se na stranu** (`KEY_BROKEN`).
+ *    Dřív se po nepovedeném `JSON.parse` vrátil prázdný postup a první další
+ *    zápis ho uložil – jedno chybné načtení tím mazalo celou sbírku.
+ * 3. **Záloha.** Když hlavní záznam zmizí nebo se poškodí, načte se kopie
+ *    stará nejvýš deset minut místo prázdného postupu.
+ *
+ * Když zápis selže (plné úložiště, privátní režim), pozná se to z `health()`
+ * a aplikace o tom řekne – tiché neukládání je horší než chybová zpráva.
  */
-export class LocalStorageStore implements ProgressStore {
+export class LocalStorageStore extends BaseProgressStore {
   private cache: Progress | null = null;
-  private listeners = new Set<() => void>();
+  private saved = true;
+  private recovered = false;
+  private lastBackupAt = 0;
+  private detached: (() => void) | null = null;
+
+  constructor() {
+    super();
+    this.listenToOtherTabs();
+  }
 
   async load(): Promise<Progress> {
     if (this.cache) return this.cache;
@@ -25,80 +51,131 @@ export class LocalStorageStore implements ProgressStore {
     return this.cache;
   }
 
-  async saveCards(cards: CardState[]): Promise<void> {
-    const progress = await this.load();
-    for (const card of cards) progress.cards[card.code] = card;
+  async update(fn: (progress: Progress) => void): Promise<Progress> {
+    // Čte se tady, ne z `cache`: mezi dvěma změnami mohla zapsat jiná
+    // záložka. Mezi čtením a zápisem není `await`, takže se dvě změny
+    // nemůžou přebít.
+    const progress = this.read();
+    fn(progress);
     this.write(progress);
-  }
-
-  async setMeta(patch: Partial<Meta>): Promise<void> {
-    const progress = await this.load();
-    progress.meta = { ...progress.meta, ...patch };
-    this.write(progress);
-  }
-
-  async logAnswer(entry: AnswerLog): Promise<void> {
-    const progress = await this.load();
-    progress.log.push(entry);
-    if (progress.log.length > LOG_LIMIT) {
-      progress.log = progress.log.slice(-LOG_LIMIT);
-    }
-    progress.meta.totalAnswers += 1;
-    this.write(progress);
+    return progress;
   }
 
   async reset(): Promise<void> {
-    this.cache = emptyProgress();
-    this.write(this.cache);
+    this.write(emptyProgress());
   }
 
-  subscribe(listener: () => void): () => void {
-    this.listeners.add(listener);
-    return () => {
-      this.listeners.delete(listener);
+  health(): StoreHealth {
+    return {
+      saved: this.saved,
+      lastSavedAt: this.cache?.savedAt ?? null,
+      recovered: this.recovered,
     };
   }
 
+  /** Uvolní posluchač druhé záložky. Používá se v testech. */
+  dispose(): void {
+    this.detached?.();
+    this.detached = null;
+  }
+
+  private listenToOtherTabs(): void {
+    if (typeof window === 'undefined') return;
+    const onStorage = (event: StorageEvent) => {
+      if (event.key !== null && event.key !== KEY) return;
+      // Zapsala jiná záložka: zahodit kopii v paměti a říct o tom UI.
+      this.cache = null;
+      this.emit();
+    };
+    window.addEventListener('storage', onStorage);
+    this.detached = () => window.removeEventListener('storage', onStorage);
+  }
+
   private read(): Progress {
-    if (typeof window === 'undefined') return emptyProgress();
+    const storage = this.storage();
+    if (!storage) return this.cache ?? emptyProgress();
+
+    const raw = storage.getItem(KEY);
+    if (raw === null) {
+      // Hlavní záznam chybí. Může to být první spuštění, ale taky úklid
+      // od někoho jiného – pak je na místě záloha, ne prázdno.
+      return this.readBackup() ?? emptyProgress();
+    }
     try {
-      const raw = window.localStorage.getItem(KEY);
-      if (!raw) return emptyProgress();
-      const parsed = JSON.parse(raw) as Progress;
-      return migrate(parsed);
+      return migrate(JSON.parse(raw) as Progress);
     } catch {
-      // Poškozená data radši zahodíme, než aby spadla celá aplikace.
-      return emptyProgress();
+      this.quarantine(raw);
+      this.recovered = true;
+      return this.readBackup() ?? emptyProgress();
+    }
+  }
+
+  private readBackup(): Progress | null {
+    const storage = this.storage();
+    const raw = storage?.getItem(KEY_BACKUP);
+    if (!raw) return null;
+    try {
+      const restored = migrate(JSON.parse(raw) as Progress);
+      this.recovered = true;
+      return restored;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Odloží nečitelný záznam na stranu. Přepsat ho prázdným postupem by byl
+   * ten nejhorší možný konec: data by nešla zachránit ani ručně.
+   */
+  private quarantine(raw: string): void {
+    const storage = this.storage();
+    if (!storage || storage.getItem(KEY_BROKEN) !== null) return;
+    try {
+      storage.setItem(KEY_BROKEN, raw);
+    } catch {
+      // Na záchranu není místo; zápis hlavního záznamu to nesmí zablokovat.
     }
   }
 
   private write(progress: Progress): void {
+    progress.savedAt = new Date().toISOString();
     this.cache = progress;
-    if (typeof window !== 'undefined') {
+    const storage = this.storage();
+    if (storage) {
+      const json = JSON.stringify(progress);
       try {
-        window.localStorage.setItem(KEY, JSON.stringify(progress));
+        storage.setItem(KEY, json);
+        this.saved = true;
+        this.backup(json, storage);
       } catch {
-        // Plné úložiště nebo privátní režim – hra může běžet dál bez ukládání.
+        // Plné úložiště nebo privátní režim. Hra běží dál, ale musí to být
+        // vidět – proto `saved = false` a ne jen prázdný catch.
+        this.saved = false;
       }
     }
-    for (const listener of this.listeners) listener();
+    this.emit();
+  }
+
+  private backup(json: string, storage: Storage): void {
+    const now = Date.now();
+    if (storage.getItem(KEY_BACKUP) !== null && now - this.lastBackupAt < BACKUP_EVERY_MS) return;
+    try {
+      storage.setItem(KEY_BACKUP, json);
+      this.lastBackupAt = now;
+    } catch {
+      // Záloha je bonus; když se nevejde, hlavní záznam už uložený je.
+    }
+  }
+
+  private storage(): Storage | null {
+    if (typeof window === 'undefined') return null;
+    try {
+      return window.localStorage;
+    } catch {
+      // Zablokované cookies – přístup k localStorage sám hodí výjimku.
+      return null;
+    }
   }
 }
 
-/**
- * Migrace starších uložených dat na aktuální schéma.
- *
- * Schéma 1 → 2 přidalo body, rekordy a souboje, 2 → 3 výsledky
- * rozřazovacího testu. Chybějící pole se doplní z prázdného stavu, takže
- * postup ve vlajkách se nikdy nezahazuje.
- */
-export function migrate(input: Progress): Progress {
-  const base = emptyProgress();
-  if (!input || typeof input !== 'object') return base;
-  return {
-    schemaVersion: SCHEMA_VERSION,
-    cards: input.cards ?? {},
-    meta: { ...base.meta, ...(input.meta ?? {}) },
-    log: Array.isArray(input.log) ? input.log.slice(-LOG_LIMIT) : [],
-  };
-}
+export { migrate } from './ProgressStore';

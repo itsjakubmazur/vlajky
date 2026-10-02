@@ -12,6 +12,7 @@ import { APP_NAME } from '@/config/app';
 import { ROUTES } from '@/config/routes';
 import { useProgress } from '@/store/StoreProvider';
 import { Button, Eyebrow, Panel } from '@/components/ui';
+import { BackupPanel } from './BackupPanel';
 
 function requirementText(unlock: Unlock): string {
   if (unlock.golds) return cs.settings.unlockBy.golds(unlock.golds);
@@ -184,6 +185,8 @@ export function SettingsScreen() {
           </p>
         </div>
       </Panel>
+
+      <BackupPanel />
 
       <Panel className="mb-3">
         <Eyebrow>{cs.settings.about}</Eyebrow>

@@ -1,38 +1,18 @@
-import type { AnswerLog, CardState } from '@/domain/srs/types';
-import {
-  emptyProgress,
-  LOG_LIMIT,
-  type Meta,
-  type Progress,
-  type ProgressStore,
-} from './ProgressStore';
+import { BaseProgressStore, emptyProgress, type Progress, type StoreHealth } from './ProgressStore';
 
 /** Úložiště jen v paměti – pro testy a pro vykreslení na serveru. */
-export class MemoryStore implements ProgressStore {
+export class MemoryStore extends BaseProgressStore {
   private progress: Progress = emptyProgress();
-  private listeners = new Set<() => void>();
 
   async load(): Promise<Progress> {
     return this.progress;
   }
 
-  async saveCards(cards: CardState[]): Promise<void> {
-    for (const card of cards) this.progress.cards[card.code] = card;
+  async update(fn: (progress: Progress) => void): Promise<Progress> {
+    fn(this.progress);
+    this.progress.savedAt = new Date().toISOString();
     this.emit();
-  }
-
-  async setMeta(patch: Partial<Meta>): Promise<void> {
-    this.progress.meta = { ...this.progress.meta, ...patch };
-    this.emit();
-  }
-
-  async logAnswer(entry: AnswerLog): Promise<void> {
-    this.progress.log.push(entry);
-    if (this.progress.log.length > LOG_LIMIT) {
-      this.progress.log = this.progress.log.slice(-LOG_LIMIT);
-    }
-    this.progress.meta.totalAnswers += 1;
-    this.emit();
+    return this.progress;
   }
 
   async reset(): Promise<void> {
@@ -40,14 +20,7 @@ export class MemoryStore implements ProgressStore {
     this.emit();
   }
 
-  subscribe(listener: () => void): () => void {
-    this.listeners.add(listener);
-    return () => {
-      this.listeners.delete(listener);
-    };
-  }
-
-  private emit(): void {
-    for (const listener of this.listeners) listener();
+  health(): StoreHealth {
+    return { saved: true, lastSavedAt: this.progress.savedAt, recovered: false };
   }
 }

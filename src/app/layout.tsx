@@ -3,6 +3,7 @@ import { APP_NAME, APP_TAGLINE } from '@/config/app';
 import { ProgressProvider } from '@/store/StoreProvider';
 import { PageTransition } from '@/components/PageTransition';
 import { ThemeApplier } from '@/components/ThemeApplier';
+import { SaveWarning } from '@/components/SaveWarning';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-dvh antialiased">
         <ProgressProvider>
           <ThemeApplier />
+          <SaveWarning />
           <PageTransition>{children}</PageTransition>
         </ProgressProvider>
       </body>

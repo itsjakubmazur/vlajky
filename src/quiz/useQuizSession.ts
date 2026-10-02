@@ -84,7 +84,7 @@ export interface SessionConfig {
 }
 
 export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): QuizSession {
-  const { ready, progress, setMeta, recordAnswer, finishRound, beatBoss, saveDaily } =
+  const { ready, progress, updateMeta, recordAnswer, finishRound, beatBoss, saveDaily } =
     useProgress();
 
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -370,15 +370,16 @@ export function useQuizSession(mode: QuizModeId, config: SessionConfig = {}): Qu
     setIndex((i) => i + 1);
 
     if (mode === 'placement') {
-      const done = progress.meta.placementIndex + 1;
+      // Index se zvedá z **uložené** hodnoty, ne z té v Reactu: dvě rychlá
+      // klepnutí po sobě by jinak obě zapsala totéž a test by se zasekl.
       const total = placementPlan(pool).length;
-      void setMeta({
-        placementIndex: done,
-        placementDone: done >= total,
-        placementResults: { ...placementAnswers.current },
+      void updateMeta((meta) => {
+        meta.placementIndex += 1;
+        meta.placementDone = meta.placementIndex >= total;
+        meta.placementResults = { ...placementAnswers.current };
       });
     }
-  }, [mode, progress.meta.placementIndex, pool, setMeta]);
+  }, [mode, pool, updateMeta]);
 
   // Uzavření kola: body, rekord, souboj, denní výzva. Jen jednou.
   useEffect(() => {

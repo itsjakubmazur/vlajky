@@ -21,14 +21,18 @@ import { snapshotOf, withSnapshot } from '@/domain/game/history';
 import { ALL_COUNTRIES } from '@/domain/countries';
 import { countriesInSet } from '~data/sets';
 import { LocalStorageStore } from './LocalStorageStore';
+import { mergeProgress } from './merge';
 import {
   dayKey,
   emptyProgress,
+  LOG_LIMIT,
+  migrate,
   nextStreak,
   type GameRecord,
   type Meta,
   type Progress,
   type ProgressStore,
+  type StoreHealth,
 } from './ProgressStore';
 
 export interface AnswerOutcome {
@@ -37,6 +41,9 @@ export interface AnswerOutcome {
   levelUp: boolean;
   card: CardState;
 }
+
+/** Spojit se stávajícím postupem, nebo ho přepsat? */
+export type RestoreMode = 'merge' | 'replace';
 
 export interface RoundOutcome {
   /** Překonal hráč svůj rekord v tomhle režimu? */
@@ -51,9 +58,19 @@ interface ProgressContextValue {
   masteryOf: (code: string) => Mastery;
   recordAnswer: (code: string, input: AnswerInput) => Promise<AnswerOutcome>;
   setMeta: (patch: Partial<Meta>) => Promise<void>;
+  /**
+   * Změna spočítaná z **uloženého** stavu. Všechno, co přičítá nebo navazuje
+   * na předchozí hodnotu, musí jít tudy – `setMeta` s číslem spočítaným
+   * z `progress` přepíše, co mezitím uložil někdo jiný.
+   */
+  updateMeta: (fn: (meta: Meta) => void) => Promise<void>;
+  /** Stav ukládání – kvůli upozornění, že se postup neukládá. */
+  health: StoreHealth;
   setActiveSet: (set: SetId) => Promise<void>;
   setRegion: (region: RegionId) => Promise<void>;
   reset: () => Promise<void>;
+  /** Nahraje postup ze zálohy – spojí ho, nebo jím přepíše ten současný. */
+  restore: (incoming: Progress, mode: RestoreMode) => Promise<void>;
   /** Uzavře kolo: připíše body a případně zapíše rekord. */
   finishRound: (mode: string, tally: RoundTally) => Promise<RoundOutcome>;
   beatBoss: (bossId: string) => Promise<void>;
@@ -84,17 +101,27 @@ export function ProgressProvider({
   const storeRef = useRef<ProgressStore>(store ?? new LocalStorageStore());
   const [progress, setProgress] = useState<Progress>(emptyProgress);
   const [ready, setReady] = useState(false);
+  const [health, setHealth] = useState<StoreHealth>(() => ({
+    saved: true,
+    lastSavedAt: null,
+    recovered: false,
+  }));
 
   useEffect(() => {
     let active = true;
     void storeRef.current.load().then((loaded) => {
       if (!active) return;
       setProgress({ ...loaded });
+      setHealth(storeRef.current.health());
       setReady(true);
     });
+    // Ohlášení přijde i z druhé záložky (událost `storage`), takže se stav
+    // přečte znovu a obě okna ukazují totéž.
     const unsubscribe = storeRef.current.subscribe(() => {
       void storeRef.current.load().then((loaded) => {
-        if (active) setProgress({ ...loaded });
+        if (!active) return;
+        setProgress({ ...loaded });
+        setHealth(storeRef.current.health());
       });
     });
     return () => {
@@ -122,34 +149,33 @@ export function ProgressProvider({
       }
 
       const card = input.skipsScheduler ? current : applyAnswer(current, input, now);
-
       const today = dayKey(now);
-      if (!input.skipsScheduler) await storeRef.current.saveCards([card]);
-      await storeRef.current.logAnswer({
-        code,
-        mode: input.mode,
-        correct: input.correct,
-        elapsedMs: input.elapsedMs,
-        at: now.toISOString(),
-        ...(input.given ? { given: input.given } : {}),
-      });
-      // Denní snímek sbírky – graf v přehledu se z logu poskládat nedá,
-      // ten má strop na 500 odpovědí.
-      const cards = input.skipsScheduler
-        ? progress.cards
-        : { ...progress.cards, [code]: card };
 
-      await storeRef.current.setMeta({
-        lastPlayedDay: today,
-        streakDays: nextStreak(progress.meta, today),
-        history: withSnapshot(
-          progress.meta.history,
+      // Karta, log, série i denní snímek jedním zápisem. Dřív to byly tři
+      // zápisy a snímek i série se počítaly ze stavu Reactu, takže druhá
+      // odpověď ve stejném tiknutí přepsala tu první.
+      const updated = await storeRef.current.update((draft) => {
+        if (!input.skipsScheduler) draft.cards[code] = card;
+        draft.log.push({
+          code,
+          mode: input.mode,
+          correct: input.correct,
+          elapsedMs: input.elapsedMs,
+          at: now.toISOString(),
+          ...(input.given ? { given: input.given } : {}),
+        });
+        if (draft.log.length > LOG_LIMIT) draft.log = draft.log.slice(-LOG_LIMIT);
+        draft.meta.totalAnswers += 1;
+        draft.meta.streakDays = nextStreak(draft.meta, today);
+        draft.meta.lastPlayedDay = today;
+        // Denní snímek sbírky – graf v přehledu se z logu poskládat nedá,
+        // ten má strop na 500 odpovědí.
+        draft.meta.history = withSnapshot(
+          draft.meta.history,
           today,
-          snapshotOf(cards, codesInActiveSet(progress.meta.activeSet)),
-        ),
+          snapshotOf(draft.cards, codesInActiveSet(draft.meta.activeSet)),
+        );
       });
-
-      const updated = await storeRef.current.load();
       setProgress({ ...updated });
 
       return { before, after: card.mastery, levelUp: isLevelUp(before, card.mastery), card };
@@ -160,6 +186,12 @@ export function ProgressProvider({
   const setMeta = useCallback(async (patch: Partial<Meta>) => {
     await storeRef.current.setMeta(patch);
     setProgress({ ...(await storeRef.current.load()) });
+  }, []);
+
+  /** Změna, která se počítá z uložené hodnoty (index v testu a podobně). */
+  const updateMeta = useCallback(async (fn: (meta: Meta) => void) => {
+    const updated = await storeRef.current.update((draft) => fn(draft.meta));
+    setProgress({ ...updated });
   }, []);
 
   const setActiveSet = useCallback(
@@ -178,9 +210,6 @@ export function ProgressProvider({
 
   const finishRound = useCallback(
     async (mode: string, tally: RoundTally): Promise<RoundOutcome> => {
-      const previous = progress.meta.records[mode] ?? null;
-      const isRecord = !previous || tally.points > previous.points;
-
       const record: GameRecord = {
         points: tally.points,
         correct: tally.correct,
@@ -190,55 +219,62 @@ export function ProgressProvider({
         at: new Date().toISOString(),
       };
 
-      await storeRef.current.setMeta({
-        totalPoints: progress.meta.totalPoints + tally.points,
-        records: isRecord
-          ? { ...progress.meta.records, [mode]: record }
-          : progress.meta.records,
+      // Body se přičítají k tomu, co je **uložené**, ne k tomu, co drží
+      // React. Jinak dvě kola uzavřená po sobě připsala jen jedno.
+      let previous: GameRecord | null = null;
+      let isRecord = false;
+      const updated = await storeRef.current.update((draft) => {
+        previous = draft.meta.records[mode] ?? null;
+        isRecord = !previous || tally.points > previous.points;
+        draft.meta.totalPoints += tally.points;
+        if (isRecord) draft.meta.records = { ...draft.meta.records, [mode]: record };
       });
-      setProgress({ ...(await storeRef.current.load()) });
+      setProgress({ ...updated });
       return { isRecord, previous };
     },
-    [progress],
+    [],
   );
 
-  const beatBoss = useCallback(
-    async (bossId: string) => {
-      if (progress.meta.bossesBeaten.includes(bossId)) return;
-      await storeRef.current.setMeta({
-        bossesBeaten: [...progress.meta.bossesBeaten, bossId],
-      });
-      setProgress({ ...(await storeRef.current.load()) });
-    },
-    [progress],
-  );
+  const beatBoss = useCallback(async (bossId: string) => {
+    const updated = await storeRef.current.update((draft) => {
+      if (draft.meta.bossesBeaten.includes(bossId)) return;
+      draft.meta.bossesBeaten = [...draft.meta.bossesBeaten, bossId];
+    });
+    setProgress({ ...updated });
+  }, []);
 
-  const saveDaily = useCallback(
-    async (result: DailyResult) => {
-      await storeRef.current.setMeta({
-        dailyResults: { ...progress.meta.dailyResults, [result.dayKey]: result },
-      });
-      setProgress({ ...(await storeRef.current.load()) });
-    },
-    [progress],
-  );
+  const saveDaily = useCallback(async (result: DailyResult) => {
+    const updated = await storeRef.current.update((draft) => {
+      draft.meta.dailyResults = { ...draft.meta.dailyResults, [result.dayKey]: result };
+    });
+    setProgress({ ...updated });
+  }, []);
 
-  const claimMission = useCallback(
-    async (day: string, missionId: string, reward: number) => {
-      const claimed = progress.meta.missionsClaimed[day] ?? [];
+  const claimMission = useCallback(async (day: string, missionId: string, reward: number) => {
+    const updated = await storeRef.current.update((draft) => {
+      const claimed = draft.meta.missionsClaimed[day] ?? [];
+      // Dvojklik na „vyzvednout“ nesmí připsat odměnu dvakrát. Kontrola
+      // proto patří sem, k uloženému stavu, ne před zápis.
       if (claimed.includes(missionId)) return;
-      await storeRef.current.setMeta({
-        missionsClaimed: { ...progress.meta.missionsClaimed, [day]: [...claimed, missionId] },
-        totalPoints: progress.meta.totalPoints + reward,
-      });
-      setProgress({ ...(await storeRef.current.load()) });
-    },
-    [progress],
-  );
+      draft.meta.missionsClaimed = { ...draft.meta.missionsClaimed, [day]: [...claimed, missionId] };
+      draft.meta.totalPoints += reward;
+    });
+    setProgress({ ...updated });
+  }, []);
 
   const reset = useCallback(async () => {
     await storeRef.current.reset();
     setProgress({ ...(await storeRef.current.load()) });
+  }, []);
+
+  const restore = useCallback(async (incoming: Progress, mode: RestoreMode) => {
+    const updated = await storeRef.current.update((draft) => {
+      const next = mode === 'merge' ? mergeProgress(draft, incoming) : migrate(incoming);
+      draft.cards = next.cards;
+      draft.meta = next.meta;
+      draft.log = next.log;
+    });
+    setProgress({ ...updated });
   }, []);
 
   const value = useMemo(
@@ -249,9 +285,12 @@ export function ProgressProvider({
       masteryOf,
       recordAnswer,
       setMeta,
+      updateMeta,
+      health,
       setActiveSet,
       setRegion,
       reset,
+      restore,
       finishRound,
       beatBoss,
       saveDaily,
@@ -264,9 +303,12 @@ export function ProgressProvider({
       masteryOf,
       recordAnswer,
       setMeta,
+      updateMeta,
+      health,
       setActiveSet,
       setRegion,
       reset,
+      restore,
       finishRound,
       beatBoss,
       saveDaily,

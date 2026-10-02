@@ -6,7 +6,7 @@ import type { History } from '@/domain/game/history';
 import type { PartyState } from '@/domain/game/party';
 
 /** Verze schématu – při změně tvaru dat se postup zmigruje, ne zahodí. */
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
 
 /** Nejlepší výkon v daném režimu. */
 export interface GameRecord {
@@ -69,9 +69,25 @@ export interface Progress {
   meta: Meta;
   /** Posledních pár set odpovědí – na statistiky ve fázi 2. */
   log: AnswerLog[];
+  /**
+   * Kdy se postup naposledy uložil (ISO). Potřebuje to zálohování,
+   * ukazuje se to v Nastavení a ve fázi 2 z toho pozná synchronizace,
+   * která strana je novější.
+   */
+  savedAt: string | null;
 }
 
 export const LOG_LIMIT = 500;
+
+/** Stav ukládání. Když se postup neukládá, musí to být vidět. */
+export interface StoreHealth {
+  /** Povedlo se poslední uložení? */
+  saved: boolean;
+  /** Kdy se naposledy povedlo uložit. */
+  lastSavedAt: string | null;
+  /** Našla se poškozená data a odložila se na stranu místo přepsání? */
+  recovered: boolean;
+}
 
 export function emptyProgress(): Progress {
   return {
@@ -100,6 +116,7 @@ export function emptyProgress(): Progress {
       hapticsOn: true,
     },
     log: [],
+    savedAt: null,
   };
 }
 
@@ -112,12 +129,100 @@ export function emptyProgress(): Progress {
  */
 export interface ProgressStore {
   load(): Promise<Progress>;
+  /**
+   * Atomická změna: přečte **aktuální** uložený stav, pustí na něj `fn`
+   * a zapíše. Všechno, co se počítá ze starého čísla (body, série, index
+   * v testu), musí jít tudy – ne přes `setMeta` s hodnotou spočítanou
+   * z Reactu. Viz komentář u `BaseProgressStore`.
+   */
+  update(fn: (progress: Progress) => void): Promise<Progress>;
   saveCards(cards: CardState[]): Promise<void>;
+  /** Jen dosazení hotových hodnot. Na přičítání je `update`. */
   setMeta(patch: Partial<Meta>): Promise<void>;
   logAnswer(entry: AnswerLog): Promise<void>;
   reset(): Promise<void>;
+  /** Stav ukládání – kvůli upozornění, že se postup neukládá. */
+  health(): StoreHealth;
   /** Oznámí změnu z jiného zdroje (jiná záložka, později realtime). */
   subscribe(listener: () => void): () => void;
+}
+
+/**
+ * Společný základ obou úložišť.
+ *
+ * Proč vůbec existuje: postup se **ztrácel**. Komponenty počítaly nové
+ * hodnoty ze stavu Reactu (`totalPoints: progress.meta.totalPoints + body`)
+ * a posílaly výsledek do úložiště. Když mezitím proběhl jiný zápis – dvě
+ * akce v jednom tiknutí, nebo druhá otevřená záložka –, druhý zápis počítal
+ * ze zastaralého čísla a první přepsal. Body uhnuly dozadu, index
+ * v rozřazovacím testu se nepohnul, série dní se rozsypala.
+ *
+ * Lék je, že se čtení a zápis nesmí rozpojit: `update` si aktuální stav
+ * přečte sám, až v okamžiku zápisu, a `fn` běží **synchronně** mezi čtením
+ * a zápisem. Nic se mezi to nevejde, takže se dva zápisy nemůžou přebít.
+ * Ostatní metody jsou postavené nad ním, aby to platilo i pro ně.
+ */
+export abstract class BaseProgressStore implements ProgressStore {
+  protected readonly listeners = new Set<() => void>();
+
+  abstract load(): Promise<Progress>;
+  abstract update(fn: (progress: Progress) => void): Promise<Progress>;
+  abstract reset(): Promise<void>;
+  abstract health(): StoreHealth;
+
+  async saveCards(cards: CardState[]): Promise<void> {
+    await this.update((progress) => {
+      for (const card of cards) progress.cards[card.code] = card;
+    });
+  }
+
+  async setMeta(patch: Partial<Meta>): Promise<void> {
+    await this.update((progress) => {
+      progress.meta = { ...progress.meta, ...patch };
+    });
+  }
+
+  async logAnswer(entry: AnswerLog): Promise<void> {
+    await this.update((progress) => {
+      progress.log.push(entry);
+      if (progress.log.length > LOG_LIMIT) progress.log = progress.log.slice(-LOG_LIMIT);
+      progress.meta.totalAnswers += 1;
+    });
+  }
+
+  subscribe(listener: () => void): () => void {
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
+  }
+
+  protected emit(): void {
+    for (const listener of this.listeners) listener();
+  }
+}
+
+/**
+ * Doplní chybějící pole z prázdného stavu a ořeže log.
+ *
+ * Schéma 1 → 2 přidalo body, rekordy a souboje, 2 → 3 výsledky
+ * rozřazovacího testu, 3 → 4 čas posledního uložení. Chybějící pole se
+ * doplní, takže postup ve vlajkách se nikdy nezahazuje.
+ */
+export function migrate(input: Progress | null | undefined): Progress {
+  const base = emptyProgress();
+  if (!input || typeof input !== 'object') return base;
+  return {
+    schemaVersion: SCHEMA_VERSION,
+    cards: isRecord(input.cards) ? input.cards : {},
+    meta: { ...base.meta, ...(isRecord(input.meta) ? input.meta : {}) },
+    log: Array.isArray(input.log) ? input.log.slice(-LOG_LIMIT) : [],
+    savedAt: typeof input.savedAt === 'string' ? input.savedAt : null,
+  };
+}
+
+function isRecord(value: unknown): boolean {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 export { dayKey } from '@/domain/game/day';

@@ -342,6 +342,32 @@ export const cs = {
       rank: (rank: string) => `hodnost ${rank}`,
     },
   },
+  backup: {
+    title: 'Záloha postupu',
+    desc: 'Postup je uložený v tomhle prohlížeči. Ulož si ho do souboru a nepřijdeš o něj, ani kdyby se prohlížeč vymazal.',
+    save: 'Uložit do souboru',
+    load: 'Nahrát ze souboru',
+    savedAt: (when: string) => `Naposledy uloženo ${when}`,
+    savedNever: 'Zatím se nic neukládalo',
+    loadedTitle: 'Záloha ze souboru',
+    loadedSummary: (collected: number, points: number) =>
+      `${collected} vlajek, ${points} bodů`,
+    loadedAt: (when: string) => `ze ${when}`,
+    merge: 'Spojit s tímhle zařízením',
+    mergeHint: 'U každé vlajky se vezme novější stav, body a rekordy ty vyšší. Nic se nezahodí.',
+    replace: 'Přepsat vším ze souboru',
+    replaceHint: 'Postup na tomhle zařízení se zahodí.',
+    done: 'Postup je nahraný.',
+    problem: {
+      notJson: 'Tenhle soubor se nedá přečíst. Je to opravdu uložená záloha?',
+      notOurs: 'Tohle není záloha z téhle aplikace.',
+      newerSchema: 'Záloha je z novější verze aplikace. Nejdřív ji aktualizuj.',
+    } as Record<string, string>,
+    saveFailed: 'Pozor: postup se neukládá',
+    saveFailedWhy:
+      'Prohlížeč nepustil zápis – bývá to plná paměť nebo anonymní okno. Odehrané kolo se po zavření karty ztratí.',
+    recovered: 'Postup se musel obnovit ze zálohy. Zkontroluj, že je všechno na svém místě.',
+  },
 } as const;
 
 export type Texts = typeof cs;
