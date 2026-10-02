@@ -14,16 +14,7 @@ export const APP_TAGLINE = 'Nauč se všechny vlajky světa';
  * `un: true` znamená, že jde o členský stát OSN – build si o to sníží
  * očekávaný počet členů, ať se nemůže stát, že nějaký zmizí omylem.
  */
-export const OMITTED: Record<string, { un: boolean; reason: string }> = {
-  'gb-nir': {
-    un: false,
-    reason:
-      'Severní Irsko – od roku 1972 nemá vlastní úřední vlajku, používá se tam ' +
-      'Union Jack. Balíček proto dodává tentýž soubor jako pro Spojené království ' +
-      'a otázka „která země to je“ by neměla jedinou správnou odpověď. Ulsterský ' +
-      'prapor je vlajka zrušené vlády, ne země.',
-  },
-};
+export const OMITTED: Record<string, { un: boolean; reason: string }> = {};
 
 /** Složení sady „Svět“. Změnou tohoto objektu se mění rozsah hry. */
 export const WORLD_SET = {

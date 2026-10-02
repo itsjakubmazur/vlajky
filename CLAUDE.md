@@ -346,7 +346,8 @@ mezitím vlajku změnily, má přednost soubor z téhle složky. Generuje je
 skutečném poměru stran a složitý znak se přenese z udržovaného `flag-icons`
 rovnoměrným zvětšením kolem středu – znak je kruhový a vztažený k výšce,
 takže se tím nedeformuje. Výsledky jsou v repozitáři, build tedy nepotřebuje
-síť. Opravené: **Sýrie** (2024), **Kyrgyzstán** (2023), **Dominika**.
+síť. Opravené: **Sýrie** (2024), **Kyrgyzstán** (2023), **Dominika**, **Severní
+Irsko**.
 
 **Vnořený `<svg>` se při buildu zplošťuje do `<g>`.** `transform` na elementu
 `<svg>` je až SVG 2 a Safari ho ignoruje – znak se pak vykreslí jinde a jinak
@@ -365,14 +366,20 @@ otázka.
 **Vynechává se jen to, co by udělalo otázku bez správné odpovědi.** Takový
 záznam patří i s důvodem do `OMITTED` (`src/config/app.ts`); build kontroluje,
 že v datech opravdu není a o kolik se tím snižuje počet členů OSN, a REVIEW.md
-ho vypisuje – aby se nemohlo stát, že nějaký zmizí omylem.
+ho vypisuje – aby se nemohlo stát, že nějaký zmizí omylem. **Teď je `OMITTED`
+prázdný** a mechanismus čeká na další takový případ.
 
-- **Severní Irsko** (sada Území má proto 30 záznamů): od roku 1972 nemá
-  vlastní úřední vlajku, používá se tam Union Jack – balíček proto dodával
-  **bajt po bajtu tentýž soubor** jako pro Spojené království a otázka „která
-  země to je“ neměla jedinou správnou odpověď. Ulsterský prapor je vlajka
-  zrušené vlády, ne země. Že se žádné dvě vlajky neshodují, hlídá od té doby
-  test v `tests/data.test.ts`.
+**Severní Irsko ukazuje ulsterský prapor.** Chvíli v datech nebylo: hlavní
+zdroj pro něj dodává **bajt po bajtu tentýž soubor** jako pro Spojené
+království (Union Jack), takže otázka „která země to je“ neměla jedinou
+správnou odpověď. Vyřadit ho byla ale přehnaná reakce – ulsterský prapor je
+rozpoznatelný a používá se (fotbal, Hry Commonwealthu), takže je lepší než
+žádná vlajka, stejně jako u Afghánistánu. Že to **není úřední vlajka** (od
+roku 1972 žádná není, prapor patřil zrušené vládě) říká zajímavost u vlajky
+i poznámka v REVIEW.md. Vlajka se generuje do `data/flags-override/`: poměr
+3:5 podle Flag Institute a Flags of the World, rameno kříže pětina výšky
+odečtená ze zdroje, hvězda s rukou a korunou přenesená z `flag-icons`. Že se
+žádné dvě vlajky neshodují, hlídá od té doby test v `tests/data.test.ts`.
 
 **„Kongo“ se neuznává ani jedné zemi.** Je to v češtině dvojznačné slovo,
 takže odpověď dostane výsledek `ambiguous`: nepočítá se jako chyba, jen se

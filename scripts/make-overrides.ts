@@ -99,6 +99,20 @@ ${transplant(emblem, w, h)}
  * Vytáhne všechno mezi značkou a koncem obalové skupiny.
  * Znak není jedna skupina, ale několik sourozenců za sebou.
  */
+/**
+ * Jako `contentAfter`, ale do konce `</svg>`. Některé zdroje svůj obsah do
+ * skupiny neobalují, takže by řez u posledního `</g>` zahodil jednu značku.
+ */
+function contentToEnd(svg: string, afterMarker: string): string {
+  const start = svg.indexOf(afterMarker);
+  if (start < 0) throw new Error(`Nenalezeno: ${afterMarker}`);
+  const content = svg.slice(start + afterMarker.length, svg.lastIndexOf('</svg>'));
+  const opened = (content.match(/<g[\s>]/g) ?? []).length;
+  const closed = (content.match(/<\/g>/g) ?? []).length;
+  if (opened !== closed) throw new Error(`Nevyvážené skupiny: ${opened} vs ${closed}`);
+  return content.trim();
+}
+
 function contentAfter(svg: string, afterMarker: string): string {
   const start = svg.indexOf(afterMarker);
   if (start < 0) throw new Error(`Nenalezeno: ${afterMarker}`);
@@ -150,4 +164,38 @@ ${emblem}
 `;
   writeFileSync(join(OUT, 'dm.svg'), svg, 'utf8');
   console.log('✓ dm.svg – Dominika, poměr 1:2');
+}
+
+// --- Severní Irsko: ulsterský prapor ve skutečném poměru 3:5 ---------------
+//
+// Hlavní zdroj dodává pro `gb-nir` bajt po bajtu tentýž Union Jack jako pro
+// Spojené království, takže otázka „která země to je“ neměla jedinou správnou
+// odpověď a záznam byl vyřazený. Ulsterský prapor ale rozpoznatelný je a
+// používá se (fotbal, Hry Commonwealthu), takže se vlajka vrací s ním.
+//
+// Poměr 3:5 podle Flag Institute, flaggenlexikon.de a Flags of the World.
+// Rameno kříže je pětina výšky – odečtené ze zdroje (96 z 480), ne z hlavy.
+{
+  const h = 540;
+  const w = h * (5 / 3);
+  const arm = h / 5;
+
+  // Pole a kříž si kreslíme sami; hvězda s rukou a korunou se přenese.
+  // Ve zdroji je pozadí první cesta, pak prázdný `rect`, pak vodorovné
+  // rameno (`rect` s id) a svislé rameno jako `use` na tentýž rect.
+  const source = readFileSync(join(SRC, 'gb-nir.svg'), 'utf8');
+  const emblem = contentToEnd(
+    source,
+    '<use xlink:href="#gb-nir-a" width="600" height="300" transform="matrix(0 .75 -1 0 560 0)"/>',
+  );
+
+  const svg = `${header('Severní Irsko – ulsterský prapor. Poměr 3:5 a rameno kříže h/5 podle zdrojů; hvězda s rukou a korunou přenesená z flag-icons (MIT). Hlavní zdroj tu dodává Union Jack, tedy soubor shodný s gb.')}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${round(w)} ${h}">
+  <path fill="#fff" d="M0 0h${round(w)}v${h}H0Z"/>
+  <path fill="#c00" d="M0 ${round(h / 2 - arm / 2)}h${round(w)}v${round(arm)}H0Z"/>
+  <path fill="#c00" d="M${round(w / 2 - arm / 2)} 0h${round(arm)}v${h}h-${round(arm)}Z"/>
+${transplant(emblem, w, h)}
+</svg>
+`;
+  writeFileSync(join(OUT, 'gb-nir.svg'), svg, 'utf8');
+  console.log('✓ gb-nir.svg – Severní Irsko, poměr 3:5');
 }

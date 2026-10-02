@@ -2,7 +2,7 @@
   "meta": {
     "generated": "scripts/build-countries.ts – NEEDITOVAT RUČNĚ",
     "flagSource": "svg-country-flags (public domain, zdroj Wikipedia)",
-    "count": 227
+    "count": 228
   },
   "countries": [
     {
@@ -1794,6 +1794,32 @@
       ],
       "accent": "#ce1124",
       "needsReview": [],
+      "iso3": null,
+      "numeric": null
+    },
+    {
+      "code": "gb-nir",
+      "nameCs": "Severní Irsko",
+      "nameCsOfficial": null,
+      "aliases": [],
+      "capitalCs": "Belfast",
+      "continent": "europe",
+      "subregion": "northernEurope",
+      "sovereignty": "territory",
+      "lat": 54.6,
+      "lng": -6.3,
+      "similar": [],
+      "difficulty": 4,
+      "funFact": "Severní Irsko nemá vlastní úřední vlajku. Ulsterský prapor patřil do roku 1972 jeho vládě a nastupují pod ním fotbalisté.",
+      "ratio": [
+        900,
+        540
+      ],
+      "accent": "#cc0000",
+      "needsReview": [
+        "ROZHODNUTO: ulsterský prapor není úřední vlajka, od roku 1972 žádná není. Je ale rozpoznatelný a používá se ve sportu, takže je lepší než nic – a hlavní zdroj tu dodával Union Jack, tedy soubor shodný s gb.",
+        "ROZHODNUTO: poměr 3:5 podle Flag Institute, flaggenlexikon.de a Flags of the World; rameno kříže je pětina výšky, odečtená ze zdroje. Vlajka je v data/flags-override/."
+      ],
       "iso3": null,
       "numeric": null
     },

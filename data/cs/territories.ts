@@ -6,6 +6,12 @@ export const territories: CsCountry[] = [
     funFact: 'Anglická vlajka je červený kříž svatého Jiří – ve Union Jacku tvoří tu rovnou část.' },
   { code: 'gb-sct', nameCs: 'Skotsko', capitalCs: 'Edinburgh', continent: 'europe', subregion: 'northernEurope', sovereignty: 'territory', lat: 56.8, lng: -4.2, difficulty: 3,
     funFact: 'Skotská vlajka je bílý šikmý kříž svatého Ondřeje na modré.' },
+  { code: 'gb-nir', nameCs: 'Severní Irsko', capitalCs: 'Belfast', continent: 'europe', subregion: 'northernEurope', sovereignty: 'territory', lat: 54.6, lng: -6.3, difficulty: 4,
+    funFact: 'Severní Irsko nemá vlastní úřední vlajku. Ulsterský prapor patřil do roku 1972 jeho vládě a nastupují pod ním fotbalisté.',
+    review: [
+      'ROZHODNUTO: ulsterský prapor není úřední vlajka, od roku 1972 žádná není. Je ale rozpoznatelný a používá se ve sportu, takže je lepší než nic – a hlavní zdroj tu dodával Union Jack, tedy soubor shodný s gb.',
+      'ROZHODNUTO: poměr 3:5 podle Flag Institute, flaggenlexikon.de a Flags of the World; rameno kříže je pětina výšky, odečtená ze zdroje. Vlajka je v data/flags-override/.',
+    ] },
   { code: 'gb-wls', nameCs: 'Wales', capitalCs: 'Cardiff', continent: 'europe', subregion: 'northernEurope', sovereignty: 'territory', lat: 52.3, lng: -3.7, difficulty: 3,
     funFact: 'Na velšské vlajce je červený drak – a ve Union Jacku není vůbec zastoupený.' },
   { code: 'gl', nameCs: 'Grónsko', capitalCs: 'Nuuk', continent: 'northAmerica', subregion: 'northAmerica', sovereignty: 'territory', lat: 72.0, lng: -40.0, difficulty: 3,
