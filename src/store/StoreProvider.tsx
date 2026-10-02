@@ -53,6 +53,8 @@ export interface RoundOutcome {
 
 interface ProgressContextValue {
   ready: boolean;
+  /** Samo úložiště – potřebuje ho synchronizace, komponenty ne. */
+  store: ProgressStore;
   progress: Progress;
   cardOf: (code: string) => CardState | undefined;
   masteryOf: (code: string) => Mastery;
@@ -280,6 +282,7 @@ export function ProgressProvider({
   const value = useMemo(
     () => ({
       ready,
+      store: storeRef.current,
       progress,
       cardOf,
       masteryOf,

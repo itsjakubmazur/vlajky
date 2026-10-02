@@ -13,7 +13,8 @@ testera, který už vlajky umí hodně dobře.
 | **1d – tři osy** | ✅ hotovo | rozdíly podobných vlajek, Hlavní města, Kde to je (mapa), přehled záměn, graf sbírky, hledání v albu |
 | **1e – turnaj** | ✅ hotovo | hra více hráčů na jednom zařízení, stejné otázky pro všechny, pořadí podle vyhraných kol |
 | **1f – Roztřiď** | ✅ hotovo | pět vlajek najednou na světadíly tažením prstu, názvy až ve vyhodnocení |
-| 2 – Supabase | ⬜ nezačato | rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
+| **1g – postup** | ✅ hotovo | oprava ztrácení postupu, záloha do souboru, spojení dvou zařízení |
+| 2 – Supabase | 🟦 rozdělaná | ✅ přihlášení e-mailem a synchronizace postupu; ⬜ rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
 
@@ -71,7 +72,11 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `src/domain/quiz/` | distraktory, režimy, sestavení hry, vzdálenosti pro mapu |
 | `src/domain/srs/` | FSRS, úrovně zvládnutí, rozřazovací vzorek, přehled slabin |
 | `src/domain/game/` | body, hodnosti, souboje, denní výzva, mise, odemykání, „co hrát teď“ |
-| `src/store/ProgressStore.ts` | rozhraní úložiště (fáze 2 = nová implementace) |
+| `src/store/ProgressStore.ts` | rozhraní úložiště + `BaseProgressStore` |
+| `src/store/merge.ts` | spojení dvou postupů (záloha i synchronizace) |
+| `src/store/backup.ts` | postup do souboru a zpět |
+| `src/sync/` | přihlášení a synchronizace (Supabase přes holý `fetch`) |
+| `supabase/` | SQL schéma a návod, co nastavit |
 | `src/i18n/cs.ts` | **všechny** texty rozhraní |
 | `src/config/app.ts` | název aplikace, složení sady, prahy |
 | `src/quiz/useActivePool.ts` | co se zrovna hraje: sada × část světa |
@@ -313,6 +318,83 @@ samý** – jinak by se výsledky nedaly porovnat.
   majitele), denní výzva (je jedna na den), souboj (potřebuje dvojici)
   a maraton (nemá konec).
 
+## Postup se nesmí ztratit
+
+Osmiletý tester hlásil, že mu „blbne progres“. Byly to tři různé chyby a každá
+sama o sobě stačila na to přijít o sbírku. Z každé plyne pravidlo:
+
+**Novou hodnotu nikdy nepočítej ze stavu Reactu.** Dřív to vypadalo takhle:
+`setMeta({ totalPoints: progress.meta.totalPoints + body })`. Mezi přečtením
+a zápisem se ale vejde jiný zápis – dvě akce v jednom tiknutí, dvojklik na
+„vyzvednout misi“, nebo druhá otevřená záložka –, a ten druhý zápis počítá ze
+starého čísla a první přepíše. Proto je v rozhraní úložiště `update(fn)`:
+aktuální stav si přečte samo úložiště a `fn` běží **synchronně** mezi čtením
+a zápisem, takže se mezi to nic nevejde. Tudy jdou body, série dní, index
+v rozřazovacím testu, rekordy, souboje i mise. `setMeta` zůstává jen na
+dosazení hotových hodnot (zvuk, část světa).
+
+Ověřeno v prohlížeči: druhá záložka připsala body na 9999, první pak jen
+přepnula zvuk v Nastavení – a před opravou byly body zpátky na 4321.
+
+**Poškozená data se nikdy nepřepisují.** Po nepovedeném `JSON.parse` se dřív
+vrátil prázdný postup a první další zápis ho uložil; jedno chybné načtení tím
+mazalo celou sbírku. Teď se nečitelný záznam odloží stranou
+(`vlajky.progress.v1.poskozeno`) a místo prázdna se vezme záloha stará nejvýš
+deset minut. Totéž když hlavní záznam úplně zmizí.
+
+**Neúspěšné uložení musí být vidět.** Plné úložiště nebo anonymní okno dřív
+spolkl prázdný `catch`: sbírka na obrazovce rostla a po zavření karty byla
+pryč. Teď o tom ví `health()` a nahoře svítí červený pásek. Je to jediné místo
+v aplikaci, které si dovolí křičet.
+
+**Záloha do souboru** je v Nastavení a je schválně obyčejný JSON: postup žije
+v prohlížeči a ten se dá vymazat jedním klepnutím v nastavení tabletu.
+
+## Spojení dvou zařízení
+
+`store/merge.ts` používá záloha i synchronizace. Mezi tabletem a telefonem
+není „ten správný“ postup ani jeden, takže se nikdy nepřepisuje, ale spojuje –
+a u každého pole jiným pravidlem, protože jiné dává smysl:
+
+- **karty** – novější podle `updatedAt`. Plánovač FSRS stojí na posledním
+  opakování, takže starší karta by vlajku položila podruhé.
+- **body a rekordy** – vyšší hodnota, **ne součet**. Součet by při dvojím
+  nahrání téže zálohy body zdvojnásobil.
+- **seznamy** (souboje, vyzvednuté mise) – sjednocení.
+- **graf sbírky** – za každý den vyšší číslo. Sbírka se sama nezmenšuje.
+- **nastavení** (rámeček, zvuk) – z toho zařízení, které ukládalo později.
+- **rozehraný turnaj se nespojuje** – patří k jednomu zařízení, na kterém si
+  ho rodina předává.
+
+## Přihlášení a synchronizace
+
+Fáze 2 začala tím, co pálilo: aby postup nešel ztratit a dalo se hrát na víc
+zařízeních. Rodinné profily, odznaky a statistiky zůstávají na později.
+
+- **Místní postup je ten hlavní, server je kopie navíc.** Aplikace funguje
+  offline, takže čekat na síť by znamenalo nehrát – a stačil by jeden
+  nepovedený požadavek, aby dítě přišlo o rozehrané kolo. Když se
+  nesynchronizuje, hraje se dál a pozná se to v Nastavení.
+- **Přihlašuje se odkazem v e-mailu, ne heslem.** Heslo by si osmiletý na
+  tabletu pamatoval hůř než klepnutí na odkaz a znamenalo by to další
+  obrazovku pro zapomenuté heslo. E-mail je rodičův.
+- **Žádné SDK.** `@supabase/supabase-js` by přibalilo stovky kilobajtů do
+  offline cache kvůli třem požadavkům. `src/sync/supabase.ts` je holý `fetch`
+  a hlavně se dá celý otestovat bez serveru (`tests/sync.test.ts`).
+- **Bezpečnost stojí na RLS**, ne na tajném klíči: každý řádek vidí jen jeho
+  vlastník, takže veřejný klíč `anon` smí být v aplikaci. SQL je
+  v `supabase/schema.sql`, návod v `supabase/README.md`.
+- **Posílá se se zpožděním** (4 s). Během kola přijde změna po každé odpovědi
+  a deset požadavků za minutu nemá smysl. Při odchodu z aplikace se pošle hned
+  – zavřená karta už nic neposílá.
+- **Token z odkazu se hned uklidí z adresy** (`history.replaceState`), ať
+  nezůstane v historii prohlížeče.
+- **Odhlášení není mazání.** Postup v zařízení zůstane.
+
+Ověřeno proti falešnému serveru v prohlížeči: tablet se 7000 body a vlajkou cz
+a telefon se 150 body a vlajkou sk se po přihlášení sejdou na obou vlajkách,
+7000 bodech a souboji z tabletu – žádná strana o nic nepřišla.
+
 ## Konvence
 
 - **Texty:** žádný český řetězec v komponentách – všechno přes `cs` z `src/i18n/cs.ts`.
@@ -325,8 +407,10 @@ samý** – jinak by se výsledky nedaly porovnat.
   ne z hlavy, takže stojí za kontrolu v REVIEW.md.
 - **Commity:** conventional commits, česky, malé kroky.
 - **Po každé změně:** `npm run check`.
-- **Žádné externí požadavky za běhu** – ani fonty, ani analytika. Všechno je
-  lokální kvůli offline režimu a soukromí.
+- **Žádné externí požadavky za běhu** – ani fonty, ani analytika. Jediná
+  výjimka je **vlastní** server se synchronizací, a i ten jen tehdy, když je
+  nastavený a hráč se přihlásí. Bez přihlášení neodejde ven jediný požadavek
+  (ověřeno v prohlížeči).
 
 ## Rozhodnutí, která stojí za vysvětlení
 

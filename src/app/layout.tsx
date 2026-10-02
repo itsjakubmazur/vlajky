@@ -4,6 +4,7 @@ import { ProgressProvider } from '@/store/StoreProvider';
 import { PageTransition } from '@/components/PageTransition';
 import { ThemeApplier } from '@/components/ThemeApplier';
 import { SaveWarning } from '@/components/SaveWarning';
+import { SyncProvider } from '@/sync/SyncProvider';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -29,9 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="cs">
       <body className="min-h-dvh antialiased">
         <ProgressProvider>
-          <ThemeApplier />
-          <SaveWarning />
-          <PageTransition>{children}</PageTransition>
+          <SyncProvider>
+            <ThemeApplier />
+            <SaveWarning />
+            <PageTransition>{children}</PageTransition>
+          </SyncProvider>
         </ProgressProvider>
       </body>
     </html>
