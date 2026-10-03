@@ -2,7 +2,7 @@
   "meta": {
     "generated": "scripts/build-countries.ts – NEEDITOVAT RUČNĚ",
     "flagSource": "svg-country-flags (public domain, zdroj Wikipedia)",
-    "count": 237
+    "count": 239
   },
   "countries": [
     {
@@ -4165,6 +4165,34 @@
       "numeric": "591"
     },
     {
+      "code": "paralympic",
+      "nameCs": "Paralympijské hry",
+      "nameCsOfficial": null,
+      "aliases": [
+        "paralympiáda",
+        "paralympijská vlajka"
+      ],
+      "capitalCs": null,
+      "continent": null,
+      "subregion": null,
+      "sovereignty": "organization",
+      "lat": null,
+      "lng": null,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Tři obloučky se jmenují agita, což je latinsky „uvádím do pohybu“. Červená, modrá a zelená jsou tři barvy, které jsou na vlajkách zemí nejčastěji.",
+      "ratio": [
+        675,
+        450
+      ],
+      "accent": "#f0282d",
+      "needsReview": [
+        "ROZHODNUTO: vlajka převzatá z Wikimedia Commons, poměr 2:3."
+      ],
+      "iso3": null,
+      "numeric": null
+    },
+    {
       "code": "pe",
       "nameCs": "Peru",
       "nameCsOfficial": "Peruánská republika",
@@ -5729,6 +5757,33 @@
       "needsReview": [],
       "iso3": "VUT",
       "numeric": "548"
+    },
+    {
+      "code": "who",
+      "nameCs": "WHO",
+      "nameCsOfficial": "Světová zdravotnická organizace",
+      "aliases": [
+        "Světová zdravotnická organizace"
+      ],
+      "capitalCs": null,
+      "continent": null,
+      "subregion": null,
+      "sovereignty": "organization",
+      "lat": null,
+      "lng": null,
+      "similar": [],
+      "difficulty": 3,
+      "funFact": "Je to vlajka OSN, do které přibyla hůl s hadem – znak boha lékařství Asklépia.",
+      "ratio": [
+        900,
+        600
+      ],
+      "accent": "#418fde",
+      "needsReview": [
+        "ROZHODNUTO: vlajka převzatá z Wikimedia Commons, poměr 2:3."
+      ],
+      "iso3": null,
+      "numeric": null
     },
     {
       "code": "ws",

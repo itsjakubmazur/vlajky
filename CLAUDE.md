@@ -14,13 +14,13 @@ testera, který už vlajky umí hodně dobře.
 | **1e – turnaj** | ✅ hotovo | hra více hráčů na jednom zařízení, stejné otázky pro všechny, pořadí podle vyhraných kol |
 | **1f – Roztřiď** | ✅ hotovo | pět vlajek najednou na světadíly tažením prstu, názvy až ve vyhodnocení |
 | **1g – postup** | ✅ hotovo | oprava ztrácení postupu, záloha do souboru, spojení dvou zařízení |
-| **1h – organizace** | ✅ hotovo | sada 9 vlajek organizací: OSN, EU, NATO, olympijská, Červený kříž, Africká unie, UNESCO, Arabská liga, ASEAN |
+| **1h – organizace** | ✅ hotovo | sada 11 vlajek organizací: OSN, EU, NATO, olympijská, paralympijská, Červený kříž, WHO, UNESCO, Africká unie, Arabská liga, ASEAN |
 | 2 – Supabase | 🟦 rozdělaná | ✅ přihlášení e-mailem a synchronizace postupu; ⬜ rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
 
 Sada „Území“ (31 závislých území včetně Anglie, Skotska a Severního Irska) a
-sada „Organizace“ (9 vlajek) jsou v datech a jdou zapnout v Nastavení.
+sada „Organizace“ (11 vlajek) jsou v datech a jdou zapnout v Nastavení.
 
 **Část světa** se vybírá na domovské obrazovce a platí pro všechny režimy
 naráz (`meta.region`, `useActivePool`). Denní výzva a souboje ji schválně
@@ -431,7 +431,7 @@ jistota, že jde o původní soubor.
 |---|---|---|
 | OSN, EU | noto-emoji `third_party/region-flags` | 2:3 |
 | NATO | Commons přes `weppyk/czech-citizenship-app` | **4:3** (předpis z roku 1959: 400×300) |
-| olympijská, Červený kříž, Africká unie, UNESCO, ASEAN | Commons přes další repozitáře | 2:3 |
+| olympijská, paralympijská, Červený kříž, WHO, UNESCO, Africká unie, ASEAN | Commons přes další repozitáře | 2:3 |
 | Arabská liga | pole dopočítané, znak přenesený z `flag-icons` | 2:3 |
 
 Arabská liga je jediná sestavovaná: soubor z Commons míchá `viewBox` 2:1
@@ -446,6 +446,9 @@ Přidat další je řádek v `data/cs/organizations.ts` plus SVG do
 `data/flags-override/` – postup je v komentáři nahoře v tom souboru.
 Chybí třeba Commonwealth; jeho soubor se v dosažitelných zdrojích najít
 nepodařilo (co se našlo, byly překreslené verze v cizím poměru stran).
+Stejně dopadly Frankofonie, Mercosur a Severská rada – jejich soubory sice
+k mání jsou, ale buď se nevykreslí, nebo u nich nejde ověřit skutečný poměr
+stran.
 
 ## Konvence
 

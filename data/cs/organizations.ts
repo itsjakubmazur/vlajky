@@ -54,6 +54,17 @@ export const organizations: CsCountry[] = [
     funFact: 'Bílý chrám na vlajce je složený z vlastního názvu: písmena U-N-E-S-C-O tvoří jeho sloupy.',
     review: ['ROZHODNUTO: vlajka převzatá z Wikimedia Commons, poměr 2:3.'] },
 
+  { code: 'who', nameCs: 'WHO', nameCsOfficial: 'Světová zdravotnická organizace',
+    aliases: ['Světová zdravotnická organizace'],
+    sovereignty: 'organization', difficulty: 3,
+    funFact: 'Je to vlajka OSN, do které přibyla hůl s hadem – znak boha lékařství Asklépia.',
+    review: ['ROZHODNUTO: vlajka převzatá z Wikimedia Commons, poměr 2:3.'] },
+
+  { code: 'paralympic', nameCs: 'Paralympijské hry', aliases: ['paralympiáda', 'paralympijská vlajka'],
+    sovereignty: 'organization', difficulty: 3,
+    funFact: 'Tři obloučky se jmenují agita, což je latinsky „uvádím do pohybu“. Červená, modrá a zelená jsou tři barvy, které jsou na vlajkách zemí nejčastěji.',
+    review: ['ROZHODNUTO: vlajka převzatá z Wikimedia Commons, poměr 2:3.'] },
+
   { code: 'arab', nameCs: 'Liga arabských států', aliases: ['Arabská liga'],
     sovereignty: 'organization', difficulty: 5,
     funFact: 'Zlatý řetěz kolem nápisu měl při přijetí vlajky tolik článků, kolik měla liga členů – dvaadvacet.',

@@ -14,7 +14,7 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 ## Přehled
 
 - Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
-- Států v sadě „Svět“: **206** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
+- Států v sadě „Svět“: **208** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
 - Území v bonusové sadě: **31**
 - Zajímavost o vlajce chybí u **0** záznamů
 - Otevřených otázek k rozhodnutí: **0**
@@ -47,6 +47,7 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 - **Mexiko** (`mx`) – hlavní město se česky píše různě, vybráno Mexico City.
 - **NATO** (`nato`) – vlajka převzatá z Wikimedia Commons, poměr 4:3 podle předpisu z roku 1959 (400×300 jednotek).
 - **Olympijské hry** (`olympic`) – vlajka převzatá z Wikimedia Commons, poměr 2:3. Kruhy se schválně nepřiřazují ke světadílům – Coubertin to tak nemyslel.
+- **Paralympijské hry** (`paralympic`) – vlajka převzatá z Wikimedia Commons, poměr 2:3.
 - **Červený kříž** (`redcross`) – vlajka převzatá z Wikimedia Commons, poměr 2:3.
 - **Rusko** (`ru`) – zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti.
 - **Rusko** (`ru`) – souřadnice proto ukazují na Moskvu, ne na zeměpisný střed země. Ostatní velké státy mají v datech svůj střed, ale ruský by táhl špendlík i výřez mapy z Evropy až ke Střední Asii.
@@ -54,6 +55,7 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 - **Turecko** (`tr`) – leží v Asii i v Evropě, vedeme ho v Asii.
 - **OSN** (`un`) – vlajka převzatá z noto-emoji (render z Wikipedie, public domain), poměr 2:3 podle vlajkového předpisu OSN.
 - **UNESCO** (`unesco`) – vlajka převzatá z Wikimedia Commons, poměr 2:3.
+- **WHO** (`who`) – vlajka převzatá z Wikimedia Commons, poměr 2:3.
 
 ## Schválně vynechané záznamy
 

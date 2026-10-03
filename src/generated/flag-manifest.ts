@@ -1,5 +1,5 @@
 // GENEROVÁNO scripts/copy-flags.ts – needitovat ručně.
-export const FLAG_REVISION = '7e7a20324921';
+export const FLAG_REVISION = 'a5dfb7eb6084';
 export const FLAG_FILES: string[] = [
   "/flags/ad.svg",
   "/flags/ae.svg",
@@ -169,6 +169,7 @@ export const FLAG_FILES: string[] = [
   "/flags/olympic.svg",
   "/flags/om.svg",
   "/flags/pa.svg",
+  "/flags/paralympic.svg",
   "/flags/pe.svg",
   "/flags/pf.svg",
   "/flags/pg.svg",
@@ -232,6 +233,7 @@ export const FLAG_FILES: string[] = [
   "/flags/vi.svg",
   "/flags/vn.svg",
   "/flags/vu.svg",
+  "/flags/who.svg",
   "/flags/ws.svg",
   "/flags/xk.svg",
   "/flags/ye.svg",
