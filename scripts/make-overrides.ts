@@ -200,38 +200,24 @@ ${transplant(emblem, w, h)}
   console.log('✓ gb-nir.svg – Severní Irsko, poměr 3:5');
 }
 
-// --- Vlajky organizací: pole ve skutečném poměru, znak přenesený ----------
+// --- Arabská liga: pole ve skutečném poměru, znak přenesený ---------------
 //
-// `flag-icons` je kreslí do 4:3 jako všechno ostatní, skutečný poměr obou je
-// 2:3 (Flags of the World, flaggenlexikon.de). Pole je u obou jednobarevné
-// a znak je uprostřed, takže platí totéž co u ostatních oprav: pole si
-// nakreslíme, znak přeneseme rovnoměrným zvětšením kolem středu.
-//
-// OSN a EU tady nejsou: jejich vlajky jsou v `data/flags-override/` převzaté
-// z noto-emoji (rendery z Wikipedie, public domain), takže se nic přenášet
-// nemusí.
-for (const org of [
-  {
-    code: 'arab',
-    field: '#006233',
-    background: /<path fill="#006233"[^>]*\/>/,
-    note: 'Liga arabských států – poměr 2:3. Pole dopočítané, znak přenesený z flag-icons (MIT).',
-  },
-  {
-    code: 'asean',
-    field: '#0039a6',
-    background: /<path fill="#0039a6"[^>]*\/>/,
-    note: 'ASEAN – poměr 2:3. Pole dopočítané, znak (kruh a klasy rýže) přenesený z flag-icons (MIT).',
-  },
-]) {
+// Ostatní vlajky organizací jsou v `data/flags-override/` převzaté z Wikimedia
+// Commons (OSN, EU, NATO, olympijská, Červený kříž, Africká unie, UNESCO,
+// ASEAN). U Arabské ligy ale dostupný soubor z Commons míchá viewBox 2:1
+// s rozměry 3:2, takže by z něj vyšel špatný poměr stran. Pole je
+// jednobarevné a znak uprostřed, takže platí totéž co u ostatních oprav:
+// pole si nakreslíme, znak přeneseme rovnoměrným zvětšením kolem středu.
+// Poměr 2:3 podle Flags of the World.
+{
   const w = 900;
   const h = 600;
-  const emblem = emblemOf(org.code, org.background);
-  const svg = `${header(org.note)}<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${w} ${h}">
-  <path fill="${org.field}" d="M0 0h${w}v${h}H0Z"/>
+  const emblem = emblemOf('arab', /<path fill="#006233"[^>]*\/>/);
+  const svg = `${header('Liga arabských států – poměr 2:3. Pole dopočítané, znak přenesený z flag-icons (MIT).')}<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${w} ${h}">
+  <path fill="#006233" d="M0 0h${w}v${h}H0Z"/>
 ${transplant(emblem, w, h)}
 </svg>
 `;
-  writeFileSync(join(OUT, `${org.code}.svg`), svg, 'utf8');
-  console.log(`✓ ${org.code}.svg – poměr 2:3`);
+  writeFileSync(join(OUT, 'arab.svg'), svg, 'utf8');
+  console.log('✓ arab.svg – Liga arabských států, poměr 2:3');
 }

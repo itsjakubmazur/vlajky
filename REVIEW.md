@@ -14,7 +14,7 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 ## Přehled
 
 - Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
-- Států v sadě „Svět“: **201** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
+- Států v sadě „Svět“: **206** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
 - Území v bonusové sadě: **31**
 - Zajímavost o vlajce chybí u **0** záznamů
 - Otevřených otázek k rozhodnutí: **0**
@@ -34,8 +34,9 @@ _Žádné._
 Tady už je rozhodnuto, zapsané jen pro paměť.
 
 - **Afghánistán** (`af`) – ukazujeme černo-červeno-zelenou vlajku Islámské republiky, platnou do roku 2021. Dnešní bílou vlajku s vyznáním víry nemá žádný dostupný balíček a kaligrafii nelze poctivě nakreslit zpaměti – tohle je vědomá volba, ne otevřená otázka.
-- **Liga arabských států** (`arab`) – poměr 2:3 podle Flags of the World; pole dopočítané, znak přenesený z flag-icons.
-- **ASEAN** (`asean`) – poměr 2:3 podle Flags of the World; pole dopočítané, znak přenesený z flag-icons.
+- **Africká unie** (`african-union`) – vlajka převzatá z Wikimedia Commons, poměr 2:3. Dnes má unie 55 členů, hvězd zůstalo 53.
+- **Liga arabských států** (`arab`) – poměr 2:3 podle Flags of the World. Pole dopočítané a znak přenesený z flag-icons, protože soubor z Commons míchá viewBox 2:1 s rozměry 3:2 – poměr by z něj vyšel špatně.
+- **ASEAN** (`asean`) – vlajka převzatá z Wikimedia Commons, poměr 2:3.
 - **Konžská republika** (`cg`) – samotné „Kongo“ neuznáváme ani jedné zemi – aplikace se doptá, která to má být.
 - **Kypr** (`cy`) – zeměpisně leží v Asii, politicky patří k Evropě (EU). Vedeme ho v Evropě.
 - **Západní Sahara** (`eh`) – sporné území, je jen v bonusové sadě.
@@ -44,11 +45,15 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 - **Severní Irsko** (`gb-nir`) – ulsterský prapor není úřední vlajka, od roku 1972 žádná není. Je ale rozpoznatelný a používá se ve sportu, takže je lepší než nic – a hlavní zdroj tu dodával Union Jack, tedy soubor shodný s gb.
 - **Severní Irsko** (`gb-nir`) – poměr 3:5 podle Flag Institute, flaggenlexikon.de a Flags of the World; rameno kříže je pětina výšky, odečtená ze zdroje. Vlajka je v data/flags-override/.
 - **Mexiko** (`mx`) – hlavní město se česky píše různě, vybráno Mexico City.
+- **NATO** (`nato`) – vlajka převzatá z Wikimedia Commons, poměr 4:3 podle předpisu z roku 1959 (400×300 jednotek).
+- **Olympijské hry** (`olympic`) – vlajka převzatá z Wikimedia Commons, poměr 2:3. Kruhy se schválně nepřiřazují ke světadílům – Coubertin to tak nemyslel.
+- **Červený kříž** (`redcross`) – vlajka převzatá z Wikimedia Commons, poměr 2:3.
 - **Rusko** (`ru`) – zeměpisný střed leží na Sibiři, vedeme ho v Evropě podle zvyklosti.
 - **Rusko** (`ru`) – souřadnice proto ukazují na Moskvu, ne na zeměpisný střed země. Ostatní velké státy mají v datech svůj střed, ale ruský by táhl špendlík i výřez mapy z Evropy až ke Střední Asii.
 - **Svazijsko** (`sz`) – král zemi v roce 2018 přejmenoval na Eswatini, ale to je jméno anglické a svazijské – český název se tím nezměnil. Názvoslovná komise ČÚZK, ministerstvo zahraničí i česká Wikipedie dál píšou Svazijsko, takže v aplikaci je Svazijsko a Eswatini se uznává jako druhý tvar odpovědi.
 - **Turecko** (`tr`) – leží v Asii i v Evropě, vedeme ho v Asii.
 - **OSN** (`un`) – vlajka převzatá z noto-emoji (render z Wikipedie, public domain), poměr 2:3 podle vlajkového předpisu OSN.
+- **UNESCO** (`unesco`) – vlajka převzatá z Wikimedia Commons, poměr 2:3.
 
 ## Schválně vynechané záznamy
 

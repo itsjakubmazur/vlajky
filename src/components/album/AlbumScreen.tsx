@@ -48,6 +48,7 @@ export function AlbumScreen() {
     [progress.meta.activeSet],
   );
   const codesInSet = useMemo(() => new Set(pool.map((c) => c.code)), [pool]);
+  const hasContinents = useMemo(() => pool.some((c) => c.continent !== null), [pool]);
 
   // Hledá se bez diakritiky a i v aliasech – „svedsko“ i „Sverige“ najdou
   // totéž, stejně jako při psaní odpovědi.
@@ -104,7 +105,11 @@ export function AlbumScreen() {
         <ProgressBar value={collected} total={shown.length} />
       </Panel>
 
-      <div className="glass-thin mb-4 flex gap-1 rounded-pill p-1" role="tablist">
+      {/* Bez zeměpisu nemá mapa co ukázat – u organizací se přepínač schová. */}
+      <div
+        className={`glass-thin mb-4 gap-1 rounded-pill p-1 ${hasContinents ? 'flex' : 'hidden'}`}
+        role="tablist"
+      >
         {(['stickers', 'map'] as const).map((value) => (
           <button
             key={value}
@@ -120,7 +125,12 @@ export function AlbumScreen() {
         ))}
       </div>
 
-      <div className="-mx-4 mb-5 flex gap-2 overflow-x-auto px-4 pb-1">
+      {/* Sada organizací nemá světadíly, takže by každý filtr vedl na prázdno. */}
+      <div
+        className={`-mx-4 mb-5 flex gap-2 overflow-x-auto px-4 pb-1 ${
+          hasContinents ? '' : 'hidden'
+        }`}
+      >
         {(['all', ...CONTINENTS] as Filter[]).map((value) => (
           <button
             key={value}
@@ -136,7 +146,7 @@ export function AlbumScreen() {
         ))}
       </div>
 
-      {tab === 'stickers' ? (
+      {tab === 'stickers' || !hasContinents ? (
         <div className="mb-3 flex flex-col gap-3">
           <input
             type="search"
@@ -163,7 +173,7 @@ export function AlbumScreen() {
         </div>
       ) : null}
 
-      {tab === 'map' ? (
+      {tab === 'map' && hasContinents ? (
         <Panel>
           <WorldMap
             masteryOf={masteryOf}

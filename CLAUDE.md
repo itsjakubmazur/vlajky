@@ -14,13 +14,13 @@ testera, který už vlajky umí hodně dobře.
 | **1e – turnaj** | ✅ hotovo | hra více hráčů na jednom zařízení, stejné otázky pro všechny, pořadí podle vyhraných kol |
 | **1f – Roztřiď** | ✅ hotovo | pět vlajek najednou na světadíly tažením prstu, názvy až ve vyhodnocení |
 | **1g – postup** | ✅ hotovo | oprava ztrácení postupu, záloha do souboru, spojení dvou zařízení |
-| **1h – organizace** | 🟦 rozdělaná | sada vlajek organizací: OSN, EU, Arabská liga, ASEAN; chybí NATO a další (viz níž) |
+| **1h – organizace** | ✅ hotovo | sada 9 vlajek organizací: OSN, EU, NATO, olympijská, Červený kříž, Africká unie, UNESCO, Arabská liga, ASEAN |
 | 2 – Supabase | 🟦 rozdělaná | ✅ přihlášení e-mailem a synchronizace postupu; ⬜ rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
 
 Sada „Území“ (31 závislých území včetně Anglie, Skotska a Severního Irska) a
-sada „Organizace“ (4 vlajky) jsou v datech a jdou zapnout v Nastavení.
+sada „Organizace“ (9 vlajek) jsou v datech a jdou zapnout v Nastavení.
 
 **Část světa** se vybírá na domovské obrazovce a platí pro všechny režimy
 naráz (`meta.region`, `useActivePool`). Denní výzva a souboje ji schválně
@@ -417,22 +417,35 @@ na kterém celý projekt stojí. Plyne z toho zbytek:
   tuhle vlajku?“. A obráceně „patří **organizaci** OSN“ – pád nese to slovo,
   takže název zůstává v prvním pádě, stejně jako u „patří zemi Japonsko“.
 - V albu se u organizace místo hlavního města a mapky ukáže, že je to
-  organizace.
+  organizace, a schová se filtr podle světadílů i záložka s mapou – jinak by
+  vedly na prázdno.
 
-**Co v sadě chybí a proč.** NATO, olympijské kruhy, Commonwealth, Africká unie
-a Červený kříž tam **nejsou**, protože se k jejich SVG nedá v tomhle prostředí
-dostat (Wikimedia je zablokovaná sítí) a nakreslit je zpaměti zakazuje pravidlo
-o nevymýšlení. Z dosažitelných zdrojů vyšly čtyři:
+**Odkud se vlajky vzaly.** Na Wikimedia Commons se z tohohle prostředí nedá
+připojit (síť ji nepouští), takže se soubory musely najít oklikou: přes
+vyhledávání v kódu na GitHubu v repozitářích, které originály z Commons
+převzaly. U každé je v hlavičce SVG napsané, odkud je, a u NATO a olympijské
+to sedělo bajt po bajtu ve třech nezávislých repozitářích – to je slušná
+jistota, že jde o původní soubor.
 
-| Vlajka | Zdroj | Poměr |
+| Vlajka | Odkud | Poměr |
 |---|---|---|
-| OSN, EU | noto-emoji `third_party/region-flags` (rendery z Wikipedie, public domain) | 2:3 z `viewBox` |
-| Arabská liga, ASEAN | pole dopočítané, znak přenesený z `flag-icons` | 2:3 podle Flags of the World |
+| OSN, EU | noto-emoji `third_party/region-flags` | 2:3 |
+| NATO | Commons přes `weppyk/czech-citizenship-app` | **4:3** (předpis z roku 1959: 400×300) |
+| olympijská, Červený kříž, Africká unie, UNESCO, ASEAN | Commons přes další repozitáře | 2:3 |
+| Arabská liga | pole dopočítané, znak přenesený z `flag-icons` | 2:3 |
+
+Arabská liga je jediná sestavovaná: soubor z Commons míchá `viewBox` 2:1
+s rozměry 3:2, takže by z něj vyšel špatný poměr stran. Jde přitom
+o jednobarevné pole se znakem uprostřed, tedy přesně případ pro
+`make-overrides.ts`.
+
+**Pozor na kódy.** Africká unie je `african-union`, ne `au` – to je Austrálie.
+Kódy organizací se schválně nekryjí s ISO 3166.
 
 Přidat další je řádek v `data/cs/organizations.ts` plus SVG do
-`data/flags-override/` – postup je v komentáři nahoře v tom souboru. Čtyři
-vlajky jsou na kvíz se čtyřmi možnostmi málo (nabídnou se vždycky všechny),
-takže sada dává smysl hlavně v albu, dokud jich nepřibude.
+`data/flags-override/` – postup je v komentáři nahoře v tom souboru.
+Chybí třeba Commonwealth; jeho soubor se v dosažitelných zdrojích najít
+nepodařilo (co se našlo, byly překreslené verze v cizím poměru stran).
 
 ## Konvence
 
@@ -470,7 +483,16 @@ skutečném poměru stran a složitý znak se přenese z udržovaného `flag-ico
 rovnoměrným zvětšením kolem středu – znak je kruhový a vztažený k výšce,
 takže se tím nedeformuje. Výsledky jsou v repozitáři, build tedy nepotřebuje
 síť. Opravené: **Sýrie** (2024), **Kyrgyzstán** (2023), **Dominika**, **Severní
-Irsko**.
+Irsko**, **Arabská liga**. Ve stejné složce jsou i vlajky, které hlavní
+balíček nemá vůbec (organizace) – `flagPath()` je najde stejně.
+
+**Barva záře se hledá i v `style` a v obrysech.** `readAccent` četl jen
+`fill="…"`, takže vlajky kreslené přes `style="fill:…"` nebo samými tahy
+(NATO, olympijské kruhy, Červený kříž) zůstávaly na výchozí mátové. Hledání
+v `style` a `stroke` je **až záchranná větev** po neúspěchu, aby se
+nepřepsaly barvy, které už sedí – kromě tří nových vlajek to opravilo i šest
+starých, které do té doby svítily mátově (Kongo, Džibutsko, Irsko, Man,
+Maroko, Malajsie).
 
 **Vnořený `<svg>` se při buildu zplošťuje do `<g>`.** `transform` na elementu
 `<svg>` je až SVG 2 a Safari ho ignoruje – znak se pak vykreslí jinde a jinak

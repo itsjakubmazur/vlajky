@@ -110,12 +110,25 @@ export function readAccent(code: string, fallback = '#19E3B1'): string {
     return s > 25 && l > 12 && l < 88;
   };
 
+  const looser = (hex: string) => {
+    const { s, l } = saturationAndLightness(hex);
+    return s > 20 && l > 10 && l < 90;
+  };
+
   const early = fills.slice(0, 6).find(vivid);
   if (early) return early;
 
-  const any = fills.find((hex) => {
-    const { s, l } = saturationAndLightness(hex);
-    return s > 20 && l > 10 && l < 90;
-  });
-  return any ?? fallback;
+  const any = fills.find(looser);
+  if (any) return any;
+
+  // Teprve když se nic nenašlo: barva z `style="fill:…"` a z obrysů. Vlajky
+  // organizací bývají kreslené takhle (NATO má pole ve `style`, olympijské
+  // kruhy a Červený kříž jsou samé `stroke`) a bez toho by jim zůstala
+  // výchozí mátová záře, která s vlajkou nemá nic společného.
+  const styled = [...svg.matchAll(/(?:fill|stroke)\s*:\s*([^;"']+)/g)]
+    .concat([...svg.matchAll(/stroke\s*=\s*"([^"]+)"/g)])
+    .map((match) => toHex((match[1] ?? '').trim()))
+    .filter((hex): hex is string => hex !== null);
+
+  return styled.find(vivid) ?? styled.find(looser) ?? fallback;
 }

@@ -1,9 +1,10 @@
 // GENEROVÁNO scripts/copy-flags.ts – needitovat ručně.
-export const FLAG_REVISION = '3e317078d4ae';
+export const FLAG_REVISION = '7e7a20324921';
 export const FLAG_FILES: string[] = [
   "/flags/ad.svg",
   "/flags/ae.svg",
   "/flags/af.svg",
+  "/flags/african-union.svg",
   "/flags/ag.svg",
   "/flags/ai.svg",
   "/flags/al.svg",
@@ -155,6 +156,7 @@ export const FLAG_FILES: string[] = [
   "/flags/my.svg",
   "/flags/mz.svg",
   "/flags/na.svg",
+  "/flags/nato.svg",
   "/flags/nc.svg",
   "/flags/ne.svg",
   "/flags/ng.svg",
@@ -164,6 +166,7 @@ export const FLAG_FILES: string[] = [
   "/flags/np.svg",
   "/flags/nr.svg",
   "/flags/nz.svg",
+  "/flags/olympic.svg",
   "/flags/om.svg",
   "/flags/pa.svg",
   "/flags/pe.svg",
@@ -178,6 +181,7 @@ export const FLAG_FILES: string[] = [
   "/flags/pw.svg",
   "/flags/py.svg",
   "/flags/qa.svg",
+  "/flags/redcross.svg",
   "/flags/ro.svg",
   "/flags/rs.svg",
   "/flags/ru.svg",
@@ -217,6 +221,7 @@ export const FLAG_FILES: string[] = [
   "/flags/ua.svg",
   "/flags/ug.svg",
   "/flags/un.svg",
+  "/flags/unesco.svg",
   "/flags/us.svg",
   "/flags/uy.svg",
   "/flags/uz.svg",
