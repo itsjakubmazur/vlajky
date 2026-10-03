@@ -46,23 +46,33 @@ export function CountrySheet({
           <MasteryBadge mastery={mastery} label={cs.album.mastery[mastery]} />
         </div>
 
-        <dl className="mt-6 grid grid-cols-2 gap-2.5">
-          <div className="glass-thin rounded-2xl p-3.5">
-            <dt className="eyebrow">{cs.album.capital}</dt>
-            <dd className="display mt-1 text-base">{country.capitalCs}</dd>
-          </div>
-          <div className="glass-thin rounded-2xl p-3.5">
-            <dt className="eyebrow">{cs.album.continent}</dt>
-            <dd className="display mt-1 text-base">{cs.continents[country.continent]}</dd>
-          </div>
-        </dl>
+        {/* Organizace nemá hlavní město, světadíl ani místo na mapě – vypsat
+            sídlo jako „hlavní město“ by tvrdilo něco, co není pravda. */}
+        {country.continent && country.capitalCs ? (
+          <>
+            <dl className="mt-6 grid grid-cols-2 gap-2.5">
+              <div className="glass-thin rounded-2xl p-3.5">
+                <dt className="eyebrow">{cs.album.capital}</dt>
+                <dd className="display mt-1 text-base">{country.capitalCs}</dd>
+              </div>
+              <div className="glass-thin rounded-2xl p-3.5">
+                <dt className="eyebrow">{cs.album.continent}</dt>
+                <dd className="display mt-1 text-base">{cs.continents[country.continent]}</dd>
+              </div>
+            </dl>
 
-        <div className="glass-thin mt-2.5 rounded-2xl p-3.5">
-          <Eyebrow>{cs.album.whereTitle}</Eyebrow>
-          <div className="mt-2">
-            <MiniMap code={code} />
-          </div>
-        </div>
+            <div className="glass-thin mt-2.5 rounded-2xl p-3.5">
+              <Eyebrow>{cs.album.whereTitle}</Eyebrow>
+              <div className="mt-2">
+                <MiniMap code={code} />
+              </div>
+            </div>
+          </>
+        ) : (
+          <p className="glass-thin mt-6 rounded-2xl p-3.5 text-sm font-bold text-muted">
+            {cs.sets.organizationsNote}
+          </p>
+        )}
 
         {country.funFact ? (
           <div className="glass-thin mt-2.5 rounded-2xl p-3.5">

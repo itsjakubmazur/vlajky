@@ -1,4 +1,4 @@
-import type { Country } from '../types';
+import type { PlacedCountry } from '../types';
 import { shuffle, type Rng } from '../rng';
 
 /**
@@ -21,7 +21,7 @@ export const MIN_SEPARATION_FLOOR = 2.5;
  * obrazovce pořád velký. Proto se rozteč počítá z rozlohy toho, co se
  * zrovna hraje, ne z pevného čísla.
  */
-export function separationFor(pool: readonly Country[]): number {
+export function separationFor(pool: readonly PlacedCountry[]): number {
   if (pool.length < 2) return MIN_SEPARATION;
 
   let minLng = Infinity;
@@ -51,7 +51,7 @@ export function separationFor(pool: readonly Country[]): number {
  * říct „blízko / daleko“. Rozdíl zeměpisných délek se krátí kosinem šířky,
  * protože u pólů jsou poledníky blíž u sebe.
  */
-export function roughDistance(a: Country, b: Country): number {
+export function roughDistance(a: PlacedCountry, b: PlacedCountry): number {
   const meanLat = ((a.lat + b.lat) / 2) * (Math.PI / 180);
   let dLng = Math.abs(a.lng - b.lng);
   if (dLng > 180) dLng = 360 - dLng;
@@ -80,15 +80,15 @@ export interface MapDistractorOptions {
  * po světě, pokročilý sousední země.
  */
 export function pickMapDistractors(
-  target: Country,
-  pool: readonly Country[],
+  target: PlacedCountry,
+  pool: readonly PlacedCountry[],
   { count = 3, rng, challenge = 0.5, minSeparation = MIN_SEPARATION }: MapDistractorOptions,
-): Country[] {
+): PlacedCountry[] {
   const others = pool.filter((c) => c.code !== target.code);
   if (others.length === 0) return [];
 
   /** Pokus o výběr při dané rozteči; může jich vrátit míň, než je potřeba. */
-  const attempt = (separation: number): Country[] => {
+  const attempt = (separation: number): PlacedCountry[] => {
     const candidates = others
       .map((c) => ({ country: c, distance: roughDistance(target, c) }))
       .filter((c) => c.distance >= separation)
@@ -103,7 +103,7 @@ export function pickMapDistractors(
         : Math.max(0, Math.floor((candidates.length - bandSize) * (1 - challenge * 2)));
     const band = candidates.slice(start, start + bandSize);
 
-    const chosen: Country[] = [];
+    const chosen: PlacedCountry[] = [];
     for (const { country } of shuffle(band.length ? band : candidates, rng)) {
       if (chosen.length >= count) break;
       // Špendlíky se nesmí překrývat ani mezi sebou.

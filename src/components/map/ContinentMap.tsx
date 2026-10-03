@@ -45,7 +45,9 @@ export function ContinentMap({
   // Ke každému obrysu světadíl, ať se dá rozsvítit celá Afrika naráz.
   const continentOf = useMemo(() => {
     const map = new Map<string, Continent>();
-    for (const country of ALL_COUNTRIES) map.set(country.code, country.continent);
+    for (const country of ALL_COUNTRIES) {
+      if (country.continent) map.set(country.code, country.continent);
+    }
     return map;
   }, []);
 

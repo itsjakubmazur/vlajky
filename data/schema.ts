@@ -12,12 +12,13 @@ export interface CsCountry {
   nameCs: string;
   nameCsOfficial?: string;
   aliases?: string[];
-  capitalCs: string;
-  continent: Continent;
-  subregion: Subregion;
+  /** Organizace hlavní město nemají – pak se vynechá. */
+  capitalCs?: string;
+  continent?: Continent;
+  subregion?: Subregion;
   sovereignty: Sovereignty;
-  lat: number;
-  lng: number;
+  lat?: number;
+  lng?: number;
   difficulty: Difficulty;
   funFact?: string;
   /** Ruční poznámka do REVIEW.md (sporné zařazení, sporný název…). */

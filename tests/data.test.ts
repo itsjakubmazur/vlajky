@@ -55,17 +55,33 @@ describe('data zemí', () => {
   it('každá země má název, hlavní město a platné zařazení', () => {
     for (const c of ALL_COUNTRIES) {
       expect(c.nameCs.length, c.code).toBeGreaterThan(0);
-      expect(c.capitalCs.length, c.code).toBeGreaterThan(0);
-      expect(CONTINENTS).toContain(c.continent);
-      expect(SUBREGIONS).toContain(c.subregion);
       expect(SOVEREIGNTIES).toContain(c.sovereignty);
       expect(c.difficulty).toBeGreaterThanOrEqual(1);
       expect(c.difficulty).toBeLessThanOrEqual(5);
+      if (c.sovereignty === 'organization') continue;
+      expect(c.capitalCs?.length, c.code).toBeGreaterThan(0);
+      expect(CONTINENTS).toContain(c.continent);
+      expect(SUBREGIONS).toContain(c.subregion);
+    }
+  });
+
+  it('organizace nemají hlavní město ani místo na mapě', () => {
+    // Dopsat OSN sídlo jako „hlavní město“ by tvrdilo něco, co není pravda:
+    // OSN nepatří do Severní Ameriky, jen tam sídlí.
+    const orgs = ALL_COUNTRIES.filter((c) => c.sovereignty === 'organization');
+    expect(orgs.length).toBeGreaterThan(0);
+    for (const c of orgs) {
+      expect(c.capitalCs, c.code).toBeNull();
+      expect(c.continent, c.code).toBeNull();
+      expect(c.subregion, c.code).toBeNull();
+      expect(c.lat, c.code).toBeNull();
+      expect(c.lng, c.code).toBeNull();
     }
   });
 
   it('souřadnice jsou v rozsahu zeměkoule', () => {
     for (const c of ALL_COUNTRIES) {
+      if (c.lat === null || c.lng === null) continue;
       expect(Math.abs(c.lat), c.code).toBeLessThanOrEqual(90);
       expect(Math.abs(c.lng), c.code).toBeLessThanOrEqual(180);
     }

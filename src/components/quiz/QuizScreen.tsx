@@ -134,20 +134,30 @@ function QuizRunner({ mode, bossId, codes, offTheRecord, onFinish }: QuizScreenP
       : (session.feedback.given ?? question.code)
     : null;
 
+  // Organizace není země; „Která země má tuhle vlajku?“ by u vlajky OSN
+  // byla špatně položená otázka.
+  const isOrg = target.sovereignty === 'organization';
+
   const prompt =
     question.kind === 'pickFlag'
-      ? cs.quiz.whichFlag(target.nameCs)
+      ? isOrg
+        ? cs.quiz.whichFlagOf(target.nameCs)
+        : cs.quiz.whichFlag(target.nameCs)
       : question.kind === 'twins'
         ? cs.quiz.whichIs(target.nameCs)
         : question.kind === 'type'
-          ? cs.quiz.typeCountry
+          ? isOrg
+            ? cs.quiz.typeName
+            : cs.quiz.typeCountry
           : question.kind === 'pickOnMap'
             ? cs.quiz.whereIsIt
             : question.kind === 'pickCapital'
               ? cs.quiz.whichCapital
               : question.kind === 'pickByCapital'
-                ? cs.quiz.whichFlagByCapital(target.capitalCs)
-                : cs.quiz.whichCountry;
+                ? cs.quiz.whichFlagByCapital(target.capitalCs ?? '')
+                : isOrg
+                  ? cs.quiz.whoseFlag
+                  : cs.quiz.whichCountry;
 
   const showsFlagInQuestion =
     question.kind === 'pickCountry' ||
@@ -237,6 +247,7 @@ function QuizRunner({ mode, bossId, codes, offTheRecord, onFinish }: QuizScreenP
               pool={pool}
               disabled={session.phase === 'feedback'}
               hint={session.hint}
+              placeholder={isOrg ? cs.quiz.inputPlaceholderName : cs.quiz.inputPlaceholder}
               onSubmit={session.answerWithText}
               onSkip={session.skip}
             />

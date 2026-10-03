@@ -73,7 +73,7 @@ export function rotationFor(codes: readonly string[]): number {
   const lngs: number[] = [];
   for (const code of codes) {
     const country = ALL_COUNTRIES.find((c) => c.code === code);
-    if (country) lngs.push(country.lng);
+    if (country?.lng !== undefined && country?.lng !== null) lngs.push(country.lng);
   }
   if (lngs.length < 2) return 0;
 
@@ -151,6 +151,7 @@ export function worldGeometry(rotationLng = 0): WorldGeometry {
   const dots = ALL_COUNTRIES.filter((c) => c.sovereignty !== 'territory')
     .filter((c) => !drawn.has(c.code))
     .flatMap<MapDot>((c) => {
+      if (c.lng === null || c.lat === null) return [];
       const point = projection([c.lng, c.lat]);
       return point ? [{ code: c.code, x: point[0], y: point[1] }] : [];
     });
@@ -167,6 +168,7 @@ export function worldGeometry(rotationLng = 0): WorldGeometry {
 
   const pointByCode = new Map<string, [number, number]>();
   for (const country of ALL_COUNTRIES) {
+    if (country.lng === null || country.lat === null) continue;
     const point = projection([country.lng, country.lat]);
     if (point) pointByCode.set(country.code, [point[0], point[1]]);
   }

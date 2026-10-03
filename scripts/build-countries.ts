@@ -12,6 +12,7 @@ import { africa } from '../data/cs/africa';
 import { americas } from '../data/cs/americas';
 import { oceania } from '../data/cs/oceania';
 import { territories } from '../data/cs/territories';
+import { organizations } from '../data/cs/organizations';
 import { similarGroups } from '../data/similar';
 import { flagDifferences, pairKey } from '../data/differences';
 import type { CsCountry } from '../data/schema';
@@ -21,7 +22,15 @@ import { normalize } from '../src/domain/text/normalize';
 import { OMITTED } from '../src/config/app';
 import { hasFlag, readAccent, readRatio, FLAG_SOURCE_NAME } from './flag-source';
 
-const source: CsCountry[] = [...europe, ...asia, ...africa, ...americas, ...oceania, ...territories];
+const source: CsCountry[] = [
+  ...europe,
+  ...asia,
+  ...africa,
+  ...americas,
+  ...oceania,
+  ...territories,
+  ...organizations,
+];
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -51,9 +60,29 @@ for (const c of source) {
 
 const countries: Country[] = source.map((c) => {
   if (!hasFlag(c.code)) fail(`Chybí SVG pro kód ${c.code} (${c.nameCs})`);
-  if (!CONTINENTS.includes(c.continent)) fail(`${c.code}: neznámý světadíl ${c.continent}`);
-  if (!SUBREGIONS.includes(c.subregion)) fail(`${c.code}: neznámá podoblast ${c.subregion}`);
   if (!SOVEREIGNTIES.includes(c.sovereignty)) fail(`${c.code}: neznámá suverenita`);
+
+  // Zeměpis má každá země a žádná organizace. Obojí najednou by znamenalo,
+  // že se někde vzala data z hlavy – třeba že OSN „leží“ v Severní Americe.
+  const isOrganization = c.sovereignty === 'organization';
+  const hasGeography =
+    c.continent !== undefined &&
+    c.subregion !== undefined &&
+    c.capitalCs !== undefined &&
+    c.lat !== undefined &&
+    c.lng !== undefined;
+  if (isOrganization && hasGeography) {
+    fail(`${c.code}: organizace nemá mít hlavní město ani souřadnice`);
+  }
+  if (!isOrganization && !hasGeography) {
+    fail(`${c.code}: chybí hlavní město, světadíl nebo souřadnice`);
+  }
+  if (c.continent !== undefined && !CONTINENTS.includes(c.continent)) {
+    fail(`${c.code}: neznámý světadíl ${c.continent}`);
+  }
+  if (c.subregion !== undefined && !SUBREGIONS.includes(c.subregion)) {
+    fail(`${c.code}: neznámá podoblast ${c.subregion}`);
+  }
 
   const needsReview = [...(c.review ?? [])];
   if (!c.funFact) needsReview.push('Chybí zajímavost o vlajce – doplň, nebo nech prázdné.');
@@ -67,12 +96,12 @@ const countries: Country[] = source.map((c) => {
     nameCs: c.nameCs,
     nameCsOfficial: c.nameCsOfficial ?? null,
     aliases: c.aliases ?? [],
-    capitalCs: c.capitalCs,
-    continent: c.continent,
-    subregion: c.subregion,
+    capitalCs: c.capitalCs ?? null,
+    continent: c.continent ?? null,
+    subregion: c.subregion ?? null,
     sovereignty: c.sovereignty,
-    lat: c.lat,
-    lng: c.lng,
+    lat: c.lat ?? null,
+    lng: c.lng ?? null,
     similar: [...(similarMap.get(c.code) ?? [])].sort(),
     difficulty: c.difficulty,
     funFact: c.funFact ?? null,
@@ -155,7 +184,8 @@ const atlas = JSON.parse(
 ) as { objects: { countries: { geometries: Geometry[] } } };
 const mapIds = new Set(atlas.objects.countries.geometries.map((g) => g.id));
 const withoutMap = countries
-  .filter((c) => c.sovereignty !== 'territory')
+  // Organizace na mapě místo nemají a mít nemají; do výpisu nepatří.
+  .filter((c) => c.sovereignty !== 'territory' && c.sovereignty !== 'organization')
   .filter((c) => !c.numeric || !mapIds.has(c.numeric))
   .map((c) => c.code);
 if (withoutMap.length) {
@@ -185,5 +215,8 @@ console.log(`  z toho členů OSN: ${unCount}`);
 console.log(`  pozorovatelé: ${countries.filter((c) => c.sovereignty === 'observer').length}`);
 console.log(`  částečně uznané: ${countries.filter((c) => c.sovereignty === 'partial').length}`);
 console.log(`  území (bonus): ${countries.filter((c) => c.sovereignty === 'territory').length}`);
+console.log(
+  `  organizace (bonus): ${countries.filter((c) => c.sovereignty === 'organization').length}`,
+);
 console.log(`  bez zajímavosti: ${countries.filter((c) => !c.funFact).length}`);
 for (const w of warnings) console.log('  ! ' + w);

@@ -32,7 +32,7 @@ export type Assignment = Record<string, Continent | null>;
 export interface SortResult {
   code: string;
   chosen: Continent | null;
-  correct: Continent;
+  correct: Continent | null;
   ok: boolean;
 }
 
@@ -40,12 +40,13 @@ export interface SortResult {
 export function gradeBatch(
   batch: readonly string[],
   assignment: Assignment,
-  continentOf: (code: string) => Continent,
+  /** `null` u vlajky bez světadílu (organizace) – ta se do Roztřiď nedostane. */
+  continentOf: (code: string) => Continent | null,
 ): SortResult[] {
   return batch.map((code) => {
     const chosen = assignment[code] ?? null;
     const correct = continentOf(code);
-    return { code, chosen, correct, ok: chosen === correct };
+    return { code, chosen, correct, ok: correct !== null && chosen === correct };
   });
 }
 

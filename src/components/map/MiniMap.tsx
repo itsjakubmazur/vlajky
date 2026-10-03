@@ -15,8 +15,12 @@ import { worldGeometry } from './geometry';
 export function MiniMap({ code }: { code: string }) {
   const { shapes, viewBox, project } = useMemo(worldGeometry, []);
   const country = requireCountry(code);
-  const point = useMemo(() => project(country.lng, country.lat), [project, country]);
+  const point = useMemo(
+    () => (country.lng === null || country.lat === null ? null : project(country.lng, country.lat)),
+    [project, country],
+  );
 
+  // Organizace na mapě místo nemají; mapka se prostě neukáže.
   if (!point) return null;
 
   return (

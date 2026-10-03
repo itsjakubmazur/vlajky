@@ -2,7 +2,7 @@
   "meta": {
     "generated": "scripts/build-countries.ts – NEEDITOVAT RUČNĚ",
     "flagSource": "svg-country-flags (public domain, zdroj Wikipedia)",
-    "count": 228
+    "count": 232
   },
   "countries": [
     {
@@ -226,6 +226,33 @@
       "numeric": "032"
     },
     {
+      "code": "arab",
+      "nameCs": "Liga arabských států",
+      "nameCsOfficial": null,
+      "aliases": [
+        "Arabská liga"
+      ],
+      "capitalCs": null,
+      "continent": null,
+      "subregion": null,
+      "sovereignty": "organization",
+      "lat": null,
+      "lng": null,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Zlatý řetěz kolem nápisu měl při přijetí vlajky tolik článků, kolik měla liga členů – dvaadvacet.",
+      "ratio": [
+        900,
+        600
+      ],
+      "accent": "#006233",
+      "needsReview": [
+        "ROZHODNUTO: poměr 2:3 podle Flags of the World; pole dopočítané, znak přenesený z flag-icons."
+      ],
+      "iso3": null,
+      "numeric": null
+    },
+    {
       "code": "as",
       "nameCs": "Americká Samoa",
       "nameCsOfficial": null,
@@ -247,6 +274,33 @@
       "needsReview": [],
       "iso3": "ASM",
       "numeric": "016"
+    },
+    {
+      "code": "asean",
+      "nameCs": "ASEAN",
+      "nameCsOfficial": "Sdružení národů jihovýchodní Asie",
+      "aliases": [
+        "Sdružení národů jihovýchodní Asie"
+      ],
+      "capitalCs": null,
+      "continent": null,
+      "subregion": null,
+      "sovereignty": "organization",
+      "lat": null,
+      "lng": null,
+      "similar": [],
+      "difficulty": 5,
+      "funFact": "Uprostřed je deset stébel rýže svázaných dohromady – deset stébel za deset členských zemí.",
+      "ratio": [
+        900,
+        600
+      ],
+      "accent": "#0039a6",
+      "needsReview": [
+        "ROZHODNUTO: poměr 2:3 podle Flags of the World; pole dopočítané, znak přenesený z flag-icons."
+      ],
+      "iso3": null,
+      "numeric": null
     },
     {
       "code": "at",
@@ -1566,6 +1620,34 @@
       "needsReview": [],
       "iso3": "ETH",
       "numeric": "231"
+    },
+    {
+      "code": "eu",
+      "nameCs": "Evropská unie",
+      "nameCsOfficial": null,
+      "aliases": [
+        "EU",
+        "Unie"
+      ],
+      "capitalCs": null,
+      "continent": null,
+      "subregion": null,
+      "sovereignty": "organization",
+      "lat": null,
+      "lng": null,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Hvězd je dvanáct bez ohledu na to, kolik je členských zemí – dvanáctka odjakživa znamená úplnost.",
+      "ratio": [
+        810,
+        540
+      ],
+      "accent": "#003399",
+      "needsReview": [
+        "ROZHODNUTO: vlajka převzatá z noto-emoji (render z Wikipedie, public domain), poměr 2:3. Tutéž vlajku používá i Rada Evropy, která ji vymyslela."
+      ],
+      "iso3": null,
+      "numeric": null
     },
     {
       "code": "fi",
@@ -5236,6 +5318,35 @@
       "needsReview": [],
       "iso3": "UGA",
       "numeric": "800"
+    },
+    {
+      "code": "un",
+      "nameCs": "OSN",
+      "nameCsOfficial": "Organizace spojených národů",
+      "aliases": [
+        "Organizace spojených národů",
+        "Spojené národy",
+        "United Nations"
+      ],
+      "capitalCs": null,
+      "continent": null,
+      "subregion": null,
+      "sovereignty": "organization",
+      "lat": null,
+      "lng": null,
+      "similar": [],
+      "difficulty": 2,
+      "funFact": "Mapa světa na vlajce OSN je vidět shora od severního pólu a olivové větve kolem ní znamenají mír.",
+      "ratio": [
+        1200,
+        800
+      ],
+      "accent": "#0981cf",
+      "needsReview": [
+        "ROZHODNUTO: vlajka převzatá z noto-emoji (render z Wikipedie, public domain), poměr 2:3 podle vlajkového předpisu OSN."
+      ],
+      "iso3": null,
+      "numeric": null
     },
     {
       "code": "us",

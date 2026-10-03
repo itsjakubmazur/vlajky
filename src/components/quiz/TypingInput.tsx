@@ -10,12 +10,15 @@ export function TypingInput({
   pool,
   disabled,
   hint,
+  placeholder = cs.quiz.inputPlaceholder,
   onSubmit,
   onSkip,
 }: {
   pool: readonly Country[];
   disabled: boolean;
   hint: string | null;
+  /** U organizací se neptáme na „název země“. */
+  placeholder?: string;
   onSubmit: (text: string, viaSuggestion?: boolean) => void;
   onSkip: () => void;
 }) {
@@ -53,7 +56,7 @@ export function TypingInput({
           autoCapitalize="off"
           spellCheck={false}
           enterKeyHint="done"
-          placeholder={cs.quiz.inputPlaceholder}
+          placeholder={placeholder}
           aria-label={cs.quiz.typeCountry}
           onFocus={() => {
             // iOS posune obsah až po vyjetí klávesnice – počkáme si na ni.

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ALL_COUNTRIES, requireCountry } from '@/domain/countries';
+import { isPlaced, type PlacedCountry } from '@/domain/types';
 import { countriesInSet } from '~data/sets';
 import { buildSession, SESSION_LENGTH } from '@/domain/quiz/session';
 import {
@@ -36,6 +37,13 @@ import { createRng } from '@/domain/rng';
 import type { CardState } from '@/domain/srs/types';
 
 const world = countriesInSet([...ALL_COUNTRIES], 'world');
+/** Sada „Svět“ jsou samé země; překladači to řekne `isPlaced`. */
+const placedWorld = world.filter(isPlaced);
+const placed = (code: string): PlacedCountry => {
+  const country = requireCountry(code);
+  if (!isPlaced(country)) throw new Error(`${code} nemá místo na mapě`);
+  return country;
+};
 const now = new Date('2026-03-01T10:00:00Z');
 
 describe('sestavení hry', () => {
@@ -297,11 +305,11 @@ describe('otázka na mapě', () => {
     });
     expect(q.options).toHaveLength(4);
     expect(q.options).toContain('bt');
-    const separation = separationFor(world);
+    const separation = separationFor(placedWorld);
     for (const a of q.options) {
       for (const b of q.options) {
         if (a === b) continue;
-        expect(roughDistance(requireCountry(a), requireCountry(b))).toBeGreaterThanOrEqual(
+        expect(roughDistance(placed(a), placed(b))).toBeGreaterThanOrEqual(
           separation,
         );
       }
@@ -312,7 +320,7 @@ describe('otázka na mapě', () => {
     // Na světové rozteči 15° se ve vybrané Evropě čtvrtá země nevešla
     // a otázka nabídla jen tři. Mapa je přitom přiblížená na Evropu,
     // takže i menší rozestup je na obrazovce pořád velký.
-    const europe = world.filter((c) => c.continent === 'europe');
+    const europe = placedWorld.filter((c) => c.continent === 'europe');
     expect(separationFor(europe)).toBeLessThan(MIN_SEPARATION);
 
     for (const seed of [1, 2, 3, 4, 5]) {
@@ -329,9 +337,9 @@ describe('otázka na mapě', () => {
   });
 
   it('pokročilému nabídne bližší místa než začátečníkovi', () => {
-    const target = requireCountry('bt');
-    const near = pickMapDistractors(target, world, { rng: createRng(2), challenge: 0.9 });
-    const far = pickMapDistractors(target, world, { rng: createRng(2), challenge: 0 });
+    const target = placed('bt');
+    const near = pickMapDistractors(target, placedWorld, { rng: createRng(2), challenge: 0.9 });
+    const far = pickMapDistractors(target, placedWorld, { rng: createRng(2), challenge: 0 });
     const mean = (list: typeof near) =>
       list.reduce((sum, c) => sum + roughDistance(target, c), 0) / list.length;
     expect(mean(near)).toBeLessThan(mean(far));
@@ -393,7 +401,8 @@ describe('otázka na mapě má vždy čtyři možnosti', () => {
     // Tři možnosti jsou samy o sobě nápověda, že se čtvrtá nevešla –
     // a šance na tip skočí z jedné ku čtyřem na jednu ku třem.
     for (const region of [null, ...regions]) {
-      const pool = region === null ? world : world.filter((c) => c.continent === region);
+      const pool =
+        region === null ? placedWorld : placedWorld.filter((c) => c.continent === region);
       const separation = separationFor(pool);
       for (const mastery of ['new', 'silver', 'gold'] as const) {
         for (let seed = 0; seed < 25; seed++) {

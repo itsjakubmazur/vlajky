@@ -55,7 +55,7 @@ describe('výřez pro Oceánii', () => {
     ];
     for (const code of codes) {
       const country = world.find((c) => c.code === code)!;
-      const point = turned.project(country.lng, country.lat);
+      const point = turned.project(country.lng!, country.lat!);
       expect(point, country.nameCs).not.toBeNull();
       expect(point![0], country.nameCs).toBeGreaterThanOrEqual(x);
       expect(point![0], country.nameCs).toBeLessThanOrEqual(x + width);

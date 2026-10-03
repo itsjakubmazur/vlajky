@@ -9,7 +9,8 @@ import {
   PARTY_MODES,
   type PartyPlayer,
 } from '@/domain/game/party';
-import type { QuizModeId } from '@/domain/quiz/modes';
+import { playableWith, type QuizModeId } from '@/domain/quiz/modes';
+import { useActivePool } from '@/quiz/useActivePool';
 import { cs } from '@/i18n/cs';
 import { Button, Eyebrow, Panel } from '@/components/ui';
 
@@ -24,6 +25,11 @@ export function PartySetup({
 }: {
   onStart: (players: PartyPlayer[], mode: QuizModeId, length: number) => void;
 }) {
+  // Sada organizací nemá zeměpis, takže se v turnaji nenabídne mapa ani
+  // hlavní města – stejně jako na domovské.
+  const { pool } = useActivePool();
+  const modes = PARTY_MODES.filter((mode) => playableWith(mode, pool));
+
   const [count, setCount] = useState(2);
   const [names, setNames] = useState<string[]>([]);
   const [mode, setMode] = useState<QuizModeId>('classic');
@@ -83,7 +89,7 @@ export function PartySetup({
       <Panel>
         <Eyebrow>{cs.party.modeTitle}</Eyebrow>
         <div className="mt-2.5 flex flex-wrap gap-2">
-          {PARTY_MODES.map((value) => (
+          {modes.map((value) => (
             <button
               key={value}
               type="button"

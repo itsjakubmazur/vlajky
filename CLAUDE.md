@@ -14,12 +14,13 @@ testera, který už vlajky umí hodně dobře.
 | **1e – turnaj** | ✅ hotovo | hra více hráčů na jednom zařízení, stejné otázky pro všechny, pořadí podle vyhraných kol |
 | **1f – Roztřiď** | ✅ hotovo | pět vlajek najednou na světadíly tažením prstu, názvy až ve vyhodnocení |
 | **1g – postup** | ✅ hotovo | oprava ztrácení postupu, záloha do souboru, spojení dvou zařízení |
+| **1h – organizace** | 🟦 rozdělaná | sada vlajek organizací: OSN, EU, Arabská liga, ASEAN; chybí NATO a další (viz níž) |
 | 2 – Supabase | 🟦 rozdělaná | ✅ přihlášení e-mailem a synchronizace postupu; ⬜ rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
 
-Sada „Území“ (31 závislých území včetně Anglie, Skotska, Walesu) už v datech je
-a jde zapnout v Nastavení.
+Sada „Území“ (31 závislých území včetně Anglie, Skotska a Severního Irska) a
+sada „Organizace“ (4 vlajky) jsou v datech a jdou zapnout v Nastavení.
 
 **Část světa** se vybírá na domovské obrazovce a platí pro všechny režimy
 naráz (`meta.region`, `useActivePool`). Denní výzva a souboje ji schválně
@@ -66,7 +67,8 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `data/countries.json` | GENEROVANÉ – needitovat |
 | `scripts/build-countries.ts` | sloučení + validace dat |
 | `scripts/flag-source.ts` | jediné místo, kde se řeší zdroj SVG |
-| `data/flags-override/` | ručně opravené vlajky – mají přednost před balíčkem |
+| `data/flags-override/` | ručně opravené vlajky a vlajky, které balíček nemá vůbec |
+| `data/cs/organizations.ts` | sada „Organizace“ (OSN, EU…) a návod, jak přidat další |
 | `scripts/make-overrides.ts` | generátor těch oprav (spouští se ručně) |
 | `src/domain/answer/match.ts` | vyhodnocení napsané odpovědi |
 | `src/domain/quiz/` | distraktory, režimy, sestavení hry, vzdálenosti pro mapu |
@@ -394,6 +396,43 @@ zařízeních. Rodinné profily, odznaky a statistiky zůstávají na později.
 Ověřeno proti falešnému serveru v prohlížeči: tablet se 7000 body a vlajkou cz
 a telefon se 150 body a vlajkou sk se po přihlášení sejdou na obou vlajkách,
 7000 bodech a souboji z tabletu – žádná strana o nic nepřišla.
+
+## Vlajky organizací
+
+Nápad osmiletého: „ty speciální vlajky jako NATO, OSN“. Sada **Organizace** se
+zapíná v Nastavení jako Území.
+
+**Organizace nemá hlavní město, světadíl ani souřadnice** – v datech jsou
+`null` a build to hlídá (dopsat „sídlo“ jako hlavní město nejde). OSN nepatří
+do Severní Ameriky, jen tam sídlí; napsat to jinak by bylo vymýšlení v datech,
+na kterém celý projekt stojí. Plyne z toho zbytek:
+
+- V `src/domain/types.ts` je `PlacedCountry` a `isPlaced`. Režimy, které se bez
+  zeměpisu neobejdou – Hlavní města, Kde to je, Roztřiď – si pool protáhnou
+  přes `isPlaced` a mají jistotu od překladače, ne od dobré vůle.
+- Ty tři režimy se u sady organizací vůbec nenabídnou (`playableWith`), a to
+  i v turnaji. Kdyby se tam přesto dostaly, `buildQuestion` propadne na
+  obyčejnou otázku místo aby postavil otázku bez správné odpovědi.
+- Otázka je jinak formulovaná: **„Čí je tahle vlajka?“** místo „Která země má
+  tuhle vlajku?“. A obráceně „patří **organizaci** OSN“ – pád nese to slovo,
+  takže název zůstává v prvním pádě, stejně jako u „patří zemi Japonsko“.
+- V albu se u organizace místo hlavního města a mapky ukáže, že je to
+  organizace.
+
+**Co v sadě chybí a proč.** NATO, olympijské kruhy, Commonwealth, Africká unie
+a Červený kříž tam **nejsou**, protože se k jejich SVG nedá v tomhle prostředí
+dostat (Wikimedia je zablokovaná sítí) a nakreslit je zpaměti zakazuje pravidlo
+o nevymýšlení. Z dosažitelných zdrojů vyšly čtyři:
+
+| Vlajka | Zdroj | Poměr |
+|---|---|---|
+| OSN, EU | noto-emoji `third_party/region-flags` (rendery z Wikipedie, public domain) | 2:3 z `viewBox` |
+| Arabská liga, ASEAN | pole dopočítané, znak přenesený z `flag-icons` | 2:3 podle Flags of the World |
+
+Přidat další je řádek v `data/cs/organizations.ts` plus SVG do
+`data/flags-override/` – postup je v komentáři nahoře v tom souboru. Čtyři
+vlajky jsou na kvíz se čtyřmi možnostmi málo (nabídnou se vždycky všechny),
+takže sada dává smysl hlavně v albu, dokud jich nepřibude.
 
 ## Konvence
 

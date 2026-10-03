@@ -1,4 +1,4 @@
-import type { Country } from '../types';
+import { isPlaced, type Country } from '../types';
 import type { Mastery } from '../srs/types';
 import { buildOptions, challengeFromMastery, pickDistractors } from './distractors';
 import { pickMapDistractors, separationFor } from './mapDistractors';
@@ -56,6 +56,23 @@ export function touchesScheduler(kind: QuestionKind): boolean {
     kind !== 'pickOnMap' &&
     kind !== 'sortToContinent'
   );
+}
+
+/**
+ * Režimy, které se bez zeměpisu neobejdou.
+ *
+ * Sada organizací nemá hlavní města ani místo na mapě, takže by otázka
+ * neměla správnou odpověď. Nenabízejí se proto na domovské ani v turnaji.
+ */
+export const GEO_MODES: readonly QuizModeId[] = ['capitals', 'map', 'sort'];
+
+export function needsGeography(mode: QuizModeId): boolean {
+  return GEO_MODES.includes(mode);
+}
+
+/** Dá se tenhle režim hrát s tím, co je zrovna vybrané? */
+export function playableWith(mode: QuizModeId, pool: readonly Country[]): boolean {
+  return !needsGeography(mode) || pool.some(isPlaced);
 }
 
 /** Kolik životů má hráč v daném režimu; `null` = neomezeně. */
@@ -165,12 +182,18 @@ export function buildQuestion({
   const resolved = kind ?? kindForMode(mode, rng);
 
   // Na mapě rozhoduje vzdálenost, ne podobnost vlajek – ta je v otázce vidět.
-  if (resolved === 'pickOnMap') {
-    const distractors = pickMapDistractors(target, pool, {
+  //
+  // Organizace na mapě místo nemají, takže se z nich otázka postavit nedá;
+  // propadne se na obyčejnou. Nabízet režim Kde to je u sady organizací se
+  // sice nemá (`modesForPool`), ale spoléhat se na to by byla chyba čekající
+  // na příležitost.
+  if (resolved === 'pickOnMap' && isPlaced(target)) {
+    const placed = pool.filter(isPlaced);
+    const distractors = pickMapDistractors(target, placed, {
       rng,
       challenge: challengeFromMastery(mastery),
       // V malé části světa se na světovou rozteč čtvrtá země nevejde.
-      minSeparation: separationFor(pool),
+      minSeparation: separationFor(placed),
     });
     return {
       code: target.code,
@@ -182,7 +205,7 @@ export function buildQuestion({
 
   // Hlavní města se ptají na jinou věc než na vlajku, ale nabídka se staví
   // stejně – ze zemí. Rozdíl je jen v tom, co je na tlačítku a co v otázce.
-  if (resolved === 'pickCapital' || resolved === 'pickByCapital') {
+  if ((resolved === 'pickCapital' || resolved === 'pickByCapital') && target.capitalCs !== null) {
     const distractors = pickDistractors(target, pool, { rng, challenge: 0.5 });
     return {
       code: target.code,
@@ -208,10 +231,24 @@ export function buildQuestion({
   });
   return {
     code: target.code,
-    kind: resolved,
+    kind: usable(resolved, target),
     options: buildOptions(target, distractors, rng).map((c) => c.code),
     mode,
   };
+}
+
+/**
+ * Typ otázky, který na dané zemi opravdu jde položit.
+ *
+ * Zeměpisné otázky se u organizací propadnou na „poznej vlajku“ – ptát se,
+ * kde leží OSN, nemá správnou odpověď.
+ */
+function usable(kind: QuestionKind, target: Country): QuestionKind {
+  if (isPlaced(target)) return kind;
+  if (kind === 'pickOnMap' || kind === 'pickCapital' || kind === 'pickByCapital') {
+    return 'pickCountry';
+  }
+  return kind;
 }
 
 /** Pro režim Dvojčata: vybere zaměnitelnou vlajku, která je v aktivní sadě. */

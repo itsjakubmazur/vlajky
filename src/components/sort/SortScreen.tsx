@@ -191,7 +191,8 @@ export function SortScreen({
 
   // --- vyhodnocení sady ---------------------------------------------------
   const check = async () => {
-    const graded = gradeBatch(batch, assignment, (code) => requireCountry(code).continent);
+    // Organizace se netřídí – sada se jim vyhýbá už při sestavení kola.
+    const graded = gradeBatch(batch, assignment, (code) => requireCountry(code).continent ?? null);
     const perSecond = Math.max(1, Math.round((Date.now() - batchStart.current) / batch.length));
 
     let gained = 0;
@@ -410,7 +411,7 @@ export function SortScreen({
                     <span className="block text-[0.85rem] font-bold leading-tight">
                       {requireCountry(result.code).nameCs}
                     </span>
-                    {!result.ok ? (
+                    {!result.ok && result.correct ? (
                       <span className="block text-[0.72rem] leading-snug text-faint">
                         {cs.sort.belongsTo(cs.continentsGenitive[result.correct])}
                       </span>

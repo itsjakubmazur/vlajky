@@ -36,7 +36,7 @@ function table(rows: Country[]): string {
       (c) =>
         `| \`${c.code}\` | **${escape(c.nameCs)}** | ${escape(c.nameCsOfficial ?? '–')} | ${
           c.aliases.length ? escape(c.aliases.join(', ')) : '–'
-        } | ${escape(c.capitalCs)} | ${c.difficulty} | ${ratioText(c.ratio)} | ${
+        } | ${c.capitalCs ? escape(c.capitalCs) : '–'} | ${c.difficulty} | ${ratioText(c.ratio)} | ${
           c.funFact ? escape(c.funFact) : '**— CHYBÍ —**'
         } |`,
     )

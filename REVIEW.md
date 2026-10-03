@@ -14,7 +14,7 @@ Co je potřeba opravit, napiš k tomu poznámku – projdu to a přepíšu ve zd
 ## Přehled
 
 - Zdroj vlajek: svg-country-flags (public domain, zdroj Wikipedia)
-- Států v sadě „Svět“: **197** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
+- Států v sadě „Svět“: **201** (193 členů OSN + Vatikán, Palestina, Kosovo, Tchaj-wan)
 - Území v bonusové sadě: **31**
 - Zajímavost o vlajce chybí u **0** záznamů
 - Otevřených otázek k rozhodnutí: **0**
@@ -34,9 +34,12 @@ _Žádné._
 Tady už je rozhodnuto, zapsané jen pro paměť.
 
 - **Afghánistán** (`af`) – ukazujeme černo-červeno-zelenou vlajku Islámské republiky, platnou do roku 2021. Dnešní bílou vlajku s vyznáním víry nemá žádný dostupný balíček a kaligrafii nelze poctivě nakreslit zpaměti – tohle je vědomá volba, ne otevřená otázka.
+- **Liga arabských států** (`arab`) – poměr 2:3 podle Flags of the World; pole dopočítané, znak přenesený z flag-icons.
+- **ASEAN** (`asean`) – poměr 2:3 podle Flags of the World; pole dopočítané, znak přenesený z flag-icons.
 - **Konžská republika** (`cg`) – samotné „Kongo“ neuznáváme ani jedné zemi – aplikace se doptá, která to má být.
 - **Kypr** (`cy`) – zeměpisně leží v Asii, politicky patří k Evropě (EU). Vedeme ho v Evropě.
 - **Západní Sahara** (`eh`) – sporné území, je jen v bonusové sadě.
+- **Evropská unie** (`eu`) – vlajka převzatá z noto-emoji (render z Wikipedie, public domain), poměr 2:3. Tutéž vlajku používá i Rada Evropy, která ji vymyslela.
 - **Spojené království** (`gb`) – Anglie záměrně není alias, je to samostatná vlajka v bonusové sadě.
 - **Severní Irsko** (`gb-nir`) – ulsterský prapor není úřední vlajka, od roku 1972 žádná není. Je ale rozpoznatelný a používá se ve sportu, takže je lepší než nic – a hlavní zdroj tu dodával Union Jack, tedy soubor shodný s gb.
 - **Severní Irsko** (`gb-nir`) – poměr 3:5 podle Flag Institute, flaggenlexikon.de a Flags of the World; rameno kříže je pětina výšky, odečtená ze zdroje. Vlajka je v data/flags-override/.
@@ -45,6 +48,7 @@ Tady už je rozhodnuto, zapsané jen pro paměť.
 - **Rusko** (`ru`) – souřadnice proto ukazují na Moskvu, ne na zeměpisný střed země. Ostatní velké státy mají v datech svůj střed, ale ruský by táhl špendlík i výřez mapy z Evropy až ke Střední Asii.
 - **Svazijsko** (`sz`) – král zemi v roce 2018 přejmenoval na Eswatini, ale to je jméno anglické a svazijské – český název se tím nezměnil. Názvoslovná komise ČÚZK, ministerstvo zahraničí i česká Wikipedie dál píšou Svazijsko, takže v aplikaci je Svazijsko a Eswatini se uznává jako druhý tvar odpovědi.
 - **Turecko** (`tr`) – leží v Asii i v Evropě, vedeme ho v Asii.
+- **OSN** (`un`) – vlajka převzatá z noto-emoji (render z Wikipedie, public domain), poměr 2:3 podle vlajkového předpisu OSN.
 
 ## Schválně vynechané záznamy
 

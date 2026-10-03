@@ -50,8 +50,10 @@ export type Subregion = (typeof SUBREGIONS)[number];
  * `observer` – pozorovatel OSN (Vatikán, Palestina)
  * `partial` – částečně uznaný stát (Kosovo, Tchaj-wan)
  * `territory` – závislé území nebo součást státu (bonusová sada)
+ * `organization` – mezinárodní organizace (bonusová sada); nemá hlavní město
+ *   ani místo na mapě, takže tyhle tři údaje jsou u ní `null`
  */
-export const SOVEREIGNTIES = ['un', 'observer', 'partial', 'territory'] as const;
+export const SOVEREIGNTIES = ['un', 'observer', 'partial', 'territory', 'organization'] as const;
 export type Sovereignty = (typeof SOVEREIGNTIES)[number];
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5;
@@ -65,13 +67,15 @@ export interface Country {
   nameCsOfficial: string | null;
   /** Další přijímané odpovědi (hovorové názvy, zkratky, starší názvy). */
   aliases: string[];
-  capitalCs: string;
-  continent: Continent;
-  subregion: Subregion;
+  /** `null` u organizací – ty žádné hlavní město nemají. */
+  capitalCs: string | null;
+  /** `null` u organizací. OSN nepatří do Severní Ameriky, jen tam sídlí. */
+  continent: Continent | null;
+  subregion: Subregion | null;
   sovereignty: Sovereignty;
-  /** Přibližný střed země (pro mapu a nápovědu směr/vzdálenost). */
-  lat: number;
-  lng: number;
+  /** Přibližný střed země (pro mapu a nápovědu směr/vzdálenost); `null` u organizací. */
+  lat: number | null;
+  lng: number | null;
   /** Kódy zaměnitelných vlajek; vztah je vždy oboustranný. */
   similar: string[];
   difficulty: Difficulty;
@@ -87,4 +91,30 @@ export interface Country {
   numeric: string | null;
   /** Výrazná barva z vlajky; rozhraní jí vlajku podsvítí. Odvozeno ze SVG. */
   accent: string;
+}
+
+/**
+ * Země, která má místo na mapě a hlavní město.
+ *
+ * Organizace (OSN, EU) ho nemají a nemají ani mít: OSN nepatří do Severní
+ * Ameriky, jen tam sídlí. Režimy, které se bez zeměpisu neobejdou – Hlavní
+ * města, Kde to je, Roztřiď – si pool protáhnou přes `isPlaced` a tím mají
+ * jistotu od překladače, ne od dobré vůle.
+ */
+export interface PlacedCountry extends Country {
+  capitalCs: string;
+  continent: Continent;
+  subregion: Subregion;
+  lat: number;
+  lng: number;
+}
+
+export function isPlaced(country: Country): country is PlacedCountry {
+  return (
+    country.capitalCs !== null &&
+    country.continent !== null &&
+    country.subregion !== null &&
+    country.lat !== null &&
+    country.lng !== null
+  );
 }

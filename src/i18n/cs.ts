@@ -218,6 +218,13 @@ export const cs = {
     whichIs: (country: string) => `Která je ${country}?`,
     typeCountry: 'Napiš název země',
     inputPlaceholder: 'Název země…',
+    // Vlajka organizace není vlajka země, tak se na ni ani neptáme jako na zemi.
+    whoseFlag: 'Čí je tahle vlajka?',
+    // „patří organizaci X“ drží pád na slově organizaci, takže název může
+    // zůstat v prvním pádě – stejně jako „patří zemi Japonsko“ u států.
+    whichFlagOf: (name: string) => `Která vlajka patří organizaci ${name}?`,
+    typeName: 'Napiš, čí je ta vlajka',
+    inputPlaceholderName: 'Název…',
     check: 'Zkontrolovat',
     dontKnow: 'Nevím',
     correct: 'Správně!',
@@ -309,6 +316,9 @@ export const cs = {
     worldDesc: 'Státy světa',
     territories: 'Území',
     territoriesDesc: 'Bonusová sada závislých území',
+    organizations: 'Organizace',
+    organizationsDesc: 'Bonusová sada vlajek mezinárodních organizací',
+    organizationsNote: 'Mezinárodní organizace – nemá hlavní město ani místo na mapě.',
   },
   settings: {
     title: 'Nastavení',

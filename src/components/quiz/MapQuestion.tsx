@@ -73,6 +73,7 @@ export function MapQuestion({
     () =>
       options.flatMap((code) => {
         const country = requireCountry(code);
+        if (country.lng === null || country.lat === null) return [];
         const point = project(country.lng, country.lat);
         return point ? [{ code, x: point[0], y: point[1], name: country.nameCs }] : [];
       }),

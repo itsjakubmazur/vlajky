@@ -199,3 +199,39 @@ ${transplant(emblem, w, h)}
   writeFileSync(join(OUT, 'gb-nir.svg'), svg, 'utf8');
   console.log('✓ gb-nir.svg – Severní Irsko, poměr 3:5');
 }
+
+// --- Vlajky organizací: pole ve skutečném poměru, znak přenesený ----------
+//
+// `flag-icons` je kreslí do 4:3 jako všechno ostatní, skutečný poměr obou je
+// 2:3 (Flags of the World, flaggenlexikon.de). Pole je u obou jednobarevné
+// a znak je uprostřed, takže platí totéž co u ostatních oprav: pole si
+// nakreslíme, znak přeneseme rovnoměrným zvětšením kolem středu.
+//
+// OSN a EU tady nejsou: jejich vlajky jsou v `data/flags-override/` převzaté
+// z noto-emoji (rendery z Wikipedie, public domain), takže se nic přenášet
+// nemusí.
+for (const org of [
+  {
+    code: 'arab',
+    field: '#006233',
+    background: /<path fill="#006233"[^>]*\/>/,
+    note: 'Liga arabských států – poměr 2:3. Pole dopočítané, znak přenesený z flag-icons (MIT).',
+  },
+  {
+    code: 'asean',
+    field: '#0039a6',
+    background: /<path fill="#0039a6"[^>]*\/>/,
+    note: 'ASEAN – poměr 2:3. Pole dopočítané, znak (kruh a klasy rýže) přenesený z flag-icons (MIT).',
+  },
+]) {
+  const w = 900;
+  const h = 600;
+  const emblem = emblemOf(org.code, org.background);
+  const svg = `${header(org.note)}<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${w} ${h}">
+  <path fill="${org.field}" d="M0 0h${w}v${h}H0Z"/>
+${transplant(emblem, w, h)}
+</svg>
+`;
+  writeFileSync(join(OUT, `${org.code}.svg`), svg, 'utf8');
+  console.log(`✓ ${org.code}.svg – poměr 2:3`);
+}

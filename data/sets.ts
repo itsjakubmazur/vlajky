@@ -1,7 +1,7 @@
 import { WORLD_SET } from '@/config/app';
 import { CONTINENTS, type Continent, type Country } from '@/domain/types';
 
-export type SetId = 'world' | 'territories';
+export type SetId = 'world' | 'territories' | 'organizations';
 
 export interface FlagSet {
   id: SetId;
@@ -20,6 +20,10 @@ export const SETS: Record<SetId, FlagSet> = {
   territories: {
     id: 'territories',
     filter: (c) => c.sovereignty === 'territory',
+  },
+  organizations: {
+    id: 'organizations',
+    filter: (c) => c.sovereignty === 'organization',
   },
 };
 

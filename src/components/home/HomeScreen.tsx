@@ -13,6 +13,7 @@ import { bossesFor } from '@/domain/game/bosses';
 import { dayKey } from '@/domain/game/day';
 import { APP_NAME } from '@/config/app';
 import { ROUTES, SLUG_BY_MODE } from '@/config/routes';
+import { playableWith } from '@/domain/quiz/modes';
 import { cs } from '@/i18n/cs';
 import { useProgress } from '@/store/StoreProvider';
 import { ButtonLink, Eyebrow, Panel, ProgressBar, ProgressRing } from '@/components/ui';
@@ -244,7 +245,7 @@ export function HomeScreen() {
 
       <h2 className="eyebrow mb-3 mt-7">{cs.home.modes}</h2>
       <div className="stagger flex flex-col gap-2.5">
-        {MODE_CARDS.map(({ mode, flags }) => {
+        {MODE_CARDS.filter(({ mode }) => playableWith(mode, pool)).map(({ mode, flags }) => {
           const record = progress.meta.records[`${mode}:${region}`];
           return (
             <Link
