@@ -218,6 +218,22 @@ export function HomeScreen() {
           </ButtonLink>
         </Panel>
 
+        {/* Malá násobilka – jiný předmět, vlastní kout aplikace. */}
+        <Link
+          href={ROUTES.math}
+          className="glass touch-target flex items-center gap-4 rounded-glass px-4 py-3 transition-[border-color,transform] duration-200 hover:border-white/25 active:scale-[0.99]"
+        >
+          <span className="display flex w-[4.5rem] shrink-0 items-center justify-center text-2xl tabular-nums text-mint">
+            7×8
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="display block text-lg leading-tight">{cs.math.title}</span>
+            <span className="mt-0.5 block text-[0.78rem] leading-snug text-faint">
+              {cs.math.desc}
+            </span>
+          </span>
+        </Link>
+
         {/* Souboje se zrádnými dvojicemi. */}
         <Link
           href={ROUTES.bosses}

@@ -6,7 +6,7 @@ import type { History } from '@/domain/game/history';
 import type { PartyState } from '@/domain/game/party';
 
 /** Verze schématu – při změně tvaru dat se postup zmigruje, ne zahodí. */
-export const SCHEMA_VERSION = 4;
+export const SCHEMA_VERSION = 5;
 
 /** Nejlepší výkon v daném režimu. */
 export interface GameRecord {
@@ -63,10 +63,32 @@ export interface Meta {
   hapticsOn: boolean;
 }
 
+/**
+ * Postup v malé násobilce.
+ *
+ * Má vlastní místo, ne společné s vlajkami: `cards` u vlajek čte album,
+ * přehled i plánovač a `log` se čte přes `requireCountry`. Karta `7x8` mezi
+ * nimi by jim nedávala smysl. Body se taky nesčítají – hodnost je za vlajky,
+ * ne za počítání.
+ */
+export interface MathProgress {
+  cards: Record<string, CardState>;
+  /** Rekordy podle toho, co se procvičovalo (`all` nebo číslo řady). */
+  records: Record<string, GameRecord>;
+  totalAnswers: number;
+  totalPoints: number;
+}
+
+export function emptyMath(): MathProgress {
+  return { cards: {}, records: {}, totalAnswers: 0, totalPoints: 0 };
+}
+
 export interface Progress {
   schemaVersion: number;
   cards: Record<string, CardState>;
   meta: Meta;
+  /** Malá násobilka – vedle vlajek, ne mezi nimi. */
+  math: MathProgress;
   /** Posledních pár set odpovědí – na statistiky ve fázi 2. */
   log: AnswerLog[];
   /**
@@ -116,6 +138,7 @@ export function emptyProgress(): Progress {
       hapticsOn: true,
     },
     log: [],
+    math: emptyMath(),
     savedAt: null,
   };
 }
@@ -206,7 +229,7 @@ export abstract class BaseProgressStore implements ProgressStore {
  * Doplní chybějící pole z prázdného stavu a ořeže log.
  *
  * Schéma 1 → 2 přidalo body, rekordy a souboje, 2 → 3 výsledky
- * rozřazovacího testu, 3 → 4 čas posledního uložení. Chybějící pole se
+ * rozřazovacího testu, 3 → 4 čas posledního uložení, 4 → 5 malou násobilku. Chybějící pole se
  * doplní, takže postup ve vlajkách se nikdy nezahazuje.
  */
 export function migrate(input: Progress | null | undefined): Progress {
@@ -217,6 +240,7 @@ export function migrate(input: Progress | null | undefined): Progress {
     cards: isRecord(input.cards) ? input.cards : {},
     meta: { ...base.meta, ...(isRecord(input.meta) ? input.meta : {}) },
     log: Array.isArray(input.log) ? input.log.slice(-LOG_LIMIT) : [],
+    math: { ...base.math, ...(isRecord(input.math) ? input.math : {}) },
     savedAt: typeof input.savedAt === 'string' ? input.savedAt : null,
   };
 }

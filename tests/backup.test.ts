@@ -3,6 +3,7 @@ import { backupFileName, decodeBackup, encodeBackup } from '@/store/backup';
 import { mergeProgress } from '@/store/merge';
 import { emptyProgress, SCHEMA_VERSION, type Progress } from '@/store/ProgressStore';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
+import type { CardState } from '@/domain/srs/types';
 
 function withCard(code: string, at: string, correct = true): Progress {
   const progress = emptyProgress();
@@ -171,6 +172,46 @@ describe('spojení dvou zařízení', () => {
 
     expect(mergeProgress(older, newer).meta.theme).toBe('theme-aurora');
     expect(mergeProgress(newer, older).meta.theme).toBe('theme-aurora');
+  });
+
+  it('násobilka se spojí stejně jako vlajky', () => {
+    const tablet = emptyProgress();
+    const card = {
+      code: '6x7',
+      mastery: 'silver',
+      seen: 4,
+      correct: 4,
+      streak: 4,
+      typedCorrect: 4,
+      updatedAt: '2026-05-01T10:00:00.000Z',
+    } as unknown as CardState;
+    tablet.math.cards['6x7'] = card;
+    tablet.math.totalAnswers = 40;
+    tablet.math.records['all'] = {
+      points: 3000,
+      correct: 20,
+      total: 20,
+      bestCombo: 20,
+      elapsedMs: 1,
+      at: '2026-05-01T00:00:00.000Z',
+    };
+
+    const phone = emptyProgress();
+    phone.math.cards['8x9'] = { ...card, code: '8x9' };
+    phone.math.totalAnswers = 12;
+    phone.math.records['all'] = {
+      points: 1000,
+      correct: 15,
+      total: 20,
+      bestCombo: 6,
+      elapsedMs: 1,
+      at: '2026-05-02T00:00:00.000Z',
+    };
+
+    const merged = mergeProgress(tablet, phone);
+    expect(Object.keys(merged.math.cards).sort()).toEqual(['6x7', '8x9']);
+    expect(merged.math.records['all']?.points).toBe(3000);
+    expect(merged.math.totalAnswers).toBe(40);
   });
 
   it('rozřazovací test zůstane hotový, i když ho druhé zařízení nezná', () => {

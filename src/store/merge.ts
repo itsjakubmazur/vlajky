@@ -1,6 +1,12 @@
 import type { CardState } from '@/domain/srs/types';
 import { HISTORY_DAYS } from '@/domain/game/history';
-import { LOG_LIMIT, migrate, type GameRecord, type Progress } from './ProgressStore';
+import {
+  LOG_LIMIT,
+  migrate,
+  type GameRecord,
+  type MathProgress,
+  type Progress,
+} from './ProgressStore';
 
 /**
  * Sloučí dva postupy do jednoho.
@@ -63,6 +69,7 @@ export function mergeProgress(a: Progress, b: Progress): Progress {
   return {
     schemaVersion: newer.schemaVersion,
     cards,
+    math: mergeMath(left.math, right.math),
     log: mergeLog(left.log, right.log),
     savedAt: laterOf(left.savedAt, right.savedAt),
     meta: {
@@ -83,6 +90,28 @@ export function mergeProgress(a: Progress, b: Progress): Progress {
       // si ho rodina předává. Zůstane ten z novějšího postupu.
       party: newer.meta.party,
     },
+  };
+}
+
+/** Násobilka se spojuje stejnými pravidly jako vlajky – jen má svůj kout. */
+function mergeMath(left: MathProgress, right: MathProgress): MathProgress {
+  const cards: Record<string, CardState> = { ...left.cards };
+  for (const [key, card] of Object.entries(right.cards)) {
+    const mine = cards[key];
+    cards[key] = !mine || card.updatedAt > mine.updatedAt ? card : mine;
+  }
+
+  const records: Record<string, GameRecord> = { ...left.records };
+  for (const [scope, record] of Object.entries(right.records)) {
+    const mine = records[scope];
+    if (!mine || record.points > mine.points) records[scope] = record;
+  }
+
+  return {
+    cards,
+    records,
+    totalAnswers: Math.max(left.totalAnswers, right.totalAnswers),
+    totalPoints: Math.max(left.totalPoints, right.totalPoints),
   };
 }
 

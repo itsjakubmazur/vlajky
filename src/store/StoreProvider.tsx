@@ -76,6 +76,10 @@ interface ProgressContextValue {
   /** Uzavře kolo: připíše body a případně zapíše rekord. */
   finishRound: (mode: string, tally: RoundTally) => Promise<RoundOutcome>;
   beatBoss: (bossId: string) => Promise<void>;
+  /** Odpověď v malé násobilce. Plánovač vlajek se jí nedotkne. */
+  recordMathAnswer: (key: string, input: AnswerInput) => Promise<AnswerOutcome>;
+  /** Uzavře kolo násobilky: připíše body a případně zapíše rekord. */
+  finishMathRound: (scope: string, tally: RoundTally) => Promise<RoundOutcome>;
   saveDaily: (result: DailyResult) => Promise<void>;
   claimMission: (day: string, missionId: string, reward: number) => Promise<void>;
 }
@@ -237,6 +241,53 @@ export function ProgressProvider({
     [],
   );
 
+  const recordMathAnswer = useCallback(
+    async (key: string, input: AnswerInput): Promise<AnswerOutcome> => {
+      const now = new Date();
+      const current = progress.math.cards[key] ?? emptyCardState(key, now);
+      const before = current.mastery;
+      const card = applyAnswer(current, input, now);
+
+      const updated = await storeRef.current.update((draft) => {
+        draft.math.cards[key] = card;
+        draft.math.totalAnswers += 1;
+        // Série dní se počítá i za počítání – je to pořád každodenní cvičení.
+        const today = dayKey(now);
+        draft.meta.streakDays = nextStreak(draft.meta, today);
+        draft.meta.lastPlayedDay = today;
+      });
+      setProgress({ ...updated });
+
+      return { before, after: card.mastery, levelUp: isLevelUp(before, card.mastery), card };
+    },
+    [progress],
+  );
+
+  const finishMathRound = useCallback(
+    async (scope: string, tally: RoundTally): Promise<RoundOutcome> => {
+      const record: GameRecord = {
+        points: tally.points,
+        correct: tally.correct,
+        total: tally.total,
+        bestCombo: tally.bestCombo,
+        elapsedMs: tally.elapsedMs,
+        at: new Date().toISOString(),
+      };
+
+      let previous: GameRecord | null = null;
+      let isRecord = false;
+      const updated = await storeRef.current.update((draft) => {
+        previous = draft.math.records[scope] ?? null;
+        isRecord = !previous || tally.points > previous.points;
+        draft.math.totalPoints += tally.points;
+        if (isRecord) draft.math.records = { ...draft.math.records, [scope]: record };
+      });
+      setProgress({ ...updated });
+      return { isRecord, previous };
+    },
+    [],
+  );
+
   const beatBoss = useCallback(async (bossId: string) => {
     const updated = await storeRef.current.update((draft) => {
       if (draft.meta.bossesBeaten.includes(bossId)) return;
@@ -296,6 +347,8 @@ export function ProgressProvider({
       restore,
       finishRound,
       beatBoss,
+      recordMathAnswer,
+      finishMathRound,
       saveDaily,
       claimMission,
     }),
@@ -314,6 +367,8 @@ export function ProgressProvider({
       restore,
       finishRound,
       beatBoss,
+      recordMathAnswer,
+      finishMathRound,
       saveDaily,
       claimMission,
     ],

@@ -1,7 +1,8 @@
 # CLAUDE.md
 
 Webová aplikace na učení vlajek světa. Česky, bez reklam, pro osmiletého
-testera, který už vlajky umí hodně dobře.
+testera, který už vlajky umí hodně dobře. Vedle vlajek má svůj kout i **malá
+násobilka** – je to jiný předmět, ale tentýž tester a tentýž tablet.
 
 ## Stav fází
 
@@ -15,6 +16,7 @@ testera, který už vlajky umí hodně dobře.
 | **1f – Roztřiď** | ✅ hotovo | pět vlajek najednou na světadíly tažením prstu, názvy až ve vyhodnocení |
 | **1g – postup** | ✅ hotovo | oprava ztrácení postupu, záloha do souboru, spojení dvou zařízení |
 | **1h – organizace** | ✅ hotovo | sada 11 vlajek organizací: OSN, EU, NATO, olympijská, paralympijská, Červený kříž, WHO, UNESCO, Africká unie, Arabská liga, ASEAN |
+| **1i – násobilka** | ✅ hotovo | malá násobilka v náhodném pořadí, vlastní numerická klávesnice, plánovač a rekordy stranou od vlajek |
 | 2 – Supabase | 🟦 rozdělaná | ✅ přihlášení e-mailem a synchronizace postupu; ⬜ rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
@@ -72,6 +74,7 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `scripts/make-overrides.ts` | generátor těch oprav (spouští se ručně) |
 | `src/domain/answer/match.ts` | vyhodnocení napsané odpovědi |
 | `src/domain/quiz/` | distraktory, režimy, sestavení hry, vzdálenosti pro mapu |
+| `src/domain/math/` | malá násobilka: příklady a sestavení kola |
 | `src/domain/srs/` | FSRS, úrovně zvládnutí, rozřazovací vzorek, přehled slabin |
 | `src/domain/game/` | body, hodnosti, souboje, denní výzva, mise, odemykání, „co hrát teď“ |
 | `src/store/ProgressStore.ts` | rozhraní úložiště + `BaseProgressStore` |
@@ -449,6 +452,53 @@ nepodařilo (co se našlo, byly překreslené verze v cizím poměru stran).
 Stejně dopadly Frankofonie, Mercosur a Severská rada – jejich soubory sice
 k mání jsou, ale buď se nevykreslí, nebo u nich nejde ověřit skutečný poměr
 stran.
+
+## Malá násobilka
+
+Jiný předmět na stejném tabletu. Zadání od táty: *„Řada mu jde dobře, ale když
+to je náhodně, tak ještě má rezervy.“* Z toho plyne všechno ostatní.
+
+**Náhodné pořadí je celá pointa.** Nestačí zamíchat: po zamíchání se pořadí
+ještě rozhází tak, aby dva příklady po sobě neměly společného činitele. Bez
+toho vznikaly shluky („6×7, 7×8, 3×7“) a z náhody se zpátky stávala řada.
+Dělá se to nadvakrát – greedy průchod a pak oprava prohozením – protože
+samotný greedy na konci došly příklady, které se hodí. Změřeno: ve 300 kolech
+nezbylo ani jedno sousedství se společným činitelem. V jedné vybrané řadě to
+z podstaty nejde, tam se to vzdá a jede dál.
+
+**Výsledek se píše, nevybírá.** Osmiletý to řekl rovnou: kdyby měl na výběr,
+je to moc jednoduché. Klávesnice je **vlastní**, ne systémová – ta na telefonu
+vyjede přes půl obrazovky, překryje příklad a při každém příkladu se znovu
+objevuje a mizí. Hardwarová klávesnice funguje taky (číslice, Backspace,
+Enter), takže na tabletu v pouzdře i na počítači jde psát normálně.
+
+**7×8 a 8×7 je jedna karta.** Pro plánovače je to tatáž znalost, takže klíč je
+vždycky `menší×větší` a při otázce se losuje pořadí. Dvě karty by znamenaly,
+že se polovina opakování ptá podruhé na totéž. Příkladů je proto 55, ne 100.
+
+**Obtížnost se počítá z činitelů**, ne odhadem: řady 1 a 10 jsou přepsání
+čísla, 2 a 5 má dítě z počítání po dvou a po pěti, čtverce se pamatují jako
+celek. Co zbyde (6×7, 7×8, 8×9), je to, kde se doopravdy chybuje.
+
+**Plánovač i bodování jsou tytéž jako u vlajek** – FSRS, úrovně zvládnutí,
+body za rychlost a sérii. Co dítě neumí, přijde na řadu dřív; zlato se dá
+získat, protože se vždycky píše.
+
+**Postup násobilky je ale vedle vlajek, ne mezi nimi** (`progress.math`).
+Karta `7x8` v `progress.cards` by nedávala smysl albu, přehledu ani plánovači
+vlajek a v logu by ji `requireCountry` neuměl přečíst. Body se taky nesčítají:
+hodnost je za vlajky, ne za počítání. Ověřeno v prohlížeči – po odehraném kole
+násobilky se v uloženém postupu změní jen `math`, série dní a čas uložení.
+
+**Série dní se počítá i za násobilku.** Je to pořád každodenní cvičení na
+stejném zařízení a trestat dítě za to, že si místo vlajek počítalo, by bylo
+proti smyslu té série.
+
+**Po chybě se nikdy nejede dál samo** – jako u vlajek. Správná odpověď svítí
+**mátově i po chybě**: v rámečku je ten správný výsledek, takže obarvit ho na
+červeno by tvrdilo, že je špatný. Že se dítě spletlo, říká roztřesení příkladu
+a korálové „Napsal jsi…“. Spodek obrazovky má v obou stavech pevnou výšku,
+jinak by příklad při chybě poskočil.
 
 ## Konvence
 
