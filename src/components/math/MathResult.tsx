@@ -1,8 +1,8 @@
 'use client';
 
 import { cs } from '@/i18n/cs';
-import type { FactRange } from '@/domain/math/facts';
-import { requireFact } from '@/domain/math/facts';
+import type { FactRange, OperationChoice } from '@/domain/math/facts';
+import { recordScope, type MathQuestion } from '@/domain/math/session';
 import type { RoundTally } from '@/domain/game/score';
 import { ROUTES } from '@/config/routes';
 import { useProgress, type RoundOutcome } from '@/store/StoreProvider';
@@ -12,21 +12,23 @@ import { Confetti } from '@/components/Confetti';
 
 export function MathResult({
   range,
+  operation,
   tally,
   outcome,
   missed,
   onAgain,
 }: {
   range: FactRange;
+  operation: OperationChoice;
   tally: RoundTally;
   outcome: RoundOutcome | null;
-  missed: string[];
+  missed: MathQuestion[];
   onAgain: () => void;
 }) {
   const { progress } = useProgress();
   const points = useCountUp(tally.points, 1100);
   const isRecord = outcome?.isRecord ?? false;
-  const best = progress.math.records[range === null ? 'all' : String(range)];
+  const best = progress.math.records[recordScope(range, operation)];
   const perfect = tally.correct === tally.total && tally.total > 0;
 
   return (
@@ -74,17 +76,16 @@ export function MathResult({
         <Panel>
           <Eyebrow>{cs.math.missedTitle}</Eyebrow>
           <div className="mt-3 flex flex-wrap gap-2">
-            {[...new Set(missed)].map((key) => {
-              const fact = requireFact(key);
-              return (
-                <span
-                  key={key}
-                  className="glass-thin display rounded-2xl px-3 py-2 text-base tabular-nums"
-                >
-                  {fact.a} × {fact.b} = <span className="text-mint">{fact.product}</span>
-                </span>
-              );
-            })}
+            {/* Ukáže se přesně to, na co se kolo ptalo – 56 : 8, ne 7 × 8. */}
+            {unique(missed).map((question) => (
+              <span
+                key={`${question.left}${question.op}${question.right}`}
+                className="glass-thin display rounded-2xl px-3 py-2 text-base tabular-nums"
+              >
+                {question.left} {cs.math.sign[question.op]} {question.right} ={' '}
+                <span className="text-mint">{question.answer}</span>
+              </span>
+            ))}
           </div>
         </Panel>
       ) : null}
@@ -97,4 +98,15 @@ export function MathResult({
       </div>
     </div>
   );
+}
+
+/** Stejný příklad dvakrát za kolo se v přehledu ukáže jednou. */
+function unique(questions: MathQuestion[]): MathQuestion[] {
+  const seen = new Set<string>();
+  return questions.filter((question) => {
+    const id = `${question.left}${question.op}${question.right}`;
+    if (seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
 }

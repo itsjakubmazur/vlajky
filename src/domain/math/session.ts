@@ -2,7 +2,16 @@ import type { CardState } from '../srs/types';
 import { isDue, isNew } from '../srs/scheduler';
 import { masteryRank } from '../srs/mastery';
 import { shuffle, type Rng } from '../rng';
-import { factsInRange, requireFact, type Fact, type FactRange } from './facts';
+import {
+  cardKey,
+  factsInRange,
+  operationsOf,
+  parseCardKey,
+  type Fact,
+  type FactRange,
+  type Operation,
+  type OperationChoice,
+} from './facts';
 
 /** Kolik příkladů má jedno kolo. */
 export const ROUND_LENGTH = 20;
@@ -10,10 +19,15 @@ export const ROUND_LENGTH = 20;
 export interface MathQuestion {
   /** Klíč karty – menší činitel první, nezávisle na pořadí v otázce. */
   key: string;
-  /** Jak se příklad ukáže. Pořadí se losuje, karta je jedna. */
+  op: Operation;
+  /**
+   * Jak se příklad ukáže: `left × right` nebo `left : right`. U násobení se
+   * losuje pořadí činitelů, u dělení dělitel – karta je pokaždé jedna.
+   */
   left: number;
   right: number;
-  product: number;
+  /** Co má dítě napsat. */
+  answer: number;
 }
 
 export interface RoundOptions {
@@ -21,7 +35,28 @@ export interface RoundOptions {
   now: Date;
   rng: Rng;
   range?: FactRange;
+  /** Násobení, dělení, nebo obojí namíchané. Výchozí je násobení. */
+  operation?: OperationChoice;
   length?: number;
+}
+
+/** Jedna karta v kole: příklad a operace, kterou se na něj ptá. */
+interface Item {
+  fact: Fact;
+  op: Operation;
+  key: string;
+}
+
+/** Pod jakým klíčem se vede rekord. Násobení má staré klíče kvůli postupu. */
+export function recordScope(range: FactRange, operation: OperationChoice): string {
+  const base = range === null ? 'all' : String(range);
+  return operation === 'mul' ? base : `${operation}:${base}`;
+}
+
+/** Všechny karty, které do výběru patří (pro „x z y zvládnutých“). */
+export function cardKeysFor(range: FactRange, operation: OperationChoice): string[] {
+  const ops = operationsOf(operation);
+  return factsInRange(range).flatMap((fact) => ops.map((op) => cardKey(fact, op)));
 }
 
 /**
@@ -41,23 +76,27 @@ export function buildRound({
   now,
   rng,
   range = null,
+  operation = 'mul',
   length = ROUND_LENGTH,
 }: RoundOptions): MathQuestion[] {
-  const pool = factsInRange(range);
+  const ops = operationsOf(operation);
+  const pool: Item[] = factsInRange(range).flatMap((fact) =>
+    ops.map((op) => ({ fact, op, key: cardKey(fact, op) })),
+  );
 
-  const due: Fact[] = [];
-  const fresh: Fact[] = [];
-  const rest: Fact[] = [];
-  for (const fact of pool) {
-    const card = cards[fact.key];
-    if (!card || isNew(card)) fresh.push(fact);
-    else if (isDue(card, now)) due.push(fact);
-    else rest.push(fact);
+  const due: Item[] = [];
+  const fresh: Item[] = [];
+  const rest: Item[] = [];
+  for (const item of pool) {
+    const card = cards[item.key];
+    if (!card || isNew(card)) fresh.push(item);
+    else if (isDue(card, now)) due.push(item);
+    else rest.push(item);
   }
 
   // Uvnitř skupiny rozhoduje, jak moc to dítěti jde; při shodě se losuje,
   // aby každé kolo nezačínalo stejnou pěticí.
-  const byWeakest = (list: Fact[]) =>
+  const byWeakest = (list: Item[]) =>
     shuffle(list, rng).sort((x, y) => score(cards[x.key]) - score(cards[y.key]));
 
   const chosen = [...byWeakest(due), ...byWeakest(fresh), ...byWeakest(rest)].slice(0, length);
@@ -68,7 +107,7 @@ export function buildRound({
     chosen.push(...shuffle(pool, rng).slice(0, length - chosen.length));
   }
 
-  return spread(shuffle(chosen, rng), rng).map((fact) => toQuestion(fact, rng));
+  return spread(shuffle(chosen, rng), rng).map((item) => toQuestion(item, rng));
 }
 
 /** Nižší číslo = horší znalost, tedy dřív na řadě. */
@@ -80,6 +119,8 @@ function score(card: CardState | undefined): number {
 
 /**
  * Rozhází pořadí tak, aby dva příklady po sobě neměly společného činitele.
+ * U dělení se počítá s činiteli, ze kterých vzniklo: 56 : 7 hned po 7 × 8
+ * by byl tentýž příklad podruhé, jen pozpátku.
  *
  * Dvě fáze. Nejdřív se bere vždycky první příklad, který se k předchozímu
  * nehodí – pořadí se tím jinak nemění, takže výběr zůstane náhodný. Na konci
@@ -90,8 +131,8 @@ function score(card: CardState | undefined): number {
  * zůstane to tak. Jedno takové sousedství z dvaceti příkladů z náhodného
  * pořadí ještě řadu neudělá.
  */
-function spread(facts: Fact[], rng: Rng): Fact[] {
-  const out: Fact[] = [];
+function spread(facts: Item[], rng: Rng): Item[] {
+  const out: Item[] = [];
   const left = [...facts];
   while (left.length > 0) {
     const previous = out[out.length - 1];
@@ -116,24 +157,32 @@ function spread(facts: Fact[], rng: Rng): Fact[] {
 }
 
 /** Sedl by `fact` na pozici `index`, aniž by se dotkl svých sousedů? */
-function fits(order: Fact[], index: number, fact: Fact): boolean {
+function fits(order: Item[], index: number, fact: Item): boolean {
   return !shares(fact, order[index - 1]) && !shares(fact, order[index + 1]);
 }
 
-function shares(fact: Fact, previous: Fact | undefined): boolean {
-  if (!previous) return false;
+function shares(item: Item, before: Item | undefined): boolean {
+  if (!before) return false;
+  const fact = item.fact;
+  const previous = before.fact;
   return (
     fact.a === previous.a || fact.a === previous.b || fact.b === previous.a || fact.b === previous.b
   );
 }
 
-function toQuestion(fact: Fact, rng: Rng): MathQuestion {
+function toQuestion({ fact, op, key }: Item, rng: Rng): MathQuestion {
   const flipped = rng() < 0.5;
+  if (op === 'div') {
+    // 56 : 7 nebo 56 : 8 – dělitel se losuje, výsledek je ten druhý činitel.
+    const divisor = flipped ? fact.b : fact.a;
+    return { key, op, left: fact.product, right: divisor, answer: fact.product / divisor };
+  }
   return {
-    key: fact.key,
+    key,
+    op,
     left: flipped ? fact.b : fact.a,
     right: flipped ? fact.a : fact.b,
-    product: fact.product,
+    answer: fact.product,
   };
 }
 
@@ -146,8 +195,9 @@ export function weakestFacts(
     .filter((card) => card.seen >= 2 && card.correct < card.seen)
     .map((card) => ({ key: card.code, wrong: card.seen - card.correct, seen: card.seen }))
     .sort((x, y) => y.wrong / y.seen - x.wrong / x.seen || y.wrong - x.wrong)
-    .slice(0, count)
-    .filter((entry) => requireFact(entry.key) !== undefined);
+    // Karta s klíčem, který neznáme (třeba ze starší verze), se vynechá.
+    .filter((entry) => parseCardKey(entry.key) !== null)
+    .slice(0, count);
 }
 
 /** Kolik příkladů má dítě zvládnutých (aspoň stříbro). */

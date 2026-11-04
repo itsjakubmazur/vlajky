@@ -16,7 +16,7 @@ násobilka** – je to jiný předmět, ale tentýž tester a tentýž tablet.
 | **1f – Roztřiď** | ✅ hotovo | pět vlajek najednou na světadíly tažením prstu, názvy až ve vyhodnocení |
 | **1g – postup** | ✅ hotovo | oprava ztrácení postupu, záloha do souboru, spojení dvou zařízení |
 | **1h – organizace** | ✅ hotovo | sada 11 vlajek organizací: OSN, EU, NATO, olympijská, paralympijská, Červený kříž, WHO, UNESCO, Africká unie, Arabská liga, ASEAN |
-| **1i – násobilka** | ✅ hotovo | malá násobilka v náhodném pořadí, vlastní numerická klávesnice, plánovač a rekordy stranou od vlajek |
+| **1i – násobilka** | ✅ hotovo | malá násobilka (násobení i dělení) v náhodném pořadí, vlastní numerická klávesnice, plánovač a rekordy stranou od vlajek |
 | 2 – Supabase | 🟦 rozdělaná | ✅ přihlášení e-mailem a synchronizace postupu; ⬜ rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
@@ -74,7 +74,7 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `scripts/make-overrides.ts` | generátor těch oprav (spouští se ručně) |
 | `src/domain/answer/match.ts` | vyhodnocení napsané odpovědi |
 | `src/domain/quiz/` | distraktory, režimy, sestavení hry, vzdálenosti pro mapu |
-| `src/domain/math/` | malá násobilka: příklady a sestavení kola |
+| `src/domain/math/` | malá násobilka: příklady, násobení a dělení, sestavení kola |
 | `src/domain/srs/` | FSRS, úrovně zvládnutí, rozřazovací vzorek, přehled slabin |
 | `src/domain/game/` | body, hodnosti, souboje, denní výzva, mise, odemykání, „co hrát teď“ |
 | `src/store/ProgressStore.ts` | rozhraní úložiště + `BaseProgressStore` |
@@ -475,6 +475,16 @@ Enter), takže na tabletu v pouzdře i na počítači jde psát normálně.
 **7×8 a 8×7 je jedna karta.** Pro plánovače je to tatáž znalost, takže klíč je
 vždycky `menší×větší` a při otázce se losuje pořadí. Dvě karty by znamenaly,
 že se polovina opakování ptá podruhé na totéž. Příkladů je proto 55, ne 100.
+
+**Dělení je vlastní karta** (`div:7x8`), protože 56 : 7 dítě umí později než
+7 × 8 – je to jiná znalost. Uvnitř dělení ale platí totéž co výš: 56 : 7
+a 56 : 8 je jedna karta a dělitel se losuje. Klíč násobení zůstal `7x8`, aby
+se nerozbil postup, který už v zařízeních je; z téhož důvodu mají rekordy
+násobení starý klíč (`all`, `7`) a dělení s mixem předponu (`div:all`,
+`mix:7`). Výchozí je **obojí namíchané** – dělení se má učit spolu
+s násobením, ne až potom. Rozhazování pořadí počítá u dělení s činiteli,
+ze kterých vzniklo: 56 : 7 hned po 7 × 8 by byl tentýž příklad pozpátku.
+Dělí se dvojtečkou, jako v české škole.
 
 **Obtížnost se počítá z činitelů**, ne odhadem: řady 1 a 10 jsou přepsání
 čísla, 2 a 5 má dítě z počítání po dvou a po pěti, čtverce se pamatují jako

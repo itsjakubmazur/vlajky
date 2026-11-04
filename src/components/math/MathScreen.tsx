@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { cs } from '@/i18n/cs';
 import { ROUTES } from '@/config/routes';
-import { factsInRange, requireFact, type FactRange } from '@/domain/math/facts';
+import { cardExample, type FactRange, type OperationChoice } from '@/domain/math/facts';
 import { masteryRank } from '@/domain/srs/mastery';
-import { weakestFacts } from '@/domain/math/session';
+import { cardKeysFor, recordScope, weakestFacts } from '@/domain/math/session';
 import { useProgress } from '@/store/StoreProvider';
 import { Button, Eyebrow, Panel, ProgressBar } from '@/components/ui';
 import { MathRound } from './MathRound';
@@ -14,9 +14,17 @@ import { MathRound } from './MathRound';
 /** Řady, které jdou procvičovat zvlášť. Jednička by byla jen přepisování. */
 const ROWS: FactRange[] = [null, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+/** Obojí je první: dělení se má učit spolu s násobením, ne až potom. */
+const OPERATIONS: { value: OperationChoice; label: string }[] = [
+  { value: 'mix', label: cs.math.opMix },
+  { value: 'mul', label: cs.math.opMul },
+  { value: 'div', label: cs.math.opDiv },
+];
+
 export function MathScreen() {
   const { ready, progress } = useProgress();
   const [range, setRange] = useState<FactRange>(null);
+  const [operation, setOperation] = useState<OperationChoice>('mix');
   const [playing, setPlaying] = useState(false);
   // Kolo se losuje při připojení komponenty, takže „ještě jednou“ musí
   // vyrobit nové – jinak by se opakovalo totéž pořadí příkladů.
@@ -25,19 +33,20 @@ export function MathScreen() {
   const cards = progress.math.cards;
 
   const stats = useMemo(() => {
-    const facts = factsInRange(range);
-    const done = facts.filter((fact) => masteryRank(cards[fact.key]?.mastery ?? 'new') >= 2).length;
-    return { done, total: facts.length };
-  }, [cards, range]);
+    const keys = cardKeysFor(range, operation);
+    const done = keys.filter((key) => masteryRank(cards[key]?.mastery ?? 'new') >= 2).length;
+    return { done, total: keys.length };
+  }, [cards, range, operation]);
 
   const weak = useMemo(() => weakestFacts(cards), [cards]);
-  const best = progress.math.records[range === null ? 'all' : String(range)];
+  const best = progress.math.records[recordScope(range, operation)];
 
   if (playing) {
     return (
       <MathRound
-        key={`${range ?? 'all'}-${round}`}
+        key={`${operation}-${range ?? 'all'}-${round}`}
         range={range}
+        operation={operation}
         onAgain={() => setRound((value) => value + 1)}
       />
     );
@@ -69,7 +78,25 @@ export function MathScreen() {
       </Panel>
 
       <Panel className="mb-3">
-        <Eyebrow>{cs.math.rangeTitle}</Eyebrow>
+        <Eyebrow>{cs.math.opTitle}</Eyebrow>
+        <div className="-mx-1 mt-2.5 flex flex-wrap gap-2 px-1">
+          {OPERATIONS.map(({ value, label }) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setOperation(value)}
+              className={`rounded-pill px-4 py-2.5 text-[0.8rem] font-extrabold transition-colors ${
+                operation === value ? 'bg-ink text-abyss' : 'glass-thin text-muted hover:text-ink'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-4">
+          <Eyebrow>{cs.math.rangeTitle}</Eyebrow>
+        </div>
         <div className="-mx-1 mt-2.5 flex flex-wrap gap-2 px-1">
           {ROWS.map((value) => (
             <button
@@ -91,14 +118,15 @@ export function MathScreen() {
           <Eyebrow>{cs.math.weakTitle}</Eyebrow>
           <div className="mt-3 flex flex-wrap gap-2">
             {weak.map((entry) => {
-              const fact = requireFact(entry.key);
+              const example = cardExample(entry.key);
+              if (!example) return null;
               return (
                 <span
                   key={entry.key}
                   className="glass-thin flex flex-col items-center rounded-2xl px-3 py-2"
                 >
                   <span className="display text-base tabular-nums">
-                    {fact.a} × {fact.b}
+                    {example.left} {cs.math.sign[example.op]} {example.right}
                   </span>
                   <span className="text-[0.65rem] font-bold text-coral">
                     {cs.math.wrongCount(entry.wrong)}

@@ -1,8 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { buildRound, ROUND_LENGTH, type MathQuestion } from '@/domain/math/session';
-import type { FactRange } from '@/domain/math/facts';
+import { buildRound, recordScope, ROUND_LENGTH, type MathQuestion } from '@/domain/math/session';
+import type { FactRange, OperationChoice } from '@/domain/math/facts';
 import { clampElapsed, pointsFor, speedOf, type RoundTally } from '@/domain/game/score';
 import { isDue } from '@/domain/srs/scheduler';
 import { createRng } from '@/domain/rng';
@@ -15,7 +15,7 @@ export interface MathFeedback {
   correct: boolean;
   /** Co dítě napsalo – u chyby se to ukáže vedle správného výsledku. */
   given: number;
-  product: number;
+  answer: number;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface MathFeedback {
  * odpovědí a na sadě × části světa. Tady je otázka jen dvě čísla a odpověď
  * se píše, takže sdílet se vyplatí bodování a plánovač, ne celá smyčka.
  */
-export function useMathSession(range: FactRange) {
+export function useMathSession(range: FactRange, operation: OperationChoice) {
   const { ready, progress, recordMathAnswer, finishMathRound } = useProgress();
   const [index, setIndex] = useState(0);
   const [entry, setEntry] = useState('');
@@ -39,7 +39,7 @@ export function useMathSession(range: FactRange) {
     elapsedMs: 0,
   });
   const [combo, setCombo] = useState(0);
-  const [missed, setMissed] = useState<string[]>([]);
+  const [missed, setMissed] = useState<MathQuestion[]>([]);
   const [outcome, setOutcome] = useState<RoundOutcome | null>(null);
 
   const askedAt = useRef(Date.now());
@@ -71,9 +71,10 @@ export function useMathSession(range: FactRange) {
       now: new Date(),
       rng: createRng(Date.now()),
       range,
+      operation,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, range]);
+  }, [ready, range, operation]);
 
   const question = questions[index] ?? null;
   const finished = questions.length > 0 && index >= questions.length;
@@ -100,7 +101,7 @@ export function useMathSession(range: FactRange) {
   const submit = useCallback(() => {
     if (!question || feedback || entry === '') return;
     const given = Number(entry);
-    const correct = given === question.product;
+    const correct = given === question.answer;
     const elapsedMs = measureElapsed();
     const card = progress.math.cards[question.key];
 
@@ -112,7 +113,7 @@ export function useMathSession(range: FactRange) {
       difficulty: 3,
     });
 
-    setFeedback({ correct, given, product: question.product });
+    setFeedback({ correct, given, answer: question.answer });
     setCombo((value) => (correct ? value + 1 : 0));
     setTally((value) => ({
       points: value.points + gained,
@@ -122,7 +123,7 @@ export function useMathSession(range: FactRange) {
       flashCount: value.flashCount + (correct && speedOf(elapsedMs) === 'flash' ? 1 : 0),
       elapsedMs: 0,
     }));
-    if (!correct) setMissed((value) => [...value, question.key]);
+    if (!correct) setMissed((value) => [...value, question]);
 
     void recordMathAnswer(question.key, {
       correct,
@@ -155,9 +156,9 @@ export function useMathSession(range: FactRange) {
     if (!finished || settled.current) return;
     settled.current = true;
     const final = { ...tally, elapsedMs: Date.now() - roundStart.current };
-    void finishMathRound(range === null ? 'all' : String(range), final).then(setOutcome);
+    void finishMathRound(recordScope(range, operation), final).then(setOutcome);
     setTally(final);
-  }, [finished, tally, finishMathRound, range]);
+  }, [finished, tally, finishMathRound, range, operation]);
 
   return {
     ready,

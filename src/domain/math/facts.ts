@@ -89,3 +89,49 @@ export function factsInRange(range: FactRange): Fact[] {
   if (range === null) return [...ALL_FACTS];
   return ALL_FACTS.filter((fact) => fact.a === range || fact.b === range);
 }
+
+/**
+ * Násobení a dělení.
+ *
+ * **Dělení má vlastní kartu**, i když stojí na stejné dvojici činitelů:
+ * 7×8 = 56 dítě umí dřív než 56 : 7, je to jiná znalost a plánovač ji musí
+ * vést zvlášť. Uvnitř dělení ale platí totéž co u násobení – 56 : 7 a 56 : 8
+ * je jedna karta a dělitel se při otázce losuje.
+ *
+ * Klíč násobení zůstal beze změny (`7x8`), aby se nerozbil postup, který už
+ * v zařízeních je. Dělení má předponu (`div:7x8`).
+ */
+export type Operation = 'mul' | 'div';
+
+/** Co se v kole počítá – jedna operace, nebo obě namíchané. */
+export type OperationChoice = Operation | 'mix';
+
+export const DIV_PREFIX = 'div:';
+
+export function operationsOf(choice: OperationChoice): Operation[] {
+  return choice === 'mix' ? ['mul', 'div'] : [choice];
+}
+
+export function cardKey(fact: Fact, op: Operation): string {
+  return op === 'mul' ? fact.key : `${DIV_PREFIX}${fact.key}`;
+}
+
+/** Přečte klíč karty zpátky na příklad a operaci; neznámý klíč = `null`. */
+export function parseCardKey(key: string): { fact: Fact; op: Operation } | null {
+  const op: Operation = key.startsWith(DIV_PREFIX) ? 'div' : 'mul';
+  const fact = byKey.get(op === 'div' ? key.slice(DIV_PREFIX.length) : key);
+  return fact ? { fact, op } : null;
+}
+
+/**
+ * Jak kartu ukázat v přehledu. U dělení se ukáže dělení větším činitelem
+ * (56 : 8), protože to je ten těžší z obou směrů.
+ */
+export function cardExample(key: string): { left: number; op: Operation; right: number } | null {
+  const parsed = parseCardKey(key);
+  if (!parsed) return null;
+  const { fact, op } = parsed;
+  return op === 'mul'
+    ? { left: fact.a, op, right: fact.b }
+    : { left: fact.product, op, right: fact.b };
+}
