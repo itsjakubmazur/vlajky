@@ -18,7 +18,7 @@ export function MasteryDot({ mastery, className = '' }: { mastery: Mastery; clas
   return (
     <span
       className={`block size-2.5 rounded-full ${DOT[mastery]} ${
-        mastery === 'gold' ? 'shadow-[0_0_10px_var(--color-gold)]' : ''
+        ''
       } ${className}`}
     />
   );
@@ -27,7 +27,7 @@ export function MasteryDot({ mastery, className = '' }: { mastery: Mastery; clas
 export function MasteryBadge({ mastery, label }: { mastery: Mastery; label: string }) {
   return (
     <span
-      className={`glass-thin inline-flex items-center gap-2 rounded-pill px-3 py-1.5 text-xs font-extrabold ${TEXT[mastery]}`}
+      className={`surface-thin inline-flex items-center gap-2 rounded-pill px-3 py-1.5 text-xs font-semibold ${TEXT[mastery]}`}
     >
       <MasteryDot mastery={mastery} />
       {label}

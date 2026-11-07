@@ -90,30 +90,41 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 ## Vizuální systém
 
 Aplikace má jeden vizuální svět – **noční atlas**. Teze, ze které se odvíjí
-všechno ostatní: *vlajky jsou jediná sytá barva na obrazovce, rozhraní je sklo.*
+všechno ostatní: *vlajky jsou jediná sytá barva na obrazovce, rozhraní je ticho.*
+Prošlo to „unslopem“ ([heydamir/unslop](https://github.com/heydamir/unslop)):
+pryč jsou barevné skvrny na pozadí, sklo, záře pod tlačítky, verzálky
+a tloušťka 800.
 
-- **Podklad:** tmavá `--color-abyss` a nad ní polární záře ze tří měkkých
-  gradientů (`body::before`, žádný obrázek). Bez ní by sklo nemělo co matnit.
-- **Sklo ve třech silách** podle role, ne plošně: `glass-raised` pro panel
-  s hlavní akcí, `glass` pro běžné panely, `glass-thin` pro čipy a štítky.
-  Ne každý blok je karta.
-- **Barvy:** `mint` je jediná plná barva rozhraní (hlavní akce, správná
-  odpověď), `gold` je nejvyšší úroveň a oslava, `coral` chyba. Šedé jsou
-  laděné do modra, ne neutrální.
-- **Písmo:** Figtree, jedna rodina na všechno. Nadpisy se od textu liší jen
-  tloušťkou a proklikem (utilita `display`), ne jiným písmem – v tak malém
+- **Podklad:** jedna inkoustová řada ploch v `@theme` – `abyss` (nejhlubší),
+  `deep` (stránka), `surface` (karta), `lift` (zvednutá). Žádný obrázek ani
+  gradient za obsahem; hloubku dělají schody mezi plochami a tenké linky
+  (text v 6–10 % průhlednosti).
+- **Plochy ve třech silách** podle role, ne plošně: `surface-raised` pro
+  panel s hlavní akcí, `surface` pro běžné panely, `surface-thin` pro čipy
+  a štítky. Ne každý blok je karta.
+- **Barvy:** `accent` je jediná plná barva rozhraní – hlavní tlačítko,
+  ukazatele postupu, klíčové číslo. **Odemykatelné téma mění právě akcent**
+  (máta, oranžová, modrá, limetková). `mint` je vedle toho *význam*: správná
+  odpověď je mátová v každém tématu. `gold` je nejvyšší úroveň a oslava,
+  `coral` chyba. Vybraný čip nebo záložka je světlá (`bg-ink`), ne akcent –
+  jinak by svítilo všechno a nevyčnívalo nic.
+- **Písmo:** Figtree, jedna rodina na všechno, tloušťky 400–600. Nadpisy se
+  od textu liší velikostí (utilita `display` je 600), ne jiným písmem. Štítky
+  nad panely (`eyebrow`) jsou normální věty, ne verzálky s prostrkáním – v tak malém
   rozhraní dělaly dvě rodiny víc hluku než užitku. Self-hostované ze
   `public/fonts/` – Google Fonts by porušily pravidlo o žádných externích
   požadavcích. Řez **latin-ext je pro češtinu povinný**.
-- **Vlajky svítí:** každá má v datech pole `accent` – výraznou barvu odečtenou
+- **Vlajky svítí – a nic jiného:** záře za vlajkou je jediný „bohatý“
+  moment obrazovky. Každá vlajka má v datech pole `accent` – výraznou barvu odečtenou
   ze svého SVG při buildu (`scripts/flag-source.ts`). Halo za vlajkou je ze
   dvou vrstev: široká rozlitá záře a těsné jasné jádro. Bez toho jádra to
   vypadá jako mlha, ne jako světlo. Stejná barva drží prstenec samolepky.
-- **Světlý režim záměrně není.** Na světlém podkladu sklo nemá co matnit
-  a vlajky přestanou svítit. Kdyby ho někdo chtěl, všechno jsou tokeny
+- **Světlý režim záměrně není.** Na světlém podkladu vlajky přestanou
+  svítit. Kdyby ho někdo chtěl, všechno jsou tokeny
   v `@theme`, takže je to práce na jednom bloku – ale je to změna identity,
   ne přepínač.
-- **Pohyb střídmě:** přechod mezi obrazovkami (`PageTransition`), nástup
+- **Pohyb střídmě, jedna křivka** (`--ease-out`), nic se nevlní ani
+  nepruží: přechod mezi obrazovkami (`PageTransition`), nástup
   panelů a nabídky po řadě (`stagger`), odhalení vlajky v otázce
   (`animate-flag-reveal`), přejezd světla po správné odpovědi, roztřesení po
   chybě, pulz hala u zlaté vlajky a napočítání výsledku (`useCountUp`).

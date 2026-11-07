@@ -72,7 +72,7 @@ export function BackupPanel() {
 
       {health.saved ? null : (
         <div className="mt-3 rounded-2xl border border-coral/35 bg-coral/10 p-3">
-          <p className="text-sm font-extrabold text-coral">{cs.backup.saveFailed}</p>
+          <p className="text-sm font-semibold text-coral">{cs.backup.saveFailed}</p>
           <p className="mt-1 text-[0.78rem] leading-snug text-muted">{cs.backup.saveFailedWhy}</p>
         </div>
       )}
@@ -106,12 +106,12 @@ export function BackupPanel() {
         }}
       />
 
-      {done ? <p className="mt-3 text-sm font-bold text-mint">{cs.backup.done}</p> : null}
-      {problem ? <p className="mt-3 text-sm font-bold text-coral">{problem}</p> : null}
+      {done ? <p className="mt-3 text-sm font-semibold text-mint">{cs.backup.done}</p> : null}
+      {problem ? <p className="mt-3 text-sm font-semibold text-coral">{problem}</p> : null}
 
       {loaded ? (
         <div className="mt-3 rounded-2xl border border-white/12 p-3">
-          <p className="text-sm font-extrabold">{cs.backup.loadedTitle}</p>
+          <p className="text-sm font-semibold">{cs.backup.loadedTitle}</p>
           <p className="mt-0.5 text-[0.8rem] text-muted">
             {cs.backup.loadedSummary(loaded.summary.collected, loaded.summary.points)}
             {loaded.at ? ` · ${cs.backup.loadedAt(whenText(loaded.at))}` : ''}

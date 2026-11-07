@@ -16,7 +16,7 @@ function Steps({ index, total }: { index: number; total: number }) {
     return (
       <div className="h-1.5 w-full overflow-hidden rounded-pill bg-white/10">
         <div
-          className="h-full rounded-pill bg-gradient-to-r from-mint-deep to-mint transition-[width] duration-500"
+          className="h-full rounded-pill bg-accent transition-[width] duration-500"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -28,7 +28,7 @@ function Steps({ index, total }: { index: number; total: number }) {
         <span
           key={i}
           className={`h-1.5 flex-1 rounded-pill transition-colors duration-300 ${
-            i < index ? 'bg-mint' : i === index ? 'bg-mint/45' : 'bg-white/10'
+            i < index ? 'bg-accent' : i === index ? 'bg-accent/45' : 'bg-white/10'
           }`}
         />
       ))}
@@ -62,17 +62,17 @@ export function QuizShell({
   return (
     <div className="flex h-[var(--safe-height)] flex-col overflow-hidden">
       <header className="shrink-0 px-4 py-3">
-        <div className="glass mx-auto flex max-w-xl items-center gap-4 rounded-pill py-2 pl-2 pr-4">
+        <div className="surface mx-auto flex max-w-xl items-center gap-4 rounded-2xl py-2 pl-2 pr-4">
           <Link
             href="/"
-            className="touch-target inline-flex items-center rounded-pill px-4 text-sm font-extrabold text-muted transition-colors hover:text-ink"
+            className="touch-target inline-flex items-center rounded-pill px-4 text-sm font-semibold text-muted transition-colors hover:text-ink"
           >
             {cs.quiz.quit}
           </Link>
           <div className="flex-1">
             <Steps index={index} total={total} />
           </div>
-          <span className="text-sm font-extrabold tabular-nums text-faint">
+          <span className="text-sm font-semibold tabular-nums text-faint">
             {cs.quiz.progress(Math.min(index + 1, total), total)}
           </span>
         </div>

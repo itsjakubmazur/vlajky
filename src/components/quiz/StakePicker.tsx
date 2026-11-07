@@ -12,7 +12,7 @@ export function StakePicker({
   onChange: (value: number) => void;
 }) {
   return (
-    <div className="glass-thin rounded-glass p-3">
+    <div className="surface-thin rounded-card p-3">
       <Eyebrow>{cs.game.stake}</Eyebrow>
       <div className="mt-2 grid grid-cols-3 gap-2">
         {[1, 2, 3].map((stake) => (
@@ -20,7 +20,7 @@ export function StakePicker({
             key={stake}
             type="button"
             onClick={() => onChange(stake)}
-            className={`touch-target rounded-pill border text-sm font-extrabold transition-colors ${
+            className={`touch-target rounded-xl border text-sm font-semibold transition-colors ${
               value === stake
                 ? 'border-gold/70 bg-gold/20 text-gold'
                 : 'border-white/10 text-muted hover:text-ink'

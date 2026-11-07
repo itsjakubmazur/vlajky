@@ -17,7 +17,7 @@ export default function GlobalError({ reset }: { error: Error; reset: () => void
           <button
             type="button"
             onClick={reset}
-            className="touch-target rounded-pill bg-mint px-6 font-extrabold text-abyss"
+            className="touch-target rounded-xl bg-accent px-6 font-semibold text-abyss"
           >
             {cs.errors.retry}
           </button>

@@ -284,7 +284,7 @@ export function SortScreen({
 
   if (!ready || batches.length === 0) {
     return (
-      <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
+      <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-semibold text-faint">
         {cs.common.loading}
       </div>
     );
@@ -293,7 +293,7 @@ export function SortScreen({
   if (done) {
     if (onFinish) {
       return (
-        <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
+        <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-semibold text-faint">
           {cs.common.loading}
         </div>
       );
@@ -331,7 +331,7 @@ export function SortScreen({
           </h1>
         </div>
 
-        <div ref={mapBox} onPointerUp={onMapTap} className="glass-thin rounded-glass p-1.5">
+        <div ref={mapBox} onPointerUp={onMapTap} className="surface-thin rounded-card p-1.5">
           <ContinentMap
             zones={zones}
             active={hovered}
@@ -367,8 +367,8 @@ export function SortScreen({
                   onPointerUp={onFlagUp}
                   className={`touch-none rounded-2xl p-1.5 transition-transform duration-150 ${
                     held === code
-                      ? 'scale-110 bg-mint/20 ring-2 ring-mint'
-                      : 'glass-thin active:scale-105'
+                      ? 'scale-110 bg-accent/20 ring-2 ring-accent'
+                      : 'surface-thin active:scale-[0.97]'
                   }`}
                 >
                   <FlagImage code={code} size="md" priority glow={false} />
@@ -402,13 +402,13 @@ export function SortScreen({
               {results.map((result) => (
                 <li
                   key={result.code}
-                  className={`glass-thin flex items-center gap-3 rounded-2xl px-3 py-2 ${
+                  className={`surface-thin flex items-center gap-3 rounded-2xl px-3 py-2 ${
                     result.ok ? 'border-mint/40' : 'border-coral/40'
                   }`}
                 >
                   <FlagImage code={result.code} size="xs" glow={false} />
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[0.85rem] font-bold leading-tight">
+                    <span className="block text-[0.85rem] font-semibold leading-tight">
                       {requireCountry(result.code).nameCs}
                     </span>
                     {!result.ok && result.correct ? (

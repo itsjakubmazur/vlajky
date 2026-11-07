@@ -35,7 +35,7 @@ export function MiniMap({ code }: { code: string }) {
           <path
             key={shape.id}
             d={shape.d}
-            fill={shape.code === code ? 'var(--color-mint)' : 'rgb(255 255 255 / 0.09)'}
+            fill={shape.code === code ? 'var(--color-accent)' : 'rgb(255 255 255 / 0.09)'}
             stroke="rgb(6 10 20 / 0.85)"
             strokeWidth={0.4}
           />
@@ -47,10 +47,10 @@ export function MiniMap({ code }: { code: string }) {
         cy={point[1]}
         r={9}
         fill="none"
-        stroke="var(--color-mint)"
+        stroke="var(--color-accent)"
         strokeWidth={2.5}
       />
-      <circle cx={point[0]} cy={point[1]} r={2.5} fill="var(--color-mint)" />
+      <circle cx={point[0]} cy={point[1]} r={2.5} fill="var(--color-accent)" />
     </svg>
   );
 }

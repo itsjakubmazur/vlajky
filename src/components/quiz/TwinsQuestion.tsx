@@ -25,19 +25,19 @@ export function TwinsQuestion({
       {options.map((code) => {
         const isCorrect = code === correctCode;
         const look = !answered
-          ? 'glass hover:border-white/25'
+          ? 'surface hover:border-white/25'
           : isCorrect
             ? 'border-mint/70 bg-mint/15'
             : code === chosen
               ? 'border-coral/70 bg-coral/15 animate-shake'
-              : 'glass opacity-35';
+              : 'surface opacity-35';
         return (
           <button
             key={code}
             type="button"
             disabled={answered}
             onClick={() => onChoose(code)}
-            className={`flex flex-col items-center justify-center gap-3 rounded-glass border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${look}`}
+            className={`flex flex-col items-center justify-center gap-3 rounded-card border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${look}`}
           >
             <FlagImage code={code} fluid priority pulse={answered && isCorrect} />
             {answered ? (

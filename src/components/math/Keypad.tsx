@@ -27,7 +27,7 @@ export function Keypad({
   disabled: boolean;
 }) {
   const key =
-    'glass touch-target flex h-full items-center justify-center rounded-2xl text-2xl font-extrabold tabular-nums ' +
+    'surface touch-target flex h-full items-center justify-center rounded-2xl text-2xl font-semibold tabular-nums ' +
     'transition-[transform,border-color,background-color] duration-100 active:scale-[0.96] ' +
     'hover:border-white/25 disabled:pointer-events-none disabled:opacity-40';
 
@@ -81,8 +81,8 @@ export function Keypad({
         disabled={disabled || !canSubmit}
         onClick={onSubmit}
         className={
-          'touch-target flex h-full items-center justify-center rounded-2xl bg-mint text-lg font-extrabold text-abyss ' +
-          'shadow-[0_10px_30px_-12px_var(--color-mint)] transition-transform duration-100 active:scale-[0.96] ' +
+          'touch-target flex h-full items-center justify-center rounded-2xl bg-accent text-lg font-semibold text-abyss ' +
+          'transition-transform duration-100 active:scale-[0.96] ' +
           'disabled:pointer-events-none disabled:opacity-30'
         }
       >

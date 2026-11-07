@@ -20,7 +20,7 @@ import { CountrySheet } from './CountrySheet';
 // Mapa s sebou nese geometrii světa – načte se až když ji někdo otevře.
 const WorldMap = dynamic(() => import('./WorldMap').then((m) => m.WorldMap), {
   ssr: false,
-  loading: () => <div className="aspect-[2/1] w-full animate-pulse rounded-glass bg-white/5" />,
+  loading: () => <div className="aspect-[2/1] w-full animate-pulse rounded-card bg-white/5" />,
 });
 
 type Filter = Continent | 'all';
@@ -32,7 +32,7 @@ const RING = {
   new: 'ring-1 ring-white/8',
   bronze: 'ring-1 ring-bronze/60',
   silver: 'ring-1 ring-silver/60',
-  gold: 'ring-1 ring-gold/70 shadow-[0_0_26px_-6px_var(--color-gold)]',
+  gold: 'ring-1 ring-gold/70',
 } as const;
 
 export function AlbumScreen() {
@@ -84,7 +84,7 @@ export function AlbumScreen() {
       <header className="mb-5 flex items-center gap-4">
         <Link
           href={ROUTES.home}
-          className="touch-target -ml-2 inline-flex items-center rounded-pill px-2 text-sm font-extrabold text-muted transition-colors hover:text-ink"
+          className="touch-target -ml-2 inline-flex items-center rounded-pill px-2 text-sm font-semibold text-muted transition-colors hover:text-ink"
         >
           {cs.common.back}
         </Link>
@@ -97,7 +97,7 @@ export function AlbumScreen() {
             {cs.album.collected(collected, shown.length)}
           </p>
           {allGold && filter !== 'all' && level === 'all' && needle === '' ? (
-            <span className="text-xs font-extrabold text-gold">
+            <span className="text-xs font-semibold text-gold">
               {cs.album.continentDone(cs.continents[filter])}
             </span>
           ) : null}
@@ -107,7 +107,7 @@ export function AlbumScreen() {
 
       {/* Bez zeměpisu nemá mapa co ukázat – u organizací se přepínač schová. */}
       <div
-        className={`glass-thin mb-4 gap-1 rounded-pill p-1 ${hasContinents ? 'flex' : 'hidden'}`}
+        className={`surface-thin mb-4 gap-1 rounded-xl p-1 ${hasContinents ? 'flex' : 'hidden'}`}
         role="tablist"
       >
         {(['stickers', 'map'] as const).map((value) => (
@@ -116,8 +116,8 @@ export function AlbumScreen() {
             role="tab"
             aria-selected={tab === value}
             onClick={() => setTab(value)}
-            className={`flex-1 rounded-pill px-4 py-2.5 text-sm font-extrabold transition-colors duration-200 ${
-              tab === value ? 'bg-mint text-abyss' : 'text-muted hover:text-ink'
+            className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors duration-200 ${
+              tab === value ? 'bg-ink text-abyss' : 'text-muted hover:text-ink'
             }`}
           >
             {value === 'stickers' ? cs.album.stickers : cs.album.map}
@@ -135,10 +135,10 @@ export function AlbumScreen() {
           <button
             key={value}
             onClick={() => setFilter(value)}
-            className={`shrink-0 rounded-pill px-4 py-2 text-[0.8rem] font-extrabold transition-colors duration-200 ${
+            className={`shrink-0 rounded-pill px-4 py-2 text-[0.8rem] font-semibold transition-colors duration-200 ${
               filter === value
                 ? 'bg-ink text-abyss'
-                : 'glass-thin text-muted hover:text-ink'
+                : 'surface-thin text-muted hover:text-ink'
             }`}
           >
             {value === 'all' ? cs.album.all : cs.continents[value]}
@@ -154,15 +154,15 @@ export function AlbumScreen() {
             onChange={(event) => setQuery(event.target.value)}
             placeholder={cs.album.search}
             aria-label={cs.album.search}
-            className="glass-thin touch-target w-full rounded-pill px-5 text-ink placeholder:text-faint"
+            className="surface-thin touch-target w-full rounded-xl px-5 text-ink placeholder:text-faint"
           />
           <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
             {(['all', ...MASTERY_LEVELS] as LevelFilter[]).map((value) => (
               <button
                 key={value}
                 onClick={() => setLevel(value)}
-                className={`inline-flex shrink-0 items-center gap-2 rounded-pill px-4 py-2 text-[0.8rem] font-extrabold transition-colors duration-200 ${
-                  level === value ? 'bg-ink text-abyss' : 'glass-thin text-muted hover:text-ink'
+                className={`inline-flex shrink-0 items-center gap-2 rounded-pill px-4 py-2 text-[0.8rem] font-semibold transition-colors duration-200 ${
+                  level === value ? 'bg-ink text-abyss' : 'surface-thin text-muted hover:text-ink'
                 }`}
               >
                 {value === 'all' ? null : <MasteryDot mastery={value} />}
@@ -180,7 +180,7 @@ export function AlbumScreen() {
             inSet={(code) => codesInSet.has(code)}
             onSelect={(code) => (codesInSet.has(code) ? setSelected(code) : undefined)}
           />
-          <div className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[0.7rem] font-bold text-faint">
+          <div className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[0.7rem] font-semibold text-faint">
             {(['new', 'bronze', 'silver', 'gold'] as const).map((level) => (
               <span key={level} className="inline-flex items-center gap-2">
                 <MasteryDot mastery={level} />
@@ -224,7 +224,7 @@ export function AlbumScreen() {
                 >
                   <FlagImage code={country.code} size="md" glow={earned} muted={!earned} />
                   <span
-                    className={`line-clamp-2 text-center text-[0.68rem] font-bold leading-tight ${
+                    className={`line-clamp-2 text-center text-[0.68rem] font-semibold leading-tight ${
                       earned ? 'text-ink' : 'text-faint'
                     }`}
                   >

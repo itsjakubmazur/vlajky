@@ -33,10 +33,10 @@ function FlagStat({
     <button
       type="button"
       onClick={onOpen}
-      className="glass-thin flex w-[5.25rem] flex-col items-center gap-1.5 rounded-2xl p-2 transition-colors hover:border-white/20"
+      className="surface-thin flex w-[5.25rem] flex-col items-center gap-1.5 rounded-2xl p-2 transition-colors hover:border-white/20"
     >
       <FlagImage code={code} size="sm" glow={false} />
-      <span className="text-center text-[0.65rem] font-bold leading-tight text-ink/90">
+      <span className="text-center text-[0.65rem] font-semibold leading-tight text-ink/90">
         {requireCountry(code).nameCs}
       </span>
       <span className="text-center text-[0.6rem] font-semibold leading-tight tabular-nums text-faint">
@@ -155,12 +155,12 @@ export function InsightScreen() {
                   <button
                     type="button"
                     onClick={() => setDetail(item.code)}
-                    className="glass-thin flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-colors hover:border-white/20"
+                    className="surface-thin flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-colors hover:border-white/20"
                   >
                     <FlagImage code={item.code} size="xs" glow={false} />
                     <FlagImage code={item.given} size="xs" glow={false} />
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[0.8rem] font-bold leading-tight">
+                      <span className="block text-[0.8rem] font-semibold leading-tight">
                         {requireCountry(item.code).nameCs}
                         <span className="font-semibold text-faint"> → </span>
                         {requireCountry(item.given).nameCs}
@@ -185,7 +185,7 @@ export function InsightScreen() {
           <div className="flex items-baseline justify-between gap-3">
             <Eyebrow>{cs.insight.fadingTitle}</Eyebrow>
             {fading.length > 0 ? (
-              <span className="display text-sm tabular-nums text-mint">{fading.length}</span>
+              <span className="display text-sm tabular-nums text-ink">{fading.length}</span>
             ) : null}
           </div>
           <p className="mt-1.5 text-sm leading-snug text-muted">

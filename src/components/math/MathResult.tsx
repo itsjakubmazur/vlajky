@@ -36,16 +36,16 @@ export function MathResult({
       <Panel raised className="flex items-center gap-5">
         <ProgressRing value={tally.correct} total={tally.total} size={104}>
           <span className="display text-3xl leading-none tabular-nums">{tally.correct}</span>
-          <span className="text-xs font-bold tabular-nums text-faint">z {tally.total}</span>
+          <span className="text-xs font-semibold tabular-nums text-faint">z {tally.total}</span>
         </ProgressRing>
         <div className="min-w-0 flex-1">
           <h1 className="display text-2xl">{cs.math.resultTitle}</h1>
-          <p className="display mt-1 text-3xl tabular-nums text-mint">
+          <p className="display mt-1 text-3xl tabular-nums text-accent">
             {points}
-            <span className="ml-1.5 text-sm font-bold text-faint">{cs.game.points}</span>
+            <span className="ml-1.5 text-sm font-semibold text-faint">{cs.game.points}</span>
           </p>
           {perfect ? (
-            <p className="mt-1 text-sm font-bold text-mint">{cs.math.allCorrect}</p>
+            <p className="mt-1 text-sm font-semibold text-mint">{cs.math.allCorrect}</p>
           ) : null}
         </div>
       </Panel>
@@ -79,7 +79,7 @@ export function MathResult({
               return (
                 <span
                   key={key}
-                  className="glass-thin display rounded-2xl px-3 py-2 text-base tabular-nums"
+                  className="surface-thin display rounded-2xl px-3 py-2 text-base tabular-nums"
                 >
                   {fact.a} × {fact.b} = <span className="text-mint">{fact.product}</span>
                 </span>

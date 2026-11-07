@@ -27,7 +27,7 @@ export function GameHud({
         {showCombo ? (
           <span
             key={combo}
-            className="animate-pop-in inline-flex items-center gap-2 rounded-pill bg-gold/15 px-3 py-1 text-xs font-extrabold text-gold"
+            className="animate-pop-in inline-flex items-center gap-2 rounded-pill bg-gold/15 px-3 py-1 text-xs font-semibold text-gold"
           >
             <span className="tabular-nums">{combo}×</span>
             <span className="text-gold/70">{cs.game.combo}</span>
@@ -46,9 +46,9 @@ export function GameHud({
         </span>
       ) : null}
 
-      <span className="display text-sm tabular-nums text-mint">
+      <span className="display text-sm tabular-nums text-accent">
         {points}
-        <span className="ml-1 text-xs font-bold text-faint">{cs.game.pointsShort}</span>
+        <span className="ml-1 text-xs font-semibold text-faint">{cs.game.pointsShort}</span>
       </span>
     </div>
   );

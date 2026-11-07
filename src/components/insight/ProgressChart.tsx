@@ -17,7 +17,7 @@ const PAD = 6;
  * svádělak čtení „rozdílu“, který nic neznamená. Každý graf má tím pádem
  * jednu barvu a nepotřebuje legendu – název řady je v nadpisu.
  *
- * Barvy jsou tokeny aplikace (mint = sbírka, gold = nejvyšší úroveň).
+ * Barvy jsou tokeny aplikace (accent = sbírka, gold = nejvyšší úroveň).
  * Drží význam, který mají všude jinde v rozhraní.
  */
 function Sparkline({
@@ -81,7 +81,7 @@ export function ProgressChart({
     {
       key: 'collected' as const,
       label: cs.insight.chartCollected,
-      color: 'var(--color-mint)',
+      color: 'var(--color-accent)',
       values: points.map((p) => p.collected),
       now: last.collected,
       change: last.collected - first.collected,
@@ -102,13 +102,13 @@ export function ProgressChart({
         <div key={row.key}>
           <div className="flex items-baseline justify-between gap-3">
             <Eyebrow>{row.label}</Eyebrow>
-            <span className="text-[0.72rem] font-bold tabular-nums text-faint">
+            <span className="text-[0.72rem] font-semibold tabular-nums text-faint">
               {cs.insight.chartChange(row.change, points.length)}
             </span>
           </div>
           <p className="display mt-0.5 text-2xl tabular-nums" style={{ color: row.color }}>
             {row.now}
-            <span className="ml-1.5 text-sm font-bold text-faint">z {total}</span>
+            <span className="ml-1.5 text-sm font-semibold text-faint">z {total}</span>
           </p>
           <div className="mt-1.5">
             <Sparkline points={row.values} color={row.color} max={total} />

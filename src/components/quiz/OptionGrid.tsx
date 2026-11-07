@@ -23,7 +23,7 @@ function KeyHint({ index }: { index: number }) {
   return (
     <span
       aria-hidden="true"
-      className="absolute left-2 top-2 hidden h-5 w-5 items-center justify-center rounded-md bg-white/10 text-[0.65rem] font-extrabold tabular-nums text-faint [@media(pointer:fine)]:flex"
+      className="absolute left-2 top-2 hidden h-5 w-5 items-center justify-center rounded-md bg-white/10 text-[0.65rem] font-semibold tabular-nums text-faint [@media(pointer:fine)]:flex"
     >
       {index + 1}
     </span>
@@ -31,10 +31,10 @@ function KeyHint({ index }: { index: number }) {
 }
 
 function state(code: string, correctCode: string, chosen: string | null) {
-  if (chosen === null) return 'glass hover:border-white/25 text-ink';
+  if (chosen === null) return 'surface hover:border-white/25 text-ink';
   if (code === correctCode) return 'border-mint/70 bg-mint/15 text-mint';
   if (code === chosen) return 'border-coral/70 bg-coral/15 text-coral animate-shake';
-  return 'glass opacity-35 text-muted';
+  return 'surface opacity-35 text-muted';
 }
 
 /**
@@ -64,7 +64,7 @@ export function OptionGrid({
             type="button"
             disabled={chosen !== null}
             onClick={() => onChoose(code)}
-            className={`touch-target relative flex min-h-20 items-center justify-center overflow-hidden rounded-glass border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${state(
+            className={`touch-target relative flex min-h-20 items-center justify-center overflow-hidden rounded-card border p-3 transition-[background-color,border-color,opacity] duration-300 active:scale-[0.99] disabled:cursor-default ${state(
               code,
               correctCode,
               chosen,

@@ -22,7 +22,7 @@ export function RegionPicker() {
     <div>
       <div className="mb-2 flex items-baseline justify-between gap-3">
         <Eyebrow>{cs.home.region}</Eyebrow>
-        <span className="text-[0.72rem] font-bold tabular-nums text-faint">
+        <span className="text-[0.72rem] font-semibold tabular-nums text-faint">
           {cs.home.regionCount(pool.length)}
         </span>
       </div>
@@ -32,8 +32,8 @@ export function RegionPicker() {
             key={id}
             type="button"
             onClick={() => void setRegion(id)}
-            className={`touch-target shrink-0 rounded-pill px-4 text-[0.8rem] font-extrabold transition-colors duration-200 ${
-              region === id ? 'bg-mint text-abyss' : 'glass-thin text-muted hover:text-ink'
+            className={`touch-target shrink-0 rounded-pill px-4 text-[0.8rem] font-semibold transition-colors duration-200 ${
+              region === id ? 'bg-ink text-abyss' : 'surface-thin text-muted hover:text-ink'
             }`}
           >
             {label(id)}

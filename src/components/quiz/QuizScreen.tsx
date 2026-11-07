@@ -98,7 +98,7 @@ function QuizRunner({ mode, bossId, codes, offTheRecord, onFinish }: QuizScreenP
 
   if (session.phase === 'loading') {
     return (
-      <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
+      <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-semibold text-faint">
         {cs.common.loading}
       </div>
     );
@@ -107,7 +107,7 @@ function QuizRunner({ mode, bossId, codes, offTheRecord, onFinish }: QuizScreenP
   if (session.phase === 'done') {
     if (onFinish) {
       return (
-        <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
+        <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-semibold text-faint">
           {cs.common.loading}
         </div>
       );
@@ -187,7 +187,7 @@ function QuizRunner({ mode, bossId, codes, offTheRecord, onFinish }: QuizScreenP
                 <FlagImage code={question.code} size="xl" priority />
               ) : (
                 // Prázdné místo si drží velikost, ať obraz neposkočí.
-                <span className="glass-thin flex h-[150px] w-[225px] items-center justify-center rounded-glass text-4xl font-black text-faint">
+                <span className="surface-thin flex h-[150px] w-[225px] items-center justify-center rounded-card text-4xl font-semibold text-faint">
                   ?
                 </span>
               )}
