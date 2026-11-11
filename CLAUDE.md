@@ -17,6 +17,7 @@ násobilka** – je to jiný předmět, ale tentýž tester a tentýž tablet.
 | **1g – postup** | ✅ hotovo | oprava ztrácení postupu, záloha do souboru, spojení dvou zařízení |
 | **1h – organizace** | ✅ hotovo | sada 11 vlajek organizací: OSN, EU, NATO, olympijská, paralympijská, Červený kříž, WHO, UNESCO, Africká unie, Arabská liga, ASEAN |
 | **1i – násobilka** | ✅ hotovo | malá násobilka v náhodném pořadí, vlastní numerická klávesnice, plánovač a rekordy stranou od vlajek |
+| **1j – počítání** | ✅ hotovo | výběr na začátku: sčítání a odčítání (do 20 / do 100), násobení, dělení, násobení a dělení |
 | 2 – Supabase | 🟦 rozdělaná | ✅ přihlášení e-mailem a synchronizace postupu; ⬜ rodinné profily (přezdívka + avatar + PIN), statistiky, denní vlajka, odznaky, série |
 | 3 – kreativní režimy | ⬜ nezačato | Vybarvi vlajku, Kresli zpaměti, Detektiv, Maraton, Duel přes kód místnosti |
 | 4 – balíčky navíc | ⬜ nezačato | kraje ČR, historické vlajky, zvuky, animace, tmavý režim |
@@ -74,7 +75,7 @@ a výměna úložiště za Supabase (fáze 2) se nedotkne UI.
 | `scripts/make-overrides.ts` | generátor těch oprav (spouští se ručně) |
 | `src/domain/answer/match.ts` | vyhodnocení napsané odpovědi |
 | `src/domain/quiz/` | distraktory, režimy, sestavení hry, vzdálenosti pro mapu |
-| `src/domain/math/` | malá násobilka: příklady a sestavení kola |
+| `src/domain/math/` | počítání: příklady násobení a dělení, sčítání a odčítání, sestavení kola |
 | `src/domain/srs/` | FSRS, úrovně zvládnutí, rozřazovací vzorek, přehled slabin |
 | `src/domain/game/` | body, hodnosti, souboje, denní výzva, mise, odemykání, „co hrát teď“ |
 | `src/store/ProgressStore.ts` | rozhraní úložiště + `BaseProgressStore` |
@@ -489,6 +490,23 @@ Karta `7x8` v `progress.cards` by nedávala smysl albu, přehledu ani plánovač
 vlajek a v logu by ji `requireCountry` neuměl přečíst. Body se taky nesčítají:
 hodnost je za vlajky, ne za počítání. Ověřeno v prohlížeči – po odehraném kole
 násobilky se v uloženém postupu změní jen `math`, série dní a čas uložení.
+
+**Co se počítá, se vybírá na začátku** (`math/operations.ts`): sčítání
+a odčítání, násobení, dělení, nebo násobení a dělení dohromady. Každá volba
+má své rekordy (`recordScope`); násobení si nechává staré klíče `all`/`7`,
+aby se dřívější rekordy neztratily.
+
+- **Dělení má vlastní karty** (`56:7`), nesdílí je s násobením. 56 : 7
+  a 56 : 8 jsou dvě otázky s různým výsledkem a znalost 7×8 ještě neznamená,
+  že dítě rychle vidí, kolikrát se sedm vejde do 56. Řada dělení je dělení
+  tím číslem („dělení sedmi“), jako ve škole. Rozhazování pořadí funguje
+  stejně – a v kombinaci hlídá i to, aby po 7×8 nepřišlo hned 56 : 7.
+- **Sčítání a odčítání karty nemá** a losuje se pokaždé znovu
+  (`math/addsub.ts`). Do sta je přes pět tisíc příkladů a jde v nich
+  o postup, ne o zapamatování dvojic – plánovač by tu jen plnil úložiště.
+  Zhruba dvě třetiny příkladů přecházejí přes desítku (`CARRY_SHARE`), tam se
+  chybuje; žádné číslo ani výsledek není nula; půl sčítání, půl odčítání
+  a nejvýš dvě stejná znaménka po sobě.
 
 **Série dní se počítá i za násobilku.** Je to pořád každodenní cvičení na
 stejném zařízení a trestat dítě za to, že si místo vlajek počítalo, by bylo

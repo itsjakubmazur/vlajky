@@ -76,8 +76,11 @@ interface ProgressContextValue {
   /** Uzavře kolo: připíše body a případně zapíše rekord. */
   finishRound: (mode: string, tally: RoundTally) => Promise<RoundOutcome>;
   beatBoss: (bossId: string) => Promise<void>;
-  /** Odpověď v malé násobilce. Plánovač vlajek se jí nedotkne. */
-  recordMathAnswer: (key: string, input: AnswerInput) => Promise<AnswerOutcome>;
+  /**
+   * Odpověď v počítání – plánovač vlajek se jí nedotkne. `key` je karta (`7x8`, `56:7`); `null` u sčítání
+   * a odčítání, které kartu nemá – započítá se jen do součtu a série dní.
+   */
+  recordMathAnswer: (key: string | null, input: AnswerInput) => Promise<AnswerOutcome | null>;
   /** Uzavře kolo násobilky: připíše body a případně zapíše rekord. */
   finishMathRound: (scope: string, tally: RoundTally) => Promise<RoundOutcome>;
   saveDaily: (result: DailyResult) => Promise<void>;
@@ -242,14 +245,13 @@ export function ProgressProvider({
   );
 
   const recordMathAnswer = useCallback(
-    async (key: string, input: AnswerInput): Promise<AnswerOutcome> => {
+    async (key: string | null, input: AnswerInput): Promise<AnswerOutcome | null> => {
       const now = new Date();
-      const current = progress.math.cards[key] ?? emptyCardState(key, now);
-      const before = current.mastery;
-      const card = applyAnswer(current, input, now);
+      const current = key ? (progress.math.cards[key] ?? emptyCardState(key, now)) : null;
+      const card = current ? applyAnswer(current, input, now) : null;
 
       const updated = await storeRef.current.update((draft) => {
-        draft.math.cards[key] = card;
+        if (key && card) draft.math.cards[key] = card;
         draft.math.totalAnswers += 1;
         // Série dní se počítá i za počítání – je to pořád každodenní cvičení.
         const today = dayKey(now);
@@ -258,6 +260,8 @@ export function ProgressProvider({
       });
       setProgress({ ...updated });
 
+      if (!current || !card) return null;
+      const before = current.mastery;
       return { before, after: card.mastery, levelUp: isLevelUp(before, card.mastery), card };
     },
     [progress],

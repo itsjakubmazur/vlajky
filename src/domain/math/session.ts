@@ -2,24 +2,35 @@ import type { CardState } from '../srs/types';
 import { isDue, isNew } from '../srs/scheduler';
 import { masteryRank } from '../srs/mastery';
 import { shuffle, type Rng } from '../rng';
-import { factsInRange, requireFact, type Fact, type FactRange } from './facts';
+import { answerOf, factOf, type Fact, type FactRange } from './facts';
+import { factsFor, type AddSubLimit, type Operation } from './operations';
+import { buildAddSubRound } from './addsub';
 
 /** Kolik příkladů má jedno kolo. */
 export const ROUND_LENGTH = 20;
 
+export type MathSign = '+' | '−' | '×' | ':';
+
 export interface MathQuestion {
-  /** Klíč karty – menší činitel první, nezávisle na pořadí v otázce. */
+  /**
+   * Klíč příkladu. U násobení a dělení je to zároveň klíč karty (`7x8`,
+   * `56:7`), takže nezávisí na pořadí v otázce. U sčítání a odčítání
+   * (`23+48`) karta není.
+   */
   key: string;
-  /** Jak se příklad ukáže. Pořadí se losuje, karta je jedna. */
+  op: MathSign;
+  /** Jak se příklad ukáže: `left op right = answer`. */
   left: number;
   right: number;
-  product: number;
+  answer: number;
 }
 
 export interface RoundOptions {
   cards: Record<string, CardState>;
   now: Date;
   rng: Rng;
+  operation?: Operation;
+  /** Řada u násobení a dělení, mez (20, 100) u sčítání a odčítání. */
   range?: FactRange;
   length?: number;
 }
@@ -40,10 +51,14 @@ export function buildRound({
   cards,
   now,
   rng,
+  operation = 'mul',
   range = null,
   length = ROUND_LENGTH,
 }: RoundOptions): MathQuestion[] {
-  const pool = factsInRange(range);
+  if (operation === 'addsub') {
+    return buildAddSubRound(rng, (range ?? 100) as AddSubLimit, length);
+  }
+  const pool = factsFor(operation, range);
 
   const due: Fact[] = [];
   const fresh: Fact[] = [];
@@ -128,26 +143,41 @@ function shares(fact: Fact, previous: Fact | undefined): boolean {
 }
 
 function toQuestion(fact: Fact, rng: Rng): MathQuestion {
+  if (fact.kind === 'div') {
+    return { key: fact.key, op: ':', left: fact.product, right: fact.b, answer: answerOf(fact) };
+  }
   const flipped = rng() < 0.5;
   return {
     key: fact.key,
+    op: '×',
     left: flipped ? fact.b : fact.a,
     right: flipped ? fact.a : fact.b,
-    product: fact.product,
+    answer: fact.product,
   };
 }
 
-/** Příklady, které jdou nejhůř – pro přehled „co ti nejde“. */
+/** Příklad tak, jak se píše: `7 × 8`, `56 : 7`. */
+export function formatFact(fact: Fact): string {
+  return fact.kind === 'div' ? `${fact.product} : ${fact.b}` : `${fact.a} × ${fact.b}`;
+}
+
+/**
+ * Příklady, které jdou nejhůř – pro přehled „co ti nejde“. S `pool` jen
+ * z těch příkladů, které se zrovna procvičují (dělení neukazuje násobení).
+ */
 export function weakestFacts(
   cards: Record<string, CardState>,
   count = 6,
+  pool?: readonly Fact[],
 ): { key: string; wrong: number; seen: number }[] {
+  const allowed = pool ? new Set(pool.map((fact) => fact.key)) : null;
   return Object.values(cards)
+    .filter((card) => factOf(card.code) !== undefined)
+    .filter((card) => !allowed || allowed.has(card.code))
     .filter((card) => card.seen >= 2 && card.correct < card.seen)
     .map((card) => ({ key: card.code, wrong: card.seen - card.correct, seen: card.seen }))
     .sort((x, y) => y.wrong / y.seen - x.wrong / x.seen || y.wrong - x.wrong)
-    .slice(0, count)
-    .filter((entry) => requireFact(entry.key) !== undefined);
+    .slice(0, count);
 }
 
 /** Kolik příkladů má dítě zvládnutých (aspoň stříbro). */

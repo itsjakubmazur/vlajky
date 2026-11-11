@@ -72,8 +72,12 @@ export interface Meta {
  * ne za počítání.
  */
 export interface MathProgress {
+  /** Karty násobení (`7x8`) i dělení (`56:7`). Sčítání karty nemá. */
   cards: Record<string, CardState>;
-  /** Rekordy podle toho, co se procvičovalo (`all` nebo číslo řady). */
+  /**
+   * Rekordy podle toho, co se procvičovalo: u násobení `all` nebo číslo
+   * řady (staré klíče), u ostatních `div:7`, `muldiv:all`, `addsub:100`.
+   */
   records: Record<string, GameRecord>;
   totalAnswers: number;
   totalPoints: number;

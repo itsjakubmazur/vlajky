@@ -1,13 +1,23 @@
 import { describe, expect, it } from 'vitest';
 import {
+  ALL_DIVISIONS,
   ALL_FACTS,
   difficultyOf,
+  divisionsInRange,
   factKey,
   factsInRange,
   parseFactKey,
   requireFact,
 } from '@/domain/math/facts';
-import { buildRound, masteredCount, ROUND_LENGTH, weakestFacts } from '@/domain/math/session';
+import {
+  buildRound,
+  formatFact,
+  masteredCount,
+  ROUND_LENGTH,
+  weakestFacts,
+} from '@/domain/math/session';
+import { factsFor, recordScope, usesCards } from '@/domain/math/operations';
+import { buildAddSubRound, hasBorrow, hasCarry } from '@/domain/math/addsub';
 import { applyAnswer, emptyCardState } from '@/domain/srs/scheduler';
 import type { CardState } from '@/domain/srs/types';
 import { createRng } from '@/domain/rng';
@@ -67,8 +77,8 @@ describe('malá násobilka – kolo', () => {
     const round = buildRound({ cards: {}, now, rng: createRng(1) });
     expect(round).toHaveLength(ROUND_LENGTH);
     for (const question of round) {
-      expect(question.left * question.right).toBe(question.product);
-      expect(requireFact(question.key).product).toBe(question.product);
+      expect(question.left * question.right).toBe(question.answer);
+      expect(requireFact(question.key).product).toBe(question.answer);
     }
   });
 
@@ -133,5 +143,118 @@ describe('malá násobilka – kolo', () => {
   it('zvládnuté se počítají od stříbra', () => {
     const cards = cardsFrom({ '3x4': { correct: true, times: 4 }, '6x7': { correct: false, times: 2 } });
     expect(masteredCount(cards)).toBe(1);
+  });
+});
+
+describe('dělení', () => {
+  it('má sto příkladů s vlastními kartami, výsledek je celé číslo do deseti', () => {
+    expect(ALL_DIVISIONS).toHaveLength(100);
+    expect(new Set(ALL_DIVISIONS.map((f) => f.key)).size).toBe(100);
+    for (const fact of ALL_DIVISIONS) {
+      expect(fact.product / fact.b).toBe(fact.a);
+      expect(fact.a).toBeGreaterThanOrEqual(1);
+      expect(fact.a).toBeLessThanOrEqual(10);
+    }
+    // 56 : 7 a 56 : 8 jsou dvě různé otázky, ne jedna karta.
+    expect(requireFact('56:7').a).toBe(8);
+    expect(requireFact('56:8').a).toBe(7);
+    expect(formatFact(requireFact('56:7'))).toBe('56 : 7');
+  });
+
+  it('řada dělení je dělení tím číslem', () => {
+    expect(divisionsInRange(7)).toHaveLength(10);
+    for (const fact of divisionsInRange(7)) expect(fact.b).toBe(7);
+  });
+
+  it('kolo dělení se ptá na podíl a sousedé nemají společné číslo', () => {
+    for (let seed = 1; seed <= 30; seed++) {
+      const round = buildRound({ cards: {}, now, rng: createRng(seed), operation: 'div' });
+      expect(round).toHaveLength(ROUND_LENGTH);
+      for (const [i, q] of round.entries()) {
+        expect(q.op).toBe(':');
+        expect(q.left / q.right).toBe(q.answer);
+        const previous = round[i - 1];
+        if (!previous) continue;
+        const now_ = [q.right, q.answer];
+        const before = [previous.right, previous.answer];
+        expect(now_.some((n) => before.includes(n)), `semínko ${seed}, pozice ${i}`).toBe(false);
+      }
+    }
+  });
+
+  it('násobení a dělení dohromady míchá obojí', () => {
+    const round = buildRound({ cards: {}, now, rng: createRng(4), operation: 'muldiv' });
+    const ops = new Set(round.map((q) => q.op));
+    expect(ops).toEqual(new Set(['×', ':']));
+    expect(factsFor('muldiv', 7)).toHaveLength(20);
+  });
+
+  it('slabiny dělení neukazují násobení', () => {
+    const cards = {
+      ...cardsFrom({ '6x7': { correct: false, times: 3 } }),
+      ...cardsFrom({ '42:7': { correct: false, times: 3 } }),
+    };
+    const weak = weakestFacts(cards, 6, factsFor('div', null)).map((e) => e.key);
+    expect(weak).toEqual(['42:7']);
+  });
+});
+
+describe('sčítání a odčítání', () => {
+  it('drží se meze, nic není nula a výsledky sedí', () => {
+    for (const limit of [20, 100] as const) {
+      for (let seed = 1; seed <= 30; seed++) {
+        const round = buildAddSubRound(createRng(seed), limit, ROUND_LENGTH);
+        expect(round).toHaveLength(ROUND_LENGTH);
+        expect(new Set(round.map((q) => q.key)).size).toBe(ROUND_LENGTH);
+        for (const q of round) {
+          expect(q.answer).toBe(q.op === '+' ? q.left + q.right : q.left - q.right);
+          for (const n of [q.left, q.right, q.answer]) {
+            expect(n).toBeGreaterThan(0);
+            expect(n).toBeLessThanOrEqual(limit);
+          }
+        }
+      }
+    }
+  });
+
+  it('je půl na půl a nejvýš dvě stejná znaménka po sobě', () => {
+    for (let seed = 1; seed <= 30; seed++) {
+      const round = buildAddSubRound(createRng(seed), 100, ROUND_LENGTH);
+      expect(round.filter((q) => q.op === '+')).toHaveLength(ROUND_LENGTH / 2);
+      for (let i = 2; i < round.length; i++) {
+        const three = [round[i - 2]!.op, round[i - 1]!.op, round[i]!.op];
+        expect(new Set(three).size, `semínko ${seed}, pozice ${i}`).toBe(2);
+      }
+    }
+  });
+
+  it('většina příkladů přechází přes desítku', () => {
+    let carry = 0;
+    let total = 0;
+    for (let seed = 1; seed <= 50; seed++) {
+      for (const q of buildAddSubRound(createRng(seed), 100, ROUND_LENGTH)) {
+        total++;
+        if (q.op === '+' ? hasCarry(q.left, q.right) : hasBorrow(q.left, q.right)) carry++;
+      }
+    }
+    expect(carry / total).toBeGreaterThan(0.5);
+    expect(carry / total).toBeLessThan(0.8);
+  });
+
+  it('nemá karty a jde přes buildRound', () => {
+    expect(usesCards('addsub')).toBe(false);
+    expect(factsFor('addsub', 100)).toEqual([]);
+    const round = buildRound({ cards: {}, now, rng: createRng(1), operation: 'addsub', range: 20 });
+    expect(round.every((q) => q.answer <= 20)).toBe(true);
+  });
+});
+
+describe('rekordy podle operace', () => {
+  it('násobení si nechává staré klíče, ostatní mají předponu', () => {
+    expect(recordScope('mul', null)).toBe('all');
+    expect(recordScope('mul', 7)).toBe('7');
+    expect(recordScope('div', 7)).toBe('div:7');
+    expect(recordScope('muldiv', null)).toBe('muldiv:all');
+    expect(recordScope('addsub', 100)).toBe('addsub:100');
   });
 });

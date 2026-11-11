@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { cs } from '@/i18n/cs';
 import type { FactRange } from '@/domain/math/facts';
+import type { Operation } from '@/domain/math/operations';
 import { useMathSession } from '@/quiz/useMathSession';
 import { useGameFeedback } from '@/components/useGameFeedback';
 import { QuizShell } from '@/components/quiz/QuizShell';
@@ -11,8 +12,16 @@ import { Keypad } from './Keypad';
 import { MathResult } from './MathResult';
 
 /** Jedno kolo: nahoře příklad, dole klávesnice u palce. */
-export function MathRound({ range, onAgain }: { range: FactRange; onAgain: () => void }) {
-  const session = useMathSession(range);
+export function MathRound({
+  operation,
+  range,
+  onAgain,
+}: {
+  operation: Operation;
+  range: FactRange;
+  onAgain: () => void;
+}) {
+  const session = useMathSession(operation, range);
   const play = useGameFeedback();
 
   // Hardware klávesnice na tabletu s pouzdrem i na počítači – stejná
@@ -39,6 +48,7 @@ export function MathRound({ range, onAgain }: { range: FactRange; onAgain: () =>
   if (session.finished) {
     return (
       <MathResult
+        operation={operation}
         range={range}
         tally={session.tally}
         outcome={session.outcome}
@@ -71,7 +81,7 @@ export function MathRound({ range, onAgain }: { range: FactRange; onAgain: () =>
             feedback && !feedback.correct ? 'animate-shake' : ''
           }`}
         >
-          {question.left} × {question.right}
+          {question.left} {question.op} {question.right}
         </p>
 
         <div className="mt-5 flex items-center justify-center gap-3">
@@ -79,7 +89,7 @@ export function MathRound({ range, onAgain }: { range: FactRange; onAgain: () =>
           <span
             className={`glass-raised display flex h-16 min-w-[6rem] items-center justify-center rounded-2xl px-5 text-4xl leading-none tabular-nums transition-colors duration-200 ${tone}`}
           >
-            {feedback && !feedback.correct ? question.product : session.entry || ' '}
+            {feedback && !feedback.correct ? question.answer : session.entry || ' '}
           </span>
         </div>
 
