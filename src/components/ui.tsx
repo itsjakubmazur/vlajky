@@ -5,15 +5,14 @@ type Variant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
 const VARIANTS: Record<Variant, string> = {
   // Jediná plná barva v rozhraní kromě vlajek – proto je jasné, kam sáhnout.
-  primary:
-    'bg-mint text-abyss shadow-[0_10px_30px_-12px_var(--color-mint)] hover:bg-[color-mix(in_oklab,var(--color-mint),white_12%)]',
-  secondary: 'glass text-ink hover:border-white/20',
+  primary: 'bg-accent text-abyss hover:bg-[color-mix(in_oklab,var(--color-accent),white_12%)]',
+  secondary: 'surface-raised text-ink hover:bg-[#222735]',
   ghost: 'text-muted hover:text-ink',
-  danger: 'glass text-coral border-coral/30 hover:border-coral/50',
+  danger: 'surface text-coral border-coral/30 hover:border-coral/50',
 };
 
 const BASE =
-  'inline-flex touch-target items-center justify-center gap-2 rounded-pill px-6 text-[0.95rem] font-extrabold ' +
+  'inline-flex touch-target items-center justify-center gap-2 rounded-xl px-6 text-[0.95rem] font-semibold ' +
   'transition-[transform,background-color,border-color,color] duration-150 active:scale-[0.98] ' +
   'disabled:pointer-events-none disabled:opacity-40';
 
@@ -53,7 +52,7 @@ export function Panel({
   children: ReactNode;
 }) {
   return (
-    <div className={`${raised ? 'glass-raised' : 'glass'} rounded-glass p-5 ${className}`}>
+    <div className={`${raised ? 'surface-raised' : 'surface'} rounded-card p-5 ${className}`}>
       {children}
     </div>
   );
@@ -68,7 +67,7 @@ export function ProgressBar({ value, total }: { value: number; total: number }) 
   return (
     <div className="h-1.5 w-full overflow-hidden rounded-pill bg-white/10">
       <div
-        className="h-full rounded-pill bg-gradient-to-r from-mint-deep to-mint transition-[width] duration-500"
+        className="h-full rounded-pill bg-accent transition-[width] duration-500"
         style={{ width: `${pct}%` }}
       />
     </div>
@@ -108,7 +107,7 @@ export function ProgressRing({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="var(--color-mint)"
+          stroke="var(--color-accent)"
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={circumference}

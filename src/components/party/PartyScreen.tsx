@@ -102,7 +102,7 @@ export function PartyScreen() {
       <header className="mb-5 flex items-center gap-4">
         <Link
           href={ROUTES.home}
-          className="touch-target -ml-2 inline-flex items-center rounded-pill px-2 text-sm font-extrabold text-muted transition-colors hover:text-ink"
+          className="touch-target -ml-2 inline-flex items-center rounded-pill px-2 text-sm font-semibold text-muted transition-colors hover:text-ink"
         >
           {cs.common.back}
         </Link>
@@ -114,7 +114,7 @@ export function PartyScreen() {
 
   if (!ready) {
     return (
-      <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-bold text-faint">
+      <div className="flex min-h-[var(--safe-height)] items-center justify-center text-sm font-semibold text-faint">
         {cs.common.loading}
       </div>
     );
@@ -149,7 +149,7 @@ export function PartyScreen() {
       {/* --- předání zařízení --- */}
       {party && onTurn ? (
         <div className="stagger flex flex-col gap-3">
-          <Panel raised className="border-mint/30 text-center">
+          <Panel raised className="text-center">
             <Eyebrow>{cs.party.roundLabel(party.rounds.length)}</Eyebrow>
             <p className="display mt-2 text-3xl">{cs.party.handoffWho(onTurn.name)}</p>
             <p className="mt-2 text-sm text-muted">{cs.party.handoffHint}</p>
@@ -190,7 +190,7 @@ export function PartyScreen() {
         <div className="mt-6 flex flex-col gap-2.5">
           {confirmEnd ? (
             <Panel className="border-coral/40">
-              <p className="text-sm font-bold text-coral">{cs.party.finishConfirm}</p>
+              <p className="text-sm font-semibold text-coral">{cs.party.finishConfirm}</p>
               <div className="mt-3 grid grid-cols-2 gap-2.5">
                 <Button variant="secondary" onClick={() => setConfirmEnd(false)}>
                   {cs.common.cancel}

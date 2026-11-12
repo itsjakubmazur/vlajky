@@ -62,7 +62,7 @@ export function TypingInput({
             // iOS posune obsah až po vyjetí klávesnice – počkáme si na ni.
             setTimeout(() => field.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 300);
           }}
-          className="glass touch-target display min-w-0 flex-1 rounded-pill px-5 text-[1.0625rem] text-ink outline-none placeholder:font-sans placeholder:font-semibold placeholder:text-faint focus:border-mint/60 disabled:opacity-50"
+          className="surface touch-target display min-w-0 flex-1 rounded-xl px-5 text-[1.0625rem] text-ink outline-none placeholder:font-sans placeholder:font-semibold placeholder:text-faint focus:border-mint/60 disabled:opacity-50"
         />
         <Button type="submit" disabled={disabled || value.trim().length === 0} className="px-5">
           {cs.quiz.check}
@@ -70,7 +70,7 @@ export function TypingInput({
       </form>
 
       {hint ? (
-        <p className="glass-thin rounded-glass px-4 py-3 text-sm font-bold text-gold">{hint}</p>
+        <p className="surface-thin rounded-card px-4 py-3 text-sm font-semibold text-gold">{hint}</p>
       ) : null}
 
       {suggestions.length > 0 ? (
@@ -80,7 +80,7 @@ export function TypingInput({
               <button
                 type="button"
                 onClick={() => send(suggestion.country.nameCs, true)}
-                className="glass touch-target display w-full rounded-pill px-5 text-left text-base transition-colors hover:border-mint/40 hover:text-mint"
+                className="surface touch-target display w-full rounded-xl px-5 text-left text-base transition-colors hover:border-accent/40 hover:text-accent"
               >
                 {suggestion.country.nameCs}
               </button>

@@ -20,7 +20,7 @@ export function SaveWarning() {
   return (
     <Link
       href={ROUTES.settings}
-      className="fixed inset-x-0 top-0 z-50 flex items-center justify-center gap-2 bg-coral px-4 py-2 text-center text-[0.78rem] font-extrabold text-abyss"
+      className="fixed inset-x-0 top-0 z-50 flex items-center justify-center gap-2 bg-coral px-4 py-2 text-center text-[0.78rem] font-semibold text-abyss"
       style={{ paddingTop: 'calc(0.5rem + env(safe-area-inset-top))' }}
     >
       <span>{cs.backup.saveFailed}</span>

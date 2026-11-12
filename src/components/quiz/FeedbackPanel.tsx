@@ -80,7 +80,7 @@ export function FeedbackPanel({
   return (
     <div
       ref={panel}
-      className={`glass-raised animate-rise-in mt-6 flex flex-col gap-4 rounded-glass p-5 ${
+      className={`surface-raised animate-rise-in mt-6 flex flex-col gap-4 rounded-card p-5 ${
         correct ? 'border-mint/35' : 'border-coral/35'
       }`}
     >
@@ -114,14 +114,14 @@ export function FeedbackPanel({
       {/* U otázky na mapě je odpověď vidět na mapě nad panelem – velká
           vlajka navíc by ji vytlačila z obrazovky. */}
       {!correct && feedback.kind === 'pickOnMap' ? (
-        <div className="rounded-glass bg-white/5 p-4 text-center">
+        <div className="rounded-card bg-white/5 p-4 text-center">
           <Eyebrow>{cs.quiz.correctAnswerIs}</Eyebrow>
           <p className="display mt-1 text-xl">{country.nameCs}</p>
         </div>
       ) : null}
 
       {!correct && feedback.kind !== 'pickOnMap' ? (
-        <div className="flex flex-col items-center gap-3 rounded-glass bg-white/5 p-4">
+        <div className="flex flex-col items-center gap-3 rounded-card bg-white/5 p-4">
           <Eyebrow>{cs.quiz.correctAnswerIs}</Eyebrow>
           <FlagImage code={country.code} size="xl" priority pulse />
           {/* U hlavních měst je správná odpověď město, ne země. */}
@@ -140,13 +140,13 @@ export function FeedbackPanel({
       ) : null}
 
       {chosen && difference ? (
-        <div className="glass-thin rounded-glass p-4">
+        <div className="surface-thin rounded-card p-4">
           <Eyebrow>{cs.quiz.differenceTitle}</Eyebrow>
           <div className="mt-3 flex items-end justify-center gap-4">
             {[country, chosen].map((side) => (
               <span key={side.code} className="flex w-24 flex-col items-center gap-1.5">
                 <FlagImage code={side.code} size="md" glow={false} />
-                <span className="text-center text-[0.7rem] font-bold leading-tight text-muted">
+                <span className="text-center text-[0.7rem] font-semibold leading-tight text-muted">
                   {side.nameCs}
                 </span>
               </span>
@@ -157,7 +157,7 @@ export function FeedbackPanel({
       ) : null}
 
       {country.funFact ? (
-        <div className="glass-thin rounded-glass p-4">
+        <div className="surface-thin rounded-card p-4">
           <Eyebrow>{cs.album.funFactTitle}</Eyebrow>
           <p className="mt-1.5 text-[0.95rem] leading-relaxed text-ink/90">{country.funFact}</p>
         </div>

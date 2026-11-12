@@ -97,14 +97,14 @@ export function HomeScreen() {
       <header className="mb-6 flex items-baseline justify-between gap-3">
         <h1 className="display text-4xl">{APP_NAME}</h1>
         {progress.meta.streakDays > 1 ? (
-          <span className="glass-thin rounded-pill px-3 py-1.5 text-xs font-extrabold text-gold">
+          <span className="surface-thin rounded-pill px-3 py-1.5 text-xs font-semibold text-gold">
             {cs.home.streak(progress.meta.streakDays)}
           </span>
         ) : null}
       </header>
 
       {/* Velké „Hrát“ – rozcestník až pod ním. */}
-      <Panel raised className="mb-5 border-mint/30">
+      <Panel raised className="mb-5">
         <Eyebrow>{cs.home.nextUpTitle}</Eyebrow>
         <p className="mb-4 mt-1.5 text-sm leading-snug text-muted">{suggestionLabel}</p>
         <ButtonLink href={suggestionHref} className="w-full">
@@ -124,14 +124,14 @@ export function HomeScreen() {
               <span className="display text-2xl leading-none tabular-nums">
                 {ready ? stats.collected : '–'}
               </span>
-              <span className="text-[0.65rem] font-bold tabular-nums text-faint">
+              <span className="text-[0.65rem] font-semibold tabular-nums text-faint">
                 z {pool.length}
               </span>
             </ProgressRing>
             <div className="min-w-0 flex-1">
               <Eyebrow>{cs.game.rank}</Eyebrow>
               <p className="display mt-0.5 text-xl">{cs.game.ranks[rank.rank.id]}</p>
-              <p className="mt-1 inline-flex items-center gap-2 text-sm font-bold text-gold">
+              <p className="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-gold">
                 <MasteryDot mastery="gold" />
                 <span className="tabular-nums">{stats.gold}</span>
                 <span className="font-semibold text-faint">{cs.home.goldCount}</span>
@@ -149,7 +149,7 @@ export function HomeScreen() {
         </Panel>
 
         {/* Denní výzva – důvod otevřít appku každý den. */}
-        <Panel raised className={dailyDone ? '' : 'border-mint/30'}>
+        <Panel>
           <Eyebrow>{cs.daily.title}</Eyebrow>
           <p className="mb-4 mt-1.5 text-sm leading-snug text-muted">
             {dailyDone
@@ -158,7 +158,7 @@ export function HomeScreen() {
           </p>
           <ButtonLink
             href={ROUTES.play(SLUG_BY_MODE.daily)}
-            variant={dailyDone ? 'secondary' : 'primary'}
+            variant="secondary"
             className="w-full"
           >
             {dailyDone ? cs.result.again : cs.daily.play}
@@ -185,7 +185,7 @@ export function HomeScreen() {
           <div className="mb-1.5 flex items-baseline justify-between gap-3">
             <Eyebrow>{cs.home.todayLabel}</Eyebrow>
             {stats.due > 0 ? (
-              <span className="display text-sm tabular-nums text-mint">{stats.due}</span>
+              <span className="display text-sm tabular-nums text-ink">{stats.due}</span>
             ) : null}
           </div>
           <p className="display text-xl">{cs.modes.review.name}</p>
@@ -202,7 +202,7 @@ export function HomeScreen() {
         </Panel>
 
         {/* Turnaj u jednoho zařízení – na dovolenou s rodinou. */}
-        <Panel className={progress.meta.party ? 'border-mint/30' : ''}>
+        <Panel>
           <Eyebrow>{cs.party.title}</Eyebrow>
           <p className="mb-4 mt-1.5 text-sm leading-snug text-muted">
             {progress.meta.party
@@ -211,7 +211,7 @@ export function HomeScreen() {
           </p>
           <ButtonLink
             href={ROUTES.party}
-            variant={progress.meta.party ? 'primary' : 'secondary'}
+            variant="secondary"
             className="w-full"
           >
             {progress.meta.party ? cs.party.resume : cs.party.open}
@@ -221,9 +221,9 @@ export function HomeScreen() {
         {/* Malá násobilka – jiný předmět, vlastní kout aplikace. */}
         <Link
           href={ROUTES.math}
-          className="glass touch-target flex items-center gap-4 rounded-glass px-4 py-3 transition-[border-color,transform] duration-200 hover:border-white/25 active:scale-[0.99]"
+          className="surface touch-target flex items-center gap-4 rounded-card px-4 py-3 transition-[border-color,transform] duration-200 hover:border-white/25 active:scale-[0.99]"
         >
-          <span className="display flex w-[4.5rem] shrink-0 items-center justify-center text-2xl tabular-nums text-mint">
+          <span className="display flex w-[4.5rem] shrink-0 items-center justify-center text-2xl tabular-nums text-ink">
             7×8
           </span>
           <span className="min-w-0 flex-1">
@@ -237,7 +237,7 @@ export function HomeScreen() {
         {/* Souboje se zrádnými dvojicemi. */}
         <Link
           href={ROUTES.bosses}
-          className="glass touch-target flex items-center gap-4 rounded-glass px-4 py-3 transition-[border-color,transform] duration-200 hover:border-white/25 active:scale-[0.99]"
+          className="surface touch-target flex items-center gap-4 rounded-card px-4 py-3 transition-[border-color,transform] duration-200 hover:border-white/25 active:scale-[0.99]"
         >
           <span className="flex w-[4.5rem] shrink-0 items-center justify-center">
             {['td', 'ro'].map((code, i) => (
@@ -267,7 +267,7 @@ export function HomeScreen() {
             <Link
               key={mode}
               href={ROUTES.play(SLUG_BY_MODE[mode])}
-              className="glass touch-target flex items-center gap-4 rounded-glass px-4 py-3 transition-[border-color,transform] duration-200 hover:border-white/25 active:scale-[0.99]"
+              className="surface touch-target flex items-center gap-4 rounded-card px-4 py-3 transition-[border-color,transform] duration-200 hover:border-white/25 active:scale-[0.99]"
             >
               <span className="flex h-11 w-[4.5rem] shrink-0 items-center justify-center">
                 {flags.map((code, i) => (
@@ -290,7 +290,7 @@ export function HomeScreen() {
                 </span>
               </span>
               {record ? (
-                <span className="display shrink-0 text-xs tabular-nums text-mint">
+                <span className="display shrink-0 text-xs tabular-nums text-muted">
                   {record.points}
                 </span>
               ) : null}

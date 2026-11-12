@@ -87,7 +87,7 @@ export function MathScreen() {
       <header className="mb-5 flex items-center gap-3">
         <Link
           href={ROUTES.home}
-          className="touch-target inline-flex items-center rounded-pill px-3 text-sm font-extrabold text-muted transition-colors hover:text-ink"
+          className="touch-target inline-flex items-center rounded-pill px-3 text-sm font-semibold text-muted transition-colors hover:text-ink"
         >
           {cs.common.back}
         </Link>
@@ -104,17 +104,17 @@ export function MathScreen() {
               aria-pressed={operation === value}
               onClick={() => choose(value)}
               className={`touch-target flex flex-col items-start gap-1 rounded-2xl px-3.5 py-3 text-left transition-colors ${
-                operation === value ? 'bg-ink text-abyss' : 'glass-thin text-muted hover:text-ink'
+                operation === value ? 'bg-ink text-abyss' : 'surface-thin text-muted hover:text-ink'
               }`}
             >
               <span
                 className={`display text-xl leading-none tabular-nums ${
-                  operation === value ? '' : 'text-mint'
+                  operation === value ? '' : 'text-ink'
                 }`}
               >
                 {SAMPLE[value]}
               </span>
-              <span className="text-[0.8rem] font-extrabold leading-tight">
+              <span className="text-[0.8rem] font-semibold leading-tight">
                 {cs.math.operations[value]}
               </span>
             </button>
@@ -146,8 +146,8 @@ export function MathScreen() {
               key={value ?? 'all'}
               type="button"
               onClick={() => setRange(value)}
-              className={`rounded-pill px-4 py-2.5 text-[0.8rem] font-extrabold tabular-nums transition-colors ${
-                range === value ? 'bg-ink text-abyss' : 'glass-thin text-muted hover:text-ink'
+              className={`rounded-pill px-4 py-2.5 text-[0.8rem] font-semibold tabular-nums transition-colors ${
+                range === value ? 'bg-ink text-abyss' : 'surface-thin text-muted hover:text-ink'
               }`}
             >
               {rangeLabel(value)}
@@ -165,10 +165,10 @@ export function MathScreen() {
               return (
                 <span
                   key={entry.key}
-                  className="glass-thin flex flex-col items-center rounded-2xl px-3 py-2"
+                  className="surface-thin flex flex-col items-center rounded-2xl px-3 py-2"
                 >
                   <span className="display text-base tabular-nums">{formatFact(fact)}</span>
-                  <span className="text-[0.65rem] font-bold text-coral">
+                  <span className="text-[0.65rem] font-semibold text-coral">
                     {cs.math.wrongCount(entry.wrong)}
                   </span>
                 </span>
@@ -184,7 +184,7 @@ export function MathScreen() {
       </Button>
 
       {progress.math.totalAnswers > 0 ? (
-        <p className="mt-6 text-center text-xs font-bold tabular-nums text-faint">
+        <p className="mt-6 text-center text-xs font-semibold tabular-nums text-faint">
           {cs.math.answersTotal(progress.math.totalAnswers)}
         </p>
       ) : null}

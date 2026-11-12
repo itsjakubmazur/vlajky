@@ -15,7 +15,7 @@ export function PartyStandings({ state }: { state: PartyState }) {
         {rows.map((row, i) => (
           <li
             key={row.player.id}
-            className={`glass-thin flex items-center gap-3 rounded-2xl px-3.5 py-2.5 ${
+            className={`surface-thin flex items-center gap-3 rounded-2xl px-3.5 py-2.5 ${
               i === 0 && row.wins > 0 ? 'border-gold/40' : ''
             }`}
           >
@@ -29,13 +29,13 @@ export function PartyStandings({ state }: { state: PartyState }) {
             <span className="display min-w-0 flex-1 truncate text-base">{row.player.name}</span>
             <span className="shrink-0 text-right">
               <span
-                className={`block text-[0.8rem] font-extrabold ${
+                className={`block text-[0.8rem] font-semibold ${
                   row.wins > 0 ? 'text-gold' : 'text-faint'
                 }`}
               >
                 {row.wins > 0 ? cs.party.wins(row.wins) : cs.party.noWins}
               </span>
-              <span className="block text-[0.7rem] font-bold tabular-nums text-faint">
+              <span className="block text-[0.7rem] font-semibold tabular-nums text-faint">
                 {row.points} {cs.game.pointsShort}
               </span>
             </span>

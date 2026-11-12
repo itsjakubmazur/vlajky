@@ -28,25 +28,30 @@
 /* ---------------------------------------------------------------------------
    Tokeny.
 
-   Aplikace má schválně jeden vizuální svět – noční atlas. Rozhraní je sklo
-   a jediná sytá barva na obrazovce jsou vlajky. Proto tmavý podklad a proto
-   žádný světlý režim: na světlém podkladu by sklo nemělo co matnit a vlajky
-   by přestaly svítit.
+   Noční atlas: tmavý inkoustový podklad, tiché plochy a jediná sytá barva
+   na obrazovce jsou vlajky. Rozhraní jim nekonkuruje – žádné skvrny na
+   pozadí, žádné sklo, žádné záře kolem tlačítek. Hloubka je ze schodů mezi
+   plochami a z tenkých linek.
 --------------------------------------------------------------------------- */
 @theme {
-  /* podklad */
-  --color-abyss: #060a14;
-  --color-deep: #0b1226;
-  --color-lift: #131c3a;
+  /* plochy – jedna inkoustová řada, od nejhlubší po zvednutou */
+  --color-abyss: #07080d;
+  --color-deep: #0b0d14;
+  --color-surface: #11141c;
+  --color-lift: #1a1e28;
 
-  /* text – modře laděná šedá, ne neutrální */
-  --color-ink: #eaf0ff;
-  --color-muted: #94a4c8;
-  --color-faint: #5f6e93;
+  /* text – tři role, laděné do modra */
+  --color-ink: #eef0f5;
+  --color-muted: #a3a9b8;
+  --color-faint: #7a8296;
 
-  /* akcenty */
+  /*
+   * Akcent nese hlavní akci, výběr a ukazatele postupu. Mění ho odemykatelné
+   * téma, proto je to samostatný token. Máta je vedle toho význam: správná
+   * odpověď je mátová v každém tématu.
+   */
+  --color-accent: #19e3b1;
   --color-mint: #19e3b1;
-  --color-mint-deep: #0c8f70;
   --color-gold: #ffc24b;
   --color-coral: #ff6b6b;
 
@@ -55,11 +60,13 @@
   --color-bronze: #d98e52;
   --color-silver: #c3cfe6;
 
-  /* Jedna rodina na všechno; nadpisy nese tloušťka, ne jiné písmo. */
+  /* Jedna rodina na všechno; nadpisy nese velikost, ne tloušťka. */
   --font-sans: 'Figtree Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --radius-glass: 1.5rem;
+  --radius-card: 1rem;
   --radius-pill: 999px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html,
@@ -82,39 +89,13 @@ body {
   /* Systémové lišty řešíme jednou tady, ne v každé obrazovce zvlášť. */
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  background: var(--color-abyss);
+  background: var(--color-deep);
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-weight: 500;
   /* Dítě nesmí odzoomovat dvojklikem na tlačítko. */
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-}
-
-/* Polární záře pod vším. Tři měkké skvrny, žádný obrázek. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: -20%;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(40rem 32rem at 10% 6%, oklch(0.66 0.17 178 / 0.55), transparent 64%),
-    radial-gradient(36rem 30rem at 92% 24%, oklch(0.7 0.16 62 / 0.34), transparent 62%),
-    radial-gradient(46rem 38rem at 46% 88%, oklch(0.52 0.17 235 / 0.5), transparent 66%),
-    /* okraje stmívíme, ať obsah drží pohromadě */
-    radial-gradient(120% 90% at 50% 50%, transparent 40%, oklch(0.16 0.04 250 / 0.55));
-  filter: blur(22px);
-  animation: aurora-drift 34s ease-in-out infinite alternate;
-}
-
-@keyframes aurora-drift {
-  from {
-    transform: translate3d(-2%, -1%, 0) scale(1);
-  }
-  to {
-    transform: translate3d(2%, 2%, 0) scale(1.08);
-  }
 }
 
 /*
@@ -142,31 +123,20 @@ body::before {
 /* ---------------------------------------------------------------------------
    Odemykatelné vzhledy.
 
-   Téma mění jen barvy polární záře, rámeček jen okraj vlajky. Nic z toho
-   nesahá na čitelnost ani na hru.
+   Téma mění jen barvu akcentu, rámeček jen okraj vlajky. Nic z toho nesahá
+   na čitelnost ani na hru. Všechny akcenty jsou dost světlé, aby na nich
+   tmavý text držel kontrast.
 --------------------------------------------------------------------------- */
-:root[data-app-theme='theme-sunrise'] body::before {
-  background:
-    radial-gradient(40rem 32rem at 10% 6%, oklch(0.74 0.17 62 / 0.5), transparent 64%),
-    radial-gradient(36rem 30rem at 92% 24%, oklch(0.68 0.19 20 / 0.34), transparent 62%),
-    radial-gradient(46rem 38rem at 46% 88%, oklch(0.5 0.14 300 / 0.42), transparent 66%),
-    radial-gradient(120% 90% at 50% 50%, transparent 40%, oklch(0.16 0.04 280 / 0.55));
+:root[data-app-theme='theme-sunrise'] {
+  --color-accent: #ff9d4d;
 }
 
-:root[data-app-theme='theme-deep'] body::before {
-  background:
-    radial-gradient(40rem 32rem at 10% 6%, oklch(0.5 0.15 245 / 0.55), transparent 64%),
-    radial-gradient(36rem 30rem at 92% 24%, oklch(0.55 0.13 200 / 0.32), transparent 62%),
-    radial-gradient(46rem 38rem at 46% 88%, oklch(0.4 0.12 265 / 0.55), transparent 66%),
-    radial-gradient(120% 90% at 50% 50%, transparent 35%, oklch(0.12 0.04 250 / 0.6));
+:root[data-app-theme='theme-deep'] {
+  --color-accent: #5aa9ff;
 }
 
-:root[data-app-theme='theme-aurora'] body::before {
-  background:
-    radial-gradient(40rem 32rem at 14% 10%, oklch(0.76 0.2 145 / 0.5), transparent 64%),
-    radial-gradient(36rem 30rem at 88% 20%, oklch(0.7 0.19 190 / 0.4), transparent 62%),
-    radial-gradient(46rem 38rem at 50% 90%, oklch(0.56 0.19 320 / 0.42), transparent 66%),
-    radial-gradient(120% 90% at 50% 50%, transparent 40%, oklch(0.14 0.05 260 / 0.55));
+:root[data-app-theme='theme-aurora'] {
+  --color-accent: #a3e635;
 }
 
 .flag-frame {
@@ -183,8 +153,7 @@ body::before {
 
 :root[data-app-frame='frame-neon'] .flag-frame {
   box-shadow:
-    0 0 0 2px var(--color-mint),
-    0 0 18px -2px var(--color-mint),
+    0 0 0 2px var(--color-accent),
     0 10px 26px -12px rgb(0 0 0 / 0.9);
 }
 
@@ -196,35 +165,24 @@ body::before {
 }
 
 /* ---------------------------------------------------------------------------
-   Sklo. Tři síly podle role – ne každý blok je karta.
+   Plochy. Tři síly podle role – ne každý blok je karta.
 --------------------------------------------------------------------------- */
-@utility glass {
-  background: linear-gradient(158deg, rgb(255 255 255 / 0.085), rgb(255 255 255 / 0.03));
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-  border: 1px solid rgb(255 255 255 / 0.1);
-  box-shadow:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.14),
-    0 20px 44px -26px rgb(0 0 0 / 0.9);
+@utility surface {
+  background: var(--color-surface);
+  border: 1px solid rgb(238 240 245 / 0.08);
 }
 
-/* Pro panel, který nese hlavní akci – o něco hmotnější. */
-@utility glass-raised {
-  background: linear-gradient(158deg, rgb(255 255 255 / 0.13), rgb(255 255 255 / 0.05));
-  backdrop-filter: blur(26px) saturate(160%);
-  -webkit-backdrop-filter: blur(26px) saturate(160%);
-  border: 1px solid rgb(255 255 255 / 0.16);
-  box-shadow:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.2),
-    0 26px 56px -28px rgb(0 0 0 / 0.95);
+/* Pro panel, který nese hlavní akci – o schod výš a s jemnou horní hranou. */
+@utility surface-raised {
+  background: var(--color-lift);
+  border: 1px solid rgb(238 240 245 / 0.1);
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.06);
 }
 
 /* Pro drobnosti – čipy, štítky. Jen náznak. */
-@utility glass-thin {
-  background: rgb(255 255 255 / 0.055);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgb(255 255 255 / 0.08);
+@utility surface-thin {
+  background: rgb(238 240 245 / 0.04);
+  border: 1px solid rgb(238 240 245 / 0.06);
 }
 
 /* Dotykové plochy: nikdy pod 48 px. */
@@ -234,17 +192,14 @@ body::before {
 }
 
 @utility display {
-  font-weight: 800;
-  letter-spacing: -0.022em;
+  font-weight: 600;
   text-wrap: balance;
 }
 
-/* Velké číslo nebo štítek verzálkami. */
+/* Štítek nad obsahem panelu. Malý a tichý, ale normální věta – ne verzálky. */
 @utility eyebrow {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 500;
   color: var(--color-faint);
 }
 
@@ -254,7 +209,7 @@ body::before {
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -348,10 +303,10 @@ body::before {
 }
 
 .animate-rise-in {
-  animation: rise-in 420ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation: rise-in 420ms var(--ease-out) backwards;
 }
 .animate-pop-in {
-  animation: pop-in 280ms cubic-bezier(0.2, 0.9, 0.3, 1.25) backwards;
+  animation: pop-in 280ms var(--ease-out) backwards;
 }
 .animate-shake {
   animation: shake 360ms ease-in-out;
@@ -360,36 +315,31 @@ body::before {
   animation: halo-pulse 1.6s ease-in-out 2;
 }
 .animate-flag-reveal {
-  animation: flag-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation: flag-reveal 480ms var(--ease-out) backwards;
 }
 .animate-page-in {
-  animation: page-in 380ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation: page-in 380ms var(--ease-out) backwards;
 }
 
 /*
- * Dlaždice alba. Nabíhají po řadě, ale zpoždění se po chvíli zastaví –
- * u dvou set vlajek by jinak poslední naskočila za minutu.
+ * Dlaždice alba. Prvních pět nabíhá po řadě, zbytek naráz – u dvou set
+ * vlajek by jinak poslední naskočila za minutu.
  */
 .tiles > * {
-  animation: tile-in 340ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation: tile-in 340ms var(--ease-out) backwards;
   /* Mimo obraz se dlaždice vůbec nevykresluje – u 197 vlajek je to znát. */
   content-visibility: auto;
   contain-intrinsic-size: auto 118px;
 }
-.tiles > *:nth-child(1) { animation-delay: 0ms; }
-.tiles > *:nth-child(2) { animation-delay: 25ms; }
-.tiles > *:nth-child(3) { animation-delay: 50ms; }
-.tiles > *:nth-child(4) { animation-delay: 75ms; }
-.tiles > *:nth-child(5) { animation-delay: 100ms; }
-.tiles > *:nth-child(6) { animation-delay: 125ms; }
-.tiles > *:nth-child(7) { animation-delay: 150ms; }
-.tiles > *:nth-child(8) { animation-delay: 175ms; }
-.tiles > *:nth-child(9) { animation-delay: 200ms; }
-.tiles > *:nth-child(n + 10) { animation-delay: 225ms; }
+.tiles > *:nth-child(2) { animation-delay: 40ms; }
+.tiles > *:nth-child(3) { animation-delay: 80ms; }
+.tiles > *:nth-child(4) { animation-delay: 120ms; }
+.tiles > *:nth-child(5) { animation-delay: 160ms; }
+.tiles > *:nth-child(n + 6) { animation-delay: 200ms; }
 
 /* Nástup po řadě – karty na domovské obrazovce. */
 .stagger > * {
-  animation: rise-in 420ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation: rise-in 420ms var(--ease-out) backwards;
 }
 .stagger > *:nth-child(1) { animation-delay: 40ms; }
 .stagger > *:nth-child(2) { animation-delay: 90ms; }
@@ -399,9 +349,6 @@ body::before {
 .stagger > *:nth-child(6) { animation-delay: 290ms; }
 
 @media (prefers-reduced-motion: reduce) {
-  body::before {
-    animation: none;
-  }
   .animate-rise-in,
   .animate-pop-in,
   .animate-shake,

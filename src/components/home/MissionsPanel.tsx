@@ -44,13 +44,13 @@ export function MissionsPanel() {
             <li key={mission.id} className="flex flex-col gap-1.5">
               <div className="flex items-baseline justify-between gap-3">
                 <span
-                  className={`text-[0.85rem] font-bold leading-snug ${
+                  className={`text-[0.85rem] font-semibold leading-snug ${
                     isClaimed ? 'text-faint line-through' : 'text-ink'
                   }`}
                 >
                   {missionLabel(mission)}
                 </span>
-                <span className="shrink-0 text-xs font-extrabold tabular-nums text-gold">
+                <span className="shrink-0 text-xs font-semibold tabular-nums text-gold">
                   {cs.missions.reward(mission.reward)}
                 </span>
               </div>
@@ -65,7 +65,7 @@ export function MissionsPanel() {
               region !== 'all' &&
               region !== mission.continent &&
               regions.includes(mission.continent!) ? (
-                <div className="glass-thin mt-0.5 flex flex-col gap-2 rounded-2xl p-3">
+                <div className="surface-thin mt-0.5 flex flex-col gap-2 rounded-2xl p-3">
                   <span className="text-[0.72rem] leading-snug text-faint">
                     {cs.missions.switchRegionHint}
                   </span>
@@ -88,7 +88,7 @@ export function MissionsPanel() {
               ) : (
                 <>
                   <ProgressBar value={value} total={mission.target} />
-                  <span className="text-[0.7rem] font-bold tabular-nums text-faint">
+                  <span className="text-[0.7rem] font-semibold tabular-nums text-faint">
                     {value} / {mission.target}
                   </span>
                 </>

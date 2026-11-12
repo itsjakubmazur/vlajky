@@ -39,10 +39,10 @@ function Toggle({
       onClick={() => onChange(!on)}
       className="touch-target flex w-full items-center justify-between rounded-2xl px-1 text-left"
     >
-      <span className="font-bold">{label}</span>
+      <span className="font-semibold">{label}</span>
       <span
         className={`relative h-7 w-12 shrink-0 rounded-pill transition-colors duration-200 ${
-          on ? 'bg-mint' : 'bg-white/12'
+          on ? 'bg-accent' : 'bg-white/12'
         }`}
       >
         <span
@@ -79,7 +79,7 @@ export function SettingsScreen() {
       <header className="mb-5 flex items-center gap-4">
         <Link
           href={ROUTES.home}
-          className="touch-target -ml-2 inline-flex items-center rounded-pill px-2 text-sm font-extrabold text-muted transition-colors hover:text-ink"
+          className="touch-target -ml-2 inline-flex items-center rounded-pill px-2 text-sm font-semibold text-muted transition-colors hover:text-ink"
         >
           {cs.common.back}
         </Link>
@@ -105,13 +105,13 @@ export function SettingsScreen() {
               onClick={() => void setActiveSet(id)}
               className={`touch-target flex flex-col justify-center rounded-2xl border px-4 py-2.5 text-left transition-colors duration-200 ${
                 progress.meta.activeSet === id
-                  ? 'border-mint/60 bg-mint/10'
-                  : 'glass-thin hover:border-white/20'
+                  ? 'border-accent/60 bg-accent/10'
+                  : 'surface-thin hover:border-white/20'
               }`}
             >
               <span
                 className={`display text-base ${
-                  progress.meta.activeSet === id ? 'text-mint' : 'text-ink'
+                  progress.meta.activeSet === id ? 'text-accent' : 'text-ink'
                 }`}
               >
                 {cs.sets[id]}
@@ -142,13 +142,13 @@ export function SettingsScreen() {
                     onClick={() => void setMeta({ [key]: unlock.id })}
                     className={`touch-target flex flex-col justify-center rounded-2xl border px-3 py-2 text-left transition-colors duration-200 ${
                       current === unlock.id
-                        ? 'border-mint/60 bg-mint/10 text-mint'
+                        ? 'border-accent/60 bg-accent/10 text-accent'
                         : open
-                          ? 'glass-thin text-ink hover:border-white/20'
+                          ? 'surface-thin text-ink hover:border-white/20'
                           : 'border-white/5 text-faint'
                     }`}
                   >
-                    <span className="text-[0.85rem] font-bold leading-tight">
+                    <span className="text-[0.85rem] font-semibold leading-tight">
                       {labels[unlock.id]}
                     </span>
                     {open ? null : (
@@ -202,7 +202,7 @@ export function SettingsScreen() {
       <Panel className="border-coral/25">
         {confirming ? (
           <div className="flex flex-col gap-3">
-            <p className="text-sm font-bold text-coral">{cs.settings.resetConfirm}</p>
+            <p className="text-sm font-semibold text-coral">{cs.settings.resetConfirm}</p>
             <div className="grid grid-cols-2 gap-2">
               <Button variant="secondary" onClick={() => setConfirming(false)}>
                 {cs.common.cancel}
@@ -225,7 +225,7 @@ export function SettingsScreen() {
         )}
       </Panel>
 
-      <p className="mt-8 text-center text-xs font-bold text-faint">{APP_NAME}</p>
+      <p className="mt-8 text-center text-xs font-semibold text-faint">{APP_NAME}</p>
     </div>
   );
 }

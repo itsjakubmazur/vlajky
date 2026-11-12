@@ -100,15 +100,15 @@ export function ResultScreen({
       <Panel raised className="flex items-center gap-5">
         <ProgressRing value={tally.correct} total={tally.total} size={104}>
           <span className="display text-3xl leading-none tabular-nums">{tally.correct}</span>
-          <span className="text-xs font-bold tabular-nums text-faint">z {tally.total}</span>
+          <span className="text-xs font-semibold tabular-nums text-faint">z {tally.total}</span>
         </ProgressRing>
         <div className="min-w-0 flex-1">
           <h1 className="display text-2xl">
             {isBoss ? (bossWon ? cs.bosses.won : cs.bosses.lost) : cs.result.title}
           </h1>
-          <p className="display mt-1 text-3xl tabular-nums text-mint">
+          <p className="display mt-1 text-3xl tabular-nums text-accent">
             {shownPoints}
-            <span className="ml-1.5 text-sm font-bold text-faint">{cs.game.points}</span>
+            <span className="ml-1.5 text-sm font-semibold text-faint">{cs.game.points}</span>
           </p>
           <p className="mt-1 text-sm leading-snug text-muted">
             {encouragement(tally.correct, tally.total)}
@@ -117,7 +117,7 @@ export function ResultScreen({
       </Panel>
 
       {placementKnown !== null ? (
-        <Panel className="border-mint/30">
+        <Panel>
           <Eyebrow>{cs.placement.done}</Eyebrow>
           <p className="display mt-1 text-lg">{cs.placement.summary(placementKnown, set.length)}</p>
           <p className="mt-1 text-[0.78rem] leading-snug text-faint">{cs.insight.estimateHint}</p>
@@ -153,7 +153,7 @@ export function ResultScreen({
             {goldEarned.map((code) => (
               <span key={code} className="flex w-20 flex-col items-center gap-2">
                 <FlagImage code={code} size="md" glow priority pulse />
-                <span className="text-center text-[0.7rem] font-bold leading-tight text-gold">
+                <span className="text-center text-[0.7rem] font-semibold leading-tight text-gold">
                   {requireCountry(code).nameCs}
                 </span>
               </span>
@@ -171,10 +171,10 @@ export function ResultScreen({
                 key={`${code}-${i}`}
                 type="button"
                 onClick={() => setDetail(code)}
-                className="glass-thin flex w-[4.75rem] flex-col items-center gap-1.5 rounded-2xl p-2 transition-colors hover:border-white/20"
+                className="surface-thin flex w-[4.75rem] flex-col items-center gap-1.5 rounded-2xl p-2 transition-colors hover:border-white/20"
               >
                 <FlagImage code={code} size="sm" glow={false} />
-                <span className="text-center text-[0.65rem] font-bold leading-tight text-muted">
+                <span className="text-center text-[0.65rem] font-semibold leading-tight text-muted">
                   {requireCountry(code).nameCs}
                 </span>
               </button>

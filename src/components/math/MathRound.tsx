@@ -87,13 +87,13 @@ export function MathRound({
         <div className="mt-5 flex items-center justify-center gap-3">
           <span className="display text-4xl leading-none text-faint">=</span>
           <span
-            className={`glass-raised display flex h-16 min-w-[6rem] items-center justify-center rounded-2xl px-5 text-4xl leading-none tabular-nums transition-colors duration-200 ${tone}`}
+            className={`surface-raised display flex h-16 min-w-[6rem] items-center justify-center rounded-2xl px-5 text-4xl leading-none tabular-nums transition-colors duration-200 ${tone}`}
           >
             {feedback && !feedback.correct ? question.answer : session.entry || ' '}
           </span>
         </div>
 
-        <p className="mt-4 h-10 text-center text-sm font-bold leading-snug">
+        <p className="mt-4 h-10 text-center text-sm font-semibold leading-snug">
           {feedback ? (
             feedback.correct ? (
               <span className="text-mint">{cs.math.correct}</span>

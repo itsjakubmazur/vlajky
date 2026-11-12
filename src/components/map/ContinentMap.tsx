@@ -73,7 +73,7 @@ export function ContinentMap({
               d={shape.d}
               fill={
                 lit
-                  ? 'var(--color-mint)'
+                  ? 'var(--color-accent)'
                   : inZone
                     ? 'rgb(255 255 255 / 0.16)'
                     : 'rgb(255 255 255 / 0.05)'
@@ -103,7 +103,7 @@ export function ContinentMap({
             textAnchor="middle"
             dominantBaseline="middle"
             fontSize={15}
-            fontWeight={800}
+            fontWeight={600}
             fill={active === continent ? 'var(--color-abyss)' : 'var(--color-ink)'}
             stroke="rgb(6 10 20 / 0.75)"
             strokeWidth={active === continent ? 0 : 3}

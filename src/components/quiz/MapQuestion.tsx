@@ -22,7 +22,7 @@ const TAP_REACH = 44;
 const LABEL_SIZE = 28;
 
 function color(code: string, correctCode: string, chosen: string | null) {
-  if (chosen === null) return { fill: 'var(--color-mint)', text: 'var(--color-abyss)' };
+  if (chosen === null) return { fill: 'var(--color-accent)', text: 'var(--color-abyss)' };
   if (code === correctCode) return { fill: 'var(--color-mint)', text: 'var(--color-abyss)' };
   if (code === chosen) return { fill: 'var(--color-coral)', text: 'var(--color-abyss)' };
   return { fill: 'rgb(255 255 255 / 0.25)', text: 'var(--color-abyss)' };
@@ -107,7 +107,7 @@ export function MapQuestion({
   return (
     <div
       ref={mapBox}
-      className="glass-thin rounded-glass p-2"
+      className="surface-thin rounded-card p-2"
       onPointerUp={(event) => pick(event.clientX, event.clientY)}
     >
       {/*
@@ -162,7 +162,7 @@ export function MapQuestion({
                     y={pin.y + pinR + labelSize}
                     textAnchor="middle"
                     fontSize={labelSize}
-                    fontWeight={800}
+                    fontWeight={600}
                     fill={pin.code === correctCode ? 'var(--color-mint)' : 'var(--color-muted)'}
                   >
                     {pin.name}

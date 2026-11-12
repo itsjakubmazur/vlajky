@@ -36,7 +36,7 @@ export function BossesScreen() {
       <header className="mb-5 flex items-center gap-4">
         <Link
           href={ROUTES.home}
-          className="touch-target -ml-2 inline-flex items-center rounded-pill px-2 text-sm font-extrabold text-muted transition-colors hover:text-ink"
+          className="touch-target -ml-2 inline-flex items-center rounded-pill px-2 text-sm font-semibold text-muted transition-colors hover:text-ink"
         >
           {cs.common.back}
         </Link>
@@ -61,8 +61,8 @@ export function BossesScreen() {
               <button
                 type="button"
                 onClick={() => setActive(boss.id)}
-                className={`touch-target flex w-full items-center gap-4 rounded-glass border px-4 py-3 text-left transition-[border-color,transform] duration-200 active:scale-[0.99] ${
-                  won ? 'border-gold/40 bg-gold/10' : 'glass hover:border-white/25'
+                className={`touch-target flex w-full items-center gap-4 rounded-card border px-4 py-3 text-left transition-[border-color,transform] duration-200 active:scale-[0.99] ${
+                  won ? 'border-gold/40 bg-gold/10' : 'surface hover:border-white/25'
                 }`}
               >
                 <span className="flex shrink-0 items-center">
@@ -84,13 +84,13 @@ export function BossesScreen() {
                     {bossName(boss, (code) => requireCountry(code).nameCs)}
                   </span>
                   {won ? (
-                    <span className="mt-0.5 block text-[0.72rem] font-extrabold text-gold">
+                    <span className="mt-0.5 block text-[0.72rem] font-semibold text-gold">
                       {cs.bosses.beaten}
                     </span>
                   ) : null}
                 </span>
                 {won ? null : (
-                  <span className="shrink-0 text-xs font-extrabold text-mint">{cs.bosses.open}</span>
+                  <span className="shrink-0 text-xs font-semibold text-accent">{cs.bosses.open}</span>
                 )}
               </button>
             </li>

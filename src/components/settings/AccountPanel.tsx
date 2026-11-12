@@ -59,7 +59,7 @@ export function AccountPanel() {
             </p>
           ) : (
             <div className="mt-3 flex flex-col gap-2">
-              <label className="text-[0.75rem] font-bold text-faint" htmlFor="sync-email">
+              <label className="text-[0.75rem] font-semibold text-faint" htmlFor="sync-email">
                 {cs.account.emailLabel}
               </label>
               <input
@@ -70,7 +70,7 @@ export function AccountPanel() {
                 value={email}
                 placeholder={cs.account.emailPlaceholder}
                 onChange={(event) => setEmail(event.target.value)}
-                className="glass-thin touch-target rounded-2xl px-4 text-base"
+                className="surface-thin touch-target rounded-2xl px-4 text-base"
               />
               <Button onClick={() => void send()} disabled={!email.includes('@') || sending}>
                 {cs.account.signIn}
@@ -82,7 +82,7 @@ export function AccountPanel() {
         </>
       ) : (
         <>
-          <p className="mt-1.5 text-sm font-bold">{cs.account.signedInAs(state.email)}</p>
+          <p className="mt-1.5 text-sm font-semibold">{cs.account.signedInAs(state.email)}</p>
           <p className="mt-1 text-[0.75rem] font-semibold text-faint">
             {state.kind === 'syncing'
               ? cs.account.syncing

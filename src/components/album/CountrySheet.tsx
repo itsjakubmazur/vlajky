@@ -26,13 +26,13 @@ export function CountrySheet({
 
   return (
     <div
-      className="fixed inset-0 z-40 flex items-end justify-center bg-abyss/70 backdrop-blur-sm sm:items-center sm:p-4"
+      className="fixed inset-0 z-40 flex items-end justify-center bg-abyss/80 sm:items-center sm:p-4"
       role="dialog"
       aria-modal="true"
       onClick={onClose}
     >
       <div
-        className="glass-raised animate-rise-in max-h-[88dvh] w-full max-w-md overflow-y-auto rounded-t-glass p-6 pb-9 sm:rounded-glass"
+        className="surface-raised animate-rise-in max-h-[88dvh] w-full max-w-md overflow-y-auto rounded-t-card p-6 pb-9 sm:rounded-card"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex flex-col items-center gap-4">
@@ -51,17 +51,17 @@ export function CountrySheet({
         {country.continent && country.capitalCs ? (
           <>
             <dl className="mt-6 grid grid-cols-2 gap-2.5">
-              <div className="glass-thin rounded-2xl p-3.5">
+              <div className="surface-thin rounded-2xl p-3.5">
                 <dt className="eyebrow">{cs.album.capital}</dt>
                 <dd className="display mt-1 text-base">{country.capitalCs}</dd>
               </div>
-              <div className="glass-thin rounded-2xl p-3.5">
+              <div className="surface-thin rounded-2xl p-3.5">
                 <dt className="eyebrow">{cs.album.continent}</dt>
                 <dd className="display mt-1 text-base">{cs.continents[country.continent]}</dd>
               </div>
             </dl>
 
-            <div className="glass-thin mt-2.5 rounded-2xl p-3.5">
+            <div className="surface-thin mt-2.5 rounded-2xl p-3.5">
               <Eyebrow>{cs.album.whereTitle}</Eyebrow>
               <div className="mt-2">
                 <MiniMap code={code} />
@@ -69,13 +69,13 @@ export function CountrySheet({
             </div>
           </>
         ) : (
-          <p className="glass-thin mt-6 rounded-2xl p-3.5 text-sm font-bold text-muted">
+          <p className="surface-thin mt-6 rounded-2xl p-3.5 text-sm font-semibold text-muted">
             {cs.sets.organizationsNote}
           </p>
         )}
 
         {country.funFact ? (
-          <div className="glass-thin mt-2.5 rounded-2xl p-3.5">
+          <div className="surface-thin mt-2.5 rounded-2xl p-3.5">
             <Eyebrow>{cs.album.funFactTitle}</Eyebrow>
             <p className="mt-1.5 text-[0.95rem] leading-relaxed text-ink/90">{country.funFact}</p>
           </div>
@@ -90,10 +90,10 @@ export function CountrySheet({
                   key={other}
                   type="button"
                   onClick={() => onSelect(other)}
-                  className="glass-thin flex w-[4.75rem] flex-col items-center gap-1.5 rounded-2xl p-2 transition-colors hover:border-white/20"
+                  className="surface-thin flex w-[4.75rem] flex-col items-center gap-1.5 rounded-2xl p-2 transition-colors hover:border-white/20"
                 >
                   <FlagImage code={other} size="sm" glow={false} />
-                  <span className="text-center text-[0.65rem] font-bold leading-tight text-muted">
+                  <span className="text-center text-[0.65rem] font-semibold leading-tight text-muted">
                     {requireCountry(other).nameCs}
                   </span>
                 </button>

@@ -55,8 +55,8 @@ export function PartySetup({
               key={value}
               type="button"
               onClick={() => setCount(value)}
-              className={`touch-target min-w-14 rounded-pill px-4 text-sm font-extrabold transition-colors ${
-                count === value ? 'bg-mint text-abyss' : 'glass-thin text-muted hover:text-ink'
+              className={`touch-target min-w-14 rounded-pill px-4 text-sm font-semibold transition-colors ${
+                count === value ? 'bg-ink text-abyss' : 'surface-thin text-muted hover:text-ink'
               }`}
             >
               {value}
@@ -79,7 +79,7 @@ export function PartySetup({
                 placeholder={cs.party.playerName(i + 1)}
                 aria-label={cs.party.playerName(i + 1)}
                 maxLength={16}
-                className="glass-thin touch-target w-full rounded-pill px-5 text-ink placeholder:text-faint"
+                className="surface-thin touch-target w-full rounded-xl px-5 text-ink placeholder:text-faint"
               />
             ))}
           </div>
@@ -94,8 +94,8 @@ export function PartySetup({
               key={value}
               type="button"
               onClick={() => setMode(value)}
-              className={`rounded-pill px-4 py-2.5 text-[0.8rem] font-extrabold transition-colors ${
-                mode === value ? 'bg-ink text-abyss' : 'glass-thin text-muted hover:text-ink'
+              className={`rounded-pill px-4 py-2.5 text-[0.8rem] font-semibold transition-colors ${
+                mode === value ? 'bg-ink text-abyss' : 'surface-thin text-muted hover:text-ink'
               }`}
             >
               {cs.modes[value as keyof typeof cs.modes].name}
@@ -112,8 +112,8 @@ export function PartySetup({
               key={value}
               type="button"
               onClick={() => setLength(value)}
-              className={`touch-target flex-1 rounded-pill text-sm font-extrabold transition-colors ${
-                length === value ? 'bg-ink text-abyss' : 'glass-thin text-muted hover:text-ink'
+              className={`touch-target flex-1 rounded-xl text-sm font-semibold transition-colors ${
+                length === value ? 'bg-ink text-abyss' : 'surface-thin text-muted hover:text-ink'
               }`}
             >
               {value}
